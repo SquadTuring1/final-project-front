@@ -3,7 +3,7 @@ import { ErrorMessage } from '@hookform/error-message';
 
 import React from 'react'
 
-const PersonalProfile = () => {
+const Registration = () => {
 
   const { 
     register, 
@@ -71,4 +71,6 @@ const PersonalProfile = () => {
   )
 }
 
-export default PersonalProfile
+
+
+export default Registration
