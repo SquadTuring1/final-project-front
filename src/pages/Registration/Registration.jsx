@@ -20,6 +20,7 @@ import {
 import { useNavigate, Link } from 'react-router-dom';
 
 const Registration = () => {
+  
   const {
     getValues,
     register,
@@ -51,9 +52,7 @@ const Registration = () => {
           <Input
             className="signup__input"
             name="email"
-            // label="Email:"
             type="email"
-            // placeholder="email"
             {...register('email', {
               required: 'Email is required',
             })}
