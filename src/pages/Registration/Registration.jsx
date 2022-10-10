@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
 import '../../ui/Registration.styled.css';
 import logoSM from '../../assets/images/Logo-sign.png';
+// import for styled components
 import {
   MainSign,
   Button,
@@ -19,12 +20,18 @@ import {
 } from '../../ui/index';
 import { useNavigate, Link } from 'react-router-dom';
 
+
+
+
 const Registration = () => {
+  const navigate = useNavigate();
+
   
+  
+  // set variables from react-hook-form
   const {
     getValues,
     register,
-    watch,
     handleSubmit,
     formState: { errors },
   } = useForm({
@@ -37,10 +44,12 @@ const Registration = () => {
   });
 
   const onSubmit = (data) => {
+   
     console.log(data);
+    // navigate("/dashboard");
   };
 
-  const navigate = useNavigate();
+  
 
   return (
     <MainSign>
@@ -62,9 +71,7 @@ const Registration = () => {
           <Input
             className="signup__input"
             name="username"
-            // label="Username:"
             type="text"
-            // placeholder="username"
             {...register('username', {
               required: 'Username is required',
             })}
@@ -76,18 +83,17 @@ const Registration = () => {
             name="password"
             label="Password:"
             type="password"
-            // placeholder="password"
             {...register('password', {
               required: 'Password is required',
             })}
           />
+          <ErrorMessage errors={errors} name="password" as="p" />
           <Label className='sing__pass--confirm' htmlFor="confirmPassword">Confirm Password</Label>
           <Input
             className="signup__input"
             name="confirmPassword"
-            label="Confirm Password:"
             type="password"
-            {...register('cotnfirmPassword', {
+            {...register('confirmPassword', {
               validate: (value) => {
                 value === getValues('password');
               },
@@ -97,7 +103,7 @@ const Registration = () => {
             <TextRemember>
             <input type="checkbox" name="remember"/>
             Remember me</TextRemember>
-          <Button as={Link} to="/dashboard">
+          <Button type="submit">
             Create account
           </Button>
           <TextAccount>
@@ -105,7 +111,7 @@ const Registration = () => {
             <TextColor as={Link} to="/login">
               Log in
             </TextColor>{' '}
-            <TextAccount orLine>OR</TextAccount>
+            {/* <TextAccount orLine>OR</TextAccount> */}
             <ButtonGoogle>Login with Google</ButtonGoogle>
           </TextAccount>
         </CenterArticle>

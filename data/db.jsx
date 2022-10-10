@@ -1,5 +1,4 @@
-{
-  "users": [
+const users = [
     {
       "id": 1,
       "firstName": "Dave",
@@ -28,4 +27,6 @@
       "avatar": "https://robohash.org/etquieum.png?size=50x50&set=set1"
     }
   ]
-}
+
+
+export { users };

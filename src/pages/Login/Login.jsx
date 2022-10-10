@@ -1,4 +1,5 @@
-import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAuthUser, userSignedIn } from '../../features/auth/authSlice';
 import {
   MainSign,
   Button,
@@ -14,31 +15,43 @@ import logoSM from '../../assets/images/Logo-sign.png';
 import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
 import { Link, useNavigate } from 'react-router-dom';
+import { selectAllUsers } from '../../features/users/usersSlice.js';
 
 const Login = () => {
-  const {
-    getValues,
-    register,
-    watch,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
+  const dispatch = useDispatch();
+  const authUser = useSelector(getAuthUser);
+  const users = useSelector(selectAllUsers);
+
+
+  // set variables for react-hook-form
+  const { register, handleSubmit, formState: { errors } } = useForm({
     defaultValues: {
       email: '',
       password: '',
     },
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit =async (data) => {
+    if (authUser.loggedIn) {
+      console.log('A user already logged in')
+      return;
+    } 
+
+    const userExists = users.find(user => user.email === data.email)
+    if (userExists) {
+      dispatch(userSignedIn(data.email))
+    } else {
+      console.log('This user does not exist')
+    }
   };
+
 
   const navigate = useNavigate();
 
   return (
     <MainSign>
       <Logo sign src={logoSM} />
-      <form className="registration__form" onSubmit={handleSubmit(onSubmit)}>
+      <form className="registration__form" id="registrationForm" onSubmit={handleSubmit(onSubmit)}>
           <TitleSign>Hello again!</TitleSign>
         <CenterArticle loginLab>
           <Label htmlFor="email">
@@ -74,7 +87,7 @@ const Login = () => {
           <TextColor className='forgotPass'>Forgot your password?</TextColor>
       </form>
       <article>
-        <Button as={Link} to="/dashboard">
+        <Button type="submit" form="registrationForm">
           Sign in
         </Button>
         <TextAccount register>
