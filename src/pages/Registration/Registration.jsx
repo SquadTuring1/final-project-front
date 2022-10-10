@@ -31,6 +31,7 @@ const Registration = () => {
       email: '',
       username: '',
       password: '',
+      confirmPassword: '',
     },
   });
 
