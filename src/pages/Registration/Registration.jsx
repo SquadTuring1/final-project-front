@@ -105,7 +105,7 @@ const Registration = () => {
             <TextColor as={Link} to="/login">
               Log in
             </TextColor>{' '}
-            <TextAccount orLine>OR</TextAccount>
+            {/* <TextAccount orLine>OR</TextAccount> */}
             <ButtonGoogle>Login with Google</ButtonGoogle>
           </TextAccount>
         </CenterArticle>
