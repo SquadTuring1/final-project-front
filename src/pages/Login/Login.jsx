@@ -1,5 +1,6 @@
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAuthUser } from '../../features/auth/authSlice';
+import { getAuthUser, userSignedIn } from '../../features/auth/authSlice';
 import {
   MainSign,
   Button,
@@ -25,29 +26,37 @@ import auth from '../../utils/firebase/firebaseConfig';
 
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const authUser = useSelector(getAuthUser);
-  
 
 
-  
-  // set variables for react-hook-form
-  const { register, handleSubmit, reset, formState: { errors } } = useForm({
-    defaultValues: {
-      email: '',
-      password: '',
-    },
-  });
+// set variables for react-hook-form
+const { register, handleSubmit, reset, formState: { errors } } = useForm({
+  defaultValues: {
+    email: '',
+    password: '',
+  },
+});
 
-  
-  const onSubmit = async (data) => {
-    console.log(data)
-    const { email, password } = data;
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-      auth.onAuthStateChanged((user) => {
-        // TODO: add current user to global states, with token and uid
-        if (user) {
-          navigate('/dashboard');
+
+const onSubmit = async (data) => {
+  console.log(data)
+  const { email, password } = data;
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+    auth.onAuthStateChanged((user) => {
+      // TODO: add current user to global states, with token and uid
+      if (user) {
+          const userObj = {
+            token: user.accessToken,
+            email: user.email,
+            password: user.password,
+            uid: user.uid
+          }
+          dispatch(userSignedIn(userObj))
+          console.log(authUser)
+          
+          /* navigate('/dashboard'); */
         }
       });
     } catch (error) {

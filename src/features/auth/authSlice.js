@@ -23,6 +23,8 @@ const authSlice = createSlice({
             lastName: user.lastName,
             username: user.username,
             loggedIn: true,
+            uid: user.uid,
+            token: user.token,
           }
         }
       }

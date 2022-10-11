@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { useId } from 'react';
 
 
 
@@ -11,6 +12,11 @@ export const apiSlice = createApi({
       query: () => '/users',
       providesTags: ['Users']
     }),
+
+    getSingleUser: builder.query({
+      query: email => `/users/${email}`
+    }),
+
     addUser: builder.mutation({
       query: (user) => ({
         url: '/users',
@@ -29,5 +35,6 @@ export const apiSlice = createApi({
 
 export const { 
   useGetUsersQuery,
+  useGetSingleUserQuery,
   useAddUserMutation,
 } = apiSlice;
