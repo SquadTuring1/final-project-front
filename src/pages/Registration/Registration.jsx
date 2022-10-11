@@ -15,9 +15,16 @@ import {
   Logo,
   Input,
   Label,
-  CenterArticle
+  CenterArticle,
 } from '../../ui/index';
 import { useNavigate, Link } from 'react-router-dom';
+import {
+  createUserWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from 'firebase/auth';
+import auth from '../../utils/firebase/firebaseConfig.js';
+import { useState } from 'react';
 
 const Registration = () => {
   const {
@@ -33,12 +40,38 @@ const Registration = () => {
       password: '',
     },
   });
+  const [signUpError, setSignUpError] = useState(null);
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    // console.log(data);
+    const { email, password } = data;
+    try {
+      console.log('insde try');
+      await createUserWithEmailAndPassword(auth, email, password);
+    } catch (error) {
+      setSignUpError(error.message);
+    }
   };
 
   const navigate = useNavigate();
+
+  const signInWithGoogle = () => {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider)
+      .then(({ user }) => {
+        if (user) {
+          const { uid, accessToken, displayName } = user;
+          console.log(uid, accessToken, displayName);
+          // TODO: set golbal state with details above
+          navigate('/dashboard');
+        }
+        if (!user) {
+          console.log('something went wrong');
+          // TODO: Error handling component
+        }
+      })
+      .catch((error) => console.log(error));
+  };
 
   return (
     <MainSign>
@@ -58,7 +91,9 @@ const Registration = () => {
             })}
           />
           <ErrorMessage errors={errors} name="email" as="p" />
-          <Label className='sign__username' htmlFor="username">Username</Label>
+          <Label className="sign__username" htmlFor="username">
+            Username
+          </Label>
           <Input
             className="signup__input"
             name="username"
@@ -70,7 +105,9 @@ const Registration = () => {
             })}
           />
           <ErrorMessage errors={errors} name="username" as="p" />
-          <Label className='sign__pass' htmlFor="password">Password</Label>
+          <Label className="sign__pass" htmlFor="password">
+            Password
+          </Label>
           <Input
             className="signup__input"
             name="password"
@@ -81,7 +118,9 @@ const Registration = () => {
               required: 'Password is required',
             })}
           />
-          <Label className='sing__pass--confirm' htmlFor="confirmPassword">Confirm Password</Label>
+          <Label className="sing__pass--confirm" htmlFor="confirmPassword">
+            Confirm Password
+          </Label>
           <Input
             className="signup__input"
             name="confirmPassword"
@@ -94,22 +133,27 @@ const Registration = () => {
             })}
           />
           <ErrorMessage errors={errors} name="password" as="p" />
-            <TextRemember>
-            <input type="checkbox" name="remember"/>
-            Remember me</TextRemember>
-          <Button as={Link} to="/dashboard">
-            Create account
-          </Button>
+          <TextRemember>
+            <input type="checkbox" name="remember" />
+            Remember me
+          </TextRemember>
+          {/* TODO: syling */}
+          {signUpError && (
+            <p style={{ color: 'red', padding: '1rem' }}>
+              Something went wrong
+            </p>
+          )}
+          <Button type="submit">Create account</Button>
           <TextAccount>
             Already have an account?{' '}
             <TextColor as={Link} to="/login">
               Log in
             </TextColor>{' '}
             <TextAccount orLine>OR</TextAccount>
-            <ButtonGoogle>Login with Google</ButtonGoogle>
           </TextAccount>
         </CenterArticle>
       </form>
+      <ButtonGoogle onClick={signInWithGoogle}>Login with Google</ButtonGoogle>
       <TextTerms>
         By signing up, you’re agree to our{' '}
         <TermColor to="/terms">Term & Conditions and Privacy Policy</TermColor>
