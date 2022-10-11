@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { getAuthState, userSignedIn } from '../../features/auth/authSlice';
+import { getAuthUser } from '../../features/auth/authSlice';
 import {
   MainSign,
   Button,
@@ -20,40 +20,20 @@ import { useGetUsersQuery } from '../../features/api/apiSlice';
 
 const Login = () => {
   const dispatch = useDispatch();
-  const authState = useSelector(getAuthState);
-
+  const authUser = useSelector(getAuthUser);
   
+  // get users, fetch status, and caching from apiSlice getUsers query
   const { data: users, isLoading, isSuccess, isError, error } = useGetUsersQuery();
   
 
 
   // set variables for react-hook-form
-  const { register, handleSubmit, formState: { errors } } = useForm({
+  const { register, handleSubmit, reset, formState: { errors } } = useForm({
     defaultValues: {
       email: '',
       password: '',
     },
   });
-
-
-
-  const onSubmit = (data) => {
-    console.log(authState)
-    if (isSuccess) {
-      console.log(users)
-      const userExists = users.find(user => user.email === data.email);
-      
-      if (userExists) {
-        console.log('User exists: ' + userExists)
-        dispatch(userSignedIn(data.email))
-        console.log(authState);
-      } else {
-        console.log('This user does not exist')
-      }
-    }
-    
-    
-  };
 
 
   const navigate = useNavigate();
