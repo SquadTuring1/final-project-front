@@ -18,8 +18,8 @@ export const TextColor = styled(Link)`
 
   &.forgotPass {
     display: flex;
-    justify-content:flex-end;
-    margin: .4rem .3rem 0 0;
+    justify-content: flex-end;
+    margin: 0.4rem 0.3rem 0 0;
     font-size: 1.05rem;
     font-weight: 300;
   }
@@ -40,18 +40,17 @@ export const TermColor = styled(TextColor)`
 `;
 
 export const TextRemember = styled(TermColor)`
-
-  margin: 0.5rem 0 .8rem;
+  margin: 0.5rem 0 0.8rem;
   font-size: 1rem;
   font-weight: 400;
   text-align: right;
 `;
 
 export const TitleSign = styled.h2`
-  margin-top: ${({signUp}) => signUp ? '2rem' : ''};
+  margin-top: ${({ signUp }) => (signUp ? '2rem' : '')};
   padding-bottom: 1rem;
   color: #fff;
   font-size: 2.5rem;
   font-weight: 600;
-  text-align:center;
+  text-align: center;
 `;
