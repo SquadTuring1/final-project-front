@@ -57,7 +57,7 @@ const PersonalProfile = () => {
             disabled
             className="username__input"
             name="username"
-            type="username"
+            type="text"
             placeholder="Username"
           />
           {/* <Label className="email__profile">Email</Label> */}
@@ -84,7 +84,7 @@ const PersonalProfile = () => {
             disabled = {(modifyInfo === true) ? true : false}
             className="info__user--input"
             name="lastname"
-            type="lastname"
+            type="text"
             placeholder="Lastname"
             {...register('lastname')}
           />

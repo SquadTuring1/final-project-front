@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import logoSM from '../../assets/images/Logo-sign.png';
 import {
   Avatar,
@@ -13,9 +13,19 @@ import {
 } from '../../ui/index';
 import avatar from '../../assets/images/user-avatar.jpg';
 import { Popover } from 'react-tiny-popover';
+import { useDispatch } from 'react-redux';
+import { userSignedIn, userSignedOut } from '../../features/auth/authSlice';
+
 
 const Navbar = () => {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const signOut = () => {
+    dispatch(userSignedOut)
+    navigate('', {replace: true})
+  }
 
   return (
     <MainNav>
@@ -26,8 +36,8 @@ const Navbar = () => {
           positions={['bottom']} // preferred positions by priority
           content={
             <PopMenu>
-              <article>Profile</article>
-              <article>Sign out</article>
+              <button>Profile</button>
+              <button onClick={signOut}>Sign out</button>
             </PopMenu>
           }
         >

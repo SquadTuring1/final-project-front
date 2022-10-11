@@ -2,11 +2,19 @@
   "users": [
     {
       "id": 1,
+      "uid": "4hndfrHp1YSRDEmAuvbsBjZiZtp2",
       "firstName": "Dave",
+<<<<<<< HEAD
       "lastName": "Simmons",
       "email": "davey@mammut.com",
       "username": "davey5000",
       "password": "assembler",
+=======
+      "lastName": "Simmons", 
+      "email": "test@turingfinalproject.com",     
+      "username": "turing",
+      "password": "turing",
+>>>>>>> develop
       "avatar": "https://robohash.org/laboreautaccusamus.png?size=50x50&set=set1"
     },
     {
