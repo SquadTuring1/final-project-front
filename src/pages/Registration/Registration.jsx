@@ -1,5 +1,7 @@
+import axios from 'axios'
 import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
+
 import { useGetUsersQuery, useAddUserMutation } from '../../features/api/apiSlice';
 import '../../ui/Registration.styled.css';
 import logoSM from '../../assets/images/Logo-sign.png';
@@ -61,15 +63,34 @@ const Registration = () => {
   const [signUpError, setSignUpError] = useState(null);
 
   const onSubmit = async (data) => {
-    // console.log(data);
     const { email, password } = data;
     try {
       console.log('insde try');
       await createUserWithEmailAndPassword(auth, email, password);
       auth.onAuthStateChanged((user) => {
         if (user) {
+          console.log(user)
           const { accessToken, uid, email } = user;
-          navigate('/dashboard');
+          // TODO working on api post
+          axios.post({ 
+            method: 'POST', 
+            url: 'http://localhost:4000/signup', 
+            // headers: {
+            //   Authorization: `Bearer ${accessToken}`
+            // },
+            body: {
+              username: data.username,
+              email,
+              uid,
+              token: accessToken,
+              password,
+            }
+          }).then(response => console.log(response))
+            .catch(err => console.log(err))
+
+
+          // ! change for rtk query / check sending tokens in headers
+          // navigate('/dashboard');
         }
       });
     } catch (error) {
@@ -83,9 +104,11 @@ const Registration = () => {
       .then(({ user }) => {
         if (user) {
           const { uid, accessToken, displayName } = user;
-          console.log(uid, accessToken, displayName);
+          // console.log(user);
           // TODO: set golbal state with details above
-          navigate('/dashboard');
+
+
+          // navigate('/dashboard');
         }
         if (!user) {
           console.log('something went wrong');

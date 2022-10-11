@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { getAuthUser } from '../../features/auth/authSlice';
+import { useAddUserMutation } from '../../features/api/apiSlice';
 import {
   MainSign,
   Button,
@@ -26,6 +27,9 @@ import auth from '../../utils/firebase/firebaseConfig';
 const Login = () => {
   const navigate = useNavigate();
   const authUser = useSelector(getAuthUser);
+  const dispatch = useDispatch();
+
+  const [ addUser ] = useAddUserMutation();
   
 
 
@@ -45,7 +49,10 @@ const Login = () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       auth.onAuthStateChanged((user) => {
+        console.log(user)   // ! What does this output?
         // TODO: add current user to global states, with token and uid
+        
+
         if (user) {
           navigate('/dashboard');
         }

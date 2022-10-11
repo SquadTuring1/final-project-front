@@ -3,8 +3,8 @@
     {
       "id": 1,
       "firstName": "Dave",
-      "lastName": "Simmons", 
-      "email": "davey@mammut.com",     
+      "lastName": "Simmons",
+      "email": "davey@mammut.com",
       "username": "davey5000",
       "password": "assembler",
       "avatar": "https://robohash.org/laboreautaccusamus.png?size=50x50&set=set1"
@@ -12,8 +12,8 @@
     {
       "id": 2,
       "firstName": "Jane",
-      "lastName": "Simmons",      
-      "email": "jane@mammut.com",     
+      "lastName": "Simmons",
+      "email": "jane@mammut.com",
       "username": "chilltimel01",
       "password": "assembler",
       "avatar": "https://robohash.org/aspernaturvoluptatemnam.png?size=50x50&set=set1"
@@ -21,11 +21,63 @@
     {
       "id": 3,
       "firstName": null,
-      "lastName": null,      
-      "email": "K84Real@mammut.com",     
+      "lastName": null,
+      "email": "K84Real@mammut.com",
       "username": "K84Real",
       "password": "assembler",
       "avatar": "https://robohash.org/etquieum.png?size=50x50&set=set1"
+    },
+    {
+      "uid": "4hndfrHp1YSRDEmAuvbsBjZiZtp2",
+      "email": "test@turingfinalproject.com",
+      "emailVerified": false,
+      "isAnonymous": false,
+      "providerData": [
+        {
+          "providerId": "password",
+          "uid": "test@turingfinalproject.com",
+          "displayName": null,
+          "email": "test@turingfinalproject.com",
+          "phoneNumber": null,
+          "photoURL": null
+        }
+      ],
+      "stsTokenManager": {
+        "refreshToken": "AOEOula0t0aVuZDuDZ95hg7AHu8cR5Bhn5yuMBRg0HStdztCkJUM0ATP6gah_aIcl8satk5eji5oOPWQ7gvTgY6w6ysZTVAbIZ8nM5i8Ffjb3kx6mKiettJtkEnS7imiK0rVZjT9RNPZB_TCbUBtfKDvIJg8OU0ldl74cI50yKjsp9zVgp364Gg5V4JO8Kl5lJBer3qYD_SZWDcOvBVBrJtKE_FmdHNw66T9SUnKs1h1fMRojvOJLJM",
+        "accessToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6Ijk5NjJmMDRmZWVkOTU0NWNlMjEzNGFiNTRjZWVmNTgxYWYyNGJhZmYiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vYXBvbGxvZnktdHVyaW5nLXRlYW0iLCJhdWQiOiJhcG9sbG9meS10dXJpbmctdGVhbSIsImF1dGhfdGltZSI6MTY2NTQ5NzMzNCwidXNlcl9pZCI6IjRobmRmckhwMVlTUkRFbUF1dmJzQmpaaVp0cDIiLCJzdWIiOiI0aG5kZnJIcDFZU1JERW1BdXZic0JqWmladHAyIiwiaWF0IjoxNjY1NDk3MzM0LCJleHAiOjE2NjU1MDA5MzQsImVtYWlsIjoidGVzdEB0dXJpbmdmaW5hbHByb2plY3QuY29tIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7ImVtYWlsIjpbInRlc3RAdHVyaW5nZmluYWxwcm9qZWN0LmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6InBhc3N3b3JkIn19.wUOChssBmi4_OwMoAjSisy2UPXVXSSSWUVoexj8LIvVazfO_A0csq_-2BrAdRva4TJHsM-RmVJlq---JZal6meZ93qlhiyz467HOfr3elN_T7Ek3TXoPTEN1zksm_HQpS78UkuL0lUDt7MIgPIZ5TDqnu1Ii7sJvinEyi1JdVZQbXPwCkfg-_34wFi6go2k_XA_-ByEIMzTtUh_IXY-9k674m2FzFQiORHc-I6SDnsfR2dtxPfK3qABThRMeiHfdtkcXxSsjWRPPLWEASy5_vpIBpPaJsNvxowQilpl475NDgnrDqb51zPcz4CAdZiQpJVYymcK4KU_k6QPLzo94nA",
+        "expirationTime": 1665500933826
+      },
+      "createdAt": "1665488881063",
+      "lastLoginAt": "1665497334232",
+      "apiKey": "AIzaSyAfFE0QnQm_PKaYl8mhn9kg2beTuf_CN-g",
+      "appName": "[DEFAULT]",
+      "id": 4
+    },
+    {
+      "uid": "4hndfrHp1YSRDEmAuvbsBjZiZtp2",
+      "email": "test@turingfinalproject.com",
+      "emailVerified": false,
+      "isAnonymous": false,
+      "providerData": [
+        {
+          "providerId": "password",
+          "uid": "test@turingfinalproject.com",
+          "displayName": null,
+          "email": "test@turingfinalproject.com",
+          "phoneNumber": null,
+          "photoURL": null
+        }
+      ],
+      "stsTokenManager": {
+        "refreshToken": "AOEOulaEv0eY96rS9qDrGaV51OEBArFcV5usxVvfyyEUByguJYmtgN4s8Hiz3mVTuweAc-CJyIV6phjlfY3RVLy1mN0BXP2dzAfc7hLKtZYCGutdlZYPM3keaSMu9gWwdLarm7IWLfvS8Ehs9pZ5oVzwuzAREWWdY9QCFsA07YJJzhzjttjg3PKITbNH68Pvo_aS0f8juFx3IHrGu31F-S62lHMgQdWTVcbpHjLBRUwfSg42XXFncnE",
+        "accessToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6Ijk5NjJmMDRmZWVkOTU0NWNlMjEzNGFiNTRjZWVmNTgxYWYyNGJhZmYiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vYXBvbGxvZnktdHVyaW5nLXRlYW0iLCJhdWQiOiJhcG9sbG9meS10dXJpbmctdGVhbSIsImF1dGhfdGltZSI6MTY2NTQ5NzMzNCwidXNlcl9pZCI6IjRobmRmckhwMVlTUkRFbUF1dmJzQmpaaVp0cDIiLCJzdWIiOiI0aG5kZnJIcDFZU1JERW1BdXZic0JqWmladHAyIiwiaWF0IjoxNjY1NDk3MzM0LCJleHAiOjE2NjU1MDA5MzQsImVtYWlsIjoidGVzdEB0dXJpbmdmaW5hbHByb2plY3QuY29tIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7ImVtYWlsIjpbInRlc3RAdHVyaW5nZmluYWxwcm9qZWN0LmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6InBhc3N3b3JkIn19.wUOChssBmi4_OwMoAjSisy2UPXVXSSSWUVoexj8LIvVazfO_A0csq_-2BrAdRva4TJHsM-RmVJlq---JZal6meZ93qlhiyz467HOfr3elN_T7Ek3TXoPTEN1zksm_HQpS78UkuL0lUDt7MIgPIZ5TDqnu1Ii7sJvinEyi1JdVZQbXPwCkfg-_34wFi6go2k_XA_-ByEIMzTtUh_IXY-9k674m2FzFQiORHc-I6SDnsfR2dtxPfK3qABThRMeiHfdtkcXxSsjWRPPLWEASy5_vpIBpPaJsNvxowQilpl475NDgnrDqb51zPcz4CAdZiQpJVYymcK4KU_k6QPLzo94nA",
+        "expirationTime": 1665500933841
+      },
+      "createdAt": "1665488881063",
+      "lastLoginAt": "1665497334232",
+      "apiKey": "AIzaSyAfFE0QnQm_PKaYl8mhn9kg2beTuf_CN-g",
+      "appName": "[DEFAULT]",
+      "id": 5
     }
   ]
 }
