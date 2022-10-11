@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
+import { useGetUsersQuery, useAddUserMutation } from '../../features/api/apiSlice';
 import '../../ui/Registration.styled.css';
 import logoSM from '../../assets/images/Logo-sign.png';
 // import for styled components
@@ -30,6 +31,19 @@ import { useState } from 'react';
 const Registration = () => {
   const navigate = useNavigate();
 
+  // get users data from apiSlice hook
+  const {
+    data: users,
+    isLoading,
+    isSuccess,
+    isError,
+    error
+  } = useGetUsersQuery();
+
+  // get the function addUser from apiSlice hook, only need the function since adding
+  const [ addUser ] = useAddUserMutation();
+  
+  
   // set variables from react-hook-form
   const {
     getValues,
@@ -151,7 +165,7 @@ const Registration = () => {
             <TextColor as={Link} to="/login">
               Log in
             </TextColor>{' '}
-            <TextAccount orLine>OR</TextAccount>
+            {/* <TextAccount orLine>OR</TextAccount> */}
           </TextAccount>
         </CenterArticle>
       </form>

@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { getAuthUser, userSignedIn } from '../../features/auth/authSlice';
+import { getAuthUser } from '../../features/auth/authSlice';
 import {
   MainSign,
   Button,
@@ -15,7 +15,6 @@ import logoSM from '../../assets/images/Logo-sign.png';
 import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
 import { Link, useNavigate } from 'react-router-dom';
-import { selectAllUsers } from '../../features/users/usersSlice.js';
 import {
   signInWithEmailAndPassword,
   onAuthStateChanged,
@@ -23,26 +22,25 @@ import {
 } from 'firebase/auth';
 import auth from '../../utils/firebase/firebaseConfig';
 
-const Login = () => {
-  const dispatch = useDispatch();
-  const authUser = useSelector(getAuthUser);
-  const users = useSelector(selectAllUsers);
 
+const Login = () => {
+  const navigate = useNavigate();
+  const authUser = useSelector(getAuthUser);
+  
+
+
+  
   // set variables for react-hook-form
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
+  const { register, handleSubmit, reset, formState: { errors } } = useForm({
     defaultValues: {
       email: '',
       password: '',
     },
   });
 
-  const navigate = useNavigate();
-
+  
   const onSubmit = async (data) => {
+    console.log(data)
     const { email, password } = data;
     try {
       await signInWithEmailAndPassword(auth, email, password);
@@ -61,11 +59,7 @@ const Login = () => {
   return (
     <MainSign>
       <Logo sign src={logoSM} />
-      <form
-        className="registration__form"
-        id="registrationForm"
-        onSubmit={handleSubmit(onSubmit)}
-      >
+      <form className="registration__form" id="loginForm" onSubmit={handleSubmit(onSubmit)}>
         <TitleSign>Hello again!</TitleSign>
         <CenterArticle loginLab>
           <Label htmlFor="email">Email:</Label>
@@ -94,16 +88,12 @@ const Login = () => {
               required: 'Password is required',
             })}
           />
-
           <ErrorMessage errors={errors} name="password" as="p" />
         </CenterArticle>
         <TextColor className="forgotPass">Forgot your password?</TextColor>
-        <Button type="submit">Sign in</Button>
       </form>
       <article>
-        <Button type="submit" form="registrationForm">
-          Sign in
-        </Button>
+        <Button type="submit" form="loginForm">Sign in</Button>
         <TextAccount register>
           Don't have an account?{' '}
           <TextColor as={Link} to="/registration">
