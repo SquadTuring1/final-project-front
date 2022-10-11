@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { getAuthUser, userSignedIn } from '../../features/auth/authSlice';
-import { useState } from 'react'
+import { getAuthState, userSignedIn } from '../../features/auth/authSlice';
 import {
   MainSign,
   Button,
@@ -16,12 +15,13 @@ import logoSM from '../../assets/images/Logo-sign.png';
 import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
 import { Link, useNavigate } from 'react-router-dom';
+
 import { useGetUsersQuery } from '../../features/api/apiSlice';
 
 const Login = () => {
   const dispatch = useDispatch();
-  const authUser = useSelector(getAuthUser);
-  console.log(authUser)
+  const authState = useSelector(getAuthState);
+
   
   const { data: users, isLoading, isSuccess, isError, error } = useGetUsersQuery();
   
@@ -38,17 +38,15 @@ const Login = () => {
 
 
   const onSubmit = (data) => {
-    if (authUser && authUser.loggedIn) {
-      console.log('A user already logged in')
-      return;
-    }
+    console.log(authState)
     if (isSuccess) {
       console.log(users)
       const userExists = users.find(user => user.email === data.email);
-      console.log(user)
+      
       if (userExists) {
+        console.log('User exists: ' + userExists)
         dispatch(userSignedIn(data.email))
-        console.log(authUser);
+        console.log(authState);
       } else {
         console.log('This user does not exist')
       }
