@@ -1,16 +1,21 @@
 import { Button, ButtonGoogle } from './Button.styled';
-import { CenterArticle } from './CenterArticle.styled';
+import { CenterArticle, CenterProfile } from './CenterArticle.styled';
 import { GlobalStyle } from './GlobalStyles';
 import { Input, Label } from './Form.styled';
 import { Logo } from './Logo.styled';
-import { MainDash, MainHome, MainSign } from './Main.styled';
+import { MainApp, MainDash, MainHome, MainSign } from './Main.styled';
 import { TextAccount, TextColor, TextTerms, TermColor, TextRemember, TitleSign, TitleH2, TitleP } from './Text.styled';
+import { MainNav, NavContent, AvatarContent, Avatar, ButtonAvatar, GreenDot } from './Avatar.styled';
+import { PopMenu } from './PopMenu.styled';
+
 
 export{
   MainHome,
   MainSign,
   MainDash,
-  CenterArticle
+  MainApp,
+  CenterArticle,
+  CenterProfile
 }
 
 export {
@@ -31,3 +36,13 @@ export {
   TitleSign,
   TitleH2,
   TitleP }
+
+  export {
+    MainNav,
+    NavContent,
+    Avatar,
+    ButtonAvatar,
+    GreenDot,
+    AvatarContent,
+    PopMenu
+  }

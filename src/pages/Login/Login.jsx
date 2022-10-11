@@ -52,7 +52,6 @@ const Login = () => {
                 required: 'Email is required',
               })}
             />
-          
           <ErrorMessage errors={errors} name="email" as="p" />
         {/* </CenterArticle>
         <CenterArticle loginLab> */}
@@ -68,7 +67,6 @@ const Login = () => {
                 required: 'Password is required',
               })}
             />
-          
           <ErrorMessage errors={errors} name="password" as="p" />
           </CenterArticle>
           <TextColor className='forgotPass'>Forgot your password?</TextColor>

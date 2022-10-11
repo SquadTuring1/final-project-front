@@ -67,4 +67,8 @@ export const TitleP = styled.p`
   color: #eee;
   font-size: 1rem;
   text-align: left;
+
+  &.change__pass{
+    display:flex;
+  }
 `
