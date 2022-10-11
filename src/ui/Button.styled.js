@@ -23,6 +23,11 @@ export const Button = styled.button`
   &:active {
     transform: scale(0.99);
   }
+
+  &.mofify__btn{
+    background-color: #999;
+    color:#000;
+  }
 `;
 
 export const ButtonGoogle = styled(Button)`

@@ -47,4 +47,5 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+font-family: 'Source Sans Pro', sans-serif;
 `

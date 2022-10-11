@@ -1,26 +1,48 @@
 import { Button, ButtonGoogle } from './Button.styled';
-import { CenterArticle } from './CenterArticle.styled';
+import { CenterArticle, CenterProfile } from './CenterArticle.styled';
 import { GlobalStyle } from './GlobalStyles';
 import { Input, Label } from './Form.styled';
 import { Logo } from './Logo.styled';
-import { MainHome, MainSign } from './Main.styled';
-import { TextAccount, TextColor, TextTerms, TermColor, TextRemember, TitleSign } from './Text.styled';
+import { MainApp, MainDash, MainHome, MainSign } from './Main.styled';
+import { TextAccount, TextColor, TextTerms, TermColor, TextRemember, TitleSign, TitleH2, TitleP } from './Text.styled';
+import { MainNav, NavContent, AvatarContent, Avatar, ButtonAvatar, GreenDot } from './Avatar.styled';
+import { PopMenu } from './PopMenu.styled';
 
 
-export {
+export{
   MainHome,
   MainSign,
+  MainDash,
+  MainApp,
   CenterArticle,
+  CenterProfile
+}
+
+export {
   Logo,
   GlobalStyle,
   Button,
+  ButtonGoogle,
+  Input,
+  Label
+};
+
+export {   
   TextAccount,
   TextColor,
   TextTerms,
   TermColor,
   TextRemember,
   TitleSign,
-  ButtonGoogle,
-  Input,
-  Label
-};
+  TitleH2,
+  TitleP }
+
+  export {
+    MainNav,
+    NavContent,
+    Avatar,
+    ButtonAvatar,
+    GreenDot,
+    AvatarContent,
+    PopMenu
+  }

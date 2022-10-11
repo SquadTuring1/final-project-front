@@ -6,5 +6,14 @@ export const CenterArticle = styled.article`
   flex-direction: column;
   align-items: center;
   margin: ${({loginLab}) => loginLab ? '' : '4rem'};
+
+  &.button__profile--container{
+    display: flex;
+    justify-content:center;
+  }
 `;
 
+export const CenterProfile = styled(CenterArticle)`
+  height:90vh;
+  align-items: center;
+`

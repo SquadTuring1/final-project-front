@@ -1,14 +1,15 @@
-import './App.css';
-import Router from './Routes/Router';
-import { GlobalStyle } from './ui/index';
+import './App.css'
+import Router from './Routes/Router'
+import { GlobalStyle, MainApp } from './ui/index';
+MainApp
 
 function App() {
   return (
-    <div>
+    <MainApp>
       <GlobalStyle />
       <Router />
-    </div>
-  );
+    </MainApp>
+  )
 }
 
 export default App;

@@ -124,46 +124,44 @@ const Registration = () => {
       <form className="registration__form" onSubmit={handleSubmit(onSubmit)}>
         <TitleSign signUp>Sign up</TitleSign>
         <CenterArticle loginLab>
-          <Label htmlFor="email">Email</Label>
+          {/* <Label htmlFor="email">Email</Label> */}
           <Input
             className="signup__input"
             name="email"
             type="email"
+            placeholder="email"
             {...register('email', {
               required: 'Email is required',
             })}
           />
           <ErrorMessage errors={errors} name="email" as="p" />
-          <Label className="sign__username" htmlFor="username">
-            Username
-          </Label>
+          {/* <Label className='sign__username' htmlFor="username">Username</Label> */}
           <Input
             className="signup__input"
             name="username"
             type="text"
+            placeholder="username"
             {...register('username', {
               required: 'Username is required',
             })}
           />
           <ErrorMessage errors={errors} name="username" as="p" />
-          <Label className="sign__pass" htmlFor="password">
-            Password
-          </Label>
+          {/* <Label className='sign__pass' htmlFor="password">Password</Label> */}
           <Input
             className="signup__input"
             name="password"
             label="Password:"
             type="password"
+            placeholder="password"
             {...register('password', {
               required: 'Password is required',
             })}
           />
-          <Label className="sing__pass--confirm" htmlFor="confirmPassword">
-            Confirm Password
-          </Label>
+          {/* <Label className='sing__pass--confirm' htmlFor="confirmPassword">Confirm Password</Label> */}
           <Input
             className="signup__input"
             name="confirmPassword"
+            placeholder="Confirm Password:"
             type="password"
             {...register('confirmPassword', {
               validate: (value) => {
@@ -172,17 +170,12 @@ const Registration = () => {
             })}
           />
           <ErrorMessage errors={errors} name="password" as="p" />
-          <TextRemember>
-            <input type="checkbox" name="remember" />
-            Remember me
-          </TextRemember>
-          {/* TODO: syling */}
-          {signUpError && (
-            <p style={{ color: 'red', padding: '1rem' }}>
-              Something went wrong
-            </p>
-          )}
-          <Button type="submit">Create account</Button>
+            <TextRemember>
+            <input type="checkbox" name="remember"/>
+            Remember me</TextRemember>
+          <Button type='submit' onClick={() => navigate('/dashboard')}>
+            Create account
+          </Button>
           <TextAccount>
             Already have an account?{' '}
             <TextColor as={Link} to="/login">

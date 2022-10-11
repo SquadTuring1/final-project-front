@@ -49,8 +49,25 @@ export const TextRemember = styled(TermColor)`
 export const TitleSign = styled.h2`
   margin-top: ${({ signUp }) => (signUp ? '2rem' : '')};
   padding-bottom: 1rem;
-  color: #fff;
+  color: #eee;
   font-size: 2.5rem;
   font-weight: 600;
   text-align: center;
 `;
+
+export const TitleH2 = styled.h2`
+  margin: 1rem 0 0;
+  color: #eee;
+  font-size: 2.3rem;
+  font-weight: 600;
+`
+
+export const TitleP = styled.p`
+  color: #eee;
+  font-size: 1rem;
+  text-align: left;
+
+  &.change__pass{
+    display:flex;
+  }
+`

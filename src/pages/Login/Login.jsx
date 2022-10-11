@@ -69,32 +69,32 @@ const Login = () => {
       <form className="registration__form" id="loginForm" onSubmit={handleSubmit(onSubmit)}>
         <TitleSign>Hello again!</TitleSign>
         <CenterArticle loginLab>
-          <Label htmlFor="email">Email:</Label>
-          <Input
-            className="signup__input"
-            name="email"
-            // label="Email:"
-            type="email"
-            {...register('email', {
-              required: 'Email is required',
-            })}
-          />
-
+          <Label htmlFor="email">
+            Email:</Label>
+            <Input
+              className="signup__input"
+              name="email"
+              // label="Email:"
+              type="email"
+              {...register('email', {
+                required: 'Email is required',
+              })}
+            />
           <ErrorMessage errors={errors} name="email" as="p" />
           {/* </CenterArticle>
         <CenterArticle loginLab> */}
           <Label passPos htmlFor="password">
             Password:
-          </Label>
-          <Input
-            className="signup__input"
-            name="password"
-            label="Password:"
-            type="password"
-            {...register('password', {
-              required: 'Password is required',
-            })}
-          />
+            </Label>
+            <Input
+              className="signup__input"
+              name="password"
+              label="Password:"
+              type="password"
+              {...register('password', {
+                required: 'Password is required',
+              })}
+            />
           <ErrorMessage errors={errors} name="password" as="p" />
         </CenterArticle>
         <TextColor className="forgotPass">Forgot your password?</TextColor>
