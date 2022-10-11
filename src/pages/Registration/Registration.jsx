@@ -159,7 +159,6 @@ const Registration = () => {
               Log in
             </TextColor>{' '}
             {/* <TextAccount orLine>OR</TextAccount> */}
-            <ButtonGoogle>Login with Google</ButtonGoogle>
           </TextAccount>
         </CenterArticle>
       </form>
