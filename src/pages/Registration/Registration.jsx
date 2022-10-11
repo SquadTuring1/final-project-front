@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
+import { useGetUsersQuery, useAddUserMutation } from '../../features/api/apiSlice';
 import '../../ui/Registration.styled.css';
 import logoSM from '../../assets/images/Logo-sign.png';
 // import for styled components
@@ -22,10 +23,20 @@ import { useNavigate, Link } from 'react-router-dom';
 
 
 
-
 const Registration = () => {
   const navigate = useNavigate();
 
+  // get users data from apiSlice hook
+  const {
+    data: users,
+    isLoading,
+    isSuccess,
+    isError,
+    error
+  } = useGetUsersQuery();
+
+  // get the function addUser from apiSlice hook, only need the function since adding
+  const [ addUser ] = useAddUserMutation();
   
   
   // set variables from react-hook-form
@@ -44,8 +55,10 @@ const Registration = () => {
   });
 
   const onSubmit = (data) => {
-   
     console.log(data);
+    const userExists = users.find(user => user.email === data.email);
+    console.log(userExists)
+
     // navigate("/dashboard");
   };
 

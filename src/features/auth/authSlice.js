@@ -22,7 +22,7 @@ const authSlice = createSlice({
     },
     userSignedOut: {
       reducer(state, action) {
-        state = initialState;
+        return initialState;
       }
     },
   },
