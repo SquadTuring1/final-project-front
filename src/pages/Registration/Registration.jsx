@@ -1,7 +1,9 @@
 import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
+import { useGetUsersQuery, useAddUserMutation } from '../../features/api/apiSlice';
 import '../../ui/Registration.styled.css';
 import logoSM from '../../assets/images/Logo-sign.png';
+// import for styled components
 import {
   MainSign,
   Button,
@@ -15,15 +17,37 @@ import {
   Logo,
   Input,
   Label,
-  CenterArticle
+  CenterArticle,
 } from '../../ui/index';
 import { useNavigate, Link } from 'react-router-dom';
+import {
+  createUserWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from 'firebase/auth';
+import auth from '../../utils/firebase/firebaseConfig.js';
+import { useState } from 'react';
 
 const Registration = () => {
+  const navigate = useNavigate();
+
+  // get users data from apiSlice hook
+  const {
+    data: users,
+    isLoading,
+    isSuccess,
+    isError,
+    error
+  } = useGetUsersQuery();
+
+  // get the function addUser from apiSlice hook, only need the function since adding
+  const [ addUser ] = useAddUserMutation();
+  
+  
+  // set variables from react-hook-form
   const {
     getValues,
     register,
-    watch,
     handleSubmit,
     formState: { errors },
   } = useForm({
@@ -31,14 +55,45 @@ const Registration = () => {
       email: '',
       username: '',
       password: '',
+      confirmPassword: '',
     },
   });
+  const [signUpError, setSignUpError] = useState(null);
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    // console.log(data);
+    const { email, password } = data;
+    try {
+      console.log('insde try');
+      await createUserWithEmailAndPassword(auth, email, password);
+      auth.onAuthStateChanged((user) => {
+        if (user) {
+          const { accessToken, uid, email } = user;
+          navigate('/dashboard');
+        }
+      });
+    } catch (error) {
+      setSignUpError(error.message);
+    }
   };
 
-  const navigate = useNavigate();
+  const signInWithGoogle = () => {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider)
+      .then(({ user }) => {
+        if (user) {
+          const { uid, accessToken, displayName } = user;
+          console.log(uid, accessToken, displayName);
+          // TODO: set golbal state with details above
+          navigate('/dashboard');
+        }
+        if (!user) {
+          console.log('something went wrong');
+          // TODO: Error handling component
+        }
+      })
+      .catch((error) => console.log(error));
+  };
 
   return (
     <MainSign>
@@ -50,7 +105,6 @@ const Registration = () => {
           <Input
             className="signup__input"
             name="email"
-            // label="Email:"
             type="email"
             placeholder="email"
             {...register('email', {
@@ -62,7 +116,6 @@ const Registration = () => {
           <Input
             className="signup__input"
             name="username"
-            // label="Username:"
             type="text"
             placeholder="username"
             {...register('username', {
@@ -110,6 +163,7 @@ const Registration = () => {
           </TextAccount>
         </CenterArticle>
       </form>
+      <ButtonGoogle onClick={signInWithGoogle}>Login with Google</ButtonGoogle>
       <TextTerms>
         By signing up, you’re agree to our{' '}
         <TermColor to="/terms">Term & Conditions and Privacy Policy</TermColor>

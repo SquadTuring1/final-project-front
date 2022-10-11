@@ -1,4 +1,5 @@
-import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAuthUser } from '../../features/auth/authSlice';
 import {
   MainSign,
   Button,
@@ -8,38 +9,58 @@ import {
   CenterArticle,
   Logo,
   Input,
-  Label
+  Label,
 } from '../../ui/index';
 import logoSM from '../../assets/images/Logo-sign.png';
 import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
 import { Link, useNavigate } from 'react-router-dom';
+import {
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  sendPasswordResetEmail,
+} from 'firebase/auth';
+import auth from '../../utils/firebase/firebaseConfig';
+
 
 const Login = () => {
-  const {
-    getValues,
-    register,
-    watch,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
+  const navigate = useNavigate();
+  const authUser = useSelector(getAuthUser);
+  
+
+
+  
+  // set variables for react-hook-form
+  const { register, handleSubmit, reset, formState: { errors } } = useForm({
     defaultValues: {
       email: '',
       password: '',
     },
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
+  
+  const onSubmit = async (data) => {
+    console.log(data)
+    const { email, password } = data;
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      auth.onAuthStateChanged((user) => {
+        // TODO: add current user to global states, with token and uid
+        if (user) {
+          navigate('/dashboard');
+        }
+      });
+    } catch (error) {
+      console.log(error);
+      // TODO:  create global Error handling state
+    }
   };
-
-  const navigate = useNavigate();
 
   return (
     <MainSign>
       <Logo sign src={logoSM} />
-      <form className="registration__form" onSubmit={handleSubmit(onSubmit)}>
-          <TitleSign>Hello again!</TitleSign>
+      <form className="registration__form" id="loginForm" onSubmit={handleSubmit(onSubmit)}>
+        <TitleSign>Hello again!</TitleSign>
         <CenterArticle loginLab>
           <Label htmlFor="email">
             Email:</Label>
@@ -53,7 +74,7 @@ const Login = () => {
               })}
             />
           <ErrorMessage errors={errors} name="email" as="p" />
-        {/* </CenterArticle>
+          {/* </CenterArticle>
         <CenterArticle loginLab> */}
           <Label passPos htmlFor="password">
             Password:
@@ -68,13 +89,11 @@ const Login = () => {
               })}
             />
           <ErrorMessage errors={errors} name="password" as="p" />
-          </CenterArticle>
-          <TextColor className='forgotPass'>Forgot your password?</TextColor>
+        </CenterArticle>
+        <TextColor className="forgotPass">Forgot your password?</TextColor>
       </form>
       <article>
-        <Button as={Link} to="/dashboard">
-          Sign in
-        </Button>
+        <Button type="submit" form="loginForm">Sign in</Button>
         <TextAccount register>
           Don't have an account?{' '}
           <TextColor as={Link} to="/registration">
