@@ -1,8 +1,11 @@
 import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
 import { useNavigate, Link } from 'react-router-dom';
+import { useState } from 'react';
 
-import { useGetUsersQuery, useAddUserMutation } from '../../features/api/apiSlice';
+import { useAddUserMutation } from '../../features/api/apiSlice';
+import { getAuthUser } from '../../features/auth/authSlice';
+import { useSelector } from 'react-redux';
 
 import '../../ui/Registration.styled.css';
 import logoSM from '../../assets/images/Logo-sign.png';
@@ -10,13 +13,15 @@ import { MainSign, Button, ButtonGoogle, TextAccount, TextColor, TextTerms, Term
 
 import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, } from 'firebase/auth';
 import auth from '../../utils/firebase/firebaseConfig.js';
-import { useState } from 'react';
+
+
 
 const Registration = () => {
   const navigate = useNavigate();
 
   // get the function addUser from apiSlice hook, only need the function since adding
   const [ addUser ] = useAddUserMutation();
+  const currentUser = useSelector(getAuthUser);
     
   // set variables from react-hook-form
   const {
@@ -44,21 +49,7 @@ const Registration = () => {
           console.log(user)
           const { accessToken, uid, email } = user;
           // TODO working on api post
-          axios.post({ 
-            method: 'POST', 
-            url: 'http://localhost:4000/signup', 
-            // headers: {
-            //   Authorization: `Bearer ${accessToken}`
-            // },
-            body: {
-              username: data.username,
-              email,
-              uid,
-              token: accessToken,
-              password,
-            }
-          }).then(response => console.log(response))
-            .catch(err => console.log(err))
+        
 
 
           // ! change for rtk query / check sending tokens in headers

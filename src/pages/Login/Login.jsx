@@ -39,16 +39,17 @@ const onSubmit = async (data) => {
   const { email, password } = data;
   try {
     await signInWithEmailAndPassword(auth, email, password);
-    auth.onAuthStateChanged((user) => {
-      // TODO: add current user to global states, with token and uid
+    
+    auth.onAuthStateChanged((user) => {    
       if (user) {
+          const { accessToken, email, uid } = user;
           const userObj = {
-            token: user.accessToken,
-            email: user.email,
-            uid: user.uid
+            token: accessToken,
+            email: email,
+            uid: uid,
           }
-          console.log(userObj)
           dispatch(userSignedIn(userObj))
+          
           console.log(authUser)
           console.log('user is logged in')
       }
