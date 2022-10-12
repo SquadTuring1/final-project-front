@@ -11,15 +11,22 @@ const authSlice = createSlice({
   reducers: {    
     userSignedIn: {
       reducer(state, action) {
-        return action.payload;
+        return {...state, ...action.payload};
       },
       prepare(user) {
         return {
           payload: {
-            email: user.email,
-            password: user.password,
             uid: user.uid,
             token: user.token,
+            email: user.email,
+            followedBy: user.followedBy,
+            following: user.following,
+            likedPlaylists: user.likedPlaylists,
+            likedSongs: user.likedSongs,
+            ownPlaylists: user.ownPlaylists,
+            _id: user._id,
+
+            
             loggedIn: true,
           }
         }

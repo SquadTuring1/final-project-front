@@ -1,18 +1,7 @@
 import { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from "axios"
-import { useDispatch, useSelector } from 'react-redux';
-import { getAuthUser, userSignedIn } from '../../features/auth/authSlice';
-import {
-  MainSign,
-  Button,
-  TextAccount,
-  TextColor,
-  TitleSign,
-  CenterArticle,
-  Logo,
-  Input,
-  Label,
-} from '../../ui/index';
+import { MainSign, Button, TextAccount, TextColor, TitleSign, CenterArticle, Logo, Input, Label } from '../../ui/index';
 import logoSM from '../../assets/images/Logo-sign.png';
 
 import { useForm } from 'react-hook-form';
@@ -23,7 +12,7 @@ import auth from '../../utils/firebase/firebaseConfig';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { getAuthUser, userSignedIn } from '../../features/auth/authSlice';
-import { useAddUserMutation, useGetSingleUserQuery, useGetUsersQuery } from '../../features/api/apiSlice';
+import { useGetSingleUserQuery } from '../../features/api/apiSlice';
 
 
 
@@ -31,10 +20,9 @@ import { useAddUserMutation, useGetSingleUserQuery, useGetUsersQuery } from '../
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const authUser = useSelector(getAuthUser);
-  const [uid, setUid] = useState(''); 
-  // const { data: dbUser, isLoading, isSuccess, isFetching, isError, error } = useGetSingleUserQuery(3)
-  const users = useGetUsersQuery();
+  const authUser = useSelector(getAuthUser);  
+  const dbUser = useGetSingleUserQuery(authUser.uid)
+  
   
   // set variables for react-hook-form
   const { register, handleSubmit, reset, formState: { errors } } = useForm({
@@ -45,59 +33,40 @@ const Login = () => {
   });
 
 
-const onSubmit = async (data) => {
-  const { email, password } = data;
+  const onSubmit = async (data) => {
+    const { email, password } = data;
 
-
-  // * Post request without Firebase Authentification
-    // axios.post("http://localhost:4000/login", {email, password})
-    // .then(response => console.log(response))
-    // .catch (error => console.log(error.message))
-
-  
-
-
-  // * Post request with Firebase Authentification
-  try {
-    await signInWithEmailAndPassword(auth, email, password);
-    
-    auth.onAuthStateChanged((user) => {    
-      if (user) {
-          const { accessToken, email, uid } = user;
-          const userObj = {
-            token: accessToken,
-            email: email,
-            uid: uid,
-          }
-
-          console.log(user.accessToken)          
-          dispatch(userSignedIn(userObj))
-          // console.log(authUser)
-
-          axios({  
-            method: 'get',            
-            url: `http://localhost:4000/api/users/${user.uid}`, 
-          headers: {
-            Authorization: `Bearer ${user.accessToken}`
-          }         
-          }).then(response => console.log(response.data))
-            .catch(err => console.log(err))          
-          /* navigate('/dashboard'); */
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      
+      auth.onAuthStateChanged((user) => {    
+        if (!user) {
+          return;
         }
+
+        const { accessToken, uid } = user;
+        const userObject = {
+          token: accessToken,
+          uid: uid,
+        };
+        dispatch(userSignedIn(userObject));
+
+        if (dbUser.isLoading) {
+          console.log('Loading user...')
+        } else if (dbUser.isSuccess) {
+          dispatch(userSignedIn({...userObject, ...dbUser.data.currentUser}));
+          // console.log(authUser)
+        } else if (dbUser.isError) {
+            console.log(dbUser.error);
+        } 
       });
-    } catch (error) {
-      console.log(error);
-      // TODO:  create global Error handling state
+    } catch(error) {
+      console.log(error)
     }
-
-// headers: {
-            //   Authorization: Bearer ${accessToken}
-            // },
+  }
 
 
-    
 
-  };
 
   return (
     <MainSign>
