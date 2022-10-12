@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAuthUser, userSignedIn } from '../../features/auth/authSlice';
 import {
@@ -22,38 +22,57 @@ import {
   sendPasswordResetEmail,
 } from 'firebase/auth';
 import auth from '../../utils/firebase/firebaseConfig';
+import { useAddUserMutation, useGetSingleUserQuery, useGetUsersQuery } from '../../features/api/apiSlice';
+
+
 
 
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const authUser = useSelector(getAuthUser);
+  const [uid, setUid] = useState(''); 
+  // const { data: dbUser, isLoading, isSuccess, isFetching, isError, error } = useGetSingleUserQuery(3)
+  const users = useGetUsersQuery();
+  
 
 
-// set variables for react-hook-form
-const { register, handleSubmit, reset, formState: { errors } } = useForm({
-  defaultValues: {
-    email: '',
-    password: '',
-  },
-});
+  
+
+
+
+  // set variables for react-hook-form
+  const { register, handleSubmit, reset, formState: { errors } } = useForm({
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  });
+
+
 
 
 const onSubmit = async (data) => {
-  console.log(data)
   const { email, password } = data;
   try {
     await signInWithEmailAndPassword(auth, email, password);
     auth.onAuthStateChanged((user) => {
       // TODO: add current user to global states, with token and uid
       if (user) {
+        // console.log(user.uid)
+        //   setUid(user.setUid)
+        //   console.log(uid)
+        //   if (isSuccess) {
+        //     console.log(dbUser)
+        //   }
+          
           const userObj = {
             token: user.accessToken,
             email: user.email,
             password: user.password,
             uid: user.uid
           }
-          dispatch(userSignedIn(userObj))
+          // dispatch(userSignedIn(userObj))
           console.log(authUser)
           
           /* navigate('/dashboard'); */

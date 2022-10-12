@@ -5,21 +5,30 @@ import { useId } from 'react';
 
 export const apiSlice = createApi({
   reducerPath: 'api',
-  baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_JSON_SERVER }),
+  baseQuery: fetchBaseQuery({ 
+    baseUrl: import.meta.env.VITE_BASE_URL,
+    prepareHeaders: (headers, { getState }) => {
+      const token = getState().auth.token  
+      // If we have a token set in state, let's assume that we should be passing it.
+      if (token) {
+        headers.set('authorization', `Bearer ${token}`)
+      }  
+      return headers
+    }, }),
   tagTypes: ['Users'],
   endpoints: (builder) => ({
     getUsers: builder.query({
-      query: () => '/users',
+      query: () => '/api/users',
       providesTags: ['Users']
     }),
 
     getSingleUser: builder.query({
-      query: email => `/users/${email}`
+      query: uid => `api/users/${uid}`
     }),
 
     addUser: builder.mutation({
       query: (user) => ({
-        url: '/users',
+        url: '/api/users',
         method: 'POST',
         body: user
       }),
@@ -31,6 +40,6 @@ export const apiSlice = createApi({
 
 export const { 
   useGetUsersQuery,
-  useGetSingleUserQuery,
+  useGetSingleUserQuery,  
   useAddUserMutation,
 } = apiSlice;

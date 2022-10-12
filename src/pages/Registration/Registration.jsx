@@ -1,50 +1,23 @@
 import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
+import { useNavigate, Link } from 'react-router-dom';
 
 import { useGetUsersQuery, useAddUserMutation } from '../../features/api/apiSlice';
+
 import '../../ui/Registration.styled.css';
 import logoSM from '../../assets/images/Logo-sign.png';
-// import for styled components
-import {
-  MainSign,
-  Button,
-  ButtonGoogle,
-  TextAccount,
-  TextColor,
-  TextTerms,
-  TermColor,
-  TextRemember,
-  TitleSign,
-  Logo,
-  Input,
-  Label,
-  CenterArticle,
-} from '../../ui/index';
-import { useNavigate, Link } from 'react-router-dom';
-import {
-  createUserWithEmailAndPassword,
-  GoogleAuthProvider,
-  signInWithPopup,
-} from 'firebase/auth';
+import { MainSign, Button, ButtonGoogle, TextAccount, TextColor, TextTerms, TermColor, TextRemember, TitleSign, Logo, Input, Label, CenterArticle, } from '../../ui/index';
+
+import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, } from 'firebase/auth';
 import auth from '../../utils/firebase/firebaseConfig.js';
 import { useState } from 'react';
 
 const Registration = () => {
   const navigate = useNavigate();
 
-  // get users data from apiSlice hook
-  const {
-    data: users,
-    isLoading,
-    isSuccess,
-    isError,
-    error
-  } = useGetUsersQuery();
-
   // get the function addUser from apiSlice hook, only need the function since adding
   const [ addUser ] = useAddUserMutation();
-  
-  
+    
   // set variables from react-hook-form
   const {
     getValues,
