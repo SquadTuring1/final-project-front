@@ -1,27 +1,18 @@
+import { Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getAuthUser, userSignedIn } from '../../features/auth/authSlice';
-import {
-  MainSign,
-  Button,
-  TextAccount,
-  TextColor,
-  TitleSign,
-  CenterArticle,
-  Logo,
-  Input,
-  Label,
+
+import { MainSign, Button, TextAccount, TextColor, TitleSign, CenterArticle, Logo, Input, Label,
 } from '../../ui/index';
 import logoSM from '../../assets/images/Logo-sign.png';
+
 import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
-import { Link, useNavigate } from 'react-router-dom';
-import {
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-  sendPasswordResetEmail,
-} from 'firebase/auth';
+
+import { signInWithEmailAndPassword, onAuthStateChanged, sendPasswordResetEmail, } from 'firebase/auth';
 import auth from '../../utils/firebase/firebaseConfig';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { getAuthUser, userSignedIn } from '../../features/auth/authSlice';
 import { useAddUserMutation, useGetSingleUserQuery, useGetUsersQuery } from '../../features/api/apiSlice';
 
 
@@ -35,12 +26,6 @@ const Login = () => {
   // const { data: dbUser, isLoading, isSuccess, isFetching, isError, error } = useGetSingleUserQuery(3)
   const users = useGetUsersQuery();
   
-
-
-  
-
-
-
   // set variables for react-hook-form
   const { register, handleSubmit, reset, formState: { errors } } = useForm({
     defaultValues: {
@@ -50,8 +35,6 @@ const Login = () => {
   });
 
 
-
-
 const onSubmit = async (data) => {
   const { email, password } = data;
   try {
@@ -59,26 +42,19 @@ const onSubmit = async (data) => {
     auth.onAuthStateChanged((user) => {
       // TODO: add current user to global states, with token and uid
       if (user) {
-        // console.log(user.uid)
-        //   setUid(user.setUid)
-        //   console.log(uid)
-        //   if (isSuccess) {
-        //     console.log(dbUser)
-        //   }
-          
           const userObj = {
             token: user.accessToken,
             email: user.email,
-            password: user.password,
             uid: user.uid
           }
-          // dispatch(userSignedIn(userObj))
+          console.log(userObj)
+          dispatch(userSignedIn(userObj))
           console.log(authUser)
-          
-          /* navigate('/dashboard'); */
-          }
-      });
-    } catch (error) {
+          console.log('user is logged in')
+      }
+    });
+    // navigate('/dashboard')
+  } catch (error) {
       console.log(error);
       // TODO:  create global Error handling state
     }

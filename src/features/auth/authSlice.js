@@ -16,15 +16,11 @@ const authSlice = createSlice({
       prepare(user) {
         return {
           payload: {
-            id: user.id,
             email: user.email,
-            avatar: user.avatar,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            username: user.username,
-            loggedIn: true,
+            password: user.password,
             uid: user.uid,
             token: user.token,
+            loggedIn: true,
           }
         }
       }
