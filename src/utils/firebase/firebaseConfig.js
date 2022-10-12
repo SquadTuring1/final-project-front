@@ -31,4 +31,8 @@ export const getCurrentToken = () =>
 export const getCurrentUserEmail = () =>
   !auth.currentUser ? null : auth.currentUser.email;
 
+
+
+    
+
 export default auth;

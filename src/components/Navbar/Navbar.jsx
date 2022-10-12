@@ -16,6 +16,11 @@ import { Popover } from 'react-tiny-popover';
 import { useDispatch } from 'react-redux';
 import { userSignedIn, userSignedOut } from '../../features/auth/authSlice';
 
+import auth from '../../utils/firebase/firebaseConfig.js';
+
+
+
+
 
 const Navbar = () => {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
@@ -23,8 +28,10 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   const signOut = () => {
-    dispatch(userSignedOut)
+    dispatch(userSignedOut())
+    auth.signOut();       // sign out from firebase
     navigate('', {replace: true})
+    
   }
 
   return (
