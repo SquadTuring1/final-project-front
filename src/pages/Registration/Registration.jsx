@@ -40,46 +40,48 @@ const Registration = () => {
   const [signUpError, setSignUpError] = useState(null);
 
   const onSubmit = async (data) => {
-    const { email, password } = data;
-    try {
-      console.log('insde try');
-      await createUserWithEmailAndPassword(auth, email, password);
-      auth.onAuthStateChanged((user) => {
-        if (user) {
-          console.log(user)
-          const { accessToken, uid, email } = user;
-          // TODO working on api post
+    console.log(data);
+    const { email, password, username } = data;
+
+    // * Post request without Firebase Authentification
+    axios.post("http://localhost:4000/signup", {email, password, username})
+    .then(response => console.log(response))
+    .catch (error => console.log(error.message))
+    
+
         
-
-
-          // ! change for rtk query / check sending tokens in headers
-          // navigate('/dashboard');
-        }
-      });
-    } catch (error) {
-      setSignUpError(error.message);
-    }
+    // * with Firebase
+    // try {
+    //   console.log('insde try');
+    //   await createUserWithEmailAndPassword(auth, email, password);
+    //   auth.onAuthStateChanged((user) => {
+    //     if (user) {
+    //       const { accessToken, uid, email } = user;
+    //       navigate('/dashboard');
+    //     }
+    //   });
+    // } catch (error) {
+    //   setSignUpError(error.message);
+    // }
   };
 
-  const signInWithGoogle = () => {
-    const provider = new GoogleAuthProvider();
-    signInWithPopup(auth, provider)
-      .then(({ user }) => {
-        if (user) {
-          const { uid, accessToken, displayName } = user;
-          // console.log(user);
-          // TODO: set golbal state with details above
-
-
-          // navigate('/dashboard');
-        }
-        if (!user) {
-          console.log('something went wrong');
-          // TODO: Error handling component
-        }
-      })
-      .catch((error) => console.log(error));
-  };
+  // const signInWithGoogle = () => {
+  //   const provider = new GoogleAuthProvider();
+  //   signInWithPopup(auth, provider)
+  //     .then(({ user }) => {
+  //       if (user) {
+  //         const { uid, accessToken, displayName } = user;
+  //         console.log(uid, accessToken, displayName);
+  //         // TODO: set golbal state with details above
+  //         navigate('/dashboard');
+  //       }
+  //       if (!user) {
+  //         console.log('something went wrong');
+  //         // TODO: Error handling component
+  //       }
+  //     })
+  //     .catch((error) => console.log(error));
+  // };
 
   return (
     <MainSign>
@@ -136,7 +138,9 @@ const Registration = () => {
             <TextRemember>
             <input type="checkbox" name="remember"/>
             Remember me</TextRemember>
-          <Button type='submit' onClick={() => navigate('/dashboard')}>
+          <Button type='submit'
+          // onClick={() => navigate('/dashboard')}
+          >
             Create account
           </Button>
           <TextAccount>
@@ -148,7 +152,7 @@ const Registration = () => {
           </TextAccount>
         </CenterArticle>
       </form>
-      <ButtonGoogle onClick={signInWithGoogle}>Login with Google</ButtonGoogle>
+      {/* <ButtonGoogle onClick={signInWithGoogle}>Login with Google</ButtonGoogle> */}
       <TextTerms>
         By signing up, you’re agree to our{' '}
         <TermColor to="/terms">Term & Conditions and Privacy Policy</TermColor>

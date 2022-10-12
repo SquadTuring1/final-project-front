@@ -1,7 +1,17 @@
-import { Link, useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-
-import { MainSign, Button, TextAccount, TextColor, TitleSign, CenterArticle, Logo, Input, Label,
+import { useState } from 'react';
+import axios from "axios"
+import { useDispatch, useSelector } from 'react-redux';
+import { getAuthUser, userSignedIn } from '../../features/auth/authSlice';
+import {
+  MainSign,
+  Button,
+  TextAccount,
+  TextColor,
+  TitleSign,
+  CenterArticle,
+  Logo,
+  Input,
+  Label,
 } from '../../ui/index';
 import logoSM from '../../assets/images/Logo-sign.png';
 
@@ -37,6 +47,17 @@ const Login = () => {
 
 const onSubmit = async (data) => {
   const { email, password } = data;
+
+
+  // * Post request without Firebase Authentification
+    // axios.post("http://localhost:4000/login", {email, password})
+    // .then(response => console.log(response))
+    // .catch (error => console.log(error.message))
+
+  
+
+
+  // * Post request with Firebase Authentification
   try {
     await signInWithEmailAndPassword(auth, email, password);
     
@@ -48,17 +69,34 @@ const onSubmit = async (data) => {
             email: email,
             uid: uid,
           }
+
+          console.log(user.accessToken)          
           dispatch(userSignedIn(userObj))
-          
-          console.log(authUser)
-          console.log('user is logged in')
-      }
-    });
-    // navigate('/dashboard')
-  } catch (error) {
+          // console.log(authUser)
+
+          axios({  
+            method: 'get',            
+            url: `http://localhost:4000/api/users/${user.uid}`, 
+          headers: {
+            Authorization: `Bearer ${user.accessToken}`
+          }         
+          }).then(response => console.log(response.data))
+            .catch(err => console.log(err))          
+          /* navigate('/dashboard'); */
+        }
+      });
+    } catch (error) {
       console.log(error);
       // TODO:  create global Error handling state
     }
+
+// headers: {
+            //   Authorization: Bearer ${accessToken}
+            // },
+
+
+    
+
   };
 
   return (
