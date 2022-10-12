@@ -1,8 +1,15 @@
 import React from 'react'
+import { GridMainContainer, GridMainItem, GridPlayerItem, GridSideItem } from '../../ui/index';
+
 
 const Dashboard = () => {
   return (
-    <div>Dashboard</div>
+    <GridMainContainer>
+      <GridSideItem>Sidebar</GridSideItem>
+      <GridMainItem>Dashboard</GridMainItem>
+      <GridPlayerItem>Music Player</GridPlayerItem>
+
+    </GridMainContainer>
   )
 }
 
