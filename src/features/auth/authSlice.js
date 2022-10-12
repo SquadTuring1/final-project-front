@@ -25,8 +25,6 @@ const authSlice = createSlice({
             likedSongs: user.likedSongs,
             ownPlaylists: user.ownPlaylists,
             _id: user._id,
-
-            
             loggedIn: true,
           }
         }

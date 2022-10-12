@@ -59,6 +59,7 @@ const Login = () => {
         } else if (dbUser.isError) {
             console.log(dbUser.error);
         } 
+        navigate('/dashboard');
       });
     } catch(error) {
       console.log(error)

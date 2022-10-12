@@ -25,15 +25,22 @@ export const apiSlice = createApi({
       query: (uid) => `api/users/${uid}`,
       method: 'GET',
     }),
-
-    addUser: builder.mutation({
+    signUpUser: builder.mutation({        // TODO: can this be merged with addUser in front and back?
       query: (user) => ({
-        url: '/api/users',
+        url: '/signup',
         method: 'POST',
         body: user
       }),
       invalidatesTags: ['Users']
-    })
+    }),
+    // addUser: builder.mutation({
+    //   query: (user) => ({
+    //     url: '/api/users',
+    //     method: 'POST',
+    //     body: user
+    //   }),
+    //   invalidatesTags: ['Users']
+    // })
   })
 })
 
@@ -41,5 +48,6 @@ export const apiSlice = createApi({
 export const { 
   useGetUsersQuery,
   useGetSingleUserQuery,  
-  useAddUserMutation,
+  // useAddUserMutation,
+  useSignUpUserMutation,
 } = apiSlice;

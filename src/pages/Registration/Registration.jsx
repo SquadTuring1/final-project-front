@@ -3,9 +3,9 @@ import { ErrorMessage } from '@hookform/error-message';
 import { useNavigate, Link } from 'react-router-dom';
 import { useState } from 'react';
 
-import { useAddUserMutation } from '../../features/api/apiSlice';
-import { getAuthUser } from '../../features/auth/authSlice';
-import { useSelector } from 'react-redux';
+import { useSignUpUserMutation, useGetSingleUserQuery } from '../../features/api/apiSlice';
+import { getAuthUser, userSignedIn } from '../../features/auth/authSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 import '../../ui/Registration.styled.css';
 import logoSM from '../../assets/images/Logo-sign.png';
@@ -15,13 +15,15 @@ import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, } 
 import auth from '../../utils/firebase/firebaseConfig.js';
 
 
-
 const Registration = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const authUser = useSelector(getAuthUser);  
+  const currentUser = useGetSingleUserQuery(authUser.uid)
 
   // get the function addUser from apiSlice hook, only need the function since adding
-  const [ addUser ] = useAddUserMutation();
-  const currentUser = useSelector(getAuthUser);
+  const [ signUpUser ] = useSignUpUserMutation();
+  
     
   // set variables from react-hook-form
   const {
@@ -39,30 +41,45 @@ const Registration = () => {
   });
   const [signUpError, setSignUpError] = useState(null);
 
+  const addUserToStateAndDb = (user, data) => {
+    const { accessToken, uid, email } = user;
+    const userObject = {
+      token: accessToken,
+      uid: uid,
+      email: email,
+      password: data.password,   // TODO: to get value, must be hashed and sent to back? bcryptjs?
+      username: data.username,
+    };
+    dispatch(userSignedIn(userObject));
+    signUpUser(userObject);
+    
+    if (currentUser.isLoading) {
+      console.log('Loading user...')
+    } else if (currentUser.isSuccess) {
+      dispatch(userSignedIn({...userObject, ...currentUser.data.currentUser}));
+      console.log(authUser)
+    } else if (currentUser.isError) {
+      console.log(currentUser.error);
+    } 
+  }
+
   const onSubmit = async (data) => {
-    console.log(data);
     const { email, password, username } = data;
 
-    // * Post request without Firebase Authentification
-    axios.post("http://localhost:4000/signup", {email, password, username})
-    .then(response => console.log(response))
-    .catch (error => console.log(error.message))
-    
-
-        
-    // * with Firebase
-    // try {
-    //   console.log('insde try');
-    //   await createUserWithEmailAndPassword(auth, email, password);
-    //   auth.onAuthStateChanged((user) => {
-    //     if (user) {
-    //       const { accessToken, uid, email } = user;
-    //       navigate('/dashboard');
-    //     }
-    //   });
-    // } catch (error) {
-    //   setSignUpError(error.message);
-    // }
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      auth.onAuthStateChanged((user) => {
+        if (!user) {
+          return;
+        }
+        addUserToStateAndDb(user, data);  // calls func declared above
+        navigate('/dashboard');
+        console.log('User Created')
+      });
+    } catch (error) {
+      setSignUpError(error.message);
+      console.log(error.message);
+    }
   };
 
   // const signInWithGoogle = () => {
