@@ -7,6 +7,8 @@ import { MainApp, MainDash, MainHome, MainSign } from './Main.styled';
 import { TextAccount, TextColor, TextTerms, TermColor, TextRemember, TitleSign, TitleH2, TitleP } from './Text.styled';
 import { MainNav, NavContent, AvatarContent, Avatar, ButtonAvatar, GreenDot } from './Avatar.styled';
 import { PopMenu } from './PopMenu.styled';
+import { GridMainContainer, GridMainItem, GridPlayerItem, GridSideItem } from './Grid.styled';
+
 
 
 export{
@@ -45,4 +47,11 @@ export {
     GreenDot,
     AvatarContent,
     PopMenu
+  }
+
+  export {
+    GridMainContainer,
+    GridMainItem, 
+    GridPlayerItem, 
+    GridSideItem
   }
