@@ -1,15 +1,5 @@
 import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
-<<<<<<< Updated upstream
-import {
-  useGetUsersQuery,
-  useAddUserMutation,
-} from '../../features/api/apiSlice';
-import '../../ui/Registration.styled.css';
-import logoSM from '../../assets/images/Logo-sign.png';
-import axios from 'axios';
-// import for styled components
-=======
 import { useNavigate, Link } from 'react-router-dom';
 import { useState } from 'react';
 
@@ -22,7 +12,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import '../../ui/Registration.styled.css';
 import logoSM from '../../assets/images/Logo-sign.png';
->>>>>>> Stashed changes
 import {
   MainSign,
   Button,
@@ -38,35 +27,13 @@ import {
   Label,
   CenterArticle,
 } from '../../ui/index';
-<<<<<<< Updated upstream
-import { useNavigate, Link } from 'react-router-dom';
-=======
 
->>>>>>> Stashed changes
 import {
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithPopup,
 } from 'firebase/auth';
 import auth from '../../utils/firebase/firebaseConfig.js';
-<<<<<<< Updated upstream
-import { useState } from 'react';
-
-const Registration = () => {
-  const navigate = useNavigate();
-
-  // get users data from apiSlice hook
-  const {
-    data: users,
-    isLoading,
-    isSuccess,
-    isError,
-    error,
-  } = useGetUsersQuery();
-
-  // get the function addUser from apiSlice hook, only need the function since adding
-  const [addUser] = useAddUserMutation();
-=======
 
 const Registration = () => {
   const navigate = useNavigate();
@@ -76,7 +43,6 @@ const Registration = () => {
 
   // get the function addUser from apiSlice hook, only need the function since adding
   const [signUpUser] = useSignUpUserMutation();
->>>>>>> Stashed changes
 
   // set variables from react-hook-form
   const {
@@ -94,8 +60,6 @@ const Registration = () => {
   });
   const [signUpError, setSignUpError] = useState(null);
 
-<<<<<<< Updated upstream
-=======
   const addUserToStateAndDb = (user, data) => {
     const { accessToken, uid, email } = user;
     const userObject = {
@@ -120,41 +84,26 @@ const Registration = () => {
     }
   };
 
->>>>>>> Stashed changes
   const onSubmit = async (data) => {
-    console.log(data);
     const { email, password, username } = data;
 
-    // * Post request without Firebase Authentification
-    // axios.post("http://localhost:4000/signup", {email, password, username})
-    // .then(response => console.log(response))
-    // .catch (error => console.log(error.message))
-
-    // * with Firebase
     try {
-      console.log('insde try');
       await createUserWithEmailAndPassword(auth, email, password);
       auth.onAuthStateChanged((user) => {
-        if (user) {
-          const { accessToken, uid, email } = user;
-          navigate('/dashboard');
+        if (!user) {
+          return;
         }
-<<<<<<< Updated upstream
-=======
         addUserToStateAndDb(user, data); // calls func declared above
         navigate('/dashboard');
         console.log('User Created');
->>>>>>> Stashed changes
       });
     } catch (error) {
       setSignUpError(error.message);
+      console.log(error.message);
     }
   };
 
-<<<<<<< Updated upstream
-=======
   // TODO: implement same func as above, to add user to db and state, uncomment button
->>>>>>> Stashed changes
   // const signInWithGoogle = () => {
   //   const provider = new GoogleAuthProvider();
   //   signInWithPopup(auth, provider)
