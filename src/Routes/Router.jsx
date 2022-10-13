@@ -8,12 +8,14 @@ import Terms from '../pages/Terms/index';
 import PersonalProfile from '../pages/PersonalProfile/index';
 
 import { Routes, Route } from 'react-router-dom';
+import ForgotPassword from '../pages/ForgotPassword/ForgotPassword';
 
 const Router = () => {
   return (
     <Routes>
       <Route index element={<Home />} />
       <Route path="login" element={<Login />} />
+      <Route path="reset" element={<ForgotPassword />} />
       <Route path="registration" element={<Registration />} />
       <Route path="/" element={<Navbar />}>
         <Route path="dashboard" element={<Dashboard />} />

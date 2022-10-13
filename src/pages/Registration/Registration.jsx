@@ -1,9 +1,12 @@
 import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
-import { useGetUsersQuery, useAddUserMutation } from '../../features/api/apiSlice';
+import {
+  useGetUsersQuery,
+  useAddUserMutation,
+} from '../../features/api/apiSlice';
 import '../../ui/Registration.styled.css';
 import logoSM from '../../assets/images/Logo-sign.png';
-import axios from "axios"
+import axios from 'axios';
 // import for styled components
 import {
   MainSign,
@@ -38,13 +41,12 @@ const Registration = () => {
     isLoading,
     isSuccess,
     isError,
-    error
+    error,
   } = useGetUsersQuery();
 
   // get the function addUser from apiSlice hook, only need the function since adding
-  const [ addUser ] = useAddUserMutation();
-  
-  
+  const [addUser] = useAddUserMutation();
+
   // set variables from react-hook-form
   const {
     getValues,
@@ -66,25 +68,23 @@ const Registration = () => {
     const { email, password, username } = data;
 
     // * Post request without Firebase Authentification
-    axios.post("http://localhost:4000/signup", {email, password, username})
-    .then(response => console.log(response))
-    .catch (error => console.log(error.message))
-    
+    // axios.post("http://localhost:4000/signup", {email, password, username})
+    // .then(response => console.log(response))
+    // .catch (error => console.log(error.message))
 
-        
     // * with Firebase
-    // try {
-    //   console.log('insde try');
-    //   await createUserWithEmailAndPassword(auth, email, password);
-    //   auth.onAuthStateChanged((user) => {
-    //     if (user) {
-    //       const { accessToken, uid, email } = user;
-    //       navigate('/dashboard');
-    //     }
-    //   });
-    // } catch (error) {
-    //   setSignUpError(error.message);
-    // }
+    try {
+      console.log('insde try');
+      await createUserWithEmailAndPassword(auth, email, password);
+      auth.onAuthStateChanged((user) => {
+        if (user) {
+          const { accessToken, uid, email } = user;
+          navigate('/dashboard');
+        }
+      });
+    } catch (error) {
+      setSignUpError(error.message);
+    }
   };
 
   // const signInWithGoogle = () => {
@@ -157,11 +157,13 @@ const Registration = () => {
             })}
           />
           <ErrorMessage errors={errors} name="password" as="p" />
-            <TextRemember>
-            <input type="checkbox" name="remember"/>
-            Remember me</TextRemember>
-          <Button type='submit'
-          // onClick={() => navigate('/dashboard')}
+          <TextRemember>
+            <input type="checkbox" name="remember" />
+            Remember me
+          </TextRemember>
+          <Button
+            type="submit"
+            // onClick={() => navigate('/dashboard')}
           >
             Create account
           </Button>

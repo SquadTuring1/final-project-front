@@ -3,9 +3,13 @@ import LoginBG from '../assets/images/Login-bg.jpg';
 import SignBG from '../assets/images/Sign-bg.jpg';
 
 export const MainApp = styled.main`
-  height:100vh;
-  background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(10,17,34,1) 100%);
-`
+  height: 100vh;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(10, 17, 34, 1) 100%
+  );
+`;
 
 export const MainHome = styled.main`
   display: flex;
@@ -21,6 +25,7 @@ export const MainHome = styled.main`
 
 export const MainSign = styled(MainHome)`
   justify-content: space-between;
+  height: 'auto';
   background-image: url(${SignBG});
 `;
 
@@ -30,6 +35,18 @@ export const MainDash = styled.main`
   justify-content: center;
   align-items: center;
   height: 90vh;
-  background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(10,17,34,1) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(10, 17, 34, 1) 100%
+  );
+  font-family: 'Source Sans Pro', sans-serif;
+`;
+
+export const MainReset = styled.main`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
   font-family: 'Source Sans Pro', sans-serif;
 `;

@@ -9,6 +9,7 @@ export const TextAccount = styled.p`
   font-size: ${({ orLine }) => (orLine ? '.9rem' : '1.1rem')};
   font-weight: ${({ orLine }) => (orLine ? '200' : '400')};
   text-align: center;
+  cursor: ${({ reset }) => reset && 'pointer'};
 `;
 
 export const TextColor = styled(Link)`
@@ -60,14 +61,14 @@ export const TitleH2 = styled.h2`
   color: #eee;
   font-size: 2.3rem;
   font-weight: 600;
-`
+`;
 
 export const TitleP = styled.p`
   color: #eee;
   font-size: 1rem;
   text-align: left;
 
-  &.change__pass{
-    display:flex;
+  &.change__pass {
+    display: flex;
   }
-`
+`;

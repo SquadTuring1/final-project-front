@@ -1,0 +1,29 @@
+
+
+.registration {
+  margin: auto;
+  width: 30%;
+  height: 100%;
+}
+
+
+
+
+.registration__item {
+  
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: .5rem;
+}
+
+input {
+  height: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+
+
+
