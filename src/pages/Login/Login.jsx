@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from "axios"
 import { MainSign, Button, TextAccount, TextColor, TitleSign, CenterArticle, Logo, Input, Label } from '../../ui/index';
@@ -16,12 +16,26 @@ import { useGetSingleUserQuery } from '../../features/api/apiSlice';
 
 
 
-
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const authUser = useSelector(getAuthUser);  
-  const dbUser = useGetSingleUserQuery(authUser.uid)
+  const { data: dbUser, isLoading, isSuccess, error } = useGetSingleUserQuery(authUser.uid)
+
+
+  useEffect(() => {
+    if (isLoading) {
+      console.log('Loading...')
+      return;
+    } 
+    if (isSuccess) {
+      console.log('Well done!')
+      console.log({...authUser, ...dbUser})      
+      dispatch(userSignedIn({...authUser, ...dbUser.currentUser}))
+      dbUser.currentUser && navigate('/dashboard')
+    }
+  }, [dbUser])
+  
   
   
   // set variables for react-hook-form
@@ -43,23 +57,12 @@ const Login = () => {
         if (!user) {
           return;
         }
-
         const { accessToken, uid } = user;
         const userObject = {
           token: accessToken,
           uid: uid,
         };
         dispatch(userSignedIn(userObject));
-
-        if (dbUser.isLoading) {
-          console.log('Loading user...')
-        } else if (dbUser.isSuccess) {
-          dispatch(userSignedIn({...userObject, ...dbUser.data.currentUser}));
-          // console.log(authUser)
-        } else if (dbUser.isError) {
-            console.log(dbUser.error);
-        } 
-        navigate('/dashboard');
       });
     } catch(error) {
       console.log(error)

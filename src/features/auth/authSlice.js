@@ -1,8 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
-  loggedIn: false,
-};
+const initialState = {};
 
 
 const authSlice = createSlice({
@@ -12,6 +10,7 @@ const authSlice = createSlice({
     userSignedIn: {
       reducer(state, action) {
         return {...state, ...action.payload};
+        // return action.payload;
       },
       prepare(user) {
         return {
@@ -25,7 +24,6 @@ const authSlice = createSlice({
             likedSongs: user.likedSongs,
             ownPlaylists: user.ownPlaylists,
             _id: user._id,
-            loggedIn: true,
           }
         }
       }
