@@ -3,28 +3,47 @@ import { ErrorMessage } from '@hookform/error-message';
 import { useNavigate, Link } from 'react-router-dom';
 import { useState } from 'react';
 
-import { useSignUpUserMutation, useGetSingleUserQuery } from '../../features/api/apiSlice';
+import {
+  useSignUpUserMutation,
+  useGetSingleUserQuery,
+} from '../../features/api/apiSlice';
 import { getAuthUser, userSignedIn } from '../../features/auth/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 import '../../ui/Registration.styled.css';
 import logoSM from '../../assets/images/Logo-sign.png';
-import { MainSign, Button, ButtonGoogle, TextAccount, TextColor, TextTerms, TermColor, TextRemember, TitleSign, Logo, Input, Label, CenterArticle, } from '../../ui/index';
+import {
+  MainSign,
+  Button,
+  ButtonGoogle,
+  TextAccount,
+  TextColor,
+  TextTerms,
+  TermColor,
+  TextRemember,
+  TitleSign,
+  Logo,
+  Input,
+  Label,
+  CenterArticle,
+} from '../../ui/index';
 
-import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, } from 'firebase/auth';
+import {
+  createUserWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from 'firebase/auth';
 import auth from '../../utils/firebase/firebaseConfig.js';
-
 
 const Registration = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const authUser = useSelector(getAuthUser);  
-  const currentUser = useGetSingleUserQuery(authUser.uid)
+  const authUser = useSelector(getAuthUser);
+  const currentUser = useGetSingleUserQuery(authUser.uid);
 
   // get the function addUser from apiSlice hook, only need the function since adding
-  const [ signUpUser ] = useSignUpUserMutation();
-  
-    
+  const [signUpUser] = useSignUpUserMutation();
+
   // set variables from react-hook-form
   const {
     getValues,
@@ -47,21 +66,23 @@ const Registration = () => {
       token: accessToken,
       uid: uid,
       email: email,
-      password: data.password,   // TODO: to get value, must be hashed and sent to back? bcryptjs?
+      password: data.password, // TODO: to get value, must be hashed and sent to back? bcryptjs?
       username: data.username,
     };
     dispatch(userSignedIn(userObject));
     signUpUser(userObject);
-    
+
     if (currentUser.isLoading) {
-      console.log('Loading user...')
+      console.log('Loading user...');
     } else if (currentUser.isSuccess) {
-      dispatch(userSignedIn({...userObject, ...currentUser.data.currentUser}));
-      console.log(authUser)
+      dispatch(
+        userSignedIn({ ...userObject, ...currentUser.data.currentUser }),
+      );
+      console.log(authUser);
     } else if (currentUser.isError) {
       console.log(currentUser.error);
-    } 
-  }
+    }
+  };
 
   const onSubmit = async (data) => {
     const { email, password, username } = data;
@@ -72,9 +93,9 @@ const Registration = () => {
         if (!user) {
           return;
         }
-        addUserToStateAndDb(user, data);  // calls func declared above
+        addUserToStateAndDb(user, data); // calls func declared above
         navigate('/dashboard');
-        console.log('User Created')
+        console.log('User Created');
       });
     } catch (error) {
       setSignUpError(error.message);
@@ -82,7 +103,7 @@ const Registration = () => {
     }
   };
 
-    // TODO: implement same func as above, to add user to db and state, uncomment button
+  // TODO: implement same func as above, to add user to db and state, uncomment button
   // const signInWithGoogle = () => {
   //   const provider = new GoogleAuthProvider();
   //   signInWithPopup(auth, provider)
@@ -153,11 +174,13 @@ const Registration = () => {
             })}
           />
           <ErrorMessage errors={errors} name="password" as="p" />
-            <TextRemember>
-            <input type="checkbox" name="remember"/>
-            Remember me</TextRemember>
-          <Button type='submit'
-          // onClick={() => navigate('/dashboard')}
+          <TextRemember>
+            <input type="checkbox" name="remember" />
+            Remember me
+          </TextRemember>
+          <Button
+            type="submit"
+            // onClick={() => navigate('/dashboard')}
           >
             Create account
           </Button>

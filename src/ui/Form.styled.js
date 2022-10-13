@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 export const Input = styled.input`
   width: 21.1rem;
-  height: 3rem;
-  padding: 0 .75rem 0 .75rem;
+  height: 3.25rem;
+  padding: 0.6rem 0.75rem 0 0.75rem;
   border-radius: 1.06rem;
   border: 0;
   outline: 0;
@@ -14,25 +14,24 @@ export const Input = styled.input`
   &:focus {
     /* border: 1px solid #EF5656;
     box-shadow: 0px 0px 10px 0px #EF5656; */
-    border: 2px solid #FFD600;
-    box-shadow: 0px 0px 10px -1px #FFD600;
+    border: 2px solid #ffd600;
+    box-shadow: 0px 0px 10px -1px #ffd600;
   }
 
-  
-  &.username__input, &.email__input {
+  &.username__input,
+  &.email__input {
     background: 0;
-    user-select:none;
+    user-select: none;
   }
 
   &.info__user--input:disabled {
     background: 0;
   }
-
 `;
 
 export const Label = styled.label`
   position: absolute;
-  top: ${({passPos}) => passPos ? '5.4rem' : '0.5rem'};
+  top: ${({ passPos }) => (passPos ? '5.4rem' : '0.5rem')};
   left: 0.7rem;
   color: #a4a4a4;
   font-size: 1rem;
