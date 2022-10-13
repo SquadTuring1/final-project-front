@@ -82,6 +82,7 @@ const Registration = () => {
     }
   };
 
+    // TODO: implement same func as above, to add user to db and state, uncomment button
   // const signInWithGoogle = () => {
   //   const provider = new GoogleAuthProvider();
   //   signInWithPopup(auth, provider)
