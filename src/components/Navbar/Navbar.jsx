@@ -43,7 +43,7 @@ const Navbar = () => {
           positions={['bottom']} // preferred positions by priority
           content={
             <PopMenu>
-              <button>Profile</button>
+              <button onClick={() => navigate('profile')}>Profile</button>
               <button onClick={signOut}>Sign out</button>
             </PopMenu>
           }

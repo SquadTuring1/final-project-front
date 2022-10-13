@@ -103,6 +103,7 @@ const PersonalProfile = () => {
             placeholder="Confirm password"
             {...register('confirmpassword')}
           />
+          <Button>Change Password</Button>
           <CenterArticle className="button__profile--container">
             {modifyInfo ? (
               <Button className="mofify__btn" type="button" onClick={() => handleDisabled()}>
