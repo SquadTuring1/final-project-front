@@ -36,13 +36,4 @@ export const getCurrentToken = () =>
 export const getCurrentUserEmail = () =>
   !auth.currentUser ? null : auth.currentUser.email;
 
-export const resetPassowrd = async (email) => {
-  try {
-    const isEmailSent = await sendPasswordResetEmail(auth, email);
-    console.log(isEmailSent);
-  } catch (error) {
-    throw Error(error);
-  }
-};
-
 export default auth;
