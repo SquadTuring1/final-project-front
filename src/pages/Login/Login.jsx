@@ -71,13 +71,13 @@ const onSubmit = async (data) => {
       <form className="registration__form" id="loginForm" onSubmit={handleSubmit(onSubmit)}>
         <TitleSign>Hello again!</TitleSign>
         <CenterArticle loginLab>
-          <Label htmlFor="email">
-            Email:</Label>
+          {/* <Label htmlFor="email">
+            Email:</Label> */}
             <Input
               className="signup__input"
               name="email"
-              // label="Email:"
               type="email"
+              placeholder='Email'
               {...register('email', {
                 required: 'Email is required',
               })}
@@ -85,14 +85,14 @@ const onSubmit = async (data) => {
           <ErrorMessage errors={errors} name="email" as="p" />
           {/* </CenterArticle>
         <CenterArticle loginLab> */}
-          <Label passPos htmlFor="password">
+          {/* <Label passPos htmlFor="password">
             Password:
-            </Label>
+            </Label> */}
             <Input
               className="signup__input"
               name="password"
-              label="Password:"
               type="password"
+              placeholder='Password'
               {...register('password', {
                 required: 'Password is required',
               })}
