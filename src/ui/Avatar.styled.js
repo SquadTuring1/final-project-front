@@ -18,14 +18,14 @@ export const AvatarContent = styled.article`
 
 export const Avatar = styled.img`
   border-radius: 2rem;
-  height: 3.2rem;
-  width: 3.2rem;
+  height: 2.3rem;
+  width: 2.3rem;
   margin: 0 1rem 0 0;
   object-fit: cover;
 `;
 export const ButtonAvatar = styled.button`
   /* position: absolute; */
-  margin: 1rem 1.6rem 0 0;
+  margin: .7rem 1.6rem .3rem 0;
   height: 3.2rem;
   width: 3.2rem;
   background: 0;
@@ -33,9 +33,10 @@ export const ButtonAvatar = styled.button`
 
 export const GreenDot = styled.div`
   position: absolute;
-  top: 2.4rem;
-  height: 0.7rem;
-  width: 0.7rem;
+  top: 1.4rem;
+  left: 1.6rem;
+  height: 0.5rem;
+  width: 0.5rem;
   border: 4px solid #000;
   border-radius: 0.7rem;
   background-color: #00c01f;

@@ -57,7 +57,7 @@ const Navbar = () => {
         </Popover>
       </NavContent>
       <Outlet />
-    </MainNav>
+    </MainNav>     
   );
 };
 

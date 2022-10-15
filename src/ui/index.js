@@ -8,7 +8,11 @@ import { TextAccount, TextColor, TextTerms, TermColor, TextRemember, TitleSign, 
 import { MainNav, NavContent, AvatarContent, Avatar, ButtonAvatar, GreenDot } from './Avatar.styled';
 import { PopMenu } from './PopMenu.styled';
 import { GridMainContainer, GridMainItem, GridPlayerItem, GridSideItem } from './Grid.styled';
+import {PlayerMain} from './PlayerMain.styled';
 
+export {
+  PlayerMain,
+}
 
 
 export{
