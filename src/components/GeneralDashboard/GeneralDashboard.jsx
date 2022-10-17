@@ -1,8 +1,15 @@
 import React from 'react'
+import { GenDashMain, CategoryDash, SongsDash, PlaylistDash, RecommendedDash } from '../../ui/index'
+
 
 const GeneralDashboard = () => {
   return (
-    <div>GeneralDashboard</div>
+    <GenDashMain>
+      <CategoryDash />
+      <SongsDash />
+      <PlaylistDash />
+      <RecommendedDash />
+    </GenDashMain>
   )
 }
 
