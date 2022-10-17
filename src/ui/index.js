@@ -8,12 +8,34 @@ import { TextAccount, TextColor, TextTerms, TermColor, TextRemember, TitleSign, 
 import { MainNav, NavContent, AvatarContent, Avatar, ButtonAvatar, GreenDot } from './Avatar.styled';
 import { PopMenu } from './PopMenu.styled';
 import { GridMainContainer, GridMainItem, GridPlayerItem, GridSideItem } from './Grid.styled';
-import {PlayerMain} from './PlayerMain.styled';
+import { CurrentSongMbl, MusicBar, MusicControls, MusicVolume, PlayerMain } from './PlayerMain.styled';
+import { MainControl, ShuffleBtn, RepeatBtn, PlayBtn } from './PlayerControls.styled';
+import { ProgressBar } from './ProgressBar.styled';
+import { SidebarMain, SideMenu, UploadBtn, CurrentSong } from './SidebarMain';
 
+//sidebar
 export {
-  PlayerMain,
+  SidebarMain,
+  SideMenu,
+  UploadBtn,
+  CurrentSong
 }
 
+// Track music bar
+export { ProgressBar }
+
+// music player controls
+export{
+  PlayerMain,
+  MainControl,
+  MusicControls,
+  MusicBar,
+  MusicVolume,
+  ShuffleBtn,
+  RepeatBtn,
+  PlayBtn,
+  CurrentSongMbl
+}
 
 export{
   MainHome,
@@ -24,6 +46,7 @@ export{
   CenterProfile
 }
 
+// Login, Sign up & Log in / buttons
 export {
   Logo,
   GlobalStyle,
@@ -33,6 +56,7 @@ export {
   Label
 };
 
+// Texts
 export {   
   TextAccount,
   TextColor,
@@ -43,6 +67,7 @@ export {
   TitleH2,
   TitleP }
 
+  // Navbar
   export {
     MainNav,
     NavContent,
@@ -53,6 +78,7 @@ export {
     PopMenu
   }
 
+  // Grid to Dashboard
   export {
     GridMainContainer,
     GridMainItem, 

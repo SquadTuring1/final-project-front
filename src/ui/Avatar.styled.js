@@ -35,9 +35,9 @@ export const GreenDot = styled.div`
   position: absolute;
   top: 1.4rem;
   left: 1.6rem;
-  height: 0.5rem;
-  width: 0.5rem;
-  border: 4px solid #000;
+  height: 0.55rem;
+  width: 0.55rem;
+  border: 3px solid #000;
   border-radius: 0.7rem;
   background-color: #00c01f;
 `;
