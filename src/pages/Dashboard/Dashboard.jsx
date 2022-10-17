@@ -15,9 +15,13 @@ const Dashboard = () => {
         <Sidebar />
       </GridSideItem>
       <GridMainItem>Dashboard</GridMainItem>
+<<<<<<< Updated upstream
       <GridPlayerItem>
         <MusicPlayer />
       </GridPlayerItem>
+=======
+      <GridPlayerItem>Music Player</GridPlayerItem>
+>>>>>>> Stashed changes
     </GridMainContainer>
   );
 };

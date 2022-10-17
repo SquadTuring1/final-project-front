@@ -18,12 +18,14 @@ const authSlice = createSlice({
             uid: user.uid,
             token: user.token,
             email: user.email,
+            _id: user._id,
+            firstName: user.firstName,
+            lastName: user.lastName,
             followedBy: user.followedBy,
             following: user.following,
             likedPlaylists: user.likedPlaylists,
             likedSongs: user.likedSongs,
             ownPlaylists: user.ownPlaylists,
-            _id: user._id,
           }
         }
       }
