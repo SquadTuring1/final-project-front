@@ -7,7 +7,47 @@ import { MainApp, MainDash, MainHome, MainSign } from './Main.styled';
 import { TextAccount, TextColor, TextTerms, TermColor, TextRemember, TitleSign, TitleH2, TitleP } from './Text.styled';
 import { MainNav, NavContent, AvatarContent, Avatar, ButtonAvatar, GreenDot } from './Avatar.styled';
 import { PopMenu } from './PopMenu.styled';
+import { GridMainContainer, GridMainItem, GridPlayerItem, GridSideItem } from './Grid.styled';
+import { CurrentSongMbl, MusicBar, MusicControls, MusicVolume, PlayerMain } from './PlayerMain.styled';
+import { MainControl, ShuffleBtn, RepeatBtn, PlayBtn } from './PlayerControls.styled';
+import { ProgressBar } from './ProgressBar.styled';
+import { SidebarMain, SideMenu, UploadBtn, CurrentSong, SideMenuItems } from './SidebarMain';
+import { CategoryDash, GenDashMain, PlaylistDash, RecommendedDash, SongsDash } from './GeneralDashboard';
 
+
+//General Dashboard
+export {
+  CategoryDash,
+  GenDashMain,
+  PlaylistDash,
+  RecommendedDash,
+  SongsDash,
+}
+
+//sidebar
+export {
+  SidebarMain,
+  SideMenu,
+  UploadBtn,
+  CurrentSong,
+  SideMenuItems,
+}
+
+// Track music bar
+export { ProgressBar }
+
+// music player controls
+export{
+  PlayerMain,
+  MainControl,
+  MusicControls,
+  MusicBar,
+  MusicVolume,
+  ShuffleBtn,
+  RepeatBtn,
+  PlayBtn,
+  CurrentSongMbl
+}
 
 export{
   MainHome,
@@ -18,6 +58,7 @@ export{
   CenterProfile
 }
 
+// Login, Sign up & Log in / buttons
 export {
   Logo,
   GlobalStyle,
@@ -27,6 +68,7 @@ export {
   Label
 };
 
+// Texts
 export {   
   TextAccount,
   TextColor,
@@ -37,6 +79,7 @@ export {
   TitleH2,
   TitleP }
 
+  // Navbar
   export {
     MainNav,
     NavContent,
@@ -45,4 +88,12 @@ export {
     GreenDot,
     AvatarContent,
     PopMenu
+  }
+
+  // Grid to Dashboard
+  export {
+    GridMainContainer,
+    GridMainItem, 
+    GridPlayerItem, 
+    GridSideItem
   }

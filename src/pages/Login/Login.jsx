@@ -1,4 +1,6 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import axios from 'axios';
 import {
   MainSign,
   Button,
@@ -8,19 +10,54 @@ import {
   CenterArticle,
   Logo,
   Input,
-  Label
+  Label,
 } from '../../ui/index';
 import logoSM from '../../assets/images/Logo-sign.png';
+
 import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
-import { Link, useNavigate } from 'react-router-dom';
+
+import {
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  sendPasswordResetEmail,
+} from 'firebase/auth';
+import auth from '../../utils/firebase/firebaseConfig';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { getAuthUser, userSignedIn } from '../../features/auth/authSlice';
+import { useGetSingleUserQuery } from '../../features/api/apiSlice';
+import { skipToken } from '@reduxjs/toolkit/dist/query';
 
 const Login = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const authUser = useSelector(getAuthUser ? getAuthUser : skipToken);
   const {
-    getValues,
+    data: dbUser,
+    isLoading,
+    isSuccess,
+    error,
+  } = useGetSingleUserQuery(authUser.uid);
+
+  useEffect(() => {
+    if (isLoading) {
+      console.log('Loading...');
+      return;
+    }
+    if (isSuccess) {
+      console.log('Well done!');
+      console.log({ ...authUser, ...dbUser });
+      dispatch(userSignedIn({ ...authUser, ...dbUser.currentUser }));
+      dbUser.currentUser && navigate('/dashboard');
+    }
+  }, [dbUser]);
+
+  // set variables for react-hook-form
+  const {
     register,
-    watch,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -29,50 +66,72 @@ const Login = () => {
     },
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
-  };
+  const onSubmit = async (data) => {
+    const { email, password } = data;
 
-  const navigate = useNavigate();
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+
+      auth.onAuthStateChanged((user) => {
+        if (!user) {
+          return;
+        }
+        const { accessToken, uid } = user;
+        const userObject = {
+          token: accessToken,
+          uid: uid,
+        };
+        dispatch(userSignedIn(userObject));
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <MainSign>
       <Logo sign src={logoSM} />
-      <form className="registration__form" onSubmit={handleSubmit(onSubmit)}>
-          <TitleSign>Hello again!</TitleSign>
+      <form
+        className="registration__form"
+        id="loginForm"
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <TitleSign>Hello again!</TitleSign>
         <CenterArticle loginLab>
-          <Label htmlFor="email">
-            Email:</Label>
-            <Input
-              className="signup__input"
-              name="email"
-              // label="Email:"
-              type="email"
-              {...register('email', {
-                required: 'Email is required',
-              })}
-            />
+          {/* <Label htmlFor="email">
+            Email:</Label> */}
+          <Input
+            className="signup__input"
+            name="email"
+            type="email"
+            placeholder="Email"
+            {...register('email', {
+              required: 'Email is required',
+            })}
+          />
           <ErrorMessage errors={errors} name="email" as="p" />
-        {/* </CenterArticle>
+          {/* </CenterArticle>
         <CenterArticle loginLab> */}
-          <Label passPos htmlFor="password">
+          {/* <Label passPos htmlFor="password">
             Password:
-            </Label>
-            <Input
-              className="signup__input"
-              name="password"
-              label="Password:"
-              type="password"
-              {...register('password', {
-                required: 'Password is required',
-              })}
-            />
+            </Label> */}
+          <Input
+            className="signup__input"
+            name="password"
+            type="password"
+            placeholder="Password"
+            {...register('password', {
+              required: 'Password is required',
+            })}
+          />
           <ErrorMessage errors={errors} name="password" as="p" />
-          </CenterArticle>
-          <TextColor className='forgotPass'>Forgot your password?</TextColor>
+        </CenterArticle>
+        <TextColor as={Link} to="/reset" className="forgotPass">
+          Forgot your password?
+        </TextColor>
       </form>
       <article>
-        <Button as={Link} to="/dashboard">
+        <Button type="submit" form="loginForm">
           Sign in
         </Button>
         <TextAccount register>

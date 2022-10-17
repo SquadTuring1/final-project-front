@@ -1,5 +1,15 @@
 import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
+import { useNavigate, Link } from 'react-router-dom';
+import { useState } from 'react';
+
+import {
+  useSignUpUserMutation,
+  useGetSingleUserQuery,
+} from '../../features/api/apiSlice';
+import { getAuthUser, userSignedIn } from '../../features/auth/authSlice';
+import { useDispatch, useSelector } from 'react-redux';
+
 import '../../ui/Registration.styled.css';
 import logoSM from '../../assets/images/Logo-sign.png';
 import {
@@ -15,15 +25,29 @@ import {
   Logo,
   Input,
   Label,
-  CenterArticle
+  CenterArticle,
 } from '../../ui/index';
-import { useNavigate, Link } from 'react-router-dom';
+
+import {
+  createUserWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from 'firebase/auth';
+import auth from '../../utils/firebase/firebaseConfig.js';
 
 const Registration = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const authUser = useSelector(getAuthUser);
+  const currentUser = useGetSingleUserQuery(authUser.uid);
+
+  // get the function addUser from apiSlice hook, only need the function since adding
+  const [signUpUser] = useSignUpUserMutation();
+
+  // set variables from react-hook-form
   const {
     getValues,
     register,
-    watch,
     handleSubmit,
     formState: { errors },
   } = useForm({
@@ -31,14 +55,72 @@ const Registration = () => {
       email: '',
       username: '',
       password: '',
+      confirmPassword: '',
     },
   });
+  const [signUpError, setSignUpError] = useState(null);
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const addUserToStateAndDb = (user, data) => {
+    const { accessToken, uid, email } = user;
+    const userObject = {
+      token: accessToken,
+      uid: uid,
+      email: email,
+      password: data.password, // TODO: to get value, must be hashed and sent to back? bcryptjs?
+      username: data.username,
+    };
+    dispatch(userSignedIn(userObject));
+    signUpUser(userObject);
+
+    if (currentUser.isLoading) {
+      console.log('Loading user...');
+    } else if (currentUser.isSuccess) {
+      dispatch(
+        userSignedIn({ ...userObject, ...currentUser.data.currentUser }),
+      );
+      console.log(authUser);
+    } else if (currentUser.isError) {
+      console.log(currentUser.error);
+    }
   };
 
-  const navigate = useNavigate();
+  const onSubmit = async (data) => {
+    const { email, password, username } = data;
+
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      auth.onAuthStateChanged((user) => {
+        if (!user) {
+          return;
+        }
+        addUserToStateAndDb(user, data); // calls func declared above
+        navigate('/dashboard');
+        console.log('User Created');
+      });
+    } catch (error) {
+      setSignUpError(error.message);
+      console.log(error.message);
+    }
+  };
+
+  // TODO: implement same func as above, to add user to db and state, uncomment button
+  // const signInWithGoogle = () => {
+  //   const provider = new GoogleAuthProvider();
+  //   signInWithPopup(auth, provider)
+  //     .then(({ user }) => {
+  //       if (user) {
+  //         const { uid, accessToken, displayName } = user;
+  //         console.log(uid, accessToken, displayName);
+  //         // TODO: set golbal state with details above
+  //         navigate('/dashboard');
+  //       }
+  //       if (!user) {
+  //         console.log('something went wrong');
+  //         // TODO: Error handling component
+  //       }
+  //     })
+  //     .catch((error) => console.log(error));
+  // };
 
   return (
     <MainSign>
@@ -50,7 +132,6 @@ const Registration = () => {
           <Input
             className="signup__input"
             name="email"
-            // label="Email:"
             type="email"
             placeholder="email"
             {...register('email', {
@@ -62,7 +143,6 @@ const Registration = () => {
           <Input
             className="signup__input"
             name="username"
-            // label="Username:"
             type="text"
             placeholder="username"
             {...register('username', {
@@ -94,10 +174,14 @@ const Registration = () => {
             })}
           />
           <ErrorMessage errors={errors} name="password" as="p" />
-            <TextRemember>
-            <input type="checkbox" name="remember"/>
-            Remember me</TextRemember>
-          <Button type='submit' onClick={() => navigate('/dashboard')}>
+          <TextRemember>
+            <input type="checkbox" name="remember" />
+            Remember me
+          </TextRemember>
+          <Button
+            type="submit"
+            // onClick={() => navigate('/dashboard')}
+          >
             Create account
           </Button>
           <TextAccount>
@@ -106,10 +190,10 @@ const Registration = () => {
               Log in
             </TextColor>{' '}
             {/* <TextAccount orLine>OR</TextAccount> */}
-            <ButtonGoogle>Login with Google</ButtonGoogle>
           </TextAccount>
         </CenterArticle>
       </form>
+      {/* <ButtonGoogle onClick={signInWithGoogle}>Login with Google</ButtonGoogle> */}
       <TextTerms>
         By signing up, you’re agree to our{' '}
         <TermColor to="/terms">Term & Conditions and Privacy Policy</TermColor>

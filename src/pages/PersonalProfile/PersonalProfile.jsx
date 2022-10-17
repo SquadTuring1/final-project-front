@@ -1,7 +1,9 @@
 import { ErrorMessage } from '@hookform/error-message';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useSelector } from 'react-redux';
 import { Popover } from 'react-tiny-popover';
+import { getAuthUser } from '../../features/auth/authSlice';
 import {
   MainDash,
   TitleH2,
@@ -12,10 +14,14 @@ import {
   TitleP,
   Button,
 } from '../../ui/index';
+import auth from '../../utils/firebase/firebaseConfig';
+
 
 const PersonalProfile = () => {
   const [modifyInfo, setModifyInfo] = useState(true);
   
+  const authUser = useSelector(getAuthUser)
+  console.log(authUser)
 
   console.log(modifyInfo)
   const {
@@ -26,9 +32,10 @@ const PersonalProfile = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      username: '',
-      name: '',
-      lastname: '',
+      username: authUser.username,
+      firstName: authUser.firstName,
+      lastName: authUser.lastName,
+      email: authUser.email,
       password: '',
     },
   });
@@ -57,8 +64,9 @@ const PersonalProfile = () => {
             disabled
             className="username__input"
             name="username"
-            type="username"
+            type="text"
             placeholder="Username"
+            {...register('username')}
           />
           {/* <Label className="email__profile">Email</Label> */}
           <Input
@@ -66,27 +74,28 @@ const PersonalProfile = () => {
             className="email__input"
             name="email"
             type="text"
-            placeholder="email"
+            placeholder="Email"
+            {...register('email')}
           />
 
           {/* <Label className="name__profile">Name</Label> */}
           <Input
             disabled = {(modifyInfo === true) ? true : false}
             className="info__user--input"
-            name="name"
-            type="name"
-            placeholder="Name"
-            {...register('name')}
+            name="firstName"
+            type="text"
+            placeholder="First name"
+            {...register('firstName')}
           />
 
           {/* <Label className="lastname__profile">Lastname</Label> */}
           <Input
             disabled = {(modifyInfo === true) ? true : false}
             className="info__user--input"
-            name="lastname"
-            type="lastname"
-            placeholder="Lastname"
-            {...register('lastname')}
+            name="lastName"
+            type="text"
+            placeholder="Last name"
+            {...register('lastName')}
           />
           <TitleP className="change__pass">Change Password</TitleP>
           {/* <Label className="pass__profile">Password</Label> */}
@@ -103,6 +112,7 @@ const PersonalProfile = () => {
             placeholder="New password"
             {...register('newPassword')}
           />
+          <Button>Change Password</Button>
           <CenterArticle className="button__profile--container">
             {modifyInfo ? (
               <Button className="modify__btn" type="button" onClick={() => handleDisabled()}>

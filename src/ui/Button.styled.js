@@ -33,8 +33,11 @@ export const Button = styled.button`
 export const ButtonGoogle = styled(Button)`
 /* background-color: #fff; */
   position: relative;
-  z-index: 0;
   overflow: hidden;
+  height: 2.5rem;
+  width: 16rem;
+  z-index: 0;
+  font-size:.9rem;
 
   &::before {
     content: '';
