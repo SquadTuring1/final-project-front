@@ -27,11 +27,12 @@ import auth from '../../utils/firebase/firebaseConfig';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAuthUser, userSignedIn } from '../../features/auth/authSlice';
 import { useGetSingleUserQuery } from '../../features/api/apiSlice';
+import { skipToken } from '@reduxjs/toolkit/dist/query';
 
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const authUser = useSelector(getAuthUser);
+  const authUser = useSelector(getAuthUser ? getAuthUser : skipToken);
   const {
     data: dbUser,
     isLoading,

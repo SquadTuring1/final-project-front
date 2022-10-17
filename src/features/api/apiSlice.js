@@ -14,25 +14,29 @@ export const apiSlice = createApi({
       }  
       return headers
     }, }),
-  tagTypes: ['Users'],
+  tagTypes: ['User'],
   endpoints: (builder) => ({
     getUsers: builder.query({
       query: () => '/api/users',
-      providesTags: ['Users']
+      providesTags: ['User']
     }),
+
 
     getSingleUser: builder.query({
       query: (uid) => `api/users/${uid}`,
       method: 'GET',
+      
     }),
+
     signUpUser: builder.mutation({        // TODO: can this be merged with addUser in front and back?
       query: (user) => ({
         url: '/signup',
         method: 'POST',
         body: user
       }),
-      invalidatesTags: ['Users']
+      invalidatesTags: ['User']
     }),
+
     // addUser: builder.mutation({
     //   query: (user) => ({
     //     url: '/api/users',
@@ -40,7 +44,8 @@ export const apiSlice = createApi({
     //     body: user
     //   }),
     //   invalidatesTags: ['Users']
-    // })
+    // }),
+    
   })
 })
 
