@@ -15,7 +15,10 @@ const Dashboard = () => {
         <Sidebar />
       </GridSideItem>
       <GridMainItem>Dashboard</GridMainItem>
-      <GridPlayerItem>Music Player</GridPlayerItem>
+      <GridPlayerItem>     
+        
+        
+      </GridPlayerItem>
     </GridMainContainer>
   );
 };
