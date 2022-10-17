@@ -6,9 +6,13 @@ import Registration from '../pages/Registration/index';
 import Dashboard from '../pages/Dashboard/index';
 import Terms from '../pages/Terms/index';
 import PersonalProfile from '../pages/PersonalProfile/index';
-
 import { Routes, Route } from 'react-router-dom';
 import ForgotPassword from '../pages/ForgotPassword/ForgotPassword';
+import FavoriteTracks from '../pages/FavoriteTracks/index';
+import Playlist from '../pages/Playlist/index';
+import Categories from '../pages/Categories/index';
+import { Sidebar } from '../components/Sidebar';
+
 
 const Router = () => {
   return (
@@ -21,6 +25,9 @@ const Router = () => {
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="terms" element={<Terms />} />
         <Route path="profile" element={<PersonalProfile />} />
+        <Route path="favorites" element={<FavoriteTracks />} />
+        <Route path="playlist" element={<Playlist />} />
+        <Route path="categories" element={<Categories />} />
       </Route>
     </Routes>
   );

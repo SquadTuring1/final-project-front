@@ -7,6 +7,8 @@ import {
 } from '../../ui/index';
 import MusicPlayer from '../../components/MusicPlayer/index';
 import { Sidebar } from '../../components/Sidebar/index';
+import GeneralDashboard from '../../components/GeneralDashboard/index';
+
 
 const Dashboard = () => {
   return (
@@ -14,10 +16,9 @@ const Dashboard = () => {
       <GridSideItem>
         <Sidebar />
       </GridSideItem>
-      <GridMainItem>Dashboard</GridMainItem>
-      <GridPlayerItem>     
-        
-        
+      <GridMainItem><GeneralDashboard /></GridMainItem>
+      <GridPlayerItem>
+        <MusicPlayer />
       </GridPlayerItem>
     </GridMainContainer>
   );

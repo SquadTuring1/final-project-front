@@ -14,13 +14,12 @@ export const apiSlice = createApi({
       }  
       return headers
     }, }),
-  tagTypes: ['User'],
+  tagTypes: ['User', 'Songs'],
   endpoints: (builder) => ({
     getUsers: builder.query({
       query: () => '/api/users',
       providesTags: ['User']
     }),
-
 
     getSingleUser: builder.query({
       query: (uid) => `api/users/${uid}`,
@@ -28,6 +27,11 @@ export const apiSlice = createApi({
       
     }),
 
+
+
+    
+
+    
     signUpUser: builder.mutation({        // TODO: can this be merged with addUser in front and back?
       query: (user) => ({
         url: '/signup',
@@ -46,6 +50,14 @@ export const apiSlice = createApi({
     //   invalidatesTags: ['Users']
     // }),
     
+// Songs
+
+getSongs: builder.query({
+  query: () => '/songs',
+  providesTags: ['Songs']
+}),
+
+
   })
 })
 
@@ -55,4 +67,5 @@ export const {
   useGetSingleUserQuery,  
   // useAddUserMutation,
   useSignUpUserMutation,
+  useGetSongsQuery
 } = apiSlice;
