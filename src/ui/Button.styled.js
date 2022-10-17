@@ -24,7 +24,7 @@ export const Button = styled.button`
     transform: scale(0.99);
   }
 
-  &.mofify__btn{
+  &.modify__btn{
     background-color: #999;
     color:#000;
   }

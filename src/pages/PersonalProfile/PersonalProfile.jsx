@@ -91,25 +91,25 @@ const PersonalProfile = () => {
           <TitleP className="change__pass">Change Password</TitleP>
           {/* <Label className="pass__profile">Password</Label> */}
           <Input
-            name="password"
+            name="currentPassword"
             type="password"
-            placeholder="Password"
-            {...register('password')}
+            placeholder="Current password"
+            {...register('currentPassword')}
           />
           {/* <Label className="conf__pass-profile">Confirm Password</Label> */}
           <Input
-            name="confirmpassword"
+            name="newPassword"
             type="password"
-            placeholder="Confirm password"
-            {...register('confirmpassword')}
+            placeholder="New password"
+            {...register('newPassword')}
           />
           <CenterArticle className="button__profile--container">
             {modifyInfo ? (
-              <Button className="mofify__btn" type="button" onClick={() => handleDisabled()}>
+              <Button className="modify__btn" type="button" onClick={() => handleDisabled()}>
                 Modify
               </Button>
             ) : (
-              <Button className="mofify__btn" type="button" onClick={() => handleEnabled()}>
+              <Button className="modify__btn" type="button" onClick={() => handleEnabled()}>
                 Save
               </Button>
             )}
