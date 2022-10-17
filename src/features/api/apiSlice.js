@@ -37,15 +37,25 @@ export const apiSlice = createApi({
       invalidatesTags: ['User']
     }),
 
-    // addUser: builder.mutation({
-    //   query: (user) => ({
-    //     url: '/api/users',
-    //     method: 'POST',
-    //     body: user
-    //   }),
-    //   invalidatesTags: ['Users']
-    // }),
-    
+    addUser: builder.mutation({
+      query: (user) => ({
+        url: '/api/users',
+        method: 'POST',
+        body: user
+      }),
+      invalidatesTags: ['Users']
+    }),
+    updateUser: builder.mutation({
+      query: (userObj) => ({
+        url: `/api/users/${userObj.uid}`,
+        method: 'PATCH',
+        body: {
+          firstName: userObj.firstName,
+          lastName: userObj.lastName,
+        }
+      }),
+      invalidatesTags: ['Users']
+    })
   })
 })
 
@@ -53,6 +63,7 @@ export const apiSlice = createApi({
 export const { 
   useGetUsersQuery,
   useGetSingleUserQuery,  
-  // useAddUserMutation,
+  useAddUserMutation,
+  useUpdateUserMutation,
   useSignUpUserMutation,
 } = apiSlice;

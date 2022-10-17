@@ -15,36 +15,30 @@ import {
   Button,
 } from '../../ui/index';
 import auth from '../../utils/firebase/firebaseConfig';
+import { useUpdateUserMutation } from '../../features/api/apiSlice';
 
 
 const PersonalProfile = () => {
   const [modifyInfo, setModifyInfo] = useState(true);
   
-  const authUser = useSelector(getAuthUser)
-  console.log(authUser)
-
-  console.log(modifyInfo)
-  const {
-    getValues,
-    register,
-    watch,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
+  const authUser = useSelector(getAuthUser);
+  
+  const [ updateUser, { isLoading } ] = useUpdateUserMutation();
+  
+  
+  const { getValues, register, reset, watch, handleSubmit, formState: { errors }, } = useForm({
     defaultValues: {
       username: authUser.username,
       firstName: authUser.firstName,
       lastName: authUser.lastName,
       email: authUser.email,
-      password: '',
+      currentPassword: '',
+      newPassword: '',
     },
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
-  };
-
-  const handleDisabled = () => {
+  const handleDisabled = (e) => {
+    e.preventDefault();
     setModifyInfo(false);
   };
 
@@ -52,9 +46,23 @@ const PersonalProfile = () => {
     setModifyInfo(true);
   };
 
+  const onSubmit = async (data) => {
+    if (!isLoading) {
+      try {
+        const userObj = {  uid: authUser.uid, firstName: data.firstName, lastName: data.lastName}; 
+        console.log(userObj)       
+        await updateUser({...userObj}).unwrap();
+        // reset();
+      } catch (error) {
+        console.log('Failed to update user')
+      }
+    }
+    handleEnabled();
+  };
+
   return (
     <MainDash>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form id="personalProfileForm" onSubmit={handleSubmit(onSubmit)}>
         <CenterProfile loginLab>
           <TitleH2 className="profile__title">Profile</TitleH2>
           <TitleP>Avatar</TitleP>
@@ -113,20 +121,22 @@ const PersonalProfile = () => {
             {...register('newPassword')}
           />
           <Button>Change Password</Button>
-          <CenterArticle className="button__profile--container">
+         
+        </CenterProfile>
+      </form>
+      <CenterArticle className="button__profile--container">
             {modifyInfo ? (
-              <Button className="modify__btn" type="button" onClick={() => handleDisabled()}>
+              // enables editing of name
+              <Button className="modify__btn" type="button" onClick={(e) => {handleDisabled(e)}}>
                 Modify
               </Button>
-            ) : (
-              <Button className="modify__btn" type="button" onClick={() => handleEnabled()}>
+            ) : (              
+              <Button className="modify__btn" form="personalProfileForm" type="submit" >
                 Save
               </Button>
             )}
             {/* <Button type="submit">Save</Button> */}
           </CenterArticle>
-        </CenterProfile>
-      </form>
     </MainDash>
   );
 };
