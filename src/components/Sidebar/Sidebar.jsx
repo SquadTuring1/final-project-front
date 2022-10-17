@@ -1,35 +1,40 @@
 import React from 'react'
 import { RiPlayListFill, RiStarFill, RiHome5Fill, RiAppsFill } from 'react-icons/ri'
-import { Link } from 'react-router-dom'
-import { SidebarMain, SideMenu, UploadBtn, CurrentSong  } from '../../ui/index'
+import { Link, Outlet } from 'react-router-dom'
+import { SidebarMain, SideMenu, UploadBtn, CurrentSong, SideMenuItems  } from '../../ui/index'
 
 
 const Sidebar = () => {
   return (
+    <>
     <SidebarMain>
       <CurrentSong>
         hola
       </CurrentSong>
       <SideMenu>
-        <Link>
+        <SideMenuItems as={Link} to='/dashboard'>
           <RiHome5Fill />
           <p className="home__link">Home</p>
-        </Link>
-        <Link>
+        </SideMenuItems>
+        <SideMenuItems as={Link} to='/playlist'>
           <RiPlayListFill />
           <p className="playlist__link">Playlist</p>
-        </Link>
-        <Link>
+        </SideMenuItems>
+        <SideMenuItems as={Link} to='/favorites'>
           <RiStarFill />
           <p className="favorites__link">Favorites</p>
-        </Link>
-        <Link>
+        </SideMenuItems>
+        <SideMenuItems as={Link} to='/categories'>
           <RiAppsFill />
           <p className="caterogies __link">Categories</p>
-        </Link>
+        </SideMenuItems>
       </SideMenu>
       <UploadBtn />
     </SidebarMain>
+    <section>
+      <Outlet />
+    </section>
+    </>
   )
 }
 

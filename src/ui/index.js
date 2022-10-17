@@ -11,14 +11,26 @@ import { GridMainContainer, GridMainItem, GridPlayerItem, GridSideItem } from '.
 import { CurrentSongMbl, MusicBar, MusicControls, MusicVolume, PlayerMain } from './PlayerMain.styled';
 import { MainControl, ShuffleBtn, RepeatBtn, PlayBtn } from './PlayerControls.styled';
 import { ProgressBar } from './ProgressBar.styled';
-import { SidebarMain, SideMenu, UploadBtn, CurrentSong } from './SidebarMain';
+import { SidebarMain, SideMenu, UploadBtn, CurrentSong, SideMenuItems } from './SidebarMain';
+import { CategoryDash, GenDashMain, PlaylistDash, RecommendedDash, SongsDash } from './GeneralDashboard';
+
+
+//General Dashboard
+export {
+  CategoryDash,
+  GenDashMain,
+  PlaylistDash,
+  RecommendedDash,
+  SongsDash,
+}
 
 //sidebar
 export {
   SidebarMain,
   SideMenu,
   UploadBtn,
-  CurrentSong
+  CurrentSong,
+  SideMenuItems,
 }
 
 // Track music bar

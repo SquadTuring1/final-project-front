@@ -17,6 +17,7 @@ import { useDispatch } from 'react-redux';
 import { userSignedIn, userSignedOut } from '../../features/auth/authSlice';
 
 import auth from '../../utils/firebase/firebaseConfig.js';
+import { Sidebar } from '../Sidebar';
 
 
 
