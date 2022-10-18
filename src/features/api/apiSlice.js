@@ -42,7 +42,7 @@ export const apiSlice = createApi({
       query: (user) => ({
         url: '/users',
         method: 'POST',
-        body: user
+        body: user,
       }),
       invalidatesTags: ['Users']
     }),
