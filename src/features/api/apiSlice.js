@@ -20,13 +20,11 @@ export const apiSlice = createApi({
       query: () => '/api/users',
       providesTags: ['User']
     }),
-
     getSingleUser: builder.query({
       query: (uid) => `api/users/${uid}`,
       method: 'GET',
       
     }),
-
     signUpUser: builder.mutation({        // TODO: can this be merged with addUser in front and back?
       query: (user) => ({
         url: '/signup',
@@ -35,27 +33,11 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: ['User']
     }),
-
-<<<<<<< HEAD
-    // addUser: builder.mutation({
-    //   query: (user) => ({
-    //     url: '/api/users',
-    //     method: 'POST',
-    //     body: user
-    //   }),
-    //   invalidatesTags: ['Users']
-    // }),
-    
-// Songs
-
     getSongs: builder.query({
       query: () => '/songs',
       transformResponse: res => Object.entries(res)[0][1],
       providesTags: ['Songs']
     }),
-
-
-=======
     addUser: builder.mutation({
       query: (user) => ({
         url: '/api/users',
@@ -75,7 +57,6 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: ['Users']
     })
->>>>>>> develop
   })
 })
 
