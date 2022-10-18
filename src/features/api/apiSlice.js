@@ -17,11 +17,11 @@ export const apiSlice = createApi({
   tagTypes: ['User', 'Songs'],
   endpoints: (builder) => ({
     getUsers: builder.query({
-      query: () => '/api/users',
+      query: () => '/users',
       providesTags: ['User']
     }),
     getSingleUser: builder.query({
-      query: (uid) => `api/users/${uid}`,
+      query: (uid) => `users/${uid}`,
       method: 'GET',
       
     }),
@@ -40,7 +40,7 @@ export const apiSlice = createApi({
     }),
     addUser: builder.mutation({
       query: (user) => ({
-        url: '/api/users',
+        url: '/users',
         method: 'POST',
         body: user
       }),
@@ -48,7 +48,7 @@ export const apiSlice = createApi({
     }),
     updateUser: builder.mutation({
       query: (userObj) => ({
-        url: `/api/users/${userObj.uid}`,
+        url: `/users/${userObj.uid}`,
         method: 'PATCH',
         body: {
           firstName: userObj.firstName,
