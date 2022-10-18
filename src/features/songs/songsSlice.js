@@ -4,7 +4,7 @@ const initialState = {
     // 
 }
 
-const songSlice = createSlice({
+const songsSlice = createSlice({
     name: 'songs',
     initialState,
     reducers: {
@@ -16,8 +16,8 @@ const songSlice = createSlice({
     }
 })
 
-export const { setSongsList } = songSlice.actions
+export const { setSongsList } = songsSlice.actions
 
 export const getSongs = (state) => state.songs
 
-export default songSlice.reducer
+export default songsSlice.reducer

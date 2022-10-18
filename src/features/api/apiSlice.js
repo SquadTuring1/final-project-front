@@ -27,11 +27,6 @@ export const apiSlice = createApi({
       
     }),
 
-
-
-    
-
-    
     signUpUser: builder.mutation({        // TODO: can this be merged with addUser in front and back?
       query: (user) => ({
         url: '/signup',
@@ -52,10 +47,11 @@ export const apiSlice = createApi({
     
 // Songs
 
-getSongs: builder.query({
-  query: () => '/songs',
-  providesTags: ['Songs']
-}),
+    getSongs: builder.query({
+      query: () => '/songs',
+      transformResponse: res => Object.entries(res)[0][1],
+      providesTags: ['Songs']
+    }),
 
 
   })
