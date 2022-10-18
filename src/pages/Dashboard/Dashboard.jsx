@@ -7,7 +7,8 @@ import {
 } from '../../ui/index';
 import MusicPlayer from '../../components/MusicPlayer/index';
 import { Sidebar } from '../../components/Sidebar/index';
-import GeneralDashboard from '../../components/GeneralDashboard/index';
+import GeneralDashboard from './GeneralDashboard/index';
+
 
 
 const Dashboard = () => {

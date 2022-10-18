@@ -36,6 +36,7 @@ export const apiSlice = createApi({
       invalidatesTags: ['User']
     }),
 
+<<<<<<< HEAD
     // addUser: builder.mutation({
     //   query: (user) => ({
     //     url: '/api/users',
@@ -54,6 +55,27 @@ export const apiSlice = createApi({
     }),
 
 
+=======
+    addUser: builder.mutation({
+      query: (user) => ({
+        url: '/api/users',
+        method: 'POST',
+        body: user
+      }),
+      invalidatesTags: ['Users']
+    }),
+    updateUser: builder.mutation({
+      query: (userObj) => ({
+        url: `/api/users/${userObj.uid}`,
+        method: 'PATCH',
+        body: {
+          firstName: userObj.firstName,
+          lastName: userObj.lastName,
+        }
+      }),
+      invalidatesTags: ['Users']
+    })
+>>>>>>> develop
   })
 })
 
@@ -61,7 +83,8 @@ export const apiSlice = createApi({
 export const { 
   useGetUsersQuery,
   useGetSingleUserQuery,  
-  // useAddUserMutation,
+  useAddUserMutation,
+  useUpdateUserMutation,
   useSignUpUserMutation,
   useGetSongsQuery
 } = apiSlice;

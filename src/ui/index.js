@@ -12,8 +12,21 @@ import { CurrentSongMbl, MusicBar, MusicControls, MusicVolume, PlayerMain } from
 import { MainControl, ShuffleBtn, RepeatBtn, PlayBtn } from './PlayerControls.styled';
 import { ProgressBar } from './ProgressBar.styled';
 import { SidebarMain, SideMenu, UploadBtn, CurrentSong, SideMenuItems } from './SidebarMain';
-import { CategoryDash, GenDashMain, PlaylistDash, RecommendedDash, SongsDash } from './GeneralDashboard';
+import { CategoryDash, GenDashMain, PlaylistDash, RecommendedDash, SongsDash } from './GeneralDashboardGrid.styled';
+import { CoverSong } from './DashboardImg.styled';
+import { CoverSongTitle, CoverSongArtist, SongsH2 } from './DashboardText.styled';
+import { CoverSongMain } from './DashboardItems.styled';
 
+
+
+//General Dashboard - Your Songs
+export {
+  CoverSong,
+  CoverSongTitle,
+  CoverSongArtist,
+  CoverSongMain,
+  SongsH2,
+}
 
 //General Dashboard
 export {
