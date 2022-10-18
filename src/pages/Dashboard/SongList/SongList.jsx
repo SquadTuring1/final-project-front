@@ -1,26 +1,35 @@
 import React from 'react';
-import { song_item_test } from '../../../dbtest';
 import { SongsDash, SongsH2 } from '../../../ui';
 import SongItem from '../SongItem';
 import { useGetSongsQuery } from '../../../features/api/apiSlice'
+import { getCurrentSong, setCurrentSong } from '../../../features/songs/songsSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react'
 
 
 
 const SongList = () => {
-  const { data: songs, isLoading, isSuccess, isError, error} = useGetSongsQuery()
-
+  const dispatch = useDispatch();
+  const { data: songList, isLoading, isSuccess, isError, error} = useGetSongsQuery()
+  const [ song, setSong ] = useState();
+  
+  song && dispatch(setCurrentSong(song))
 
   let content;
   if (isLoading){
     content = <p>Loading...</p>
   } else if (isSuccess){
-    console.log('success')
-    content = songs.map(({imageUrl, title, _id,}) => {
+    content = songList.map(({ _id, imageUrl, artistName, title,}) => {
+        
         return (
-          <SongItem key={_id} title={title} cover={imageUrl} />   // TODO add artist={artist}
+          <div key={_id} onClick={() => setSong(_id)}>
+            <SongItem artist={artistName} title={title} cover={imageUrl}  />  
+          </div>
+          
+          
         )
     })
-  } else if (isError){
+  } else if (isError) {
     content = <p>Error</p>
   }
 
