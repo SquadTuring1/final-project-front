@@ -1,15 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+
 const initialState = {
     currentSongId: 0,
     currentSongIndex: 0,
+    currentSongUrl: '',
     songList : [],
     repeat: false,
     shuffle: false,
     playing: false,
-    songDuration: 0,
-    currentSongTime: 0,
 }
+
 
 const songsSlice = createSlice({
   name: 'songs',
@@ -17,7 +18,7 @@ const songsSlice = createSlice({
   reducers: {
     setSongsList: {
       reducer(state, action){
-        return {...state, songList: action.payload}
+        return {...state, ...action.payload}
       }
     },
     setCurrentSong: {
@@ -25,6 +26,7 @@ const songsSlice = createSlice({
             return {
                 ...state, 
                 currentSongId: action.payload._id, 
+                currentSongUrl: action.payload.fileUrl,
                 currentSongIndex: action.payload.songIndex,
                 playing: true
             }
@@ -33,10 +35,13 @@ const songsSlice = createSlice({
     playPreviousSong: {
       reducer(state, action) {
         let previous;
-        if (state.currentSongIndex === 0 ) {
-          previous = { currentSongIndex: state.songList.length - 1, currentSongId: state.songList[state.songList.length - 1]._id }
+        let index;
+        if (state.currentSongIndex === 0 ) { 
+          index = state.songList.length - 1;
+          previous = { currentSongIndex: index, currentSongId: state.songList[index]._id, currentSongUrl: state.songList[index].fileUrl  }
         } else {
-          previous = { currentSongIndex: state.currentSongIndex - 1, currentSongId: state.songList[state.currentSongIndex - 1]._id }
+          index = state.currentSongIndex - 1;
+          previous = { currentSongIndex: index, currentSongId: state.songList[index]._id, currentSongUrl: state.songList[index].fileUrl }      // if it's NOT the first song
         }
         return { ...state, ...previous };
       }
@@ -44,10 +49,13 @@ const songsSlice = createSlice({
     playNextSong: {
       reducer(state, action) {
         let next;
+        let index;
         if (state.currentSongIndex === state.songList.length - 1) {
-          next = { currentSongIndex: 0, currentSongId: state.songList[0]._id }
+          index = 0;
+          next = { currentSongIndex: index, currentSongId: state.songList[index]._id, currentSongUrl: state.songList[index].fileUrl }
         } else {
-          next = { currentSongIndex: state.currentSongIndex + 1, currentSongId: state.songList[state.currentSongIndex + 1]._id }
+          index = state.currentSongIndex + 1;
+          next = { currentSongIndex:index, currentSongId: state.songList[index]._id, currentSongUrl: state.songList[index].fileUrl }
         }
         return { ...state, ...next };
       }
@@ -76,7 +84,7 @@ const songsSlice = createSlice({
     },
     handleEndOfSong: {
       reducer(state, action) {
-        if (state.random) {
+        if (state.shuffle) {
           playRandomSong();
         } 
         if (state.repeat) {
@@ -88,17 +96,16 @@ const songsSlice = createSlice({
         } else {          // if error, play next song
           playNextSong();
         }
-        
       }
     },
     setSongDuration: {
       reducer(state, action) {
-        return { ...state, songDuration: action. payload }
+        return { ...state, songDuration: action.payload }
       }
     },
     setCurrentSongTime: {
       reducer(state, action) {
-        return { ...state, currentSongTime: action. payload }
+        return { ...state, currentSongTime: action.payload }
       }
     }
   }
@@ -106,24 +113,23 @@ const songsSlice = createSlice({
 
 
 export const getSongState = (state) => state.songs
-export const getCurrentSong = (state) => state.songs.currentSongId;
+export const getCurrentSongId = (state) => state.songs.currentSongId;
 export const getCurrentSongIndex = (state) => state.songs.currentSongIndex;
+export const getCurrentSongUrl = (state) => state.songs.currentSongUrl;
 export const getSongList = (state) => state.songs.songList;
-export const getVolume = (state) => state.songs.volume;
 export const getSongDuration = (state) => state.songs.songDuration;
-export const getCurrentSongTime = (state) => state.songs.currentSongTime 
-export const getSongPlaying = (state) => state.songs.playing
+export const getCurrentSongTime = (state) => state.songs.currentSongTime;
+export const getPlaying = (state) => state.songs.playing;
 
-export const { 
-  setSongsList, 
-  setCurrentSong, 
-  playPreviousSong, 
-  playNextSong, 
-  toggleShuffle, 
-  toggleRepeat, 
+export const {
+  setSongsList,
+  setCurrentSong,
+  playPreviousSong,
+  playNextSong,
+  toggleShuffle,
+  toggleRepeat,
   togglePlaying,
-  handleEndOfSong,
-  setVolume,
+  handleEndOfSong,  
   setSongDuration,
   setCurrentSongTime
 } = songsSlice.actions
