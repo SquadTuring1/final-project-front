@@ -7,6 +7,8 @@ const initialState = {
     repeat: false,
     shuffle: false,
     playing: false,
+    songDuration: 0,
+    currentSongTime: 0,
 }
 
 const songsSlice = createSlice({
@@ -88,6 +90,16 @@ const songsSlice = createSlice({
         }
         
       }
+    },
+    setSongDuration: {
+      reducer(state, action) {
+        return { ...state, songDuration: action. payload }
+      }
+    },
+    setCurrentSongTime: {
+      reducer(state, action) {
+        return { ...state, currentSongTime: action. payload }
+      }
     }
   }
 })
@@ -97,6 +109,10 @@ export const getSongState = (state) => state.songs
 export const getCurrentSong = (state) => state.songs.currentSongId;
 export const getCurrentSongIndex = (state) => state.songs.currentSongIndex;
 export const getSongList = (state) => state.songs.songList;
+export const getVolume = (state) => state.songs.volume;
+export const getSongDuration = (state) => state.songs.songDuration;
+export const getCurrentSongTime = (state) => state.songs.currentSongTime 
+export const getSongPlaying = (state) => state.songs.playing
 
 export const { 
   setSongsList, 
@@ -105,7 +121,11 @@ export const {
   playNextSong, 
   toggleShuffle, 
   toggleRepeat, 
-  togglePlaying  
+  togglePlaying,
+  handleEndOfSong,
+  setVolume,
+  setSongDuration,
+  setCurrentSongTime
 } = songsSlice.actions
 
 
