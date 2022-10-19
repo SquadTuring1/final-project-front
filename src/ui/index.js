@@ -17,7 +17,16 @@ import { CoverSong } from './DashboardImg.styled';
 import { CoverSongTitle, CoverSongArtist, SongsH2, SongTimer } from './DashboardText.styled';
 import { CoverSongMain } from './DashboardItems.styled';
 import { SideMenu, SideMenuItems } from './MenuItems.styled';
+import { NavOutlet, SideOutlet, PlayerOutlet, MainOutlet } from './GridOutlet.styled';
 
+
+// Outlet from React router
+export {
+  NavOutlet, 
+  SideOutlet, 
+  PlayerOutlet, 
+  MainOutlet
+}
 
 //General Dashboard - Your Songs
 export {

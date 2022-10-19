@@ -13,16 +13,22 @@ import GeneralDashboard from './GeneralDashboard/index';
 
 const Dashboard = () => {
   return (
-    <GridMainContainer>
-      <GridSideItem>
-        <Sidebar />
-      </GridSideItem>
-      <GridMainItem><GeneralDashboard /></GridMainItem>
-      <GridPlayerItem>
-        <MusicPlayer />
-      </GridPlayerItem>
-    </GridMainContainer>
+
+    <div>
+
+    </div>
   );
 };
 
 export default Dashboard;
+
+
+    // <GridMainContainer>
+    //   <GridSideItem>
+    //     <Sidebar />
+    //   </GridSideItem>
+    //   <GridMainItem><GeneralDashboard /></GridMainItem>
+    //   <GridPlayerItem>
+    //     <MusicPlayer />
+    //   </GridPlayerItem>
+    // </GridMainContainer>

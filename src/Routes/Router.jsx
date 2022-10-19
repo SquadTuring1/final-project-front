@@ -11,7 +11,7 @@ import ForgotPassword from '../pages/ForgotPassword/ForgotPassword';
 import FavoriteTracks from '../pages/FavoriteTracks/index';
 import Playlist from '../pages/Playlist/index';
 import Categories from '../pages/Categories/index';
-import { Sidebar } from '../components/Sidebar';
+import OutletFrame from '../components/OutletFrame/OutletFrame';
 
 
 const Router = () => {
@@ -21,7 +21,7 @@ const Router = () => {
       <Route path="login" element={<Login />} />
       <Route path="reset" element={<ForgotPassword />} />
       <Route path="registration" element={<Registration />} />
-      <Route path="/" element={<Navbar />}>
+      <Route path="/" element={<OutletFrame />}>
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="terms" element={<Terms />} />
         <Route path="profile" element={<PersonalProfile />} />

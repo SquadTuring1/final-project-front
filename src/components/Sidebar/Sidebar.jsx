@@ -15,9 +15,6 @@ const Sidebar = () => {
       <SidebarMenu />
       <UploadBtn />
     </SidebarMain>
-    <section>
-      <Outlet />
-    </section>
     </>
   )
 }

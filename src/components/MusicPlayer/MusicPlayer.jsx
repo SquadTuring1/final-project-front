@@ -1,5 +1,6 @@
 import { RiVolumeUpFill } from 'react-icons/ri';
 import { PlayerMain, ProgressBar, MusicBar, MusicControls, MusicVolume, CurrentSongMbl, ProgressTime, SongTimer } from '../../ui/index';
+import Volume from '../Volume/index';
 import Controls from './Controls/index';
 
 
