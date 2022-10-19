@@ -101,6 +101,7 @@ const Login = () => {
           {/* <Label htmlFor="email">
             Email:</Label> */}
           <Input
+          noFocus
             className="signup__input"
             name="email"
             type="email"

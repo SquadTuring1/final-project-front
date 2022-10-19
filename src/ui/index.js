@@ -11,11 +11,12 @@ import { GridMainContainer, GridMainItem, GridPlayerItem, GridSideItem } from '.
 import { CurrentSongMbl, MusicBar, MusicControls, MusicVolume, PlayerMain, ProgressTime } from './PlayerMain.styled';
 import { MainControl, ShuffleBtn, RepeatBtn, PlayBtn } from './PlayerControls.styled';
 import { ProgressBar } from './ProgressBar.styled';
-import { SidebarMain, SideMenu, UploadBtn, CurrentSong, SideMenuItems, CurrentPlaying } from './SidebarMain';
+import { SidebarMain, UploadBtn, CurrentSong, CurrentPlaying } from './SidebarMain';
 import { CategoryDash, GenDashMain, PlaylistDash, RecommendedDash, SongsDash } from './GeneralDashboardGrid.styled';
 import { CoverSong } from './DashboardImg.styled';
 import { CoverSongTitle, CoverSongArtist, SongsH2, SongTimer } from './DashboardText.styled';
 import { CoverSongMain } from './DashboardItems.styled';
+import { SideMenu, SideMenuItems } from './MenuItems.styled';
 
 
 //General Dashboard - Your Songs
