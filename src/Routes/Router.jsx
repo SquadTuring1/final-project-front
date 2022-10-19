@@ -29,9 +29,7 @@ const Router = () => {
         <Route path="favorites" element={<FavoriteTracks />} />
         <Route path="playlist" element={<Playlist />} />
         <Route path="categories" element={<Categories />} />
-
-        <Route path="cloudinary" element={<FormCloudinary />} />
-        <Route path="test" element={<FormCloudinary2 />} />
+        <Route path="cloudinary" element={<FormCloudinary2 />} />
       </Route>
     </Routes>
   );
