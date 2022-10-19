@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const GridSideItem = styled.aside`
   grid-area: sidebar;
-  border: 1px dashed #fff;
+  /* border: 1px dashed #fff; */
   color: #fff;
 `;
 

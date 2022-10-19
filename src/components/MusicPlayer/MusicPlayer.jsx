@@ -1,6 +1,7 @@
 import { RiVolumeUpFill } from 'react-icons/ri';
-import { PlayerMain, ProgressBar, MusicBar, MusicControls, MusicVolume, CurrentSongMbl } from '../../ui/index';
+import { PlayerMain, ProgressBar, MusicBar, MusicControls, MusicVolume, CurrentSongMbl, ProgressTime, SongTimer } from '../../ui/index';
 import Controls from './Controls/index';
+
 
 const MusicPlayer = () => {
   return (
@@ -9,6 +10,10 @@ const MusicPlayer = () => {
         <Controls />
       </MusicControls>
       <MusicBar className='progress_bar'>
+      <ProgressTime>
+        <SongTimer>00:00</SongTimer>
+        <SongTimer>00:00</SongTimer>
+      </ProgressTime>
         <ProgressBar type="range" />
       </MusicBar>
       <MusicVolume className='volume__bar'>

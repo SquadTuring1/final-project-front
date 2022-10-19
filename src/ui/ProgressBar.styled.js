@@ -20,8 +20,9 @@ margin: 0 auto;
 }
 
 @media (min-width: 960px) {
-  width: 50%;
+  width: 70.5%;
   display: flex;
   justify-content: center;
+  padding: .7rem 0 0;
 }
 `;

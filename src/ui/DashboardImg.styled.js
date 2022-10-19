@@ -5,4 +5,10 @@ export const CoverSong = styled.img`
   width: 7.5rem;
   margin: 0 0 .4rem;
   border-radius: 0.3rem;
+
+  &.sidebar__desktop--cover {
+    height: 14rem;
+    width: 14rem;
+    margin: 0 0 .7rem;
+  }
 `;

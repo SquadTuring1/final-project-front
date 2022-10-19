@@ -3,13 +3,21 @@ import styled from 'styled-components';
 export const CurrentSong = styled.article`
   display: none;
   grid-area: currentsong;
-  border: 1px dotted #fff;
+  /* border: 1px dotted #fff; */
   color: #fff;
 
   @media (min-width: 960px) {
-    display: block;
+    display: flex;
+    justify-content: center;
   }
 `;
+
+export const CurrentPlaying = styled.article`
+  display: flex;
+  flex-direction: column;
+  /* width: 14rem; */
+  margin: 2rem 0 0;
+`
 
 export const SideMenu = styled.article`
   display: flex;
@@ -17,7 +25,7 @@ export const SideMenu = styled.article`
   align-items: center;
   height: 100%;
   grid-area: sidemenu;
-  border: 1px dotted #fff;
+  /* border: 1px dotted #fff; */
   color: #fff;
 
   @media(min-width: 960px) {
@@ -41,7 +49,7 @@ export const SideMenuItems = styled.article`
 export const UploadBtn = styled.article`
   display: none;
   grid-area: upload;
-  border: 1px dotted #fff;
+  /* border: 1px dotted #fff; */
   color: #fff;
 
   @media (min-width: 960px) {

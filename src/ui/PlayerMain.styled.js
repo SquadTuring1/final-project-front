@@ -3,22 +3,30 @@ import { CurrentSong } from './SidebarMain';
 
 export const CurrentSongMbl = styled(CurrentSong)`
   grid-area: currentsong;
-  border: 1px dotted #fff;
+  /* border: 1px dotted #fff; */
 `
 
 export const MusicControls = styled.article `
   grid-area: controls;
-  border: 1px dotted #fff;
+  /* border: 1px dotted #fff; */
 
 `
 export const MusicBar = styled.article `
   grid-area: bar;
-  border: 1px dotted #fff;
+  /* border: 1px dotted #fff; */
 `
+
+export const ProgressTime = styled.article`
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  width: 70%;
+`
+
 export const MusicVolume = styled.article `
   display:none;
   grid-area: volume;
-  border: 1px dotted #fff;
+  /* border: 1px dotted #fff; */
 
   @media (min-width: 960px) {
     display: block;

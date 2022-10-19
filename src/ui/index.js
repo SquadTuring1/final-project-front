@@ -8,15 +8,14 @@ import { TextAccount, TextColor, TextTerms, TermColor, TextRemember, TitleSign, 
 import { MainNav, NavContent, AvatarContent, Avatar, ButtonAvatar, GreenDot } from './Avatar.styled';
 import { PopMenu } from './PopMenu.styled';
 import { GridMainContainer, GridMainItem, GridPlayerItem, GridSideItem } from './Grid.styled';
-import { CurrentSongMbl, MusicBar, MusicControls, MusicVolume, PlayerMain } from './PlayerMain.styled';
+import { CurrentSongMbl, MusicBar, MusicControls, MusicVolume, PlayerMain, ProgressTime } from './PlayerMain.styled';
 import { MainControl, ShuffleBtn, RepeatBtn, PlayBtn } from './PlayerControls.styled';
 import { ProgressBar } from './ProgressBar.styled';
-import { SidebarMain, SideMenu, UploadBtn, CurrentSong, SideMenuItems } from './SidebarMain';
+import { SidebarMain, SideMenu, UploadBtn, CurrentSong, SideMenuItems, CurrentPlaying } from './SidebarMain';
 import { CategoryDash, GenDashMain, PlaylistDash, RecommendedDash, SongsDash } from './GeneralDashboardGrid.styled';
 import { CoverSong } from './DashboardImg.styled';
-import { CoverSongTitle, CoverSongArtist, SongsH2 } from './DashboardText.styled';
+import { CoverSongTitle, CoverSongArtist, SongsH2, SongTimer } from './DashboardText.styled';
 import { CoverSongMain } from './DashboardItems.styled';
-
 
 
 //General Dashboard - Your Songs
@@ -44,6 +43,7 @@ export {
   UploadBtn,
   CurrentSong,
   SideMenuItems,
+  CurrentPlaying
 }
 
 // Track music bar
@@ -59,7 +59,9 @@ export{
   ShuffleBtn,
   RepeatBtn,
   PlayBtn,
-  CurrentSongMbl
+  CurrentSongMbl,
+  ProgressTime,
+  SongTimer
 }
 
 export{
