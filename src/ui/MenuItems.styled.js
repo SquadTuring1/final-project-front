@@ -23,9 +23,5 @@ export const SideMenuItems = styled.article`
 display: flex;
 text-decoration: none;
 font-size: 1.1rem;
-color: white;
-
-  &:hover{
-    color: ${({category, category2}) => category ? 'blue': 'pink' && category2 ? 'violet' : 'yellow'};
-  }
+color: pink;
 `;
