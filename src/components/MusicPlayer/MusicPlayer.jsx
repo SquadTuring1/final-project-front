@@ -19,10 +19,10 @@ const MusicPlayer = () => {
     return (ms - (ms %= 60)) / 60 + ( 9 < ms ? ':' : ':0') + ~~ms;  
   }
 
-  const handleProgressBar = (progressValue) => {
-    let calculatedProgress =(progressValue * songDuration);
-    setCurrentSongTime(calculatedProgress);    
-    audioTag.current.currentTime = calculatedProgress;
+  const handleProgressBar = (e) => {
+    const progress = Math.floor((e.target.value / 100) * songDuration);
+    setCurrentSongTime(progress)
+    audioTag.current.currentTime = progress;
   }
 
   const handleVolume = (volumeValue) => {
@@ -41,7 +41,7 @@ const MusicPlayer = () => {
         <audio ref={audioTag}
           onTimeUpdate={(e) => setCurrentSongTime(e.target.currentTime)}
           onCanPlay={(e) => setSongDuration(e.target.duration)}
-          onEnded={(e) => dispatch(handleEnd)}
+          onEnded={(e) => dispatch(handleEndOfSong)}
           type="audio/mpeg"
           preload="true"
           src={songUrl}>
@@ -54,7 +54,7 @@ const MusicPlayer = () => {
         id="progressBar"
         value={songDuration ? (currentSongTime * 100) / songDuration : 0}
         max="100"  
-        onChange={(e) => handleProgressBar(((e.clientX - e.target.offsetLeft) / e.target.offsetWidth) * 100)}
+        onChange={(e) => handleProgressBar(e)}
       />
       <span>{currentSongTime ? formatSongTime(currentSongTime) : formatSongTime(0)}</span>
       <br></br>
@@ -64,7 +64,7 @@ const MusicPlayer = () => {
         <RiVolumeUpFill />
         <input 
           type="range" 
-          value={Math.round(volume * 100)}
+          vaalue={Math.round(volume * 100)}
           name="volumeBar" 
           id="volumeBar" 
           onChange={(e) => handleVolume(e.target.value / 100)}
