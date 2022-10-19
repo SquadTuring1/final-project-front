@@ -13,7 +13,7 @@ import Playlist from '../pages/Playlist/index';
 import Categories from '../pages/Categories/index';
 import { Sidebar } from '../components/Sidebar';
 import FormCloudinary from '../pages/FormCloudinary';
-
+import FormCloudinary2 from '../pages/FormCloudinary2';
 
 const Router = () => {
   return (
@@ -29,8 +29,9 @@ const Router = () => {
         <Route path="favorites" element={<FavoriteTracks />} />
         <Route path="playlist" element={<Playlist />} />
         <Route path="categories" element={<Categories />} />
-        
-        <Route path="cloudinary" element={< FormCloudinary/>} />
+
+        <Route path="cloudinary" element={<FormCloudinary />} />
+        <Route path="test" element={<FormCloudinary2 />} />
       </Route>
     </Routes>
   );
