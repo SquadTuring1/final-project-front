@@ -1,5 +1,4 @@
-import { RiVolumeUpFill } from 'react-icons/ri';
-import { PlayerMain, ProgressBar, MusicBar, MusicControls, MusicVolume, CurrentSongMbl, ProgressTime, SongTimer } from '../../ui/index';
+import { PlayerMain, ProgressBar, MusicBar, MusicControls, ProgressTime, SongTimer } from '../../ui/index';
 import Volume from '../Volume/index';
 import Controls from './Controls/index';
 
@@ -17,10 +16,7 @@ const MusicPlayer = () => {
       </ProgressTime>
         <ProgressBar type="range" />
       </MusicBar>
-      <MusicVolume className='volume__bar'>
-        <RiVolumeUpFill />
-        <input type="range" name="" id="" />
-      </MusicVolume>
+      <Volume />
     </PlayerMain>
   );
 };
