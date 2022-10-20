@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { MainControl, ShuffleBtn, RepeatBtn,PlayBtn, ChangeSongBtn } from '../../../ui/index';
 import { RiRepeat2Fill, RiShuffleFill, RiSkipBackFill, RiSkipForwardFill, RiPlayFill, RiPauseFill } from 'react-icons/ri';
 import { useState } from 'react';
@@ -7,41 +7,39 @@ import { playPreviousSong, playNextSong, toggleShuffle, toggleRepeat, togglePlay
 
 
 const Controls = ({audioTag, children}) => {
-  const dispatch = useDispatch();
-  const isPlaying = useSelector(getPlaying)
-  const shuffle = useSelector(getShuffle);
-  const repeat = useSelector(getRepeat)
-  
+    const dispatch = useDispatch();
+    const isPlayingState = useSelector(getPlaying)
+    const shuffle = useSelector(getShuffle);
+    const repeat = useSelector(getRepeat)
 
+    useEffect(() => {
+      if (audioTag.current) {
+        audioTag.current.paused === isPlayingState ?? dispatch(togglePlaying())
+      } 
+    }, [audioTag.current && audioTag.current.paused])
 
+    const togglePlayPause = () => {
+      dispatch(togglePlaying());          // toggle playing state
+      audioTag.current.paused ? audioTag.current.play() : audioTag.current.pause();
+    }
 
-  const togglePlayPause = () => {
-    console.log(isPlaying)
-    dispatch(togglePlaying());          // toggle playing state
-    audioTag.current.paused ? audioTag.current.play() : audioTag.current.pause();
-  }
-
-  const playPrevious = () => {
-    if (audioTag.current.playing) {
-      audioTag.current.ended = true;
-      dispatch(playPreviousSong());
-      audioTag.current.play();
-    } 
-  }
-
-  const playNext = () => {
-    
-  }
-
+    const changeTrack = async (trackChoice) => {    
+      trackChoice === 'previous' && dispatch(playPreviousSong());
+      trackChoice === 'next' && dispatch(playNextSong());
+      if (!audioTag.current.paused) {
+        await audioTag.current.load();
+        await audioTag.current.play();
+      }
+    }
 
   return (
     <MainControl>
       {/* component composition from musicplayer to bring in audio, with state */}
       {children && children}
       <ShuffleBtn as={RiShuffleFill} selected={shuffle} onClick={() => dispatch(toggleShuffle())} />
-      <ChangeSongBtn as={RiSkipBackFill}  onClick={() => playPrevious} />      
-      <PlayBtn as={!isPlaying ? RiPlayFill : RiPauseFill} selected={isPlaying} onClick={togglePlayPause} />
-      <ChangeSongBtn as={RiSkipForwardFill} onClick={() => dispatch(playNextSong())} />
+      <ChangeSongBtn as={RiSkipBackFill}  onClick={() => changeTrack('previous')} />      
+      <PlayBtn as={audioTag.current && audioTag.current.paused ? RiPlayFill : RiPauseFill} selected={audioTag.current && !audioTag.current.paused} onClick={togglePlayPause} />
+      <ChangeSongBtn as={RiSkipForwardFill} onClick={() => changeTrack('next')} />
       <RepeatBtn as={RiRepeat2Fill} selected={repeat} onClick={() => dispatch(toggleRepeat())} />
     </MainControl>
   );

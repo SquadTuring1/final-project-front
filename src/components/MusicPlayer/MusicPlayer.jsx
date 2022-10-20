@@ -3,17 +3,21 @@ import Volume from '../Volume/index';
 import { RiVolumeUpFill } from 'react-icons/ri';
 import { useRef, useState } from 'react';
 import Controls from './Controls/index';
-import { getCurrentSongUrl, handleEndOfSong } from '../../features/songs/songsSlice';
+import { getCurrentSongUrl, getShuffle, getRepeat, getCurrentSongIndex, getSongList, playNextSong, playRandomSong } from '../../features/songs/songsSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 
 const MusicPlayer = () => {
   const dispatch = useDispatch();
-  const songUrl = useSelector(getCurrentSongUrl);
+  const songUrl = useSelector(getCurrentSongUrl); 
+  const shuffle = useSelector(getShuffle);
+  const repeat = useSelector(getRepeat);
+  const songIndex = useSelector(getCurrentSongIndex)
+  const songList = useSelector(getSongList)
 
   const [ currentSongTime, setCurrentSongTime ] = useState(0);
   const [ songDuration, setSongDuration ] = useState(0);
-  const [ volume, setVolume ] = useState(0.25);
+  const [ volume, setVolume ] = useState(0.15);
 
   const audioTag = useRef();
   
@@ -22,19 +26,33 @@ const MusicPlayer = () => {
   }
 
   const handleProgressBar = (e) => {
-    const progress = Math.floor((e.target.value / 100) * songDuration);
+    const progress = Math.floor((e.target.value / 1000) * songDuration);
     setCurrentSongTime(progress)
     audioTag.current.currentTime = progress;
   }
 
   const handleVolume = (volumeValue) => {
-    console.log(volumeValue)
-    console.log(audioTag.current.volume)
     setVolume(volumeValue)
     audioTag.current.volume = volumeValue;
   }
 
-console.log(audioTag)
+  const handleEndOfSong = async (e) => {    
+    console.log(e)
+    if (shuffle) {
+      dispatch(playRandomSong())
+    } else {
+      if (repeat) {
+        dispatch(playNextSong())
+      } else if (songIndex === songList.length - 1) {   // if last song, don't play anything else
+        return;
+      } else {          // if error, play next song
+        dispatch(playNextSong())
+      }
+    }
+    await audioTag.current.load();
+    await audioTag.current.play();
+  }
+
   return (
     <>
     <PlayerMain>  
@@ -43,12 +61,12 @@ console.log(audioTag)
         <audio ref={audioTag}
           onTimeUpdate={(e) => setCurrentSongTime(e.target.currentTime)}
           onCanPlay={(e) => setSongDuration(e.target.duration)}
-          onEnded={(e) => dispatch(handleEndOfSong)}
+          onEnded={(e) => handleEndOfSong(e)}
           type="audio/mpeg"
           preload="true"
           src={songUrl}>
         </audio>
-      </Controls>       // Component
+      </Controls>      
       </MusicControls>
       <MusicBar className='progress_bar'>
         <ProgressTime>
@@ -57,8 +75,8 @@ console.log(audioTag)
         </ProgressTime>
         <ProgressBar type="range" 
         id="progressBar"
-        value={songDuration ? (currentSongTime * 100) / songDuration : 0}
-        max="100"  
+        value={songDuration ? (currentSongTime * 1000) / songDuration : 0}
+        max="1000"  
         onChange={(e) => handleProgressBar(e)}
         />
           {/* </MusicBar> */}
