@@ -6,7 +6,7 @@ export const MainControl = styled.main`
   justify-content: flex-end;
   align-items: center;
   height: 100%;
-  margin: 0 1.5rem 0 0;
+  margin: .8rem 1.5rem 0 0;
 
 
   @media (min-width: 960px) {

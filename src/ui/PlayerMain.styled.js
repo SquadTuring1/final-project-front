@@ -57,6 +57,7 @@ export const PlayerMain = styled.main`
   &.volume__bar{
     display:none;
   }
+  background-color: #040810;
 
 
   @media (min-width: 960px) {
@@ -64,5 +65,6 @@ export const PlayerMain = styled.main`
     'controls volume' 50%
     'bar      volume' auto/
     auto  14.3rem;
+    height: 100%;
   }
 `

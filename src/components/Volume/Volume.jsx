@@ -1,6 +1,6 @@
 import React from 'react';
 import { RiVolumeUpFill } from 'react-icons/ri';
-import { MusicVolume } from '../../ui';
+import { MusicVolume } from '../../ui/index';
 
 
 const Volume = () => {

@@ -61,6 +61,7 @@ export const SidebarMain = styled.main`
   height: 100%;
   display: grid;
   grid: 'sidemenu';
+  background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(4,8,16,1) 40%);
 
   @media (min-width: 960px) {
     grid:

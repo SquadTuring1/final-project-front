@@ -1,22 +1,29 @@
 import React from 'react';
 import {
-  GridMainContainer,
-  GridMainItem,
-  GridPlayerItem,
-  GridSideItem,
+MainFlex,  CategoryRow, 
+SongsRow, 
+PlaylistRow, 
+SpecialRow
 } from '../../ui/index';
-import MusicPlayer from '../../components/MusicPlayer/index';
-import { Sidebar } from '../../components/Sidebar/index';
-import GeneralDashboard from './GeneralDashboard/index';
-
+import SongItem from './SongItem/index';
+import SongList from './SongList/SongList';
+import { Scrollbars } from 'react-custom-scrollbars-2';
 
 
 const Dashboard = () => {
   return (
-
-    <div>
-
-    </div>
+    <Scrollbars universal>
+      <MainFlex>
+        <CategoryRow>
+        <SongList />
+        </CategoryRow>
+        <SongsRow><SongList /></SongsRow>
+        <PlaylistRow><SongList /></PlaylistRow>
+        <SpecialRow><SongList /></SpecialRow>
+        <SpecialRow><SongList /></SpecialRow>
+        <SpecialRow><SongList /></SpecialRow>
+      </MainFlex>
+    </Scrollbars>
   );
 };
 
