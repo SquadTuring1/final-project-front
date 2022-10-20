@@ -13,7 +13,7 @@ import { MainControl, ShuffleBtn, RepeatBtn, PlayBtn, ChangeSongBtn } from './Pl
 import { ProgressBar } from './ProgressBar.styled';
 import { SidebarMain, UploadBtn, CurrentSong, CurrentPlaying } from './SidebarMain';
 import { CategoryDash, GenDashMain, PlaylistDash, RecommendedDash, SongsDash } from './GeneralDashboardGrid.styled';
-import { CoverSong } from './DashboardImg.styled';
+import { CoverMenuIcon, CoverSong } from './DashboardImg.styled';
 import { CoverSongTitle, CoverSongArtist, SongsH2, SongTimer } from './DashboardText.styled';
 import { CoverSongMain } from './DashboardItems.styled';
 import { SideMenu, SideMenuItems } from './MenuItems.styled';
@@ -43,6 +43,7 @@ export {
   CoverSongArtist,
   CoverSongMain,
   SongsH2,
+  CoverMenuIcon
 }
 
 //General Dashboard

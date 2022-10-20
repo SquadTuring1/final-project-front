@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
 export const CoverSongTitle = styled.p`
-  width: 7.5rem;
+  width: 6.9rem;
   margin: 0 0 0.2rem;
-  font-size: 0.95rem;
-  font-weight: 700;
+  font-size: 0.9rem;
+  font-weight: 600;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
