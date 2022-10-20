@@ -10,7 +10,6 @@ export const MusicControls = styled.article `
   grid-area: controls;
   /* border: 1px dotted #fff; */
  
-  }
 
 `
 export const MusicBar = styled.article `

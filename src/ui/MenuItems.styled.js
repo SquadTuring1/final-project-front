@@ -5,7 +5,7 @@ export const SideMenu = styled.main`
   justify-content:center;
   align-items: center;
   height: 100%;
-  margin: 0 0 0 1.5rem;
+  /* margin: 0 0 0 1.5rem; */
 
   &:hover{
     color: yellow;
@@ -13,6 +13,7 @@ export const SideMenu = styled.main`
 
 
   @media(min-width: 960px) {
+    margin: 0 0 0 1.5rem;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
@@ -22,6 +23,18 @@ export const SideMenu = styled.main`
 export const SideMenuItems = styled.article`
 display: flex;
 text-decoration: none;
-font-size: 1.1rem;
-color: pink;
+font-size: 1rem;
+color: white;
+font-family: 'Source Sans Pro', sans-serif;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+
+@media(min-width: 960px) {
+    /* border: red 1px solid; */
+    margin: 1rem;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+  }
 `;

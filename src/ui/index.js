@@ -18,6 +18,7 @@ import { CoverSongTitle, CoverSongArtist, SongsH2, SongTimer } from './Dashboard
 import { CoverSongMain } from './DashboardItems.styled';
 import { SideMenu, SideMenuItems } from './MenuItems.styled';
 import { NavOutlet, SideOutlet, PlayerOutlet, MainOutlet } from './GridOutlet.styled';
+import { IconHome, IconFavorites, IconPlaylist, IconCategories } from './Icons.styled';
 
 // Dashboard Home
 export {
@@ -26,6 +27,14 @@ export {
   SongsRow, 
   PlaylistRow, 
   SpecialRow
+}
+
+//Icons
+export {
+  IconHome,
+  IconFavorites,
+  IconPlaylist,
+  IconCategories 
 }
 
 // Outlet from React router

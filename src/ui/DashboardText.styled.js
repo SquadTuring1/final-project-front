@@ -8,6 +8,7 @@ export const CoverSongTitle = styled.p`
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+  font-family: 'Source Sans Pro', sans-serif;
 
   &.sidebar__desktop--title {
     font-size:1.4rem;
@@ -31,6 +32,7 @@ flex-direction: column;
   margin: 0 0 1rem;
   font-size: 1.5rem;
   font-weight: 600;
+  font-family: 'Source Sans Pro', sans-serif;
 
   &.sidebar__desktop--nowplaying {
     font-size: 1.4rem;
