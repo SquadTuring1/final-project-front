@@ -13,7 +13,7 @@ import Playlist from '../pages/Playlist/index';
 import Categories from '../pages/Categories/index';
 import OutletFrame from '../components/OutletFrame/OutletFrame';
 import { Sidebar } from '../components/Sidebar';
-import FormCloudinary from '../pages/FormCloudinary';
+// import FormCloudinary from '../pages/FormCloudinary';
 import FormCloudinary2 from '../pages/FormCloudinary2';
 
 const Router = () => {
