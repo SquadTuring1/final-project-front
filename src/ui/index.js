@@ -9,7 +9,7 @@ import { MainNav, NavContent, AvatarContent, Avatar, ButtonAvatar, GreenDot } fr
 import { PopMenu } from './PopMenu.styled';
 import { MainFlex, CategoryRow, SongsRow, PlaylistRow, SpecialRow } from './Grid.styled';
 import { CurrentSongMbl, MusicBar, MusicControls, MusicVolume, PlayerMain, ProgressTime } from './PlayerMain.styled';
-import { MainControl, ShuffleBtn, RepeatBtn, PlayBtn } from './PlayerControls.styled';
+import { MainControl, ShuffleBtn, RepeatBtn, PlayBtn, ChangeSongBtn } from './PlayerControls.styled';
 import { ProgressBar } from './ProgressBar.styled';
 import { SidebarMain, UploadBtn, CurrentSong, CurrentPlaying } from './SidebarMain';
 import { CategoryDash, GenDashMain, PlaylistDash, RecommendedDash, SongsDash } from './GeneralDashboardGrid.styled';
@@ -77,6 +77,7 @@ export{
   ShuffleBtn,
   RepeatBtn,
   PlayBtn,
+  ChangeSongBtn,
   CurrentSongMbl,
   ProgressTime,
   SongTimer

@@ -122,6 +122,8 @@ export const getSongList = (state) => state.songs.songList;
 export const getSongDuration = (state) => state.songs.songDuration;
 export const getCurrentSongTime = (state) => state.songs.currentSongTime;
 export const getPlaying = (state) => state.songs.playing;
+export const getShuffle = (state) => state.songs.shuffle;
+export const getRepeat = (state) => state.songs.repeat;
 
 export const {
   setSongsList,

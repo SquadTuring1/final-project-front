@@ -34,7 +34,7 @@ const MusicPlayer = () => {
     audioTag.current.volume = volumeValue;
   }
 
-
+console.log(audioTag)
   return (
     <>
     <PlayerMain>  
