@@ -13,7 +13,7 @@ const Controls = ({audioTag, children}) => {
 
   const toggleAudio = () => {
     console.log(isPlaying)
-    dispatch(togglePlaying);          // toggle playing state
+    dispatch(togglePlaying());          // toggle playing state
     audioTag.current.paused ? audioTag.current.play() : audioTag.current.pause();
   }
 

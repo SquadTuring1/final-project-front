@@ -35,13 +35,14 @@ const songsSlice = createSlice({
     playPreviousSong: {
       reducer(state, action) {
         let previous;
-        let index;
+        let oldIndex;
+        let newIndex;
         if (state.currentSongIndex === 0 ) { 
-          index = state.songList.length - 1;
-          previous = { currentSongIndex: index, currentSongId: state.songList[index]._id, currentSongUrl: state.songList[index].fileUrl  }
+          newIndex = state.songList.length - 1;
+          previous = { currentSongIndex: newIndex, currentSongId: state.songList[newIndex]._id, currentSongUrl: state.songList[newIndex].fileUrl  }
         } else {
-          index = state.currentSongIndex - 1;
-          previous = { currentSongIndex: index, currentSongId: state.songList[index]._id, currentSongUrl: state.songList[index].fileUrl }      // if it's NOT the first song
+          newIndex = state.currentSongIndex - 1;
+          previous = { currentSongIndex: newIndex, currentSongId: state.songList[newIndex]._id, currentSongUrl: state.songList[newIndex].fileUrl }      // if it's NOT the first song
         }
         return { ...state, ...previous };
       }
@@ -49,13 +50,14 @@ const songsSlice = createSlice({
     playNextSong: {
       reducer(state, action) {
         let next;
-        let index;
-        if (state.currentSongIndex === state.songList.length - 1) {
-          index = 0;
-          next = { currentSongIndex: index, currentSongId: state.songList[index]._id, currentSongUrl: state.songList[index].fileUrl }
+        let oldIndex = state.currentSongIndex
+        let newIndex;
+        if (oldIndex === state.songList.length - 1) {
+          newIndex = 0;
+          next = { currentSongIndex: newIndex, currentSongId: state.songList[newIndex]._id, currentSongUrl: state.songList[newIndex].fileUrl }
         } else {
-          index = state.currentSongIndex + 1;
-          next = { currentSongIndex:index, currentSongId: state.songList[index]._id, currentSongUrl: state.songList[index].fileUrl }
+          newIndex = state.currentSongIndex + 1;
+          next = { currentSongIndex: newIndex, currentSongId: state.songList[newIndex]._id, currentSongUrl: state.songList[newIndex].fileUrl }
         }
         return { ...state, ...next };
       }
