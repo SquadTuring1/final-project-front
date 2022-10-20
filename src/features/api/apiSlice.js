@@ -14,20 +14,17 @@ export const apiSlice = createApi({
       }  
       return headers
     }, }),
-  tagTypes: ['User'],
+  tagTypes: ['User', 'Songs'],
   endpoints: (builder) => ({
     getUsers: builder.query({
-      query: () => '/api/users',
+      query: () => '/users',
       providesTags: ['User']
     }),
-
-
     getSingleUser: builder.query({
-      query: (uid) => `api/users/${uid}`,
+      query: (uid) => `users/${uid}`,
       method: 'GET',
       
     }),
-
     signUpUser: builder.mutation({        // TODO: can this be merged with addUser in front and back?
       query: (user) => ({
         url: '/signup',
@@ -36,10 +33,14 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: ['User']
     }),
-
+    getSongs: builder.query({
+      query: () => '/songs',
+      transformResponse: res => Object.entries(res)[0][1],
+      providesTags: ['Songs']
+    }),
     addUser: builder.mutation({
       query: (user) => ({
-        url: '/api/users',
+        url: '/users',
         method: 'POST',
         body: user
       }),
@@ -47,7 +48,7 @@ export const apiSlice = createApi({
     }),
     updateUser: builder.mutation({
       query: (userObj) => ({
-        url: `/api/users/${userObj.uid}`,
+        url: `/users/${userObj.uid}`,
         method: 'PATCH',
         body: {
           firstName: userObj.firstName,
@@ -66,4 +67,5 @@ export const {
   useAddUserMutation,
   useUpdateUserMutation,
   useSignUpUserMutation,
+  useGetSongsQuery
 } = apiSlice;
