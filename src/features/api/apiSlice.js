@@ -23,7 +23,6 @@ export const apiSlice = createApi({
     getSingleUser: builder.query({
       query: (uid) => `users/${uid}`,
       method: 'GET',
-      
     }),
     signUpUser: builder.mutation({        // TODO: can this be merged with addUser in front and back?
       query: (user) => ({
@@ -42,7 +41,7 @@ export const apiSlice = createApi({
       query: (user) => ({
         url: '/users',
         method: 'POST',
-        body: user
+        body: user,
       }),
       invalidatesTags: ['Users']
     }),

@@ -33,12 +33,7 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const authUser = useSelector(getAuthUser ? getAuthUser : skipToken);
-  const {
-    data: dbUser,
-    isLoading,
-    isSuccess,
-    error,
-  } = useGetSingleUserQuery(authUser.uid);
+  const { data: dbUser, isLoading, isSuccess, error } = useGetSingleUserQuery(authUser.uid);
 
   useEffect(() => {
     if (isLoading) {

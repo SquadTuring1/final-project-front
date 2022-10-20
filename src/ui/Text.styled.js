@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { RiPlayCircleLine } from 'react-icons/ri';
+
 
 export const TextAccount = styled.p`
   margin: ${({ register, orLine }) =>
