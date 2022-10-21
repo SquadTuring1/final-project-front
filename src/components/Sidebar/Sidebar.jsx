@@ -13,7 +13,7 @@ const Sidebar = () => {
     <SidebarMain>
       <NowPlaying />
       <SidebarMenu />
-      <UploadBtn />
+      {/* <UploadBtn /> */}
     </SidebarMain>
     </>
   )

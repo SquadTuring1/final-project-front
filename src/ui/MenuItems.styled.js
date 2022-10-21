@@ -28,11 +28,11 @@ color: white;
 font-family: 'Source Sans Pro', sans-serif;
 flex-direction: column;
 align-items: center;
-justify-content: center;
+justify-content: space-between;
+margin: 0.5rem;
 
 @media(min-width: 960px) {
     /* border: red 1px solid; */
-    margin: 1rem;
     flex-direction: row;
     align-items: flex-start;
     justify-content: center;

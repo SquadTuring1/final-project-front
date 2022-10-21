@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { IconHome, IconFavorites, IconPlaylist, IconCategories, SideMenu, SideMenuItems } from '../../ui/index'
+import { IconHome, IconFavorites, IconPlaylist, IconCategories, SideMenu, SideMenuItems, IconUpload, UploadButton } from '../../ui/index'
 
 const SidebarMenu = () => {
   return (
@@ -20,6 +20,12 @@ const SidebarMenu = () => {
     <SideMenuItems as={Link} to='/categories'>
       <IconCategories  />
       <p className="categories__link">Categories</p>
+    </SideMenuItems>
+      <SideMenuItems>
+        <UploadButton>
+          <IconUpload  />
+          <p className="categories__link">Upload</p>
+        </UploadButton>
     </SideMenuItems>
   </SideMenu>
   )

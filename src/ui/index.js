@@ -18,7 +18,8 @@ import { CoverSongTitle, CoverSongArtist, SongsH2, SongTimer } from './Dashboard
 import { CoverSongMain } from './DashboardItems.styled';
 import { SideMenu, SideMenuItems } from './MenuItems.styled';
 import { NavOutlet, SideOutlet, PlayerOutlet, MainOutlet } from './GridOutlet.styled';
-import { IconHome, IconFavorites, IconPlaylist, IconCategories } from './Icons.styled';
+import { IconHome, IconFavorites, IconPlaylist, IconCategories, IconUpload } from './Icons.styled';
+import { UploadButton } from './UploadButton.syled';
 
 // Dashboard Home
 export {
@@ -34,7 +35,13 @@ export {
   IconHome,
   IconFavorites,
   IconPlaylist,
-  IconCategories 
+  IconCategories,
+  IconUpload
+}
+
+//Upload Song Button
+export {
+  UploadButton
 }
 
 // Outlet from React router

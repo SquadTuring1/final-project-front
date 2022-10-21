@@ -47,6 +47,13 @@ export const SideMenuItems = styled.article`
 `
 
 export const UploadBtn = styled.article`
+
+/* background-color: #232323;
+    display: flex;
+    border-radius: 12px;
+    padding: 10px;
+    color: white; */
+    
   display: none;
   grid-area: upload;
   /* border: 1px dotted #fff; */
