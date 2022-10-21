@@ -14,6 +14,6 @@ export const CenterArticle = styled.article`
 `;
 
 export const CenterProfile = styled(CenterArticle)`
-  height:90vh;
+  height:50vh;
   align-items: center;
 `

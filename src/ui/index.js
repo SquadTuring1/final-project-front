@@ -4,7 +4,7 @@ import { GlobalStyle } from './GlobalStyles';
 import { Input, Label } from './Form.styled';
 import { Logo } from './Logo.styled';
 import { MainApp, MainDash, MainHome, MainSign } from './Main.styled';
-import { TextAccount, TextColor, TextTerms, TermColor, TextRemember, TitleSign, TitleH2, TitleP } from './Text.styled';
+import { TextAccount, TextColor, TextTerms, TermColor, TextRemember, TitleSign, TitleH2, TitleP, ResponseMessage } from './Text.styled';
 import { MainNav, NavContent, AvatarContent, Avatar, ButtonAvatar, GreenDot } from './Avatar.styled';
 import { PopMenu } from './PopMenu.styled';
 import { MainFlex, CategoryRow, SongsRow, PlaylistRow, SpecialRow } from './Grid.styled';
@@ -18,6 +18,7 @@ import { CoverSongTitle, CoverSongArtist, SongsH2, SongTimer } from './Dashboard
 import { CoverSongMain } from './DashboardItems.styled';
 import { SideMenu, SideMenuItems } from './MenuItems.styled';
 import { NavOutlet, SideOutlet, PlayerOutlet, MainOutlet } from './GridOutlet.styled';
+
 
 // Dashboard Home
 export {
@@ -111,7 +112,9 @@ export {
   TextRemember,
   TitleSign,
   TitleH2,
-  TitleP }
+  TitleP,
+  ResponseMessage,
+}
 
   // Navbar
   export {
@@ -131,3 +134,4 @@ export {
   //   GridPlayerItem, 
   //   GridSideItem
   // }
+

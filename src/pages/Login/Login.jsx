@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
 import {
   MainSign,
   Button,
@@ -11,6 +10,7 @@ import {
   Logo,
   Input,
   Label,
+  ResponseMessage
 } from '../../ui/index';
 import logoSM from '../../assets/images/Logo-sign.png';
 
@@ -29,6 +29,7 @@ import { getAuthUser, userSignedIn } from '../../features/auth/authSlice';
 import { useGetSingleUserQuery } from '../../features/api/apiSlice';
 import { skipToken } from '@reduxjs/toolkit/dist/query';
 
+
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -41,8 +42,6 @@ const Login = () => {
       return;
     }
     if (isSuccess) {
-      console.log('Well done!');
-      console.log({ ...authUser, ...dbUser });
       dispatch(userSignedIn({ ...authUser, ...dbUser.currentUser }));
       dbUser.currentUser && navigate('/dashboard');
     }
@@ -105,7 +104,7 @@ const Login = () => {
               required: 'Email is required',
             })}
           />
-          <ErrorMessage errors={errors} name="email" as="p" />
+          <ErrorMessage as={ResponseMessage} className="login-error" errors={errors} name="email" />
           {/* </CenterArticle>
         <CenterArticle loginLab> */}
           {/* <Label passPos htmlFor="password">
@@ -120,7 +119,7 @@ const Login = () => {
               required: 'Password is required',
             })}
           />
-          <ErrorMessage errors={errors} name="password" as="p" />
+          <ErrorMessage as={ResponseMessage} className="login-error" errors={errors} name="password" />
         </CenterArticle>
         <TextColor as={Link} to="/reset" className="forgotPass">
           Forgot your password?

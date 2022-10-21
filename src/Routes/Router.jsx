@@ -32,6 +32,7 @@ const Router = () => {
         <Route path="categories" element={<Categories />} />
         <Route path="cloudinary" element={<FormCloudinary2 />} />
       </Route>
+      
     </Routes>
   );
 };

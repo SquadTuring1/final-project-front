@@ -13,18 +13,21 @@ import {
   CenterProfile,
   TitleP,
   Button,
+  ResponseMessage,
 } from '../../ui/index';
 import auth from '../../utils/firebase/firebaseConfig';
+import { updatePassword } from 'firebase/auth'
 import { useUpdateUserMutation } from '../../features/api/apiSlice';
 
 
 const PersonalProfile = () => {
-  const [modifyInfo, setModifyInfo] = useState(true);
+  const [modifyInfo, setModifyInfo] = useState(true);  // enable editing in fields
+  const [ message, setMessage ] = useState({});
   
-  const authUser = useSelector(getAuthUser);
   
-  const [ updateUser, { isLoading } ] = useUpdateUserMutation();
-  
+  // global state for auth and user query
+  const authUser = useSelector(getAuthUser);  
+  const [ updateUser, { isLoading } ] = useUpdateUserMutation();  
   
   const { getValues, register, reset, watch, handleSubmit, formState: { errors }, } = useForm({
     defaultValues: {
@@ -45,20 +48,42 @@ const PersonalProfile = () => {
   const handleEnabled = () => {
     setModifyInfo(true);
   };
+  console.log(auth.currentUser)
 
   const onSubmit = async (data) => {
     if (!isLoading) {
       try {
         const userObj = {  uid: authUser.uid, firstName: data.firstName, lastName: data.lastName}; 
-        console.log(userObj)       
-        await updateUser({...userObj}).unwrap();
-        // reset();
+        
+        let response = await updateUser({...userObj}).unwrap();
+        if (response.success) {
+          setMessage({ success: 'User information updated successfully' })
+        }
+        reset();
       } catch (error) {
         console.log('Failed to update user')
+        setMessage({ error: 'User information was not updated' })
       }
     }
     handleEnabled();
   };
+
+  const changePassword = async () => {
+    const newPassword = getValues().newPassword;
+
+    updatePassword(auth.currentUser, newPassword).then(() => {
+      console.log('Update Successful')
+      setMessage({success: 'Password updated successfully'})
+    }).catch ((error) => {
+      console.log('Error: ', error)
+      setMessage({error: 'Password was not updated'})
+    })
+  
+    
+  }
+
+
+
 
   return (
     <MainDash>
@@ -120,10 +145,9 @@ const PersonalProfile = () => {
             placeholder="New password"
             {...register('newPassword')}
           />
-          <Button>Change Password</Button>
-         
         </CenterProfile>
       </form>
+      <Button className="pass__btn" type="button" onClick={(e) => changePassword(e)}>Change Password</Button>
       <CenterArticle className="button__profile--container">
             {modifyInfo ? (
               // enables editing of name
