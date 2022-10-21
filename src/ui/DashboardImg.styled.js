@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import { RiMore2Fill } from 'react-icons/ri'
-
 
 export const CoverSong = styled.img`
   height: 7.5rem;
@@ -20,9 +18,9 @@ export const CoverSong = styled.img`
   }
 `;
 
-export const CoverMenuIcon = styled(RiMore2Fill)`
+export const CoverMenuIcon = styled.article`
   position: absolute;
   transform: scale(1.3);
-  top: 9rem;
-  left: 7.4rem;
+  top: 9.15rem;
+  left: 7.5rem;
 `;

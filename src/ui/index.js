@@ -6,7 +6,7 @@ import { Logo } from './Logo.styled';
 import { MainApp, MainDash, MainHome, MainSign } from './Main.styled';
 import { TextAccount, TextColor, TextTerms, TermColor, TextRemember, TitleSign, TitleH2, TitleP } from './Text.styled';
 import { MainNav, NavContent, AvatarContent, Avatar, ButtonAvatar, GreenDot } from './Avatar.styled';
-import { PopMenu } from './PopMenu.styled';
+import { PopCoverItems, PopItems, PopMenu } from './PopMenu.styled';
 import { MainFlex, CategoryRow, SongsRow, PlaylistRow, SpecialRow } from './Grid.styled';
 import { CurrentSongMbl, MusicBar, MusicControls, MusicVolume, PlayerMain, ProgressTime } from './PlayerMain.styled';
 import { MainControl, ShuffleBtn, RepeatBtn, PlayBtn, ChangeSongBtn } from './PlayerControls.styled';
@@ -18,6 +18,7 @@ import { CoverSongTitle, CoverSongArtist, SongsH2, SongTimer } from './Dashboard
 import { CoverSongMain } from './DashboardItems.styled';
 import { SideMenu, SideMenuItems } from './MenuItems.styled';
 import { NavOutlet, SideOutlet, PlayerOutlet, MainOutlet } from './GridOutlet.styled';
+
 
 // Dashboard Home
 export {
@@ -36,14 +37,16 @@ export {
   MainOutlet
 }
 
-//General Dashboard - Your Songs
+//General Dashboard - Your Songs covers
 export {
   CoverSong,
   CoverSongTitle,
   CoverSongArtist,
   CoverSongMain,
   SongsH2,
-  CoverMenuIcon
+  CoverMenuIcon,
+  PopCoverItems,
+  PopItems
 }
 
 //General Dashboard
