@@ -1,9 +1,12 @@
 import React from 'react'
 import { CoverSong, CoverSongTitle, CoverSongArtist, CoverSongMain, SongsH2} from '../../../ui/index'
+import TestLikes from '../../../components/TestLikes'
 
 
-const SongItem = ({ artist, title, cover }) => {
+const SongItem = ({ artist, title, cover, songId }) => {
+
   return (
+    <div key={songId} >
     <CoverSongMain>
     {/* <SongsH2>Your Songs</SongsH2> */}
       <CoverSong src={cover} alt='cover' />
@@ -13,7 +16,9 @@ const SongItem = ({ artist, title, cover }) => {
       <article>
         <CoverSongArtist>{artist}</CoverSongArtist>
       </article>
-    </CoverSongMain>
+      <TestLikes artist={artist} title={title} cover={cover} songId={songId} />
+    </CoverSongMain>    
+    </div>
   )
 }
 
