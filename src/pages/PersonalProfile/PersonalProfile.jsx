@@ -1,5 +1,5 @@
 import { ErrorMessage } from '@hookform/error-message';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import { Popover } from 'react-tiny-popover';
@@ -8,13 +8,15 @@ import { MainDash, TitleH2, Input, CenterArticle, CenterProfile, TitleP, Button,
 import auth from '../../utils/firebase/firebaseConfig';
 import { updatePassword } from 'firebase/auth'
 import { useUpdateUserMutation } from '../../features/api/apiSlice';
-import FileUploader from './FileUploader';
-
+import { ToastContainer, toast } from 'react-toastify';
 
 
 const PersonalProfile = () => {
   const [modifyInfo, setModifyInfo] = useState(true);  // enable editing in fields
   const [ message, setMessage ] = useState({});
+
+
+
   
   
   // global state for auth and user query
@@ -50,7 +52,10 @@ const PersonalProfile = () => {
         
         let response = await updateUser({...userObj}).unwrap();
         if (response.success) {
-          setMessage({ success: 'User information updated successfully' })
+          console.log('success!!!')
+          toast.success("Success Notification !", {
+            position: toast.POSITION.TOP_CENTER
+          });
         }
         reset();
       } catch (error) {
@@ -151,7 +156,7 @@ const PersonalProfile = () => {
               <Button className="modify__btn" type="button" onClick={(e) => {handleDisabled(e)}}>
                 Modify
               </Button>
-            ) : (              
+            ) : (
               <Button className="modify__btn" form="personalProfileForm" type="submit" >
                 Save
               </Button>
