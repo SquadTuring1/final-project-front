@@ -27,6 +27,10 @@ export const Input = styled.input`
   &.info__user--input:disabled {
     background: 0;
   }
+
+  &.invisible {
+    display: none;
+  }
 `;
 
 export const Label = styled.label`

@@ -4,20 +4,12 @@ import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import { Popover } from 'react-tiny-popover';
 import { getAuthUser } from '../../features/auth/authSlice';
-import {
-  MainDash,
-  TitleH2,
-  Input,
-  Label,
-  CenterArticle,
-  CenterProfile,
-  TitleP,
-  Button,
-  ResponseMessage,
-} from '../../ui/index';
+import { MainDash, TitleH2, Input, CenterArticle, CenterProfile, TitleP, Button, ResponseMessage, } from '../../ui/index';
 import auth from '../../utils/firebase/firebaseConfig';
 import { updatePassword } from 'firebase/auth'
 import { useUpdateUserMutation } from '../../features/api/apiSlice';
+import FileUploader from './FileUploader';
+
 
 
 const PersonalProfile = () => {
@@ -48,12 +40,13 @@ const PersonalProfile = () => {
   const handleEnabled = () => {
     setModifyInfo(true);
   };
-  console.log(auth.currentUser)
+  
 
   const onSubmit = async (data) => {
     if (!isLoading) {
       try {
         const userObj = {  uid: authUser.uid, firstName: data.firstName, lastName: data.lastName}; 
+        console.log(newUser)
         
         let response = await updateUser({...userObj}).unwrap();
         if (response.success) {
@@ -70,6 +63,7 @@ const PersonalProfile = () => {
 
   const changePassword = async () => {
     const newPassword = getValues().newPassword;
+    console.log(newPassword)
 
     updatePassword(auth.currentUser, newPassword).then(() => {
       console.log('Update Successful')
@@ -90,9 +84,12 @@ const PersonalProfile = () => {
       <form id="personalProfileForm" onSubmit={handleSubmit(onSubmit)}>
         <CenterProfile loginLab>
           <TitleH2 className="profile__title">Profile</TitleH2>
-          <TitleP>Avatar</TitleP>
-          <input accept="image/png,image/jpeg" type="file" />
-          {/* <Label className="username__profile">Username</Label> */}
+          
+          {/* <Button><input accept="image/png,image/jpeg" id="avatar__input" type="file"  />Avatar</Button> */}
+          <FileUploader>Hey</FileUploader>
+          
+          
+          
           <Input
             disabled
             className="username__input"
