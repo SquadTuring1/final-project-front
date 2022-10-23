@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
 import { useNavigate, Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { useSignUpUserMutation, useGetSingleUserQuery, } from '../../features/api/apiSlice';
 import { getAuthUser, userSignedIn } from '../../features/auth/authSlice';
@@ -25,10 +25,13 @@ const Registration = () => {
   const dispatch = useDispatch();
   const [signUpError, setSignUpError] = useState(null);
 
-  const authUser = useSelector(getAuthUser);
-  const currentUser = useGetSingleUserQuery(authUser.uid);
+  const authUser = useSelector(getAuthUser);   
+  const { data: dbUser, isFetching, isLoading: isLoadingUser, isSuccess } = useGetSingleUserQuery(auth.currentUser.uid);
   // get the function addUser from apiSlice hook, only need the function since adding
-  const [signUpUser, { isLoading }] = useSignUpUserMutation();
+  const [signUpUser, { isLoading: isLoadingSignup }] = useSignUpUserMutation();
+  
+
+
 
   const showToast = (type, string) => {
     type === 'success' ? toast.success(string) : toast.error(string);
@@ -44,46 +47,56 @@ const Registration = () => {
     },
   });
   
-  
+  useEffect(() => {
+    if (isLoadingUser) {
+      console.log('Loading User Complete...');
+      return;
+    }
+    if (isSuccess) {
+      dispatch(userSignedIn({ ...authUser, ...dbUser.currentUser }));
+      // dbUser.currentUser && navigate('/dashboard');
+    }
+  }, [dbUser]);
 
-  const addUserToStateAndDb = async (user, data) => {
+  const addUserToDb = async (user, data) => {
     const { accessToken, uid, email } = user;
-    const userObject = {
-      token: accessToken,
-      uid: uid,
-      email: email,
-      password: data.password, // TODO: to get value, must be hashed and sent to back? bcryptjs?
+    const userObj = {
+      token: accessToken, 
+      uid: uid, 
+      email: email, 
+      password: data.password, 
       username: data.username,
     };
+    // console.log(authUser)     // all undefined
+    const canSave = [userObj.token, userObj.uid, userObj.email, userObj.password, userObj.username].every(Boolean) && !isLoadingSignup;
 
-    const canSave = [userObject.token, userObject.uid, userObject.email, userObject.password, userObject.username].every(Boolean) && !isLoading;
+    // add user to db
     if (canSave) {
       try {
-        await signUpUser(userObject).unwrap();
-        console.log('Signed up successfully')
+        console.log('adding to db')
+        await signUpUser(userObj);    // add to db
+        console.log('Signed up successfully') 
         showToast('success', 'Signed up successfully')
       } catch (error) {
         console.log('Signup failed')
         showToast('error', 'Signup failed')
       }
-      
-    }
-    
-    dispatch(userSignedIn(userObject));
-    
-
-    if (currentUser.isLoading) {
-      console.log('Loading user...');
-    } else if (currentUser.isSuccess) {
-      dispatch(
-        userSignedIn({ ...userObject, ...currentUser.data.currentUser }),
-      );
-      console.log(authUser);
-    } else if (currentUser.isError) {
-      console.log(currentUser.error);
+      authUser && dispatch(userSignedIn({ ...authUser, ...userObj }))
+    } else {
+      console.log('Cannot save user')
+      showToast('error', 'User could not be created')
     }
   };
 
+  const fetchUser = () => {
+    if (isFetching) {
+      console.log('fetching user')
+    } else if (isSuccess) {
+      dispatch(userSignedIn({ ...authUser, ...dbUser, }))
+    }
+  }
+
+  // create user on firebase, call func from inside to create user on db, then another to set auth state
   const onSubmit = async (data) => {
     const { email, password, username } = data;
 
@@ -91,11 +104,20 @@ const Registration = () => {
       await createUserWithEmailAndPassword(auth, email, password);
       auth.onAuthStateChanged((user) => {
         if (!user) {
+          showToast('error', 'User cannot be created')
           return;
         }
-        addUserToStateAndDb(user, data); // calls func declared above
-        navigate('/dashboard');
+        addUserToDb(user, data); // calls func declared 
+        if (isLoadingUser) {
+          console.log('Loading User')
+        } else if (isSuccess) {
+          console.log(dbUser)
+          dispatch(userSignedIn({ ...authUser, ...dbUser.currentUser }))
+        }
+        
         console.log('User Created');
+        navigate('/dashboard');
+        
       });
     } catch (error) {
       setSignUpError(error.message);

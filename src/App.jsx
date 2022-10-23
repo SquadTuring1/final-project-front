@@ -11,7 +11,7 @@ function App() {
     <MainApp>
       <GlobalStyle />
       <Router />
-      <ToastContainer theme="dark" position="top-center" autoClose="3000" transition={Slide} toastId={nanoid()}/>
+      <ToastContainer theme="dark" position="top-center" autoClose={3000} transition={Slide} toastId={nanoid()} hideProgressBar={true} />
     </MainApp>
   )
 }
