@@ -104,7 +104,7 @@ const Login = () => {
               required: 'Email is required',
             })}
           />
-          <ErrorMessage as={ResponseMessage} className="login-error" errors={errors} name="email" />
+          <ErrorMessage as={ResponseMessage} className="login error" errors={errors} name="email" />
           {/* </CenterArticle>
         <CenterArticle loginLab> */}
           {/* <Label passPos htmlFor="password">
@@ -119,7 +119,7 @@ const Login = () => {
               required: 'Password is required',
             })}
           />
-          <ErrorMessage as={ResponseMessage} className="login-error" errors={errors} name="password" />
+          <ErrorMessage as={ResponseMessage} className="login error" errors={errors} name="password" />
         </CenterArticle>
         <TextColor as={Link} to="/reset" className="forgotPass">
           Forgot your password?
