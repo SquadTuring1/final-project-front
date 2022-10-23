@@ -3,54 +3,39 @@ import { ErrorMessage } from '@hookform/error-message';
 import { useNavigate, Link } from 'react-router-dom';
 import { useState } from 'react';
 
-import {
-  useSignUpUserMutation,
-  useGetSingleUserQuery,
-} from '../../features/api/apiSlice';
+import { useSignUpUserMutation, useGetSingleUserQuery, } from '../../features/api/apiSlice';
 import { getAuthUser, userSignedIn } from '../../features/auth/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 import '../../ui/Registration.styled.css';
 import logoSM from '../../assets/images/Logo-sign.png';
-import {
-  MainSign,
-  Button,
-  ButtonGoogle,
-  TextAccount,
-  TextColor,
-  TextTerms,
-  TermColor,
-  TextRemember,
-  TitleSign,
-  Logo,
-  Input,
-  Label,
-  CenterArticle,
-} from '../../ui/index';
+import { MainSign, Button, ButtonGoogle, TextAccount, TextColor, TextTerms, TermColor, TextRemember, TitleSign, Logo, Input, Label, CenterArticle, ResponseMessage } from '../../ui/index';
 
-import {
-  createUserWithEmailAndPassword,
-  GoogleAuthProvider,
-  signInWithPopup,
-} from 'firebase/auth';
+import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, } from 'firebase/auth';
 import auth from '../../utils/firebase/firebaseConfig.js';
+
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css'
+
+
+
 
 const Registration = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [signUpError, setSignUpError] = useState(null);
+
   const authUser = useSelector(getAuthUser);
   const currentUser = useGetSingleUserQuery(authUser.uid);
-
   // get the function addUser from apiSlice hook, only need the function since adding
-  const [signUpUser] = useSignUpUserMutation();
+  const [signUpUser, { isLoading }] = useSignUpUserMutation();
+
+  const showToast = (type, string) => {
+    type === 'success' ? toast.success(string) : toast.error(string);
+  }
 
   // set variables from react-hook-form
-  const {
-    getValues,
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
+  const { getValues, register, handleSubmit, formState: { errors },} = useForm({
     defaultValues: {
       email: '',
       username: '',
@@ -58,9 +43,10 @@ const Registration = () => {
       confirmPassword: '',
     },
   });
-  const [signUpError, setSignUpError] = useState(null);
+  
+  
 
-  const addUserToStateAndDb = (user, data) => {
+  const addUserToStateAndDb = async (user, data) => {
     const { accessToken, uid, email } = user;
     const userObject = {
       token: accessToken,
@@ -69,8 +55,22 @@ const Registration = () => {
       password: data.password, // TODO: to get value, must be hashed and sent to back? bcryptjs?
       username: data.username,
     };
+
+    const canSave = [userObject.token, userObject.uid, userObject.email, userObject.password, userObject.username].every(Boolean) && !isLoading;
+    if (canSave) {
+      try {
+        await signUpUser(userObject).unwrap();
+        console.log('Signed up successfully')
+        showToast('success', 'Signed up successfully')
+      } catch (error) {
+        console.log('Signup failed')
+        showToast('error', 'Signup failed')
+      }
+      
+    }
+    
     dispatch(userSignedIn(userObject));
-    signUpUser(userObject);
+    
 
     if (currentUser.isLoading) {
       console.log('Loading user...');
@@ -128,68 +128,60 @@ const Registration = () => {
       <form className="registration__form" onSubmit={handleSubmit(onSubmit)}>
         <TitleSign signUp>Sign up</TitleSign>
         <CenterArticle loginLab>
-          {/* <Label htmlFor="email">Email</Label> */}
           <Input
             className="signup__input"
             name="email"
             type="email"
-            placeholder="email"
+            placeholder="Email"
             {...register('email', {
               required: 'Email is required',
             })}
           />
-          <ErrorMessage errors={errors} name="email" as="p" />
-          {/* <Label className='sign__username' htmlFor="username">Username</Label> */}
+          <ErrorMessage as={ResponseMessage} className="login error" errors={errors} name="email" />
           <Input
             className="signup__input"
             name="username"
             type="text"
-            placeholder="username"
+            placeholder="Username"
             {...register('username', {
               required: 'Username is required',
             })}
           />
-          <ErrorMessage errors={errors} name="username" as="p" />
-          {/* <Label className='sign__pass' htmlFor="password">Password</Label> */}
+          <ErrorMessage as={ResponseMessage} className="login error" errors={errors} name="username" />
           <Input
             className="signup__input"
             name="password"
             label="Password:"
             type="password"
-            placeholder="password"
+            placeholder="Password"
             {...register('password', {
               required: 'Password is required',
             })}
           />
-          {/* <Label className='sing__pass--confirm' htmlFor="confirmPassword">Confirm Password</Label> */}
+          <ErrorMessage as={ResponseMessage} className="login error" errors={errors} name="password" />
           <Input
             className="signup__input"
             name="confirmPassword"
-            placeholder="Confirm Password:"
+            placeholder="Confirm password:"
             type="password"
             {...register('confirmPassword', {
               validate: (value) => {
                 value === getValues('password');
               },
+              required: 'Confirmation is required',
             })}
           />
-          <ErrorMessage errors={errors} name="password" as="p" />
+          <ErrorMessage as={ResponseMessage} className="login error" errors={errors} name="confirmPassword" />
           <TextRemember>
             <input type="checkbox" name="remember" />
             Remember me
           </TextRemember>
-          <Button
-            type="submit"
-            // onClick={() => navigate('/dashboard')}
-          >
-            Create account
-          </Button>
+          <Button type="submit" >Create account</Button>
           <TextAccount>
             Already have an account?{' '}
             <TextColor as={Link} to="/login">
               Log in
             </TextColor>{' '}
-            {/* <TextAccount orLine>OR</TextAccount> */}
           </TextAccount>
         </CenterArticle>
       </form>
