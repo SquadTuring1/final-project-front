@@ -4,30 +4,25 @@ import { Button, Input } from '../../ui';
 
 
 
-const FileUploader = () => {
+const FileUploader = ({buttonName}) => {
 
   const hiddenFileInput = useRef(null);
-
 
   const handleClick = (e) => {
     hiddenFileInput.current.click();
   }
-
-
 
   const handleChange = (e) => {
     const fileUploaded = e.target.files[0];
     props.handleFile(fileUploaded);
   }
 
-
-
   return (
     <>
       <Button onClick={(e) => handleClick()}>
-        Upload Avatar
+        {buttonName}
       </Button>
-      <Input className="invisible" type="file" ref={hiddenFileInput} onChange={handleChange}  />
+      <Input className="invisible" accept="image/png,image/jpeg" type="file" ref={hiddenFileInput} onChange={handleChange}  />
     </>
   )
 }

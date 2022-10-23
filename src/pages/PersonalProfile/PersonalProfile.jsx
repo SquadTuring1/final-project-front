@@ -8,21 +8,30 @@ import { MainDash, TitleH2, Input, CenterArticle, CenterProfile, TitleP, Button,
 import auth from '../../utils/firebase/firebaseConfig';
 import { updatePassword } from 'firebase/auth'
 import { useUpdateUserMutation } from '../../features/api/apiSlice';
-import { ToastContainer, toast } from 'react-toastify';
+import FileUploader from './FileUploader';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css'
+import { nanoid } from '@reduxjs/toolkit';
+
+
 
 
 const PersonalProfile = () => {
   const [modifyInfo, setModifyInfo] = useState(true);  // enable editing in fields
   const [ message, setMessage ] = useState({});
-
-
-
   
   
-  // global state for auth and user query
+  // receive toast type and display (define inline)
+  const showToast = (type, string) => {
+    type === 'success' ? toast.success(string) : toast.error(string);
+  }
+
+  
+  // global state for auth and api for user query
   const authUser = useSelector(getAuthUser);  
-  const [ updateUser, { isLoading } ] = useUpdateUserMutation();  
-  
+  const [ updateUser, { isLoading, isError, error } ] = useUpdateUserMutation();  
+
+  // form settings
   const { getValues, register, reset, watch, handleSubmit, formState: { errors }, } = useForm({
     defaultValues: {
       username: authUser.username,
@@ -34,6 +43,7 @@ const PersonalProfile = () => {
     },
   });
 
+  // control modify & save btns
   const handleDisabled = (e) => {
     e.preventDefault();
     setModifyInfo(false);
@@ -43,39 +53,37 @@ const PersonalProfile = () => {
     setModifyInfo(true);
   };
   
-
+  
+  // update user info to db 
   const onSubmit = async (data) => {
-    if (!isLoading) {
+    console.log(updateUser, isLoading)
+    const canSave = [data.email, data.firstName, data.lastName].every(Boolean) && !isLoading
+    if (canSave && !isLoading) {
       try {
         const userObj = {  uid: authUser.uid, firstName: data.firstName, lastName: data.lastName}; 
-        console.log(newUser)
+        await updateUser({...userObj}).unwrap();
+        showToast('success', 'User updated successfully!')
         
-        let response = await updateUser({...userObj}).unwrap();
-        if (response.success) {
-          console.log('success!!!')
-          toast.success("Success Notification !", {
-            position: toast.POSITION.TOP_CENTER
-          });
-        }
-        reset();
       } catch (error) {
         console.log('Failed to update user')
-        setMessage({ error: 'User information was not updated' })
+        showToast('error', 'User was not updated')
       }
     }
     handleEnabled();
+    
   };
 
+  // change update pw to firebase
   const changePassword = async () => {
     const newPassword = getValues().newPassword;
     console.log(newPassword)
 
     updatePassword(auth.currentUser, newPassword).then(() => {
       console.log('Update Successful')
-      setMessage({success: 'Password updated successfully'})
+      showToast('success', 'Password updated successfully!')
     }).catch ((error) => {
       console.log('Error: ', error)
-      setMessage({error: 'Password was not updated'})
+      showToast('error', 'Password was not updated')
     })
   
     
@@ -89,12 +97,8 @@ const PersonalProfile = () => {
       <form id="personalProfileForm" onSubmit={handleSubmit(onSubmit)}>
         <CenterProfile loginLab>
           <TitleH2 className="profile__title">Profile</TitleH2>
-          
           {/* <Button><input accept="image/png,image/jpeg" id="avatar__input" type="file"  />Avatar</Button> */}
-          <FileUploader>Hey</FileUploader>
-          
-          
-          
+          {/* <FileUploader buttonName='Avatar'></FileUploader> */}
           <Input
             disabled
             className="username__input"
@@ -150,6 +154,7 @@ const PersonalProfile = () => {
         </CenterProfile>
       </form>
       <Button className="pass__btn" type="button" onClick={(e) => changePassword(e)}>Change Password</Button>
+
       <CenterArticle className="button__profile--container">
             {modifyInfo ? (
               // enables editing of name
