@@ -57,11 +57,11 @@ export const apiSlice = createApi({
       invalidatesTags: ['Users']
     }),
     likeASong: builder.mutation({
-      query: (songObj) => ({
-        url: `/songs/${songObj.songId}/like`,
+      query: ({songId, userId}) => ({
+        url: `/songs/${songId}/like`,
         method: 'POST',
         body: {
-          userId: songObj.songId,  
+          userId: userId,
         }
       }),
       invalidatesTags: ['Songs']
