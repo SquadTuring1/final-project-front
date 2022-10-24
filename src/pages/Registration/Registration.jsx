@@ -29,7 +29,6 @@ const Registration = () => {
   const { data: dbUser, isFetching, isLoading: isLoadingUser, isSuccess } = useGetSingleUserQuery(authUser && authUser.uid);
   // get the function addUser from apiSlice hook, only need the function since adding
   const [signUpUser, { isLoading: isLoadingSignup }] = useSignUpUserMutation();
-  
 
   const showToast = (type, string) => {
     type === 'success' ? toast.success(string) : toast.error(string);
@@ -52,7 +51,7 @@ const Registration = () => {
     }
     if (isSuccess) {
       dispatch(userSignedIn({ ...authUser, ...dbUser.currentUser }));
-      dbUser.currentUser && navigate('/dashboard');
+      // dbUser.currentUser && navigate('/dashboard');
     }
   }, [dbUser]);
 
@@ -75,11 +74,11 @@ const Registration = () => {
         await signUpUser(userObj);    // add to db
         console.log('Signed up successfully') 
         showToast('success', 'Signed up successfully')
+        authUser && dispatch(userSignedIn({ ...authUser, ...userObj }))
       } catch (error) {
         console.log('Signup failed')
         showToast('error', 'Signup failed')
-      }
-      authUser && dispatch(userSignedIn({ ...authUser, ...userObj }))
+      }      
     } else {
       console.log('Cannot save user')
       showToast('error', 'User could not be created')
@@ -96,7 +95,7 @@ const Registration = () => {
       await createUserWithEmailAndPassword(auth, email, password);
       auth.onAuthStateChanged((user) => {
         if (!user) {
-          showToast('error', 'User cannot be created')
+          console.log('User not logged in')
           return;
         } else {
           addUserToDb(user, data); // calls func declared 

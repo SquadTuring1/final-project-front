@@ -33,7 +33,7 @@ import { skipToken } from '@reduxjs/toolkit/dist/query';
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const authUser = useSelector(getAuthUser ? getAuthUser : skipToken);
+  const authUser = useSelector(getAuthUser && getAuthUser);
   const { data: dbUser, isLoading, isSuccess, error } = useGetSingleUserQuery(authUser.uid);
 
   useEffect(() => {

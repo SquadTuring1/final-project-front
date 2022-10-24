@@ -100,7 +100,9 @@ const songsSlice = createSlice({
 
 
 export const getSongState = (state) => state.songs
+export const getCurrentSong = (state) => state.songs.songList[state.songs.currentSongIndex];
 export const getCurrentSongId = (state) => state.songs.currentSongId;
+
 export const getCurrentSongIndex = (state) => state.songs.currentSongIndex;
 export const getCurrentSongUrl = (state) => state.songs.currentSongUrl;
 export const getSongList = (state) => state.songs.songList;
