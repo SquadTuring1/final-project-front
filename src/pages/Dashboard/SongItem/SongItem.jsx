@@ -10,9 +10,9 @@ import {
 import Modal from 'react-modal';
 import PopoverSongCover from '../../../components/PopoverSongCover/index';
 import logoMammoth from '../../../assets/images/empty-cover-logo.svg'
+import LikedSong from '../../../components/LikedSong'
 
-
-const SongItem = ({ artist, title, cover }) => {
+const SongItem = ({ artist, title, cover, songId }) => {
 
   const emptyCover = () => {
     if (cover !== undefined) {
@@ -23,6 +23,7 @@ const SongItem = ({ artist, title, cover }) => {
   }
 
   return (
+    <div key={songId} >
     <CoverSongMain>
       {/* <SongsH2>Your Songs</SongsH2> */}
         <PopoverSongCover />
@@ -33,8 +34,10 @@ const SongItem = ({ artist, title, cover }) => {
       <article>
         <CoverSongArtist>{artist}</CoverSongArtist>
       </article>
-    </CoverSongMain>
-  );
-};
+      <LikedSong songId={songId} />      
+    </CoverSongMain>    
+    </div>
+  )
+}
 
 export default SongItem;

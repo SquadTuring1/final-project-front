@@ -1,9 +1,9 @@
 import { ErrorMessage } from '@hookform/error-message';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Popover } from 'react-tiny-popover';
-import { getAuthUser } from '../../features/auth/authSlice';
+import { getAuthUser, userSignedIn } from '../../features/auth/authSlice';
 import { MainDash, TitleH2, Input, CenterArticle, CenterProfile, TitleP, Button, ResponseMessage, } from '../../ui/index';
 import auth from '../../utils/firebase/firebaseConfig';
 import { updatePassword } from 'firebase/auth'
@@ -17,6 +17,7 @@ import { nanoid } from '@reduxjs/toolkit';
 
 
 const PersonalProfile = () => {
+  const dispatch = useDispatch();
   const [modifyInfo, setModifyInfo] = useState(true);  // enable editing in fields
   const [ message, setMessage ] = useState({});
   
@@ -62,6 +63,7 @@ const PersonalProfile = () => {
       try {
         const userObj = {  uid: authUser.uid, firstName: data.firstName, lastName: data.lastName}; 
         await updateUser({...userObj}).unwrap();
+        dispatch(userSignedIn({ ...authUser, ...userObj }))
         showToast('success', 'User updated successfully!')
         
       } catch (error) {

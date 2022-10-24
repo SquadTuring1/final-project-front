@@ -41,6 +41,7 @@ const authSlice = createSlice({
 
 
 export const getAuthUser = (state) => state.auth;
+export const getUserId = (state) => state.auth._id;
 
 export const { userSignedIn, userSignedOut } = authSlice.actions;
 
