@@ -15,7 +15,7 @@ const OutletFrame = () => {
       <NavOutlet><Navbar /></NavOutlet>
       <SideOutlet><Sidebar /></SideOutlet>
       <PlayerOutlet><MusicPlayer /></PlayerOutlet>
-      {/* <Outlet /> */}
+      <Outlet />
     </MainOutlet>
   )
 }
