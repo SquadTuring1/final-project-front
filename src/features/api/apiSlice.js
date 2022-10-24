@@ -14,7 +14,7 @@ export const apiSlice = createApi({
       }  
       return headers
     }, }),
-  tagTypes: ['User', 'Songs'],
+  tagTypes: ['User', 'Songs', 'Playlists'],
   endpoints: (builder) => ({
     getUsers: builder.query({
       query: () => '/users',
@@ -76,6 +76,10 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: ['Songs']
     }),
+    getPlaylists: builder.query({
+      query: () => '/playlists',
+      providesTags: ['Playlists']
+    })
   })
 })
 
@@ -88,5 +92,6 @@ export const {
   useLikeASongMutation,
   useDeleteLikeASongMutation,
   useSignUpUserMutation,
-  useGetSongsQuery
+  useGetSongsQuery,
+  useGetPlaylistsQuery,
 } = apiSlice;

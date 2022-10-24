@@ -27,7 +27,7 @@ const songsSlice = createSlice({
                 ...state, 
                 currentSongId: action.payload._id, 
                 currentSongUrl: action.payload.fileUrl,
-                currentSongIndex: action.payload.songIndex,
+                currentSongIndex: action.payload.currentSongIndex,
                 playing: true
             }
         }
@@ -120,9 +120,8 @@ export const {
   toggleShuffle,
   playRandomSong,
   toggleRepeat,
-  togglePlaying,
-  
-    setSongDuration,
+  togglePlaying,  
+  setSongDuration,
   setCurrentSongTime
 } = songsSlice.actions
 
