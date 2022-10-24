@@ -13,6 +13,7 @@ const PopoverSongCover = () => {
   return (
         <Popover
           isOpen={isPopOpen}
+          onClickOutside={() => setIsPopOpen(false)}
           positions={['bottom']} // preferred positions by priority
           content={
             <PopMenu>
