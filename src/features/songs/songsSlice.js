@@ -84,22 +84,7 @@ const songsSlice = createSlice({
         return { ...state, playing: !state.playing };
       }
     },
-    handleEndOfSong: {
-      reducer(state, action) {
-        if (state.shuffle) {
-          playRandomSong();
-        } 
-        if (state.repeat) {
-          playNextSong();
-          return;
-        }
-        if (state.currentSongIndex === state.songList.length - 1) {   // if last song, don't play anything else
-          return;
-        } else {          // if error, play next song
-          playNextSong();
-        }
-      }
-    },
+    
     setSongDuration: {
       reducer(state, action) {
         return { ...state, songDuration: action.payload }
@@ -131,10 +116,11 @@ export const {
   playPreviousSong,
   playNextSong,
   toggleShuffle,
+  playRandomSong,
   toggleRepeat,
   togglePlaying,
-  handleEndOfSong,  
-  setSongDuration,
+  
+    setSongDuration,
   setCurrentSongTime
 } = songsSlice.actions
 

@@ -1,12 +1,32 @@
-import React from 'react'
-import { CoverSong, CoverSongTitle, CoverSongArtist, CoverSongMain, SongsH2} from '../../../ui/index'
+import React, { useState } from 'react';
+import {
+  CoverSong,
+  CoverSongTitle,
+  CoverSongArtist,
+  CoverSongMain,
+  CoverMenuIcon,
+  SongsH2,
+} from '../../../ui/index';
+import Modal from 'react-modal';
+import PopoverSongCover from '../../../components/PopoverSongCover/index';
+import logoMammoth from '../../../assets/images/empty-cover-logo.svg'
 
 
 const SongItem = ({ artist, title, cover }) => {
+
+  const emptyCover = () => {
+    if (cover !== undefined) {
+      return cover
+    }else{
+      return logoMammoth
+    }
+  }
+
   return (
     <CoverSongMain>
-    {/* <SongsH2>Your Songs</SongsH2> */}
-      <CoverSong src={cover} alt='cover' />
+      {/* <SongsH2>Your Songs</SongsH2> */}
+        <PopoverSongCover />
+      <CoverSong src={emptyCover()} /> 
       <article>
         <CoverSongTitle>{title}</CoverSongTitle>
       </article>
@@ -14,7 +34,7 @@ const SongItem = ({ artist, title, cover }) => {
         <CoverSongArtist>{artist}</CoverSongArtist>
       </article>
     </CoverSongMain>
-  )
-}
+  );
+};
 
-export default SongItem
+export default SongItem;

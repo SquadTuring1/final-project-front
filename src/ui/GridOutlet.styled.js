@@ -25,7 +25,7 @@ export const MainOutlet = styled.main`
   '  .       .  ' auto
   'player player ' 4rem
   'sidebar sidebar ' 7rem/
-  20rem auto;
+  100%;
   height: 100%;
 
   @media(min-width: 960px) {
