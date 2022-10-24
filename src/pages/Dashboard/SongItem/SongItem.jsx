@@ -1,6 +1,7 @@
 import React from 'react'
 import { CoverSong, CoverSongTitle, CoverSongArtist, CoverSongMain, SongsH2} from '../../../ui/index'
 import TestLikes from '../../../components/TestLikes'
+import LikedSong from '../../../components/LikedSong'
 
 
 const SongItem = ({ artist, title, cover, songId }) => {
@@ -16,7 +17,8 @@ const SongItem = ({ artist, title, cover, songId }) => {
       <article>
         <CoverSongArtist>{artist}</CoverSongArtist>
       </article>
-      <TestLikes artist={artist} title={title} cover={cover} songId={songId} />
+      {/* <TestLikes artist={artist} title={title} cover={cover} songId={songId} /> */}
+      <LikedSong songId={songId} />      
     </CoverSongMain>    
     </div>
   )
