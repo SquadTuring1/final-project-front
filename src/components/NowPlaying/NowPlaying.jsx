@@ -21,17 +21,19 @@ const NowPlaying = () => {
     artist = 'Loading artist...'
   }
  
-
+  if (currentSong) {
     return (
-    <CurrentSong>
-        <CurrentPlaying>
-        <SongsH2 className='sidebar__desktop--nowplaying'>Now playing</SongsH2>        
-        <CoverSong className='sidebar__desktop--cover' src={imageUrl ? imageUrl : logoMammoth} alt="" />        
-        <CoverSongTitle className='sidebar__desktop--title'>{title}</CoverSongTitle>
-        <CoverSongArtist className='sidebar__desktop--artist'>{artist}</CoverSongArtist>
-        </CurrentPlaying>
-      </CurrentSong>
-    )
+      <CurrentSong>
+          <CurrentPlaying>
+          <SongsH2 className='sidebar__desktop--nowplaying'>Now playing</SongsH2>        
+          <CoverSong className='sidebar__desktop--cover' src={imageUrl ? imageUrl : logoMammoth} alt="" />        
+          <CoverSongTitle className='sidebar__desktop--title'>{title}</CoverSongTitle>
+          <CoverSongArtist className='sidebar__desktop--artist'>{artist}</CoverSongArtist>
+          </CurrentPlaying>
+        </CurrentSong>
+      )
+  }
+    
 }
 
 export default NowPlaying
