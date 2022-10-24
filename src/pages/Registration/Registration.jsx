@@ -68,7 +68,7 @@ const Registration = () => {
       username: data.username,
     };
     // console.log(authUser)     // all undefined
-    const canSave = [userObj.token, userObj.uid, userObj.email, userObj.password, userObj.username].every(Boolean) && !isLoadingSignup;
+    const canSave = [userObj.token, userObj.uid, userObj.email, userObj.username].every(Boolean) && !isLoadingSignup;
 
     // add user to db
     if (canSave) {
@@ -88,13 +88,7 @@ const Registration = () => {
     }
   };
 
-  const fetchUser = () => {
-    if (isFetching) {
-      console.log('fetching user')
-    } else if (isSuccess) {
-      dispatch(userSignedIn({ ...authUser, ...dbUser, }))
-    }
-  }
+
 
   // create user on firebase, call func from inside to create user on db, then another to set auth state
   const onSubmit = async (data) => {
@@ -106,18 +100,17 @@ const Registration = () => {
         if (!user) {
           showToast('error', 'User cannot be created')
           return;
+        } else {
+          addUserToDb(user, data); // calls func declared 
+          if (isLoadingUser) {
+            console.log('Loading User')
+          } else if (isSuccess) {
+            console.log(dbUser)
+            dispatch(userSignedIn({ ...authUser, ...dbUser.currentUser }))
+          }
         }
-        addUserToDb(user, data); // calls func declared 
-        if (isLoadingUser) {
-          console.log('Loading User')
-        } else if (isSuccess) {
-          console.log(dbUser)
-          dispatch(userSignedIn({ ...authUser, ...dbUser.currentUser }))
-        }
-        
         console.log('User Created');
         navigate('/dashboard');
-        
       });
     } catch (error) {
       setSignUpError(error.message);

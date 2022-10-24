@@ -85,8 +85,6 @@ const PersonalProfile = () => {
       console.log('Error: ', error)
       showToast('error', 'Password was not updated')
     })
-  
-    
   }
 
 
@@ -97,7 +95,7 @@ const PersonalProfile = () => {
         <CenterProfile loginLab>
           <TitleH2 className="profile__title">Profile</TitleH2>
           {/* <Button><input accept="image/png,image/jpeg" id="avatar__input" type="file"  />Avatar</Button> */}
-          {/* <FileUploader buttonName='Avatar'></FileUploader> */}
+          <FileUploader buttonName='Avatar'></FileUploader>
           <Input
             disabled
             className="username__input"
