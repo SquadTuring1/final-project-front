@@ -6,18 +6,21 @@ import { Logo } from './Logo.styled';
 import { MainApp, MainDash, MainHome, MainSign } from './Main.styled';
 import { TextAccount, TextColor, TextTerms, TermColor, TextRemember, TitleSign, TitleH2, TitleP, ResponseMessage } from './Text.styled';
 import { MainNav, NavContent, AvatarContent, Avatar, ButtonAvatar, GreenDot } from './Avatar.styled';
-import { PopMenu } from './PopMenu.styled';
+import { PopCoverItems, PopItems, PopMenu } from './PopMenu.styled';
 import { MainFlex, CategoryRow, SongsRow, PlaylistRow, SpecialRow } from './Grid.styled';
 import { CurrentSongMbl, MusicBar, MusicControls, MusicVolume, PlayerMain, ProgressTime } from './PlayerMain.styled';
 import { MainControl, ShuffleBtn, RepeatBtn, PlayBtn, ChangeSongBtn } from './PlayerControls.styled';
 import { ProgressBar } from './ProgressBar.styled';
 import { SidebarMain, UploadBtn, CurrentSong, CurrentPlaying } from './SidebarMain';
 import { CategoryDash, GenDashMain, PlaylistDash, RecommendedDash, SongsDash } from './GeneralDashboardGrid.styled';
-import { CoverSong } from './DashboardImg.styled';
+import { CoverMenuIcon, CoverSong } from './DashboardImg.styled';
 import { CoverSongTitle, CoverSongArtist, SongsH2, SongTimer } from './DashboardText.styled';
-import { CoverSongMain } from './DashboardItems.styled';
+import { CoverCategoryMain, CoverPlaylistMain, CoverSongMain, PlaylistTitle, PlaylistInfo } from './DashboardItems.styled';
 import { SideMenu, SideMenuItems } from './MenuItems.styled';
 import { NavOutlet, SideOutlet, PlayerOutlet, MainOutlet } from './GridOutlet.styled';
+import { IconHome, IconFavorites, IconPlaylist, IconCategories, IconUpload } from './Icons.styled';
+import { UploadButton } from './UploadButton.syled';
+
 
 
 // Dashboard Home
@@ -29,6 +32,20 @@ export {
   SpecialRow
 }
 
+//Icons
+export {
+  IconHome,
+  IconFavorites,
+  IconPlaylist,
+  IconCategories,
+  IconUpload
+}
+
+//Upload Song Button
+export {
+  UploadButton
+}
+
 // Outlet from React router
 export {
   NavOutlet, 
@@ -37,13 +54,28 @@ export {
   MainOutlet
 }
 
-//General Dashboard - Your Songs
+// General Dashboard - Playlist covers
+export {
+  CoverPlaylistMain,
+  PlaylistTitle,
+  PlaylistInfo
+}
+
+// General Dashboard - Category covers
+export {
+  CoverCategoryMain
+}
+
+// General Dashboard - Your Songs covers
 export {
   CoverSong,
   CoverSongTitle,
   CoverSongArtist,
   CoverSongMain,
   SongsH2,
+  CoverMenuIcon,
+  PopCoverItems,
+  PopItems
 }
 
 //General Dashboard

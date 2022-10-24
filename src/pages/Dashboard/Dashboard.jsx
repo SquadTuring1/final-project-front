@@ -8,6 +8,8 @@ SpecialRow
 import SongItem from './SongItem/index';
 import SongList from './SongList/SongList';
 import { Scrollbars } from 'react-custom-scrollbars-2';
+import PlaylistItem from './PlaylistItem';
+import PlaylistList from './PlaylistList/PlaylistList';
 
 
 const Dashboard = () => {
@@ -18,7 +20,7 @@ const Dashboard = () => {
         <SongList />
         </CategoryRow>
         <SongsRow><SongList /></SongsRow>
-        <PlaylistRow><SongList /></PlaylistRow>
+        <PlaylistRow><PlaylistList /></PlaylistRow>
         <SpecialRow><SongList /></SpecialRow>
         <SpecialRow><SongList /></SpecialRow>
         <SpecialRow><SongList /></SpecialRow>

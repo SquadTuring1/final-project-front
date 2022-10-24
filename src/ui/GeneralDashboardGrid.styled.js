@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const CategoryDash = styled.section`
-  grid-area: categories;
+  /* grid-area: categories; */
   /* border: 1px dotted yellow; */
 
   @media(min-width: 960px){
@@ -11,7 +11,7 @@ export const CategoryDash = styled.section`
 
 export const SongsDash = styled.section`
 display: flex;
-  grid-area: yoursongs;
+  /* grid-area: yoursongs; */
   /* border: 1px dotted yellow; */
 
   @media(min-width: 960px){
@@ -20,7 +20,8 @@ display: flex;
 `;
 
 export const PlaylistDash = styled.section`
-  grid-area: playlist;
+display: flex;
+  /* grid-area: playlist; */
   /* border: 1px dotted yellow; */
 
   @media(min-width: 960px){
@@ -29,7 +30,7 @@ export const PlaylistDash = styled.section`
 `;
 
 export const RecommendedDash = styled.section`
-  grid-area: recommended;
+  /* grid-area: recommended; */
   /* border: 1px dotted yellow; */
 
   @media(min-width: 960px){

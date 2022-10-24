@@ -18,7 +18,6 @@ const Navbar = () => {
         <Logo className="logo_profile" src={logoSM} alt="logotipe" />
           <PopoverNavbar />
       </NavContent>
-      <Outlet />
     </MainNav>     
   );
 };
