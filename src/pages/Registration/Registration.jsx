@@ -26,12 +26,10 @@ const Registration = () => {
   const [signUpError, setSignUpError] = useState(null);
 
   const authUser = useSelector(getAuthUser);   
-  const { data: dbUser, isFetching, isLoading: isLoadingUser, isSuccess } = useGetSingleUserQuery(auth.currentUser.uid);
+  const { data: dbUser, isFetching, isLoading: isLoadingUser, isSuccess } = useGetSingleUserQuery(authUser && authUser.uid);
   // get the function addUser from apiSlice hook, only need the function since adding
   const [signUpUser, { isLoading: isLoadingSignup }] = useSignUpUserMutation();
   
-
-
 
   const showToast = (type, string) => {
     type === 'success' ? toast.success(string) : toast.error(string);
@@ -54,7 +52,7 @@ const Registration = () => {
     }
     if (isSuccess) {
       dispatch(userSignedIn({ ...authUser, ...dbUser.currentUser }));
-      // dbUser.currentUser && navigate('/dashboard');
+      dbUser.currentUser && navigate('/dashboard');
     }
   }, [dbUser]);
 
@@ -110,7 +108,7 @@ const Registration = () => {
           }
         }
         console.log('User Created');
-        navigate('/dashboard');
+        // navigate('/dashboard');
       });
     } catch (error) {
       setSignUpError(error.message);
