@@ -28,7 +28,7 @@ color: white;
 font-family: 'Source Sans Pro', sans-serif;
 flex-direction: column;
 align-items: center;
-justify-content: space-between;
+justify-content: space-around;
 margin: 0.5rem;
 
 @media(min-width: 960px) {
