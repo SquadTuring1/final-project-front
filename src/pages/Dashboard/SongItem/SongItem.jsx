@@ -12,7 +12,8 @@ import PopoverSongCover from '../../../components/PopoverSongCover/index';
 import logoMammoth from '../../../assets/images/empty-cover-logo.svg'
 import LikedSong from '../../../components/LikedSong'
 
-const SongItem = ({ artist, title, cover }) => {
+
+const SongItem = ({ artist, title, cover, songId }) => {
 
   const emptyCover = () => {
     if (cover !== undefined) {
@@ -21,10 +22,6 @@ const SongItem = ({ artist, title, cover }) => {
       return logoMammoth
     }
   }
-
-
-
-const SongItem = ({ artist, title, cover, songId }) => {
 
   return (
     <div key={songId} >
@@ -43,5 +40,5 @@ const SongItem = ({ artist, title, cover, songId }) => {
     </div>
   )
 }
-}
+
 export default SongItem;

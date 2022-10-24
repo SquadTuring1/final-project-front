@@ -1,17 +1,23 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
+import { getCurrentSong } from '../../features/songs/songsSlice'
 import {  CurrentSong, CurrentPlaying, CoverSongArtist, CoverSongTitle, SongsH2, CoverSong } from '../../ui/index'
+import logoMammoth from '../../assets/images/empty-cover-logo.svg'
 
 const NowPlaying = () => {
-  return (
+  const currentSong = useSelector(getCurrentSong)
+ 
+
+    return (
     <CurrentSong>
         <CurrentPlaying>
-        <SongsH2 className='sidebar__desktop--nowplaying'>Now playing</SongsH2>
-        <CoverSong className='sidebar__desktop--cover' src="https://freemusicarchive.org/image/?file=images%2Falbums%2FJack_Skuller_-_Live_at_WFMU_on_Minor_Music_June_18th_2012_-_20120626114609467.jpg&width=290&height=290&type=album" alt="" />
-        <CoverSongTitle className='sidebar__desktop--title'>Don't wait</CoverSongTitle>
-        <CoverSongArtist className='sidebar__desktop--artist'>Jack Skuller</CoverSongArtist>
+        <SongsH2 className='sidebar__desktop--nowplaying'>Now playing</SongsH2>        
+        <CoverSong className='sidebar__desktop--cover' src={currentSong.imageUrl ? currentSong.imageUrl : logoMammoth} alt="" />        
+        <CoverSongTitle className='sidebar__desktop--title'>{currentSong && currentSong.title}</CoverSongTitle>
+        <CoverSongArtist className='sidebar__desktop--artist'>{currentSong && currentSong.artist}</CoverSongArtist>
         </CurrentPlaying>
       </CurrentSong>
-  )
+    )
 }
 
 export default NowPlaying
