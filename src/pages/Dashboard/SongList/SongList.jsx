@@ -5,7 +5,7 @@ import { useGetSongsQuery } from '../../../features/api/apiSlice'
 import { setCurrentSong, setSongsList } from '../../../features/songs/songsSlice';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react'
-
+// import {nanoid} from '@reduxjs/toolkit'
 
 
 const SongList = () => {
@@ -28,10 +28,10 @@ const SongList = () => {
     content = <p>Loading...</p>
   } else if (isSuccess) {
       content = songList.map(({ _id, imageUrl, artist, title, fileUrl }, songIndex) => {
-      return (
-        <div key={_id} onClick={() => handleSongClick(songIndex, _id, fileUrl) }>
-          <SongItem artist={artist && artist.artistName} title={title} cover={imageUrl} />
-        </div>
+      return (        
+          <SongItem key={_id} artist={artist && artist.artistName} title={title} cover={imageUrl} songId={_id}
+          onClick={() => handleSongClick(songIndex, _id, fileUrl)}
+          />              
       )
     })
   } else if (isError) {

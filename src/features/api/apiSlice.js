@@ -55,7 +55,27 @@ export const apiSlice = createApi({
         }
       }),
       invalidatesTags: ['Users']
-    })
+    }),
+    likeASong: builder.mutation({
+      query: ({songId, userId}) => ({
+        url: `/songs/${songId}/like`,
+        method: 'POST',
+        body: {
+          userId: userId,
+        }
+      }),
+      invalidatesTags: ['Songs']
+    }),
+    deleteLikeASong: builder.mutation({
+      query: ({songId, userId}) => ({
+        url: `/songs/${songId}/like`,
+        method: 'DELETE',
+        body: {
+          userId: userId,
+        }
+      }),
+      invalidatesTags: ['Songs']
+    }),
   })
 })
 
@@ -65,6 +85,8 @@ export const {
   useGetSingleUserQuery,  
   useAddUserMutation,
   useUpdateUserMutation,
+  useLikeASongMutation,
+  useDeleteLikeASongMutation,
   useSignUpUserMutation,
   useGetSongsQuery
 } = apiSlice;
