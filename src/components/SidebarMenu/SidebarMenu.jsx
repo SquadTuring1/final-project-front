@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { IconHome, IconFavorites, IconPlaylist, IconCategories, SideMenu, SideMenuItems, IconUpload, UploadButton } from '../../ui/index'
+import ReactModal from 'react-modal'
 
 const SidebarMenu = () => {
   return (
