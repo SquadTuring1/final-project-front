@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const CoverSongTitle = styled.p`
   width: 6.9rem;
   margin: 0 0 0.2rem;
-  font-size: 0.9rem;
+  font-size: 0.75rem;
   font-weight: 600;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -17,7 +17,7 @@ export const CoverSongTitle = styled.p`
 `;
 
 export const CoverSongArtist = styled(CoverSongTitle)`
-  font-size: 0.85rem;
+  font-size: 0.65rem;
   font-weight: 200;
 
   &.sidebar__desktop--artist {
@@ -41,4 +41,5 @@ flex-direction: column;
 
 export const SongTimer = styled.p`
   font-size:.85rem;
+  color: #fff;
 `;

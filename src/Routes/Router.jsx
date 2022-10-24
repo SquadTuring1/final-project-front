@@ -24,10 +24,10 @@ const Router = () => {
       <Route path="login" element={<Login />} />
       <Route path="reset" element={<ForgotPassword />} />
       <Route path="registration" element={<Registration />} />
+        <Route path="profile" element={<PersonalProfile />} />
       <Route path="/" element={<OutletFrame />}>
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="terms" element={<Terms />} />
-        <Route path="profile" element={<PersonalProfile />} />
         <Route path="favorites" element={<FavoriteTracks />} />
         <Route path="playlist" element={<Playlist />} />
         <Route path="categories" element={<Categories />} />

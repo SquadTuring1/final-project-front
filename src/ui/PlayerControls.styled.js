@@ -70,7 +70,7 @@ export const PlayBtn = styled.button`
 `;
 
 export const ChangeSongBtn = styled.button`
-  display: none;
+  display: block;
 
   &:hover {
     font-weight: bold;

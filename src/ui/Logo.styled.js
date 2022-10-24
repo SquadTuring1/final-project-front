@@ -4,12 +4,12 @@ export const Logo = styled.img`
   margin-top: ${({sign}) => (sign ? '1rem' : '2rem')};
 
   &.logo_profile {
-    height: 1.5rem;
+    height: 1.9rem;
     margin: 0 0 0 1rem;
     padding: .5rem 0 0 0;
 
     @media(min-width: 960px) {
-      height: 2.2rem;
+      height: 2.6rem;
       margin: 0 0 0 4.4rem;
     }
   }

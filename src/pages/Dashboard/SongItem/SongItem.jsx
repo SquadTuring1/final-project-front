@@ -9,14 +9,24 @@ import {
 } from '../../../ui/index';
 import Modal from 'react-modal';
 import PopoverSongCover from '../../../components/PopoverSongCover/index';
+import logoMammoth from '../../../assets/images/empty-cover-logo.svg'
 
 
 const SongItem = ({ artist, title, cover }) => {
+
+  const emptyCover = () => {
+    if (cover !== undefined) {
+      return cover
+    }else{
+      return logoMammoth
+    }
+  }
+
   return (
     <CoverSongMain>
       {/* <SongsH2>Your Songs</SongsH2> */}
         <PopoverSongCover />
-      <CoverSong src={cover} alt="cover" />
+      <CoverSong src={emptyCover()} /> 
       <article>
         <CoverSongTitle>{title}</CoverSongTitle>
       </article>
