@@ -2,6 +2,8 @@ import React from 'react'
 import { useSelector } from 'react-redux';
 import { useGetPlaylistsQuery } from '../../features/api/apiSlice'
 import { getAuthUser, getUserId } from '../../features/auth/authSlice';
+import PlaylistItem from '../Dashboard/PlaylistItem/PlaylistItem';
+import { PlaylistColumn } from '../../ui';
 
 const Playlist = () => {
   const userId = useSelector(getAuthUser)
@@ -13,20 +15,17 @@ const Playlist = () => {
     content = 
         <div>Playlists are being loaded...</div>
   } else if (isSuccess) {
-    data.playlists.map(playlist => console.log(playlist.title))
-    console.log(data.playlists)
-    content = data.playlists.map(playlist => (
-<div key={playlist._id}>playlist.title</div>
-    )
-      
-    )
+    content = 
+      <PlaylistColumn className='vertical'>
+      {data.playlists.map(playlist => 
+      <PlaylistItem key={playlist._id} title={playlist.title} />
+      )}
+      </PlaylistColumn>
   }
-
 
 
   return (
     <>  
-    <div>Playlist</div>
     <div>{content}</div>
     </>
   )

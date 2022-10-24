@@ -6,7 +6,6 @@ import logoMammoth from '../../assets/images/empty-cover-logo.svg'
 
 const NowPlaying = () => {
   const currentSong = useSelector(getCurrentSong);
-  console.log(currentSong)
 
   let imageUrl;
   let title;

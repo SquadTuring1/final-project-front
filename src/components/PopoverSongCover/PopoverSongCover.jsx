@@ -3,6 +3,7 @@ import { RiArrowDropDownFill, RiStarSFill, RiEditBoxLine, RiDeleteBinLine } from
 import { useNavigate } from 'react-router-dom'
 import { Popover } from 'react-tiny-popover'
 import { CoverMenuIcon, PopMenu, PopCoverItems, PopItems } from '../../ui/index'
+import PopoverNavbar from '../PopoverNavbar/PopoverNavbar'
 
 
 
@@ -20,7 +21,7 @@ const PopoverSongCover = () => {
               <PopCoverItems>
                 <PopItems><RiStarSFill /> Favorite</PopItems>
                 <PopItems><RiEditBoxLine /> Edit</PopItems>
-                <PopItems><RiDeleteBinLine />Delete</PopItems>
+                <PopItems><RiDeleteBinLine /> Delete</PopItems>
               </PopCoverItems>
             </PopMenu>
           }

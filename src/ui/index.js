@@ -7,6 +7,7 @@ import { MainApp, MainDash, MainHome, MainSign } from './Main.styled';
 import { TextAccount, TextColor, TextTerms, TermColor, TextRemember, TitleSign, TitleH2, TitleP, ResponseMessage } from './Text.styled';
 import { MainNav, NavContent, AvatarContent, Avatar, ButtonAvatar, GreenDot } from './Avatar.styled';
 import { PopCoverItems, PopItems, PopMenu } from './PopMenu.styled';
+import { PlaylistColumn } from './Playlist.styled';
 import { MainFlex, CategoryRow, SongsRow, PlaylistRow, SpecialRow } from './Grid.styled';
 import { CurrentSongMbl, MusicBar, MusicControls, MusicVolume, PlayerMain, ProgressTime } from './PlayerMain.styled';
 import { MainControl, ShuffleBtn, RepeatBtn, PlayBtn, ChangeSongBtn } from './PlayerControls.styled';
@@ -167,3 +168,7 @@ export {
   //   GridSideItem
   // }
 
+// Playlists
+export {
+  PlaylistColumn,
+}
