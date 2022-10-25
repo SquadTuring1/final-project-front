@@ -6,6 +6,11 @@ import { setCurrentSong, setSongsList } from '../../../features/songs/songsSlice
 import { useDispatch } from 'react-redux';
 import { useState } from 'react'
 
+import "swiper/css";
+import "swiper/css/bundle";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { A11y, Navigation, Pagination, Scrollbar, Virtual } from "swiper";
+
 
 
 const SongList = () => {
@@ -29,19 +34,35 @@ const SongList = () => {
   } else if (isSuccess) {
       content = songList.map(({ _id, imageUrl, artist, title, fileUrl }, songIndex) => {
       return (
-        <div key={_id} onClick={() => handleSongClick(songIndex, _id, fileUrl) }>
-          <SongItem artist={artist && artist.artistName} title={title} cover={imageUrl} />
-        </div>
+        <SwiperSlide key={_id} virtualIndex={_id} onClick={() => handleSongClick(songIndex, _id, fileUrl) }>
+            <SongItem artist={artist && artist.artistName} title={title} cover={imageUrl} />
+        </SwiperSlide>
       )
     })
   } else if (isError) {
     content = <p>{error}</p>
-  }
+  } 
 
   return (
-    <SongsDash>
-      {content}
-    </SongsDash>
+    <Swiper
+      spaceBetween={0}
+      slidesPerView={4}
+      virtual
+      modules={[ Navigation, Pagination, Scrollbar, A11y, Virtual]}
+      navigation
+      height={"100%"}
+      pagination={{ clickable: true }}
+      loop={true}
+      style={{
+        "--swiper-navigation-color": "#fff",
+        "--swiper-pagination-color": "#fff",
+        "--swiper-navigation-size": "1.5rem"
+      }}
+    >
+      <SongsDash>
+        {content}
+      </SongsDash>
+    </Swiper>
   );
 };
 

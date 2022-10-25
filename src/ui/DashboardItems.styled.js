@@ -9,7 +9,7 @@ position: relative;
   border-radius: .3rem;
   background-color: #0A101A;
   padding: .5rem .7rem;
-  
+
 
   &:hover {
     background-color: #0C1525;
@@ -53,5 +53,5 @@ export const PlaylistInfo = styled(PlaylistTitle)`
 /// Category component ///
 
 export const CoverCategoryMain = styled.main`
-  
+
 `;
