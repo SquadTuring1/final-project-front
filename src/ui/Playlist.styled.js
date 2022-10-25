@@ -2,20 +2,29 @@ import styled from 'styled-components';
 import { PlaylistTitle, PlaylistInfo,  } from './DashboardItems.styled';
 import { CoverPlaylistMain } from './DashboardItems.styled';
 
-export const PlaylistContainer = styled.div`
-  display: flex;
-  height: 70vh;
-`
+// export const PlaylistContainer = styled.div`
+//   display: flex;
+//   justify-content: space-between;
+//   height: 70vh;
+//   width: 100%;
+// `
+
+// export const  = styled.`
+  
+// `;
 
 export const PlaylistColumn = styled.section `
-  /* height: 60vh; */
-  width: 50%;
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
-  flex-direction: column;
-  justify-content: flex-start; 
-  gap: 1rem;  
+  grid-area: playlist;
+  margin: 0 0 0 1rem;
+  
+  /* height: 60vh;
+  width: 50%;
   align-items: center;
+  justify-content: flex-start; 
+  gap: 1rem;
   overflow-y: scroll;
   overflow-x: hidden;
   margin-left: -1rem;
@@ -25,7 +34,27 @@ export const PlaylistColumn = styled.section `
     gap: 0.1rem;
     margin: 0;
     padding: 0;
-  }
+  } */
+`
+export const PlaylistColumnSongs = styled.section`
+grid-area: songs;
+  margin: 0 1rem 0 0;
+`;
+
+
+export const PlaylistContainer = styled.main`
+height: 100%;
+  display: grid;
+  grid: 
+  'playlist songs' 100%/
+    35%     auto
+  ;
+  gap: 1rem;
+
+  /* display: flex;
+  justify-content: space-between;
+  height: 70vh;
+  width: 100%; */
 `
 
 
@@ -33,11 +62,11 @@ export const PlaylistCoverSm = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 45%;
-  height: 5rem;
+  width: 15rem;
+  height: 4rem;
   border-radius: .3rem;
   background-color: #8D0E0E;
-  margin: 0 0 .5rem 0rem;
+  margin: 0 0 1rem 1rem;
   padding: .5rem .5rem ;
   font-size: .8rem;
   cursor: pointer;

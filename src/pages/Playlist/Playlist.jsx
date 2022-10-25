@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux";
-import { PlaylistColumn, PlaylistContainer, PlaylistTitle, PlaylistInfo, PlaylistCoverSm, PlaylistSong } from "../../ui/index"
+import { PlaylistColumn, PlaylistContainer, PlaylistTitle, PlaylistInfo, PlaylistCoverSm, PlaylistSong, PlaylistColumnSongs } from "../../ui/index"
 import { useState } from 'react'
 import { getAuthUser } from "../../features/auth/authSlice";
 import { useGetPlaylistsQuery, useGetSinglePlaylistQuery } from "../../features/api/apiSlice";
-
+import Scrollbars from "react-custom-scrollbars-2";
 
 
 const Playlist = () => {
@@ -51,15 +51,22 @@ const Playlist = () => {
 
   return (
     <>  
-    
-    <PlaylistContainer>
-      <PlaylistColumn>
-        {playlistsContent}
-      </PlaylistColumn>
-      <PlaylistColumn className="playlist__songs">
-        {songsContent}
-      </PlaylistColumn>
-    </PlaylistContainer>
+    <Scrollbars universal>
+      <PlaylistContainer>
+        <Scrollbars universal>
+          <PlaylistColumn>
+    {/* <h1>My Playlist</h1> */}
+            {playlistsContent}
+          </PlaylistColumn>
+        </Scrollbars>
+        <Scrollbars>
+          <PlaylistColumnSongs className="playlist__songs">
+            {songsContent}
+            {/* {playlistsContent} */}
+          </PlaylistColumnSongs>
+        </Scrollbars>
+      </PlaylistContainer>
+    </Scrollbars>
     </>
   )
 }
