@@ -3,7 +3,7 @@ import { CenterArticle, CenterProfile } from './CenterArticle.styled';
 import { GlobalStyle } from './GlobalStyles';
 import { Input, Label } from './Form.styled';
 import { Logo } from './Logo.styled';
-import { MainApp, MainDash, MainHome, MainSign } from './Main.styled';
+import { MainApp, MainDash, MainHome, MainModal, MainSign } from './Main.styled';
 import { TextAccount, TextColor, TextTerms, TermColor, TextRemember, TitleSign, TitleH2, TitleP, ResponseMessage } from './Text.styled';
 import { MainNav, NavContent, AvatarContent, Avatar, ButtonAvatar, GreenDot } from './Avatar.styled';
 import { PopCoverItems, PopItems, PopMenu } from './PopMenu.styled';
@@ -23,6 +23,11 @@ import { IconHome, IconFavorites, IconPlaylist, IconCategories, IconUpload } fro
 import { UploadButton } from './UploadButton.syled';
 
 
+
+// Upload modal
+export {
+  MainModal
+}
 
 // Dashboard Home
 export {

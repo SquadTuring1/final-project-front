@@ -21,6 +21,7 @@ export const UploadButton = styled.button`
 
     &:active{
         box-shadow: inset -2px -2px 10px -4px rgba(71,71,71,0.58);
+        transform: scale(0.99)
     }
     &:hover{
         cursor: context-menu;

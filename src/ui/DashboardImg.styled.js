@@ -21,6 +21,6 @@ export const CoverSong = styled.img`
 export const CoverMenuIcon = styled.article`
   position: absolute;
   transform: scale(1.3);
-  top: 9.15rem;
+  top: 8.5rem;
   left: 7.5rem;
 `;

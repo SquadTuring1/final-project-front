@@ -1,6 +1,8 @@
+import ReactModal from 'react-modal';
 import styled from 'styled-components';
 import LoginBG from '../assets/images/Login-bg.jpg';
 import SignBG from '../assets/images/Sign-bg.jpg';
+
 
 export const MainApp = styled.main`
   height: 100vh;
@@ -49,4 +51,8 @@ export const MainReset = styled.main`
   align-items: center;
   justify-content: space-between;
   font-family: 'Source Sans Pro', sans-serif;
+`;
+
+export const MainModal = styled(ReactModal)`
+
 `;

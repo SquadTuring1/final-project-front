@@ -1,9 +1,10 @@
 import React from 'react';
 import {
-MainFlex,  CategoryRow, 
-SongsRow, 
-PlaylistRow, 
-SpecialRow
+  MainFlex,
+  CategoryRow,
+  SongsRow,
+  PlaylistRow,
+  SpecialRow,
 } from '../../ui/index';
 import SongItem from './SongItem/index';
 import SongList from './SongList/SongList';
@@ -11,19 +12,32 @@ import { Scrollbars } from 'react-custom-scrollbars-2';
 import PlaylistItem from './PlaylistItem';
 import PlaylistList from './PlaylistList/PlaylistList';
 
-
 const Dashboard = () => {
   return (
     <Scrollbars universal>
       <MainFlex>
         <CategoryRow>
-        <SongList />
+          <h2>Genres</h2>
+          <SongList />
         </CategoryRow>
-        <SongsRow><SongList /></SongsRow>
-        <PlaylistRow><PlaylistList /></PlaylistRow>
-        <SpecialRow><SongList /></SpecialRow>
-        <SpecialRow><SongList /></SpecialRow>
-        <SpecialRow><SongList /></SpecialRow>
+        <SongsRow>
+        <h2>My Songs</h2>
+          <SongList />
+        </SongsRow>
+        <PlaylistRow>
+        My Playlist
+          <PlaylistList />
+        </PlaylistRow>
+        <SpecialRow>
+        Recommended Songs
+          <SongList />
+        </SpecialRow>
+        <SpecialRow>
+          <SongList />
+        </SpecialRow>
+        <SpecialRow>
+          <SongList />
+        </SpecialRow>
       </MainFlex>
     </Scrollbars>
   );
@@ -31,13 +45,12 @@ const Dashboard = () => {
 
 export default Dashboard;
 
-
-    // <GridMainContainer>
-    //   <GridSideItem>
-    //     <Sidebar />
-    //   </GridSideItem>
-    //   <GridMainItem><GeneralDashboard /></GridMainItem>
-    //   <GridPlayerItem>
-    //     <MusicPlayer />
-    //   </GridPlayerItem>
-    // </GridMainContainer>
+// <GridMainContainer>
+//   <GridSideItem>
+//     <Sidebar />
+//   </GridSideItem>
+//   <GridMainItem><GeneralDashboard /></GridMainItem>
+//   <GridPlayerItem>
+//     <MusicPlayer />
+//   </GridPlayerItem>
+// </GridMainContainer>
