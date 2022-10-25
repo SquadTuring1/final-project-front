@@ -3,15 +3,13 @@ import { SongsDash, SongsH2 } from '../../../ui';
 import SongItem from '../SongItem';
 import { useGetSongsQuery } from '../../../features/api/apiSlice'
 import { setCurrentSong, setSongsList } from '../../../features/songs/songsSlice';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useState } from 'react'
-import { getUserId } from '../../../features/auth/authSlice';
 // import {nanoid} from '@reduxjs/toolkit'
 
 
 const SongList = () => {
   const dispatch = useDispatch();
-  const userId = useSelector(getUserId)
   const { data: songList, isLoading, isSuccess, isError, error} = useGetSongsQuery()
 
   // sets songList in songs state, if the query for data from getSongs returns a list
@@ -29,10 +27,10 @@ const SongList = () => {
   if (isLoading) {
     content = <p>Loading...</p>
   } else if (isSuccess) {
-      content = songList.map(({ _id, imageUrl, artist, title, fileUrl, likedBY }, songIndex) => {
-      
+      content = songList.map(({ _id, imageUrl, artist, title, fileUrl }, songIndex) => {
       return (        
-          <SongItem key={_id} artist={artist && artist.artistName} title={title} cover={imageUrl} likedBY={likedBY} songId={_id} onClick={() => handleSongClick(songIndex, _id, fileUrl)}
+          <SongItem key={_id} artist={artist && artist.artistName} title={title} cover={imageUrl} songId={_id}
+          onClick={() => handleSongClick(songIndex, _id, fileUrl)}
           />              
       )
     })
