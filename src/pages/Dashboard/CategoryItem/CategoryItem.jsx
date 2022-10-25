@@ -2,10 +2,10 @@ import React from 'react'
 import { CoverCategoryMain } from '../../../ui/index'
 
 
-const CategoryItem = () => {
+const Categories = () => {
   return (
     <CoverCategoryMain>CategoryItem</CoverCategoryMain>
   )
 }
 
-export default CategoryItem
+export default Categories

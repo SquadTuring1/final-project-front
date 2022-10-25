@@ -40,7 +40,7 @@ const SongItem = ({ artist, title, cover, songId, likedBY }) => {
       <article>
         <CoverSongArtist>{artist}</CoverSongArtist>
       </article>
-      <LikedSong songId={songId} likedBY={likedBY} likedByCurrentUser={likedBY?.some((user) => user._id === userId) ? true : false} />      
+      <LikedSong songId={songId} likedBY={likedBY} />      
     </CoverSongMain>    
     </div>
   )

@@ -27,9 +27,9 @@ const SongList = () => {
   if (isLoading) {
     content = <p>Loading...</p>
   } else if (isSuccess) {
-      content = songList.map(({ _id, imageUrl, artist, title, fileUrl }, songIndex) => {
+      content = songList.map(({ _id, imageUrl, artist, title, fileUrl, likedBY }, songIndex) => {
       return (        
-          <SongItem key={_id} artist={artist && artist.artistName} title={title} cover={imageUrl} songId={_id}
+          <SongItem key={_id} artist={artist && artist.artistName} title={title} cover={imageUrl} songId={_id} likedBY={likedBY}
           onClick={() => handleSongClick(songIndex, _id, fileUrl)}
           />              
       )

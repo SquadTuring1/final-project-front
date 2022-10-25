@@ -8,25 +8,22 @@ import 'react-toastify/dist/ReactToastify.min.css'
 import { nanoid } from '@reduxjs/toolkit';
 import auth from '../../utils/firebase/firebaseConfig.js';
 
-export default function LikedSong({ songId, likedBY, likedByCurrentUser }) {
+export default function LikedSong({ songId, likedBY }) {
   
-
   const userId = useSelector(getUserId)
-  const [ isLiked, setIsLiked] = useState(likedByCurrentUser)
-  
+  const [ isLiked, setIsLiked] = useState(likedBY?.some(user => user._id === userId))
   
 
   const [ likeASong, { isLoading } ] = useLikeASongMutation();
-  const [ deleteASong ] = useDeleteLikeASongMutation()
+  const [ deleteASong, { isLoading: deleteLoading } ] = useDeleteLikeASongMutation()
 
   const toggleLiked = () => {
     setIsLiked(current => !isLiked)
   }
 
 
-
-
   const canSave = [ songId, userId, !isLiked ].every(Boolean) && !isLoading;
+  const canDelete = [ songId, userId, isLiked ].every(Boolean) && !deleteLoading;
 
   const handleClick = async () => {
     toggleLiked()
@@ -40,21 +37,24 @@ export default function LikedSong({ songId, likedBY, likedByCurrentUser }) {
       }
     } else {
       if (!userId) {
-        toast.warning('Likes are not saved when user is not logged in', { toastId: nanoid() })
+        !isLiked && toast.warning('Remember likes are not saved when not logged in', { toastId: nanoid() })
         return;
       }
-      console.log("Deleting liked song!")
-      try{
-        await deleteASong(songObj).unwrap()
-      } catch(error){
-        console.error("Failed to delete liked song!")
+      if (canDelete) {
+        try{
+         await deleteASong(songObj).unwrap()
+         console.log('Song like removed')
+        } catch(error){
+          console.error("Failed to delete liked song!")
+        }
       }
+      
     }
   }  
   
   return (
     <>    
-    <div onClick={handleClick}>{likedByCurrentUser ? <RiStarFill/> : <RiStarLine/>}</div>
+    <div onClick={handleClick}>{isLiked ? <RiStarFill/> : <RiStarLine/>}</div>
     </>
   )
 }
