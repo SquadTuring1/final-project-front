@@ -92,13 +92,11 @@ export const apiSlice = createApi({
       method: 'GET',
     }),
     getGenres: builder.query({
-      query: () => '/songs',
-      
-      // providesTags: ['Songs'],
+      query: () => '/genres',
       providesTags: (result, error, arg) =>
         result
-          ? [...result.map(({ id }) => ({ type: 'Songs', id })), 'Songs']
-          : ['Songs'],
+          ? [...result.map(({ id }) => ({ type: 'Genres', id })), 'Genres']
+          : ['Genres'],
     }),
 
   })
@@ -114,6 +112,7 @@ export const {
   useDeleteLikeASongMutation,
   useSignUpUserMutation,
   useGetSongsQuery,
+  useGetGenresQuery,
   useGetPlaylistsQuery,
   useGetSinglePlaylistQuery,
 } = apiSlice;
