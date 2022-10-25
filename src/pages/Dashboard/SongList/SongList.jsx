@@ -28,7 +28,7 @@ const SongList = () => {
     content = <p>Loading...</p>
   } else if (isSuccess) {
       content = songList.map(({ _id, imageUrl, artist, title, fileUrl }, songIndex) => {
-      return (        
+      return (
           <SongItem key={_id} artist={artist && artist.artistName} title={title} cover={imageUrl} songId={_id}
           onClick={() => handleSongClick(songIndex, _id, fileUrl)}
           />              

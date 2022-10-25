@@ -1,32 +1,65 @@
-import React from 'react'
-import { useSelector } from 'react-redux';
-import { useGetPlaylistsQuery } from '../../features/api/apiSlice'
-import { getAuthUser, getUserId } from '../../features/auth/authSlice';
-import PlaylistItem from '../Dashboard/PlaylistItem/PlaylistItem';
-import { PlaylistColumn } from '../../ui';
+import { useSelector } from "react-redux";
+import { PlaylistColumn, PlaylistContainer, PlaylistTitle, PlaylistInfo, PlaylistCoverSm, PlaylistSong } from "../../ui/index"
+import { useState } from 'react'
+import { getAuthUser } from "../../features/auth/authSlice";
+import { useGetPlaylistsQuery, useGetSinglePlaylistQuery } from "../../features/api/apiSlice";
+
+
 
 const Playlist = () => {
   const userId = useSelector(getAuthUser)
-  const { data, isLoading, isFetching, isSuccess, isError, error } = useGetPlaylistsQuery();
+  const [ selectedPlaylistId,  setSelectedPlaylistId ] = useState(null);
 
+  const { data: playlistsData, isLoading: isPlaylistsLoading, isFetching: isPlaylistsFetching, isSuccess: isPlaylistsSuccess, isError: isPlaylistsError, error: playlistsError } = useGetPlaylistsQuery();
 
-  let content;
-  if (isFetching || isLoading) {
-    content = 
+  const { data: clickedPlaylist, isLoading: isClickedLoading, isFetching: isClickedFetching, isSuccess: isClickedSuccess, isError: isClickedError, error: clickedError } = useGetSinglePlaylistQuery(selectedPlaylistId && selectedPlaylistId)
+  
+  
+  const handleClick = (playlistId) => {
+    setSelectedPlaylistId(current => playlistId)
+  }
+  
+  let playlistsContent;
+  if (isPlaylistsFetching || isPlaylistsLoading) {
+    playlistsContent = 
         <div>Playlists are being loaded...</div>
-  } else if (isSuccess) {
-    content = 
-      <PlaylistColumn className='vertical'>
-      {data.playlists.map(playlist => 
-      <PlaylistItem key={playlist._id} title={playlist.title} />
+  } else if (isPlaylistsSuccess) {
+    playlistsContent = 
+      <>
+      {playlistsData.playlists.map(playlist =>
+        <PlaylistCoverSm key={playlist._id} onClick={() => handleClick(playlist._id)}>
+          <PlaylistTitle >{playlist.title}</PlaylistTitle>
+          <PlaylistInfo>{playlist.songs.length}</PlaylistInfo>         
+        </PlaylistCoverSm>
       )}
-      </PlaylistColumn>
+      </>
   }
 
+  let songsContent;
+  if (isClickedLoading) {
+    songsContent = <div>No playlist selected</div>
+  } else if (isClickedSuccess) {
+    console.log(clickedPlaylist)
+    songsContent = 
+      clickedPlaylist.playlist.songs.map((song, index) => 
+        <PlaylistSong >
+          <div>{index+1}.  </div>
+          <div key={song._id}>{song.title}</div>
+        </PlaylistSong>
+        )
+  }
 
   return (
     <>  
-    <div>{content}</div>
+    
+    <PlaylistContainer>
+      <PlaylistColumn>
+        {playlistsContent}
+      </PlaylistColumn>
+      <PlaylistColumn className="playlist__songs">
+        {songsContent}
+      </PlaylistColumn>
+    </PlaylistContainer>
     </>
   )
 }
