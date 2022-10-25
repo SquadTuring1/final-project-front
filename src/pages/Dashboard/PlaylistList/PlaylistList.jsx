@@ -7,13 +7,14 @@ import PlaylistItem from '../PlaylistItem';
 const PlaylistList = () => {
   return (
     <main>
-          <PlaylistDash>
+      <PlaylistDash>
       {song_item_test.map(({id, tracks, title}) => {
         return (
             <PlaylistItem key={id} tracks={tracks} title={title} />
         )
       })}
-          </PlaylistDash>
+      </PlaylistDash>
+      
     </main>
   )
 }

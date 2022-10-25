@@ -79,7 +79,12 @@ export const apiSlice = createApi({
     getPlaylists: builder.query({
       query: () => '/playlists',
       providesTags: ['Playlists']
-    })
+    }),
+    getSinglePlaylist: builder.query({
+      query: (playlistId) => `/playlists/${playlistId}`,
+      method: 'GET',
+    }),
+    
   })
 })
 
@@ -94,4 +99,5 @@ export const {
   useSignUpUserMutation,
   useGetSongsQuery,
   useGetPlaylistsQuery,
+  useGetSinglePlaylistQuery,
 } = apiSlice;
