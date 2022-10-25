@@ -53,7 +53,7 @@ export const TitleSign = styled.h2`
   margin-top: ${({ signUp }) => (signUp ? '2rem' : '')};
   padding-bottom: 1rem;
   color: #eee;
-  font-size: 2.5rem;
+  font-size: ${({uploadModal}) => (uploadModal ? '2.7rem' : '2.5rem')};
   font-weight: 600;
   text-align: center;
 `;
