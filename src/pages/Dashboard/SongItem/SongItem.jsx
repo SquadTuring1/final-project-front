@@ -11,8 +11,14 @@ import Modal from 'react-modal';
 import PopoverSongCover from '../../../components/PopoverSongCover/index';
 import logoMammoth from '../../../assets/images/empty-cover-logo.svg'
 import LikedSong from '../../../components/LikedSong'
+import { useSelector } from 'react-redux';
+import { getUserId } from '../../../features/auth/authSlice';
 
-const SongItem = ({ artist, title, cover, songId }) => {
+const SongItem = ({ artist, title, cover, songId, likedBY }) => {
+
+  const userId = useSelector(getUserId)
+  
+  
 
   const emptyCover = () => {
     if (cover !== undefined) {
@@ -34,7 +40,7 @@ const SongItem = ({ artist, title, cover, songId }) => {
       <article>
         <CoverSongArtist>{artist}</CoverSongArtist>
       </article>
-      <LikedSong songId={songId} />      
+      <LikedSong songId={songId} likedBY={likedBY} likedByCurrentUser={likedBY?.some((user) => user._id === userId) ? true : false} />      
     </CoverSongMain>    
     </div>
   )

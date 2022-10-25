@@ -1,13 +1,20 @@
 import { RiRestartLine, RiStarFill, RiStarLine } from 'react-icons/ri'
-import { useState } from 'react';
-import { getUserId } from '../../features/auth/authSlice'
+import { useEffect, useState } from 'react';
+import { getAuthUser, getUserId } from '../../features/auth/authSlice'
 import { useSelector } from 'react-redux';
 import { useLikeASongMutation, useDeleteLikeASongMutation } from '../../features/api/apiSlice';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css'
+import { nanoid } from '@reduxjs/toolkit';
+import auth from '../../utils/firebase/firebaseConfig.js';
 
-export default function LikedSong({ songId}) {
+export default function LikedSong({ songId, likedBY, likedByCurrentUser }) {
+  
 
-  const [ isLiked, setIsLiked] = useState()
-  const userId = useSelector(getUserId);
+  const userId = useSelector(getUserId)
+  const [ isLiked, setIsLiked] = useState(likedByCurrentUser)
+  
+  
 
   const [ likeASong, { isLoading } ] = useLikeASongMutation();
   const [ deleteASong ] = useDeleteLikeASongMutation()
@@ -15,6 +22,9 @@ export default function LikedSong({ songId}) {
   const toggleLiked = () => {
     setIsLiked(current => !isLiked)
   }
+
+
+
 
   const canSave = [ songId, userId, !isLiked ].every(Boolean) && !isLoading;
 
@@ -28,8 +38,11 @@ export default function LikedSong({ songId}) {
       } catch (error){
         console.error("Failed to load liked song!")
       }
-    } 
-    else{
+    } else {
+      if (!userId) {
+        toast.warning('Likes are not saved when user is not logged in', { toastId: nanoid() })
+        return;
+      }
       console.log("Deleting liked song!")
       try{
         await deleteASong(songObj).unwrap()
@@ -41,7 +54,7 @@ export default function LikedSong({ songId}) {
   
   return (
     <>    
-    <div onClick={handleClick}>{isLiked ? <RiStarFill/> : <RiStarLine/>}</div>
+    <div onClick={handleClick}>{likedByCurrentUser ? <RiStarFill/> : <RiStarLine/>}</div>
     </>
   )
 }
