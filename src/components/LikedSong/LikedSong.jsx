@@ -8,12 +8,9 @@ import 'react-toastify/dist/ReactToastify.min.css'
 import { nanoid } from '@reduxjs/toolkit';
 import auth from '../../utils/firebase/firebaseConfig.js';
 
-export default function LikedSong({ songId, likedBY }) {
-  
+export default function LikedSong({ songId, likedBY }) {  
   const userId = useSelector(getUserId)
-  console.log(userId)
-  const [ isLiked, setIsLiked] = useState(likedBY && likedBY.some(user => user._id === userId))
-  console.log(isLiked)
+  const [ isLiked, setIsLiked] = useState(likedBY?.some(user => user._id === userId))
 
   const [ likeASong, { isLoading } ] = useLikeASongMutation();
   const [ deleteASong, { isLoading: deleteLoading } ] = useDeleteLikeASongMutation()

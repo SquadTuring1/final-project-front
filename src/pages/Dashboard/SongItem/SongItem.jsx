@@ -22,16 +22,15 @@ const SongItem = ({ artist, title, cover, songId, likedBY }) => {
 
   const emptyCover = () => {
     if (cover !== undefined) {
-      return cover
+      return cover;
     }else{
-      return logoMammoth
+      return logoMammoth;
     }
   }
 
   const handleClick = () => {
     const index = songList.findIndex(song => song._id === songId);
     dispatch(setCurrentSong({ currentSongIndex: index, _id: songId, fileUrl: songList[index].fileUrl }))
-    console.log('clicking song item')
   }
 
   return (

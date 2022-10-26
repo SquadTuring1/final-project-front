@@ -1,10 +1,13 @@
 import React from 'react'
 import { useGetGenresQuery } from '../../../features/api/apiSlice'
-import { CoverCategoryMain, CoverSong } from '../../../ui/index'
+import { CoverCategoryMain, CoverPlaylistMain } from '../../../ui/index'
+
 
 
 const CategoryItem = () => {
   const { data: genres, isLoading, isSuccess, isError, error } = useGetGenresQuery();
+
+
 
   let content;
   if (isLoading) {
@@ -12,14 +15,17 @@ const CategoryItem = () => {
   } else if (isSuccess) {
     content =     
       genres.map(genre =>  
-          <img key={genre._id} src={genre.imgUrl}></img> 
+        <div key={genre._id}>
+          <img src={genre.imgUrl} /> 
+        </div>
       )
   }
 
+  
   return (
     <>
     <CoverCategoryMain>
-    {content}
+      {content}
     </CoverCategoryMain>
     
     </>
