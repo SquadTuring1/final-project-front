@@ -79,7 +79,17 @@ export const apiSlice = createApi({
     getPlaylists: builder.query({
       query: () => '/playlists',
       providesTags: ['Playlists']
-    })
+    }),
+    addSongToPlaylist: builder.mutation({
+      query: (playlistId, songId) => ({
+        url: `/playlists/${playlistId}/addsong`,
+        method: 'PATCH',
+        body:{
+          songId: songId
+        }
+      }),
+      invalidatesTags: ['Playlists'] 
+    })    
   })
 })
 
@@ -94,4 +104,5 @@ export const {
   useSignUpUserMutation,
   useGetSongsQuery,
   useGetPlaylistsQuery,
+  useAddSongToPlaylistMutation
 } = apiSlice;

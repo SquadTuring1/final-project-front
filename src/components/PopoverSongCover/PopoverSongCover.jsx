@@ -19,6 +19,10 @@ import {
 import PopoverNavbar from '../PopoverNavbar';
 import ReactModal from 'react-modal';
 
+import { useGetPlaylistsQuery } from "../../features/api/apiSlice"
+import { useAddSongToPlaylistMutation } from "../../features/api/apiSlice"
+import { setSongsList, setCurrentSong } from '../../features/songs/songsSlice'
+import { useSelector } from 'react-redux';
 
 // Styles for add to playlist Modal
 const customStyles = {
@@ -45,12 +49,26 @@ const customStyles = {
   }
 };
 
-const PopoverSongCover = () => {
-  const [isPopOpen, setIsPopOpen] = useState(false);
-  const navigate = useNavigate();
-
+const PopoverSongCover = ({songId}) => {
+  
+  // console.log("songId",songId)
+  const { data, isLoading, isSuccess, isError, error } = useGetPlaylistsQuery()
+  const [ addSongToPlaylist ] = useAddSongToPlaylistMutation()
+  // console.log(data)  
   
 
+  const playListArr = data.playlists  
+  console.log(playListArr)
+
+  const addToPlaylist = (_id) => {
+    console.log("works")
+    
+  }
+
+
+
+
+  const [isPopOpen, setIsPopOpen] = useState(false);  
   const [modalOpen, setModalOpen] = useState(false)
   const openModal = () => {
     setModalOpen(true)
@@ -61,12 +79,13 @@ const PopoverSongCover = () => {
   const handlePopOver = () => {
     setModalOpen(false)
       }
+  const handleDelete = () => {
+    console.log("sdjksjdkjsd")
+    setIsPopOpen(false)
+    openModal()
+  }
 
-const handleDelete = () => {
-  console.log("sdjksjdkjsd")
-  setIsPopOpen(false)
-  openModal()
-}
+
   return (
     <Popover
     onclick={handlePopOver}
@@ -88,9 +107,20 @@ const handleDelete = () => {
             </PopItems>
             <PopItems onClick={openModal}>+ Add to playlist</PopItems>
             <ReactModal style={customStyles} isOpen={modalOpen} onRequestClose={closeModal}>  
-            <p>Jose</p>        
-              <PopItems>Add to Playlist</PopItems>
-              <PopItems>Create Playlist</PopItems>
+            {playListArr.map(({_id, title, isPrivate, songs, followers}) => {              
+              return (                
+                <article key={_id}>
+                  
+                  {title}
+                  <button onClick={()=>addToPlaylist(_id)}>Add</button>            
+
+                </article>
+
+
+              )
+              
+            })}      
+              
               <PopItems onClick={closeModal}>Close</PopItems>
               
             </ReactModal>

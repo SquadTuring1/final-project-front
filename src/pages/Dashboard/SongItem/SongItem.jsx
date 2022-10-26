@@ -26,7 +26,7 @@ const SongItem = ({ artist, title, cover, songId }) => {
     <div key={songId} >
     <CoverSongMain>
       {/* <SongsH2>Your Songs</SongsH2> */}
-        <PopoverSongCover />
+        <PopoverSongCover songId={songId}/>
       <CoverSong src={emptyCover()} /> 
       <article>
         <CoverSongTitle>{title}</CoverSongTitle>
