@@ -1,52 +1,47 @@
 import React, { useState } from 'react';
-import {
-  RiArrowDropDownFill,
-  RiStarSFill,
-  RiEditBoxLine,
-  RiDeleteBinLine,
-  RiMore2Fill,
-  RiMore2Line
-} from 'react-icons/ri';
-import { useNavigate, Link } from 'react-router-dom';
-import { Popover } from 'react-tiny-popover';
-import {
-  CoverMenuIcon,
-  PopMenu,
-  PopCoverItems,
-  PopItems,
-} from '../../ui/index';
-import PopoverNavbar from '../PopoverNavbar';
+import { RiMore2Line } from 'react-icons/ri';
+
+import { MenuItem, Menu, Button } from '@mui/material';
 
 const PopoverSongCover = () => {
-  const [isPopOpen, setIsPopOpen] = useState(false);
-  const navigate = useNavigate();
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const open = Boolean(anchorEl);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
-    <Popover
-      isOpen={isPopOpen}
-      onClickOutside={() => setIsPopOpen(false)}
-      positions={['bottom']} // preferred positions by priority
-      content={
-        <PopMenu>
-          <PopCoverItems>
-            <PopItems>
-              <RiStarSFill /> Favorite
-            </PopItems>
-            <PopItems>
-              <RiEditBoxLine /> Edit
-            </PopItems>
-            <PopItems>
-              <RiDeleteBinLine />
-              Delete
-            </PopItems>
-          </PopCoverItems>
-        </PopMenu>
-      }
-    >
-      <CoverMenuIcon onClick={() => setIsPopOpen(!isPopOpen)}>
-        <RiMore2Line />
-      </CoverMenuIcon>
-    </Popover>
+    <div>
+      <article>
+        <Button
+          id="resources-button"
+          onClick={handleClick}
+          aria-control={open ? 'resources-menu' : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? 'true' : undefined}
+        >
+          <RiMore2Line />
+        </Button>
+      </article>
+      <Menu
+        id="resources-menu"
+        anchorEl={anchorEl}
+        open={open}
+        MenuListProps={{
+          'aria-labelledby': 'resources-button',
+        }}
+        onClose={handleClose}
+      >
+        <MenuItem onClick={handleClose}>Edit</MenuItem>
+        <MenuItem onClick={handleClose}>Favorite</MenuItem>
+      </Menu>
+    </div>
   );
 };
 
