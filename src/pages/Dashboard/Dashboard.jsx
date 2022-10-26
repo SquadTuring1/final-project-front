@@ -23,7 +23,6 @@ const Dashboard = () => {
         <PlaylistRow><PlaylistList /></PlaylistRow>
         <SpecialRow><SongList /></SpecialRow>
         <SpecialRow><SongList /></SpecialRow>
-        <SpecialRow><SongList /></SpecialRow>
       </MainFlex>
     </Scrollbars>
   );

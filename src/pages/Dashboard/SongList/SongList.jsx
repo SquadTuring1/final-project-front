@@ -45,17 +45,15 @@ const SongList = () => {
 
   return (
     <Swiper
+      modules={[ Navigation, Pagination, Scrollbar, A11y, Virtual]}
+      navigation
       spaceBetween={0}
       slidesPerView={4}
       virtual
-      modules={[ Navigation, Pagination, Scrollbar, A11y, Virtual]}
-      navigation
       height={"100%"}
-      pagination={{ clickable: true }}
       loop={true}
       style={{
         "--swiper-navigation-color": "#fff",
-        "--swiper-pagination-color": "#fff",
         "--swiper-navigation-size": "1.5rem"
       }}
     >
