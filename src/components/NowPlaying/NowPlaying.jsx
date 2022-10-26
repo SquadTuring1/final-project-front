@@ -6,7 +6,7 @@ import logoMammoth from '../../assets/images/empty-cover-logo.svg'
 import { apiSlice } from '../../features/api/apiSlice'
 
 const NowPlaying = () => {
-  const currentSong = useSelector(getCurrentSong || api.endpoints.getSongs.select());
+  const currentSong = useSelector(getCurrentSong && getCurrentSong);
   
 
   let imageUrl;

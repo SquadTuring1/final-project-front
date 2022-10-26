@@ -11,14 +11,14 @@ import Modal from 'react-modal';
 import PopoverSongCover from '../../../components/PopoverSongCover/index';
 import logoMammoth from '../../../assets/images/empty-cover-logo.svg'
 import LikedSong from '../../../components/LikedSong'
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { getUserId } from '../../../features/auth/authSlice';
+import { getSongList, setCurrentSong } from '../../../features/songs/songsSlice';
 
 const SongItem = ({ artist, title, cover, songId, likedBY }) => {
-
+  const dispatch = useDispatch();
   const userId = useSelector(getUserId)
-  
-  
+  const songList = useSelector(getSongList)
 
   const emptyCover = () => {
     if (cover !== undefined) {
@@ -28,12 +28,20 @@ const SongItem = ({ artist, title, cover, songId, likedBY }) => {
     }
   }
 
+  const handleClick = () => {
+    const index = songList.findIndex(song => song._id === songId);
+    dispatch(setCurrentSong({ currentSongIndex: index, _id: songId, fileUrl: songList[index].fileUrl }))
+    console.log('clicking song item')
+  }
+
   return (
     <div key={songId} >
     <CoverSongMain>
       {/* <SongsH2>Your Songs</SongsH2> */}
         <PopoverSongCover />
-      <CoverSong src={emptyCover()} /> 
+      <CoverSong src={emptyCover()} 
+      onClick={handleClick} 
+      /> 
       <article>
         <CoverSongTitle>{title}</CoverSongTitle>
       </article>

@@ -20,7 +20,8 @@ const SongList = () => {
   }, [songList])
 
   const handleSongClick = (songIndex, _id, fileUrl) => {
-    dispatch(setCurrentSong({currentSongIndex: songIndex, _id, fileUrl}))
+    const currentSongObj = {currentSongIndex: songIndex, _id, fileUrl: fileUrl}
+    dispatch(setCurrentSong(currentSongObj))
   }
 
   let content;
@@ -28,10 +29,10 @@ const SongList = () => {
     content = <p>Loading...</p>
   } else if (isSuccess) {
     content = songList.map(({ _id, imageUrl, artist, title, fileUrl }, songIndex) => 
-      <SongItem key={_id} artist={artist && artist.artistName} title={title} cover={imageUrl} songId={_id}
+      <SongItem key={_id} artist={artist && artist.artistName} title={title} cover={imageUrl} songId={_id} songIndex={songIndex} fileUrl={fileUrl}
       onClick={() => handleSongClick(songIndex, _id, fileUrl)}
-      />              
-    )        
+      />   
+    )
   } else if (isError) {
     content = <p>{error}</p>
   }

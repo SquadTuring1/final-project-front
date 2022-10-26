@@ -4,7 +4,6 @@ import { CoverCategoryMain, CoverSong } from '../../../ui/index'
 
 
 const CategoryItem = () => {
-
   const { data: genres, isLoading, isSuccess, isError, error } = useGetGenresQuery();
 
   let content;

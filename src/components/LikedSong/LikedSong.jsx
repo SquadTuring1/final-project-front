@@ -11,8 +11,9 @@ import auth from '../../utils/firebase/firebaseConfig.js';
 export default function LikedSong({ songId, likedBY }) {
   
   const userId = useSelector(getUserId)
-  const [ isLiked, setIsLiked] = useState(likedBY?.some(user => user._id === userId))
-  
+  console.log(userId)
+  const [ isLiked, setIsLiked] = useState(likedBY && likedBY.some(user => user._id === userId))
+  console.log(isLiked)
 
   const [ likeASong, { isLoading } ] = useLikeASongMutation();
   const [ deleteASong, { isLoading: deleteLoading } ] = useDeleteLikeASongMutation()
