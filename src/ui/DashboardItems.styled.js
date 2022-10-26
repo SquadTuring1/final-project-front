@@ -57,7 +57,7 @@ export const CoverCategoryMain = styled.main`
 
   display: flex;
   flex-shrink: 1;
-  height: 10vh
+  height: 15vh;
   
  
 `;
