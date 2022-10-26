@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
 import {
   MainSign,
   Button,
@@ -11,6 +10,7 @@ import {
   Logo,
   Input,
   Label,
+  ResponseMessage
 } from '../../ui/index';
 import logoSM from '../../assets/images/Logo-sign.png';
 
@@ -28,12 +28,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAuthUser, userSignedIn } from '../../features/auth/authSlice';
 import { useGetSingleUserQuery } from '../../features/api/apiSlice';
 import { skipToken } from '@reduxjs/toolkit/dist/query';
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.min.css'
+import { nanoid } from '@reduxjs/toolkit';
+
 
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const authUser = useSelector(getAuthUser ? getAuthUser : skipToken);
+  const authUser = useSelector(getAuthUser && getAuthUser);
   const { data: dbUser, isLoading, isSuccess, error } = useGetSingleUserQuery(authUser.uid);
+
+  
 
   useEffect(() => {
     if (isLoading) {
@@ -41,8 +47,6 @@ const Login = () => {
       return;
     }
     if (isSuccess) {
-      console.log('Well done!');
-      console.log({ ...authUser, ...dbUser });
       dispatch(userSignedIn({ ...authUser, ...dbUser.currentUser }));
       dbUser.currentUser && navigate('/dashboard');
     }
@@ -77,9 +81,13 @@ const Login = () => {
           uid: uid,
         };
         dispatch(userSignedIn(userObject));
+        authUser && toast.success(`You are now logged in as ${email}`, {
+          toastId: nanoid(),
+        })
       });
     } catch (error) {
       console.log(error);
+      toast.error(`You were unable to log in`, { toastId: nanoid() })
     }
   };
 
@@ -105,7 +113,7 @@ const Login = () => {
               required: 'Email is required',
             })}
           />
-          <ErrorMessage errors={errors} name="email" as="p" />
+          <ErrorMessage as={ResponseMessage} className="login error" errors={errors} name="email" />
           {/* </CenterArticle>
         <CenterArticle loginLab> */}
           {/* <Label passPos htmlFor="password">
@@ -120,7 +128,7 @@ const Login = () => {
               required: 'Password is required',
             })}
           />
-          <ErrorMessage errors={errors} name="password" as="p" />
+          <ErrorMessage as={ResponseMessage} className="login error" errors={errors} name="password" />
         </CenterArticle>
         <TextColor as={Link} to="/reset" className="forgotPass">
           Forgot your password?

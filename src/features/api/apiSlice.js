@@ -14,7 +14,7 @@ export const apiSlice = createApi({
       }  
       return headers
     }, }),
-  tagTypes: ['User', 'Songs'],
+  tagTypes: ['User', 'Songs', 'Playlists'],
   endpoints: (builder) => ({
     getUsers: builder.query({
       query: () => '/users',
@@ -55,7 +55,36 @@ export const apiSlice = createApi({
         }
       }),
       invalidatesTags: ['Users']
-    })
+    }),
+    likeASong: builder.mutation({
+      query: ({songId, userId}) => ({
+        url: `/songs/${songId}/like`,
+        method: 'POST',
+        body: {
+          userId: userId,
+        }
+      }),
+      invalidatesTags: ['Songs']
+    }),
+    deleteLikeASong: builder.mutation({
+      query: ({songId, userId}) => ({
+        url: `/songs/${songId}/like`,
+        method: 'DELETE',
+        body: {
+          userId: userId,
+        }
+      }),
+      invalidatesTags: ['Songs']
+    }),
+    getPlaylists: builder.query({
+      query: () => '/playlists',
+      providesTags: ['Playlists']
+    }),
+    getSinglePlaylist: builder.query({
+      query: (playlistId) => `/playlists/${playlistId}`,
+      method: 'GET',
+    }),
+    
   })
 })
 
@@ -65,6 +94,10 @@ export const {
   useGetSingleUserQuery,  
   useAddUserMutation,
   useUpdateUserMutation,
+  useLikeASongMutation,
+  useDeleteLikeASongMutation,
   useSignUpUserMutation,
-  useGetSongsQuery
+  useGetSongsQuery,
+  useGetPlaylistsQuery,
+  useGetSinglePlaylistQuery,
 } = apiSlice;

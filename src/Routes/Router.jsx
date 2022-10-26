@@ -34,6 +34,7 @@ const Router = () => {
         <Route path="cloudinary" element={<FormCloudinary2 />} />
         <Route path="*" element={<ErrorPage />} />
       </Route>
+      
     </Routes>
   );
 };

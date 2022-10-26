@@ -25,11 +25,13 @@ export const ProgressTime = styled.article`
 
 export const MusicVolume = styled.article `
   display:none;
+  color: #fff;
   grid-area: volume;
   /* border: 1px dotted #fff; */
 
   @media (min-width: 960px) {
     display: block;
+
 
     &.volume__bar {
       display: flex;
@@ -40,8 +42,7 @@ export const MusicVolume = styled.article `
     &.progress_bar {
       display: flex;
       justify-content: center;
-    }
-    
+    }    
   }
 `
 

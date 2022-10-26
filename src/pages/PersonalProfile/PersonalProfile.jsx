@@ -1,31 +1,33 @@
 import { ErrorMessage } from '@hookform/error-message';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Popover } from 'react-tiny-popover';
-import { getAuthUser } from '../../features/auth/authSlice';
-import {
-  MainDash,
-  TitleH2,
-  Input,
-  Label,
-  CenterArticle,
-  CenterProfile,
-  TitleP,
-  Button,
-} from '../../ui/index';
+import { getAuthUser, userSignedIn } from '../../features/auth/authSlice';
+import { MainDash, TitleH2, Input, CenterArticle, CenterProfile, TitleP, Button, ResponseMessage, } from '../../ui/index';
 import auth from '../../utils/firebase/firebaseConfig';
+import { updatePassword } from 'firebase/auth'
 import { useUpdateUserMutation } from '../../features/api/apiSlice';
+import FileUploader from './FileUploader';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css'
+import { nanoid } from '@reduxjs/toolkit';
+
+
 
 
 const PersonalProfile = () => {
-  const [modifyInfo, setModifyInfo] = useState(true);
-  
-  const authUser = useSelector(getAuthUser);
-  
-  const [ updateUser, { isLoading } ] = useUpdateUserMutation();
+  const dispatch = useDispatch();
+  const [modifyInfo, setModifyInfo] = useState(true);  // enable editing in fields
+  const [ message, setMessage ] = useState({});
   
   
+  
+  // global state for auth and api for user query
+  const authUser = useSelector(getAuthUser);  
+  const [ updateUser, { isLoading, isError, error } ] = useUpdateUserMutation();  
+
+  // form settings
   const { getValues, register, reset, watch, handleSubmit, formState: { errors }, } = useForm({
     defaultValues: {
       username: authUser.username,
@@ -37,6 +39,7 @@ const PersonalProfile = () => {
     },
   });
 
+  // control modify & save btns
   const handleDisabled = (e) => {
     e.preventDefault();
     setModifyInfo(false);
@@ -45,29 +48,51 @@ const PersonalProfile = () => {
   const handleEnabled = () => {
     setModifyInfo(true);
   };
-
+  
+  
+  // update user info to db 
   const onSubmit = async (data) => {
-    if (!isLoading) {
+    console.log(updateUser, isLoading)
+    const canSave = [data.email, data.firstName, data.lastName].every(Boolean) && !isLoading
+    if (canSave && !isLoading) {
       try {
         const userObj = {  uid: authUser.uid, firstName: data.firstName, lastName: data.lastName}; 
-        console.log(userObj)       
         await updateUser({...userObj}).unwrap();
-        // reset();
+        dispatch(userSignedIn({ ...authUser, ...userObj }))
+        toast.success('User updated successfully!', { toastId: nanoid() })
+        
       } catch (error) {
         console.log('Failed to update user')
+        toast.error('User was not updated', { toastId: nanoid() })
       }
     }
     handleEnabled();
+    
   };
+
+  // change update pw to firebase
+  const changePassword = async () => {
+    const newPassword = getValues().newPassword;
+    console.log(newPassword)
+
+    updatePassword(auth.currentUser, newPassword).then(() => {
+      console.log('Update Successful')
+      toast.success('Password updated successfully!', { toastId: nanoid() })
+    }).catch ((error) => {
+      console.log('Error: ', error)
+      toast.error('Password was not updated', { toastId: nanoid() })
+    })
+  }
+
+
 
   return (
     <MainDash>
       <form id="personalProfileForm" onSubmit={handleSubmit(onSubmit)}>
         <CenterProfile loginLab>
           <TitleH2 className="profile__title">Profile</TitleH2>
-          <TitleP>Avatar</TitleP>
-          <input accept="image/png,image/jpeg" type="file" />
-          {/* <Label className="username__profile">Username</Label> */}
+          {/* <Button><input accept="image/png,image/jpeg" id="avatar__input" type="file"  />Avatar</Button> */}
+          <FileUploader buttonName='Avatar'></FileUploader>
           <Input
             disabled
             className="username__input"
@@ -120,17 +145,17 @@ const PersonalProfile = () => {
             placeholder="New password"
             {...register('newPassword')}
           />
-          <Button>Change Password</Button>
-         
         </CenterProfile>
       </form>
+      <Button className="pass__btn" type="button" onClick={(e) => changePassword(e)}>Change Password</Button>
+
       <CenterArticle className="button__profile--container">
             {modifyInfo ? (
               // enables editing of name
               <Button className="modify__btn" type="button" onClick={(e) => {handleDisabled(e)}}>
                 Modify
               </Button>
-            ) : (              
+            ) : (
               <Button className="modify__btn" form="personalProfileForm" type="submit" >
                 Save
               </Button>

@@ -5,7 +5,14 @@ import SongItem from '../SongItem/index'
 import SongList from '../SongList/SongList'
 
 
+
 const GeneralDashboard = () => {
+  
+
+
+
+
+
   return (
     <GenDashMain>
       <CategoryDash />

@@ -14,6 +14,12 @@ export const CenterArticle = styled.article`
 `;
 
 export const CenterProfile = styled(CenterArticle)`
-  height:90vh;
+  margin-top: -3rem;
+  height:50vh;
   align-items: center;
+
+  &.button {
+    
+    height: 100%;
+  }
 `

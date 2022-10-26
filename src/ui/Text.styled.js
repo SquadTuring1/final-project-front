@@ -53,7 +53,7 @@ export const TitleSign = styled.h2`
   margin-top: ${({ signUp }) => (signUp ? '2rem' : '')};
   padding-bottom: 1rem;
   color: #eee;
-  font-size: 2.5rem;
+  font-size: ${({uploadModal}) => (uploadModal ? '2.7rem' : '2.5rem')};
   font-weight: 600;
   text-align: center;
 `;
@@ -74,3 +74,29 @@ export const TitleP = styled.p`
     display: flex;
   }
 `;
+
+
+export const ResponseMessage = styled.p`
+  font-size: 1rem;
+  font-weight: 400; 
+  
+
+  &.success {
+    color: yellow;
+  }
+
+  &.error {
+    color: #FF63D3;
+  }
+
+
+  &.login {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    bottom: 2.75rem;
+    right: 1rem;
+}`
+
+

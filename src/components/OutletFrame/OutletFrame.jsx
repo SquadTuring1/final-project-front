@@ -11,7 +11,7 @@ import { Sidebar } from '../Sidebar/index'
 
 const OutletFrame = () => {
   return (
-    <MainOutlet>
+    <MainOutlet >
       <NavOutlet><Navbar /></NavOutlet>
       <SideOutlet><Sidebar /></SideOutlet>
       <PlayerOutlet><MusicPlayer /></PlayerOutlet>

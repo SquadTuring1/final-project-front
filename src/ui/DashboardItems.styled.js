@@ -29,6 +29,7 @@ export const CoverPlaylistMain = styled.main`
   margin: 1rem 1rem 2rem 1rem;
   padding: .4rem 0 .4rem .7rem;
 
+
   @media(min-width: 960px) {
     width: 14.35rem;
   }

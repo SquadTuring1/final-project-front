@@ -3,10 +3,11 @@ import { CenterArticle, CenterProfile } from './CenterArticle.styled';
 import { GlobalStyle } from './GlobalStyles';
 import { Input, Label } from './Form.styled';
 import { Logo } from './Logo.styled';
-import { MainApp, MainDash, MainHome, MainSign } from './Main.styled';
-import { TextAccount, TextColor, TextTerms, TermColor, TextRemember, TitleSign, TitleH2, TitleP } from './Text.styled';
+import { MainApp, MainDash, MainHome, MainModal, MainSign } from './Main.styled';
+import { TextAccount, TextColor, TextTerms, TermColor, TextRemember, TitleSign, TitleH2, TitleP, ResponseMessage } from './Text.styled';
 import { MainNav, NavContent, AvatarContent, Avatar, ButtonAvatar, GreenDot } from './Avatar.styled';
 import { PopCoverItems, PopItems, PopMenu } from './PopMenu.styled';
+import { PlaylistColumn, PlaylistCoverSm, PlaylistContainer, PlaylistSong, PlaylistColumnSongs } from './Playlist.styled';
 import { MainFlex, CategoryRow, SongsRow, PlaylistRow, SpecialRow } from './Grid.styled';
 import { CurrentSongMbl, MusicBar, MusicControls, MusicVolume, PlayerMain, ProgressTime } from './PlayerMain.styled';
 import { MainControl, ShuffleBtn, RepeatBtn, PlayBtn, ChangeSongBtn } from './PlayerControls.styled';
@@ -21,6 +22,12 @@ import { NavOutlet, SideOutlet, PlayerOutlet, MainOutlet } from './GridOutlet.st
 import { IconHome, IconFavorites, IconPlaylist, IconCategories, IconUpload } from './Icons.styled';
 import { UploadButton } from './UploadButton.syled';
 
+
+
+// Upload modal
+export {
+  MainModal
+}
 
 // Dashboard Home
 export {
@@ -143,7 +150,9 @@ export {
   TextRemember,
   TitleSign,
   TitleH2,
-  TitleP }
+  TitleP,
+  ResponseMessage,
+}
 
   // Navbar
   export {
@@ -163,3 +172,12 @@ export {
   //   GridPlayerItem, 
   //   GridSideItem
   // }
+
+// Playlists
+export {
+  PlaylistColumn,
+  PlaylistCoverSm,
+  PlaylistContainer,
+  PlaylistSong,
+  PlaylistColumnSongs
+}
