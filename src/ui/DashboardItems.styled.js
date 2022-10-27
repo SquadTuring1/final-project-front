@@ -55,5 +55,11 @@ export const PlaylistInfo = styled(PlaylistTitle)`
 /// Category component ///
 
 export const CoverCategoryMain = styled.main`
+  display: flex;
 
-`;
+  &img {
+    height: 3rem;
+  }
+
+`
+;

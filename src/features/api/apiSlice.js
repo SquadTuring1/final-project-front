@@ -4,17 +4,19 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 export const apiSlice = createApi({
   reducerPath: 'api',
-  baseQuery: fetchBaseQuery({ 
+  baseQuery: fetchBaseQuery({
     baseUrl: import.meta.env.VITE_BASE_URL,
+    // refetchOnMountOrChange: true,
+    // refetchOnFocus: true,
     prepareHeaders: (headers, { getState }) => {
-      const token = getState().auth.token  
+      const token = getState().auth.token
       // If we have a token set in state, let's assume that we should be passing it.
       if (token) {
         headers.set('Authorization', `Bearer ${token}`)
-      }  
+      }
       return headers
     }, }),
-  tagTypes: ['User', 'Songs', 'Playlists'],
+  tagTypes: ['User', 'Songs', 'Playlists', 'Genres'],
   endpoints: (builder) => ({
     getUsers: builder.query({
       query: () => '/users',
@@ -32,10 +34,24 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: ['User']
     }),
+    logInAndUpdateToken: builder.mutation({
+      query: ({ uid, token }) => ({
+        url: '/login',
+        method: 'PATCH',
+        body: {
+          uid: uid,
+          token: token,
+        }
+      })
+    }),
     getSongs: builder.query({
       query: () => '/songs',
       transformResponse: res => Object.entries(res)[0][1],
-      providesTags: ['Songs']
+      // providesTags: ['Songs'],
+      providesTags: (result, error, arg) =>
+        result
+          ? [...result.map(({ id }) => ({ type: 'Songs', id })), 'Songs']
+          : ['Songs'],
     }),
     addUser: builder.mutation({
       query: (user) => ({
@@ -64,7 +80,8 @@ export const apiSlice = createApi({
           userId: userId,
         }
       }),
-      invalidatesTags: ['Songs']
+      // invalidatesTags: ['Songs']
+      invalidatesTags: (result, error, arg) => [{ type: 'Songs', id: arg.id }],
     }),
     deleteLikeASong: builder.mutation({
       query: ({songId, userId}) => ({
@@ -84,20 +101,29 @@ export const apiSlice = createApi({
       query: (playlistId) => `/playlists/${playlistId}`,
       method: 'GET',
     }),
-    
+    getGenres: builder.query({
+      query: () => '/genres',
+      providesTags: (result, error, arg) =>
+        result
+          ? [...result.map(({ id }) => ({ type: 'Genres', id })), 'Genres']
+          : ['Genres'],
+    }),
+
   })
 })
 
 
-export const { 
+export const {
   useGetUsersQuery,
-  useGetSingleUserQuery,  
+  useGetSingleUserQuery,
   useAddUserMutation,
   useUpdateUserMutation,
   useLikeASongMutation,
   useDeleteLikeASongMutation,
   useSignUpUserMutation,
+  useLogInAndUpdateTokenMutation,
   useGetSongsQuery,
+  useGetGenresQuery,
   useGetPlaylistsQuery,
   useGetSinglePlaylistQuery,
 } = apiSlice;

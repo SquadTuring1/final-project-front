@@ -1,11 +1,13 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { getCurrentSong } from '../../features/songs/songsSlice'
+import { getCurrentSong, getSongList } from '../../features/songs/songsSlice'
 import {  CurrentSong, CurrentPlaying, CoverSongArtist, CoverSongTitle, SongsH2, CoverSong } from '../../ui/index'
 import logoMammoth from '../../assets/images/empty-cover-logo.svg'
+import { apiSlice } from '../../features/api/apiSlice'
 
 const NowPlaying = () => {
-  const currentSong = useSelector(getCurrentSong);
+  const currentSong = useSelector(getCurrentSong && getCurrentSong);
+  
 
   let imageUrl;
   let title;
@@ -20,18 +22,18 @@ const NowPlaying = () => {
     artist = 'Loading artist...'
   }
  
-  if (currentSong) {
-    return (
-      <CurrentSong>
-          <CurrentPlaying>
-          <SongsH2 className='sidebar__desktop--nowplaying'>Now playing</SongsH2>        
-          <CoverSong className='sidebar__desktop--cover' src={imageUrl ? imageUrl : logoMammoth} alt="" />        
-          <CoverSongTitle className='sidebar__desktop--title'>{title}</CoverSongTitle>
-          <CoverSongArtist className='sidebar__desktop--artist'>{artist}</CoverSongArtist>
-          </CurrentPlaying>
-        </CurrentSong>
-      )
-  }
+  
+  return (
+    <CurrentSong>
+      <CurrentPlaying>
+      <SongsH2 className='sidebar__desktop--nowplaying'>Now playing</SongsH2>        
+      <CoverSong className='sidebar__desktop--cover' src={imageUrl} alt="" />        
+      <CoverSongTitle className='sidebar__desktop--title'>{title}</CoverSongTitle>
+      <CoverSongArtist className='sidebar__desktop--artist'>{artist}</CoverSongArtist>
+      </CurrentPlaying>
+    </CurrentSong>
+    )
+
     
 }
 

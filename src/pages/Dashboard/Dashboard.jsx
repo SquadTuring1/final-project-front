@@ -8,6 +8,7 @@ import {
 } from '../../ui/index';
 import SongItem from './SongItem/index';
 import SongList from './SongList/SongList';
+import Categories from './CategoryItem/CategoryItem';
 import { Scrollbars } from 'react-custom-scrollbars-2';
 import PlaylistItem from './PlaylistItem';
 import PlaylistList from './PlaylistList/PlaylistList';
@@ -18,7 +19,7 @@ const Dashboard = () => {
       <MainFlex>
         <CategoryRow>
           <h2>Genres</h2>
-          <SongList />
+          <Categories />
         </CategoryRow>
         <SongsRow>
         <h2>My Songs</h2>
