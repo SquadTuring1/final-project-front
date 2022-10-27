@@ -22,7 +22,6 @@ const PopoverSongCover = () => {
         <Button
           id="resources-button"
           onClick={handleClick}
-          aria-control={open ? 'resources-menu' : undefined}
           aria-haspopup="true"
           aria-expanded={open ? 'true' : undefined}
         >

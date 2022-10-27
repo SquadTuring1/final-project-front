@@ -9,6 +9,7 @@ position: relative;
   border-radius: .3rem;
   background-color: #0A101A;
   padding: .5rem .7rem;
+  width: 10rem;
 
 
   &:hover {
