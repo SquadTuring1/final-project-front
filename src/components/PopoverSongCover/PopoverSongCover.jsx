@@ -17,7 +17,7 @@ import { CoverMenuIcon } from '../../ui/DashboardImg.styled';
 import {
   useGetPlaylistsQuery,
   useAddSongToPlaylistMutation,
-  useGetSinglePlaylistQuery,
+  // useGetSinglePlaylistQuery,
   useAddPlaylistMutation
 } from '../../features/api/apiSlice';
 import { autocompleteClasses } from '@mui/material';
