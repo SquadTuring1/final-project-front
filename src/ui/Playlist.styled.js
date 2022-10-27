@@ -19,6 +19,7 @@ export const PlaylistColumn = styled.section `
   flex-wrap: wrap;
   grid-area: playlist;
   margin: 0 0 0 1rem;
+
   
   /* height: 60vh;
   width: 50%;
@@ -39,6 +40,7 @@ export const PlaylistColumn = styled.section `
 export const PlaylistColumnSongs = styled.section`
 grid-area: songs;
   margin: 0 1rem 0 0;
+
 `;
 
 
@@ -88,11 +90,10 @@ export const PlaylistSong = styled.div`
   height: 2rem;
   width: 90%;
   display: flex;
-  
+  /* border-bottom: 1px solid #fff; */
+  color: #fff;
   align-items: center;
-  color: hsla(0, 0%, 0%, 0.1);
-  background-color: lightgrey;
-  color: black;
   font-size: 1.2rem;
-  padding: 0.4rem;
+  padding:0 0 1.5rem 0;
+  margin: 2rem 0;
 `

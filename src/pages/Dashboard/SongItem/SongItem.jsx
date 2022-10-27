@@ -38,7 +38,7 @@ const SongItem = ({ artist, title, cover, songId, likedBY }) => {
     <CoverSongMain>
       {/* <SongsH2>Your Songs</SongsH2> */}
         <PopoverSongCover />
-      <CoverSong src={emptyCover()} 
+      <CoverSong cover={cover} src={emptyCover()} 
       onClick={handleClick} 
       /> 
       <article>
@@ -48,7 +48,7 @@ const SongItem = ({ artist, title, cover, songId, likedBY }) => {
         <CoverSongArtist>{artist}</CoverSongArtist>
       </article>
       <LikedSong songId={songId} likedBY={likedBY} />      
-    </CoverSongMain>    
+    </CoverSongMain>
     </div>
   )
 }

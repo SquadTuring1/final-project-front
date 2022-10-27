@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { RiMore2Line } from 'react-icons/ri';
 
+
 import { MenuItem, Menu, Button } from '@mui/material';
+import { CoverMenuIcon } from '../../ui/DashboardImg.styled';
 
 const PopoverSongCover = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -19,7 +21,7 @@ const PopoverSongCover = () => {
   return (
     <div>
       <article>
-        <Button
+        <CoverMenuIcon as={Button}
           id="resources-button"
           onClick={handleClick}
           // aria-control={open ? 'resources-menu' : undefined}
@@ -27,7 +29,7 @@ const PopoverSongCover = () => {
           aria-expanded={open ? 'true' : undefined}
         >
           <RiMore2Line />
-        </Button>
+        </CoverMenuIcon>
       </article>
       <Menu
         id="resources-menu"

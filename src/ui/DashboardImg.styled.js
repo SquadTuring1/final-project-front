@@ -16,11 +16,17 @@ export const CoverSong = styled.img`
     transform: scale(1.03);
     transition: transform .7s;
   }
+
+  &.cover__song--playlist {
+    height: 2.6rem;
+    width: 2.6rem;
+    margin: 0 1.7rem;
+  }
 `;
 
 export const CoverMenuIcon = styled.article`
   position: absolute;
   transform: scale(1.3);
-  top: 8.5rem;
-  left: 7.5rem;
+  top: 9.2rem;
+  left: 5.5rem;
 `;
