@@ -8,21 +8,21 @@ export const MainFlex = styled.main`
 `;
 
 export const CategoryRow = styled.section`
-  border: 1px dashed #fff;
+  /* border: 1px dashed #fff; */
 `;
 
 export const SongsRow = styled.section`
-  border: 1px dashed #fff;
+  /* border: 1px dashed #fff; */
 `;
 
 export const PlaylistRow = styled.section`
-  border: 1px dashed #fff;
+  /* border: 1px dashed #fff; */
 `;
 
 
 
 export const SpecialRow = styled.section`
-  border: 1px dashed #fff;
+  /* border: 1px dashed #fff; */
 `;
 
 

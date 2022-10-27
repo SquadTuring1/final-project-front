@@ -16,12 +16,12 @@ import { SidebarMain, UploadBtn, CurrentSong, CurrentPlaying } from './SidebarMa
 import { CategoryDash, GenDashMain, PlaylistDash, RecommendedDash, SongsDash } from './GeneralDashboardGrid.styled';
 import { CoverMenuIcon, CoverSong } from './DashboardImg.styled';
 import { CoverSongTitle, CoverSongArtist, SongsH2, SongTimer } from './DashboardText.styled';
-import { CoverCategoryMain, CoverPlaylistMain, CoverSongMain, PlaylistTitle, PlaylistInfo } from './DashboardItems.styled';
+import { CoverCategoryMain, CoverPlaylistMain, CoverSongMain, PlaylistTitle, PlaylistInfo, CoverCategoryImg } from './DashboardItems.styled';
 import { SideMenu, SideMenuItems } from './MenuItems.styled';
 import { NavOutlet, SideOutlet, PlayerOutlet, MainOutlet } from './GridOutlet.styled';
 import { IconHome, IconFavorites, IconPlaylist, IconCategories, IconUpload } from './Icons.styled';
 import { UploadButton } from './UploadButton.syled';
-
+CoverCategoryImg
 
 
 // Upload modal
@@ -69,7 +69,8 @@ export {
 
 // General Dashboard - Category covers
 export {
-  CoverCategoryMain
+  CoverCategoryMain,
+  CoverCategoryImg
 }
 
 // General Dashboard - Your Songs covers

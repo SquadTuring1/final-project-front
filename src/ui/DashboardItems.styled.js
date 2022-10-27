@@ -54,12 +54,14 @@ export const PlaylistInfo = styled(PlaylistTitle)`
 
 /// Category component ///
 
+export const CoverCategoryImg = styled.img`
+height: 8rem;
+margin: 0 1rem;
+`;
+
 export const CoverCategoryMain = styled.main`
   display: flex;
 
-  &img {
-    height: 3rem;
-  }
 
 `
 ;

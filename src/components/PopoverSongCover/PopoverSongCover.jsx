@@ -12,6 +12,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
+import { CoverMenuIcon } from '../../ui/DashboardImg.styled';
 
 import {
   useGetPlaylistsQuery,
@@ -140,7 +141,7 @@ const PopoverSongCover = ({ songId }) => {
   return (
     <div>
       <article>
-        <Button
+        <CoverMenuIcon as={Button}
           id="resources-button"
           onClick={handleClick}
           // aria-control={open ? 'resources-menu' : undefined}
@@ -148,7 +149,7 @@ const PopoverSongCover = ({ songId }) => {
           aria-expanded={open ? 'true' : undefined}
         >
           <RiMore2Line />
-        </Button>
+        </CoverMenuIcon>
       </article>
       <Menu
         id="resources-menu"
