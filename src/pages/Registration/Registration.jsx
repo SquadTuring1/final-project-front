@@ -16,6 +16,7 @@ import auth from '../../utils/firebase/firebaseConfig.js';
 
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css'
+import { nanoid } from '@reduxjs/toolkit';
 
 
 
@@ -30,9 +31,9 @@ const Registration = () => {
   // get the function addUser from apiSlice hook, only need the function since adding
   const [signUpUser, { isLoading: isLoadingSignup }] = useSignUpUserMutation();
 
-  const showToast = (type, string) => {
-    type === 'success' ? toast.success(string) : toast.error(string);
-  }
+  // const showToast = (type, string) => {
+  //   type === 'success' ? toast.success(string) : toast.error(string);
+  // }
 
   // set variables from react-hook-form
   const { getValues, register, handleSubmit, formState: { errors },} = useForm({
@@ -72,16 +73,16 @@ const Registration = () => {
       try {
         console.log('adding to db')
         await signUpUser(userObj);    // add to db
-        console.log('Signed up successfully') 
-        showToast('success', 'Signed up successfully')
+        console.log('User created successfully') 
+        toast.success('User created successfully', { toastId: nanoid() })
         authUser && dispatch(userSignedIn({ ...authUser, ...userObj }))
       } catch (error) {
         console.log('Signup failed')
-        showToast('error', 'Signup failed')
+        toast.error('Signup failed', { toastId: nanoid() })
       }      
     } else {
       console.log('Cannot save user')
-      showToast('error', 'User could not be created')
+      toast.error('User could not be created', { toastId: nanoid() })
     }
   };
 
@@ -104,6 +105,7 @@ const Registration = () => {
           } else if (isSuccess) {
             console.log(dbUser)
             dispatch(userSignedIn({ ...authUser, ...dbUser.currentUser }))
+            toast.success(`${data.email} is now signed in`, { toastId: nanoid() })
           }
         }
         console.log('User Created');
@@ -112,6 +114,7 @@ const Registration = () => {
     } catch (error) {
       setSignUpError(error.message);
       console.log(error.message);
+      toast.error('User could not be created', { toastId: nanoid() })
     }
   };
 

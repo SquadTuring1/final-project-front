@@ -22,11 +22,6 @@ const PersonalProfile = () => {
   const [ message, setMessage ] = useState({});
   
   
-  // receive toast type and display (define inline)
-  const showToast = (type, string) => {
-    type === 'success' ? toast.success(string) : toast.error(string);
-  }
-
   
   // global state for auth and api for user query
   const authUser = useSelector(getAuthUser);  
@@ -64,11 +59,11 @@ const PersonalProfile = () => {
         const userObj = {  uid: authUser.uid, firstName: data.firstName, lastName: data.lastName}; 
         await updateUser({...userObj}).unwrap();
         dispatch(userSignedIn({ ...authUser, ...userObj }))
-        showToast('success', 'User updated successfully!')
+        toast.success('User updated successfully!', { toastId: nanoid() })
         
       } catch (error) {
         console.log('Failed to update user')
-        showToast('error', 'User was not updated')
+        toast.error('User was not updated', { toastId: nanoid() })
       }
     }
     handleEnabled();
@@ -82,10 +77,10 @@ const PersonalProfile = () => {
 
     updatePassword(auth.currentUser, newPassword).then(() => {
       console.log('Update Successful')
-      showToast('success', 'Password updated successfully!')
+      toast.success('Password updated successfully!', { toastId: nanoid() })
     }).catch ((error) => {
       console.log('Error: ', error)
-      showToast('error', 'Password was not updated')
+      toast.error('Password was not updated', { toastId: nanoid() })
     })
   }
 

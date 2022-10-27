@@ -1,138 +1,47 @@
 import React, { useState } from 'react';
-import {
-  RiArrowDropDownFill,
-  RiStarSFill,
-  RiEditBoxLine,
-  RiDeleteBinLine,
-  RiMore2Fill,
-  RiMore2Line
-} from 'react-icons/ri';
-import { useNavigate, Link } from 'react-router-dom';
-import { Popover } from 'react-tiny-popover';
-import {
-  CoverMenuIcon,
-  PopMenu,
-  PopCoverItems,
-  PopItems,
-  Button,
-} from '../../ui/index';
-import PopoverNavbar from '../PopoverNavbar';
-import ReactModal from 'react-modal';
+import { RiMore2Line } from 'react-icons/ri';
 
-import { useGetPlaylistsQuery } from "../../features/api/apiSlice"
-import { useAddSongToPlaylistMutation } from "../../features/api/apiSlice"
-import { setSongsList, setCurrentSong } from '../../features/songs/songsSlice'
-import { useSelector } from 'react-redux';
+import { MenuItem, Menu, Button } from '@mui/material';
 
-// Styles for add to playlist Modal
-const customStyles = {
-  content: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'column',
-    width: '30%',
-    border: 'none',
-    fontFamily: 'Source Sans Pro, sans-serif',
-    color: 'white',
-    backgroundColor: '#040810',
-    top: '50%',
-    left: '50%',
-    // right: 'auto',
-    bottom: 'auto',
-    // marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-    // overflow: hidden
-  },
-  overlay: {
-    backgroundColor: 'rgba(0, 0, 0, 0.7)'
-  }
-};
+const PopoverSongCover = () => {
+  const [anchorEl, setAnchorEl] = useState(null);
 
-const PopoverSongCover = ({songId}) => {
-  
-  // console.log("songId",songId)
-  const { data, isLoading, isSuccess, isError, error } = useGetPlaylistsQuery()
-  const [ addSongToPlaylist ] = useAddSongToPlaylistMutation()
-  // console.log(data)  
-  
+  const open = Boolean(anchorEl);
 
-  const playListArr = data.playlists  
-  console.log(playListArr)
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
 
-  const addToPlaylist = (_id) => {
-    console.log("works")
-    
-  }
-
-
-
-
-  const [isPopOpen, setIsPopOpen] = useState(false);  
-  const [modalOpen, setModalOpen] = useState(false)
-  const openModal = () => {
-    setModalOpen(true)
-  }
-  const closeModal = () => {
-    setModalOpen(false)
-  }
-  const handlePopOver = () => {
-    setModalOpen(false)
-      }
-  const handleDelete = () => {
-    console.log("sdjksjdkjsd")
-    setIsPopOpen(false)
-    openModal()
-  }
-
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
-    <Popover
-    onclick={handlePopOver}
-      isOpen={isPopOpen}
-      onClickOutside={() => setIsPopOpen(false)}
-      positions={['bottom']} // preferred positions by priority
-      content={
-        <PopMenu>
-          <PopCoverItems>
-            <PopItems>
-              <RiStarSFill /> Favorite
-            </PopItems>
-            <PopItems>
-              <RiEditBoxLine /> Edit
-            </PopItems>
-            <PopItems onClick={handleDelete}>             
-              
-             <RiDeleteBinLine  />Delete 
-            </PopItems>
-            <PopItems onClick={openModal}>+ Add to playlist</PopItems>
-            <ReactModal style={customStyles} isOpen={modalOpen} onRequestClose={closeModal}>  
-            {playListArr.map(({_id, title, isPrivate, songs, followers}) => {              
-              return (                
-                <article key={_id}>
-                  
-                  {title}
-                  <button onClick={()=>addToPlaylist(_id)}>Add</button>            
-
-                </article>
-
-
-              )
-              
-            })}      
-              
-              <PopItems onClick={closeModal}>Close</PopItems>
-              
-            </ReactModal>
-            {/* <Button onClick={openModal}>+ Add to playlist</Button> */}
-          </PopCoverItems>
-        </PopMenu>
-      }
-    >
-      <CoverMenuIcon onClick={() => setIsPopOpen(!isPopOpen)}>
-        <RiMore2Line />
-      </CoverMenuIcon>
-    </Popover>
+    <div>
+      <article>
+        <Button
+          id="resources-button"
+          onClick={handleClick}
+          aria-control={open ? 'resources-menu' : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? 'true' : undefined}
+        >
+          <RiMore2Line />
+        </Button>
+      </article>
+      <Menu
+        id="resources-menu"
+        anchorEl={anchorEl}
+        open={open}
+        MenuListProps={{
+          'aria-labelledby': 'resources-button',
+        }}
+        onClose={handleClose}
+      >
+        <MenuItem onClick={handleClose}>Edit</MenuItem>
+        <MenuItem onClick={handleClose}>Favorite</MenuItem>
+      </Menu>
+    </div>
   );
 };
 
