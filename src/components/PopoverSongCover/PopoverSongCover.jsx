@@ -1,4 +1,8 @@
 import { useState } from 'react';
+import { getUserId } from '../../features/auth/authSlice'
+import { useSelector } from 'react-redux';
+import { useNavigate } from "react-router-dom";
+
 import { RiMore2Line } from 'react-icons/ri';
 
 // import { MenuItem, Menu } from '@mui/material';
@@ -13,7 +17,11 @@ import {
   useGetPlaylistsQuery,
   useAddSongToPlaylistMutation,
   useGetSinglePlaylistQuery,
+  useAddPlaylistMutation
 } from '../../features/api/apiSlice';
+import { autocompleteClasses } from '@mui/material';
+import { CoverSongTitle } from '../../ui';
+import { async } from '@firebase/util';
 
 
 const style = {
@@ -22,27 +30,70 @@ const style = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: 500,
+  height: 'auto',
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
   p: 4,
 };
 
-
-
+const randomPlaylistTitle = () => {
+  const randomNumber = Math.floor(100000 + Math.random() * 900000)
+  return `playlist_${randomNumber}`
+}
 
 const PopoverSongCover = ({ songId }) => {  
-  const { data, isLoading, isSuccess, isError, error } = useGetPlaylistsQuery();  
-  // console.log(data.playlists)
+  const userId = useSelector(getUserId);
+  const navigate = useNavigate()
+  // console.log(userId)
+  const { data, isLoading, isSuccess, isError } = useGetPlaylistsQuery();  
   const [ addSongToPlaylist ] = useAddSongToPlaylistMutation() 
-
-  const handleAddSong = (playlistId) => {    
-    // console.log('playlistId', playlistId)
-    // console.log('songId',songId)
+  const [ addPlaylist, {isLoading: newPlaylist} ] = useAddPlaylistMutation()
+  
+  const handleAddSong = (playlistId) => {        
     addSongToPlaylist({playlistId, songId})
-    console.log('Song added to playlist!')
+    console.log('Song added to playlist!')    
     console.log({playlistId, songId})
   }
+
+  // const canSave = [userObj.token, userObj.uid, userObj.email, userObj.username].every(Boolean) && !isLoadingSignup;
+ 
+  const handleCreatePlaylist = async() => {
+    // const playListObj = {
+    //   title:randomPlaylistTitle(),
+    //   description: "",
+    //   isPrivate: false,
+    //   userId: userId,
+    //   songs: songId 
+    // }
+    // const canSave = [playListObj.title, playListObj.description, playListObj.isPrivate, playListObj.userId, playListObj.songs].every(Boolean)  && !newPlaylist;
+    // if (canSave){
+    //   console.log("works11")
+    //   try{       
+    //     await addPlaylist(playListObj).unwrap()
+    //     // console.log(result.status)
+    //     // if (result) navigate("/playlist")
+    //     // if (newPlaylist) navigate("/playlist")
+    //     console.log("works")
+    //   }catch (error){
+    //     console.log(error)
+    //   }      
+    // }        
+    
+    
+
+    addPlaylist({
+      title:randomPlaylistTitle(),
+      description: "",
+      isPrivate: false,
+      userId: userId,
+      songs: songId })
+    console.log(`${randomPlaylistTitle()} created`)
+    console.log('previous')
+    navigate("/playlist")
+    console.log('jksjdjsdljsljdlkjs')
+  }
+
 
   let content;
   if (isLoading) {
@@ -76,8 +127,7 @@ const PopoverSongCover = ({ songId }) => {
     setAnchorEl(null);
   };
   const openPlaylists = () => {
-    console.log('Playlist openened!');
-    // handleClose();
+    console.log('Playlist openened!');    
   };
   // end MUI pop over
 
@@ -109,8 +159,8 @@ const PopoverSongCover = ({ songId }) => {
         }}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose}>Edit</MenuItem>
-        <MenuItem onClick={handleClose}>Favorite</MenuItem>
+        <MenuItem onClick={handleClose}>Delete song</MenuItem>
+        <MenuItem onClick={handleClose}>Edit song</MenuItem>
         <MenuItem onClick={openPlaylists}>
           <Button onClick={handleOpenModal}>Add song to playlist</Button>
           <Modal
@@ -120,10 +170,9 @@ const PopoverSongCover = ({ songId }) => {
             aria-describedby="modal-modal-description"
           >
             <Box sx={style}>
-              <button>Create playlist</button>
+              <button onClick={handleCreatePlaylist}>Create playlist</button>
               <Typography id="modal-modal-title" variant="h6" component="h2">
-                {content}
-                
+                {content}                
               </Typography>              
             </Box>
           </Modal>
