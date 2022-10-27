@@ -81,7 +81,7 @@ export const apiSlice = createApi({
       providesTags: ['Playlists']
     }),
     addSongToPlaylist: builder.mutation({
-      query: (playlistId, songId) => ({
+      query: ({playlistId, songId}) => ({
         url: `/playlists/${playlistId}/addsong`,
         method: 'PATCH',
         body:{
@@ -93,8 +93,7 @@ export const apiSlice = createApi({
     getSinglePlaylist: builder.query({
       query: (playlistId) => `/playlists/${playlistId}`,
       method: 'GET',
-    }),
-    
+    }),    
   })
 })
 
