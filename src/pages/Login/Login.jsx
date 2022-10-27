@@ -26,7 +26,7 @@ import auth from '../../utils/firebase/firebaseConfig';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { getAuthUser, userSignedIn } from '../../features/auth/authSlice';
-import { useGetSingleUserQuery } from '../../features/api/apiSlice';
+import { useGetSingleUserQuery, useLogInAndUpdateTokenMutation } from '../../features/api/apiSlice';
 import { skipToken } from '@reduxjs/toolkit/dist/query';
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.min.css'
@@ -38,7 +38,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const authUser = useSelector(getAuthUser && getAuthUser);
   const { data: dbUser, isLoading, isSuccess, error } = useGetSingleUserQuery(authUser.uid);
-
+  const [ loginAndUpdateToken, { isLoadingLogin }] = useLogInAndUpdateTokenMutation();
   
 
   useEffect(() => {
@@ -81,6 +81,7 @@ const Login = () => {
           uid: uid,
         };
         dispatch(userSignedIn(userObject));
+        loginAndUpdateToken(userObject);
         authUser && toast.success(`You are now logged in as ${email}`, {
           toastId: nanoid(),
         })

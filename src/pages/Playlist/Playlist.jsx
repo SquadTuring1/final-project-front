@@ -42,7 +42,7 @@ const Playlist = () => {
     console.log(clickedPlaylist)
     songsContent = 
       clickedPlaylist.playlist.songs.map((song, index) => 
-        <PlaylistSong >
+        <PlaylistSong key={song._id}>
           <div>{index+1}.  </div>
           <div key={song._id}>{song.title}</div>
         </PlaylistSong>

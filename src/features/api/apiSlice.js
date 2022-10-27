@@ -34,6 +34,16 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: ['User']
     }),
+    logInAndUpdateToken: builder.mutation({
+      query: ({ uid, token }) => ({
+        url: '/login',
+        method: 'PATCH',
+        body: {
+          uid: uid,
+          token: token,
+        }
+      })
+    }),
     getSongs: builder.query({
       query: () => '/songs',
       transformResponse: res => Object.entries(res)[0][1],
@@ -111,6 +121,7 @@ export const {
   useLikeASongMutation,
   useDeleteLikeASongMutation,
   useSignUpUserMutation,
+  useLogInAndUpdateTokenMutation,
   useGetSongsQuery,
   useGetGenresQuery,
   useGetPlaylistsQuery,

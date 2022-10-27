@@ -15,9 +15,11 @@ const SongList = () => {
   // sets songList in songs state, if the query for data from getSongs returns a list
   useEffect(() => {
     if (isSuccess) {
-    dispatch(setSongsList({songList: songList, currentSongIndex: 0, currentSongId: songList[0]._id, currentSongUrl: songList[0].fileUrl, playing: false}));
+    dispatch(setSongsList({songList: songList, currentSongIndex: 0, currentSongId: songList[0]?._id, currentSongUrl: songList[0]?.fileUrl, playing: false}));
+    } else {
+      return;
     }
-  }, [songList])
+  }, [songList ])
 
 
 
@@ -25,8 +27,8 @@ const SongList = () => {
   if (isLoading) {
     content = <p>Loading...</p>
   } else if (isSuccess) {
-    content = songList.map(({ _id, imageUrl, artist, title, fileUrl, likedBY }, songIndex) => 
-      <SongItem key={_id} artist={artist && artist.artistName} title={title} cover={imageUrl} songId={_id} songIndex={songIndex} fileUrl={fileUrl} likedBY={likedBY} />   
+    content = songList?.map(({ _id, imageUrl, artist, title, fileUrl, likedBY }, songIndex) => 
+      <SongItem key={_id} artist={artist?.artistName} title={title} cover={imageUrl} songId={_id} songIndex={songIndex} fileUrl={fileUrl} likedBY={likedBY} />   
     )
   } else if (isError) {
     content = <p>{error}</p>
