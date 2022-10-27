@@ -1,6 +1,6 @@
 import React from 'react'
 import { useGetGenresQuery } from '../../../features/api/apiSlice'
-import { CoverCategoryMain, CoverPlaylistMain } from '../../../ui/index'
+import { CoverCategoryMain, CoverPlaylistMain, CoverCategoryImg } from '../../../ui/index'
 
 
 
@@ -16,7 +16,7 @@ const CategoryItem = () => {
     content =     
       genres.map(genre =>  
         <div key={genre._id}>
-          <img src={genre.imgUrl} /> 
+          <CoverCategoryImg src={genre.imgUrl} /> 
         </div>
       )
   }

@@ -9,7 +9,8 @@ position: relative;
   border-radius: .3rem;
   background-color: #0A101A;
   padding: .5rem .7rem;
-  
+  width: 10rem;
+
 
   &:hover {
     background-color: #0C1525;
@@ -53,12 +54,14 @@ export const PlaylistInfo = styled(PlaylistTitle)`
 
 /// Category component ///
 
+export const CoverCategoryImg = styled.img`
+height: 8rem;
+margin: 0 1rem;
+`;
+
 export const CoverCategoryMain = styled.main`
   display: flex;
 
-  &img {
-    height: 3rem;
-  }
 
 `
 ;

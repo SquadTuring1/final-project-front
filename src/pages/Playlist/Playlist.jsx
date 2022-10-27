@@ -1,10 +1,11 @@
 import { useSelector } from "react-redux";
-import { PlaylistColumn, PlaylistContainer, PlaylistTitle, PlaylistInfo, PlaylistCoverSm, PlaylistSong, PlaylistColumnSongs } from "../../ui/index"
+import { PlaylistColumn, PlaylistContainer, PlaylistTitle, PlaylistInfo, PlaylistCoverSm, PlaylistSong, PlaylistColumnSongs, CoverSong, CoverSongTitle } from "../../ui/index"
 import { useState } from 'react'
 import { getAuthUser } from "../../features/auth/authSlice";
 import { useGetPlaylistsQuery, useGetSinglePlaylistQuery } from "../../features/api/apiSlice";
 import Scrollbars from "react-custom-scrollbars-2";
-import SongItem from "../Dashboard/SongItem";
+import SongItem from '../Dashboard/SongItem/index'
+import PopoverSongCover from "../../components/PopoverSongCover";
 
 
 const Playlist = () => {
@@ -26,6 +27,7 @@ const Playlist = () => {
     playlistsContent = 
         <div>Playlists are being loaded...</div>
   } else if (isPlaylistsSuccess) {
+    console.log(playlistsData)
     playlistsContent = 
       <>
       {playlistsData.playlists.map(playlist =>
@@ -42,15 +44,16 @@ const Playlist = () => {
     songsContent = <div>No playlist selected</div>
   } else if (isClickedSuccess) {
     console.log(clickedPlaylist)
-    dispatch(setSongsList({songList: clickedPlaylist, currentSongIndex: 0, currentSongId: clickedPlaylist[0]?._id, currentSongUrl: List[0]?.fileUrl, playing: false}));
+    // dispatch(setSongsList({songList: clickedPlaylist, currentSongIndex: 0, currentSongId: clickedPlaylist[0]?._id, currentSongUrl: List[0]?.fileUrl, playing: false}));
     console.log(songList)
     songsContent = 
-      clickedPlaylist.playlist.songs.map((song, index) => 
-      
-      // <SongItem key={_id} /> </SongItem>
-        <PlaylistSong key={song._id}>
-          <div>{index+1}.  </div>
-          <div key={song._id}>{song.title}</div>
+      clickedPlaylist.playlist.songs.map(({ imageUrl, genre, title, artist, likedBy, _id}, index) => 
+        <PlaylistSong key={_id}>
+          <CoverSongTitle className="index__song--playlist">{index+1}</CoverSongTitle>
+          <CoverSong className="cover__song--playlist" src={imageUrl} />
+          <CoverSongTitle className="title__song--playlist playlist__info--row">{title}</CoverSongTitle>
+          <CoverSongTitle className="artist__song--playlist playlist__info--row">{artist}</CoverSongTitle>
+          <CoverSongTitle className="genre__song--playlist playlist__info--row">{genre.title}</CoverSongTitle>
         </PlaylistSong>
         )
   }
@@ -60,7 +63,7 @@ const Playlist = () => {
     <Scrollbars universal>
       <PlaylistContainer>
         <Scrollbars universal>
-          <PlaylistColumn>
+          <PlaylistColumn className="playlist__covers">
     {/* <h1>My Playlist</h1> */}
             {playlistsContent}
           </PlaylistColumn>

@@ -97,9 +97,20 @@ export const apiSlice = createApi({
       query: () => '/playlists',
       providesTags: ['Playlists']
     }),
+    addSongToPlaylist: builder.mutation({
+      query: ({playlistId, songId}) => ({
+        url: `/playlists/${playlistId}/addsong`,
+        method: 'PATCH',
+        body:{
+          songId: songId
+        }
+      }),
+      invalidatesTags: ['Playlists'] 
+    }),    
     getSinglePlaylist: builder.query({
       query: (playlistId) => `/playlists/${playlistId}`,
       method: 'GET',
+      providesTags: ['Playlists']
     }),
     getGenres: builder.query({
       query: () => '/genres',
@@ -109,6 +120,20 @@ export const apiSlice = createApi({
           : ['Genres'],
     }),
 
+    addPlaylist: builder.mutation({
+      query: ({title, description, isPrivate, userId, songs}) => ({
+        url: '/playlists',
+        method: 'POST',
+        body:{
+          title,
+          description,
+          isPrivate,
+          userId,
+          songs
+        }
+      }),
+      invalidatesTags: ['Playlists']
+    })    
   })
 })
 
@@ -125,5 +150,7 @@ export const {
   useGetSongsQuery,
   useGetGenresQuery,
   useGetPlaylistsQuery,
+  useAddSongToPlaylistMutation,
   useGetSinglePlaylistQuery,
+  useAddPlaylistMutation
 } = apiSlice;
