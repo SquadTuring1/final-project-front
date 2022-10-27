@@ -4,10 +4,12 @@ import { useState } from 'react'
 import { getAuthUser } from "../../features/auth/authSlice";
 import { useGetPlaylistsQuery, useGetSinglePlaylistQuery } from "../../features/api/apiSlice";
 import Scrollbars from "react-custom-scrollbars-2";
+import SongItem from "../Dashboard/SongItem";
 
 
 const Playlist = () => {
-  const userId = useSelector(getAuthUser)
+  const userId = useSelector(getAuthUser);
+  const songList = useSelector(getSongList)
   const [ selectedPlaylistId,  setSelectedPlaylistId ] = useState(null);
 
   const { data: playlistsData, isLoading: isPlaylistsLoading, isFetching: isPlaylistsFetching, isSuccess: isPlaylistsSuccess, isError: isPlaylistsError, error: playlistsError } = useGetPlaylistsQuery();
@@ -40,8 +42,12 @@ const Playlist = () => {
     songsContent = <div>No playlist selected</div>
   } else if (isClickedSuccess) {
     console.log(clickedPlaylist)
+    dispatch(setSongsList({songList: clickedPlaylist, currentSongIndex: 0, currentSongId: clickedPlaylist[0]?._id, currentSongUrl: List[0]?.fileUrl, playing: false}));
+    console.log(songList)
     songsContent = 
       clickedPlaylist.playlist.songs.map((song, index) => 
+      
+      // <SongItem key={_id} /> </SongItem>
         <PlaylistSong key={song._id}>
           <div>{index+1}.  </div>
           <div key={song._id}>{song.title}</div>
