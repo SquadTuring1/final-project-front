@@ -15,7 +15,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getUserId } from '../../../features/auth/authSlice';
 import { getSongList, setCurrentSong } from '../../../features/songs/songsSlice';
 
-const SongItem = ({ artist, title, cover, songId, likedBY }) => {
+const SongItem = ({ artist, title, cover, songId, likedBY, album }) => {
   const dispatch = useDispatch();
   const userId = useSelector(getUserId)
   const songList = useSelector(getSongList)
@@ -37,7 +37,7 @@ const SongItem = ({ artist, title, cover, songId, likedBY }) => {
     <div key={songId} >
     <CoverSongMain>
       {/* <SongsH2>Your Songs</SongsH2> */}
-        <PopoverSongCover songId={songId} />
+        <PopoverSongCover songId={songId} title={title} artist={artist} album={album}/>
       <CoverSong cover={cover} src={emptyCover()} 
       onClick={handleClick} 
       /> 

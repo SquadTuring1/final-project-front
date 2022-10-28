@@ -60,6 +60,18 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: ['Songs']
     }),
+    updateSong: builder.mutation({
+      query: ({songId, title, album, artist}) => ({
+        url: `/songs/${songId}`,
+        method: 'PUT',
+        body: {
+          title,          
+          album, 
+          artist
+        }
+      }),
+      invalidatesTags: ['Songs']
+    }),
     addUser: builder.mutation({
       query: (user) => ({
         url: '/users',
@@ -159,7 +171,7 @@ export const {
   useGetGenresQuery,
   useGetPlaylistsQuery,
   useLazyGetSinglePlaylistQuery,
-  useAddSongToPlaylistMutation,
-  
-  useAddPlaylistMutation
+  useAddSongToPlaylistMutation,  
+  useAddPlaylistMutation,
+  useUpdateSongMutation
 } = apiSlice;
