@@ -16,7 +16,7 @@ import Box from '@mui/material/Box';
 import {
   useGetPlaylistsQuery,
   useAddSongToPlaylistMutation,
-  useGetSinglePlaylistQuery,
+  // useGetSinglePlaylistQuery,
   useAddPlaylistMutation
 } from '../../features/api/apiSlice';
 import { autocompleteClasses } from '@mui/material';

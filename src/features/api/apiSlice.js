@@ -150,7 +150,8 @@ export const {
   useGetSongsQuery,
   useGetGenresQuery,
   useGetPlaylistsQuery,
+  useLazyGetSinglePlaylistQuery,
   useAddSongToPlaylistMutation,
-  useGetSinglePlaylistQuery,
+  
   useAddPlaylistMutation
 } = apiSlice;

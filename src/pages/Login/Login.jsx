@@ -48,7 +48,7 @@ const Login = () => {
     }
     if (isSuccess) {
       dispatch(userSignedIn({ ...authUser, ...dbUser.currentUser }));
-      dbUser.currentUser && navigate('/dashboard');
+      dbUser?.currentUser && navigate('/dashboard');
     }
   }, [dbUser]);
 
