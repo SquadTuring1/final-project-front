@@ -12,7 +12,6 @@ import { nanoid } from '@reduxjs/toolkit'
 
 const Playlist = () => {
   const userId = useSelector(getAuthUser);
-  // const songList = useSelector(getSongList)
   const [ itemList, updateItemList ] = useState(null);
   
 
@@ -42,10 +41,10 @@ const Playlist = () => {
 
   const draggableStyles = {
     userSelect: 'none',
-    padding: 16,
-    margin: '0 0 8px 0',
-    minHeight: '50px',
-    color: 'white',
+  //   padding: 16,
+  //   margin: '0 0 8px 0',
+  //   minHeight: '50px',
+  //   color: 'white',
   }
   
   const handleOnDragEnd = (result) => {
@@ -63,9 +62,6 @@ const Playlist = () => {
       songsArray.splice(result.destination.index, 0, reorderedItem)
       updateItemList(songsArray)
     }
-    // 
-    // console.log(columnIndex)
-    console.log(source, destination)
   }
   
   let playlistsContent;
@@ -90,7 +86,7 @@ const Playlist = () => {
     songsContent = <div>No playlist selected</div>
   } else if (isClickedSuccess) {
     
-    // dispatch(setSongsList({songList: clickedPlaylist, currentSongIndex: 0, currentSongId: clickedPlaylist[0]?._id, currentSongUrl: List[0]?.fileUrl, playing: false}));
+    // todo: update new order in back
     
     songsContent =       
       itemList?.map(({ imageUrl, genre, title, artist, likedBy, _id}, index) =>    
@@ -101,7 +97,8 @@ const Playlist = () => {
                 {...provided.draggableProps} 
                 ref={provided.innerRef}
                 {...provided.dragHandleProps} 
-                style={{...draggableStyles, backgroundColor: snapshot.isDragging && '#456C86', ...provided.draggableProps.style}} >
+                style={{...draggableStyles, backgroundColor: snapshot.isDragging && '#456C86', ...provided.draggableProps.style}} 
+                >
                 <CoverSongTitle className="index__song--playlist">{index+1}</CoverSongTitle>
                 <CoverSong className="cover__song--playlist" src={imageUrl} />
                 <CoverSongTitle className="title__song--playlist playlist__info--row">{title}</CoverSongTitle>
@@ -116,27 +113,14 @@ const Playlist = () => {
   
   return (
     <>  
-    <Scrollbars universal>
       <PlaylistContainer>
         <Scrollbars universal>
-          <DragDropContext onDragEnd={handleOnDragEnd}>
-            <Droppable droppableId='playlists' key={nanoid()}>
-              {(provided, snapshot) => (
-                  <PlaylistColumn className="playlist__covers"
-                  {...provided.droppableProps}
-                  ref={provided.innerRef}
-                  >
-                    {playlistsContent}
-                    {provided.placeholder}  
-                  </PlaylistColumn>
-                  
-                )
-                
-              }
-            </Droppable>
-          </DragDropContext>
+          <PlaylistColumn className="playlist__covers">
+            {playlistsContent}
+          </PlaylistColumn>
         </Scrollbars>
         <Scrollbars>
+          {/* separation columns */}
           <DragDropContext onDragEnd={handleOnDragEnd}>
             <Droppable droppableId='tracks' key={nanoid()}>
               {(provided, snapshot) => (
@@ -153,7 +137,7 @@ const Playlist = () => {
           </DragDropContext>
         </Scrollbars>
       </PlaylistContainer>
-    </Scrollbars>
+    
     </>
   )
 }
