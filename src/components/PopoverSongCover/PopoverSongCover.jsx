@@ -12,7 +12,6 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
-import { CoverMenuIcon } from '../../ui/DashboardImg.styled';
 
 import {
   useGetPlaylistsQuery,
@@ -56,33 +55,8 @@ const PopoverSongCover = ({ songId }) => {
     console.log('Song added to playlist!')    
     console.log({playlistId, songId})
   }
-
-  // const canSave = [userObj.token, userObj.uid, userObj.email, userObj.username].every(Boolean) && !isLoadingSignup;
  
-  const handleCreatePlaylist = async() => {
-    // const playListObj = {
-    //   title:randomPlaylistTitle(),
-    //   description: "",
-    //   isPrivate: false,
-    //   userId: userId,
-    //   songs: songId 
-    // }
-    // const canSave = [playListObj.title, playListObj.description, playListObj.isPrivate, playListObj.userId, playListObj.songs].every(Boolean)  && !newPlaylist;
-    // if (canSave){
-    //   console.log("works11")
-    //   try{       
-    //     await addPlaylist(playListObj).unwrap()
-    //     // console.log(result.status)
-    //     // if (result) navigate("/playlist")
-    //     // if (newPlaylist) navigate("/playlist")
-    //     console.log("works")
-    //   }catch (error){
-    //     console.log(error)
-    //   }      
-    // }        
-    
-    
-
+  const handleCreatePlaylist = async() => {        
     addPlaylist({
       title:randomPlaylistTitle(),
       description: "",
@@ -94,7 +68,6 @@ const PopoverSongCover = ({ songId }) => {
     navigate("/playlist")
     console.log('jksjdjsdljsljdlkjs')
   }
-
 
   let content;
   if (isLoading) {
@@ -116,7 +89,6 @@ const PopoverSongCover = ({ songId }) => {
     content = <p>Error...</p>;
   }
   
-
   // MUI pop over
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -141,15 +113,15 @@ const PopoverSongCover = ({ songId }) => {
   return (
     <div>
       <article>
-        <CoverMenuIcon as={Button}
+        <Button
           id="resources-button"
           onClick={handleClick}
-          // aria-control={open ? 'resources-menu' : undefined}
+          aria-control={open ? 'resources-menu' : undefined}
           aria-haspopup="true"
           aria-expanded={open ? 'true' : undefined}
         >
           <RiMore2Line />
-        </CoverMenuIcon>
+        </Button>
       </article>
       <Menu
         id="resources-menu"
