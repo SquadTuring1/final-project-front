@@ -46,8 +46,8 @@ export const apiSlice = createApi({
     }),
     getSongs: builder.query({
       query: () => '/songs',
-      transformResponse: res => Object.entries(res)[0][1],
-      // providesTags: ['Songs'],
+      transformResponse: res => res.songs,
+      providesTags: ['Songs'],
       providesTags: (result, error, arg) =>
         result
           ? [...result.map(({ id }) => ({ type: 'Songs', id })), 'Songs']
