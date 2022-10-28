@@ -3,6 +3,9 @@ import { getUserId } from '../../features/auth/authSlice'
 import { useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 
+import { toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+
 import { RiMore2Line } from 'react-icons/ri';
 
 // import { MenuItem, Menu } from '@mui/material';
@@ -17,7 +20,8 @@ import {
   useGetPlaylistsQuery,
   useAddSongToPlaylistMutation,
   // useGetSinglePlaylistQuery,
-  useAddPlaylistMutation
+  useAddPlaylistMutation,
+  useDeleteSongMutation
 } from '../../features/api/apiSlice';
 import { autocompleteClasses } from '@mui/material';
 import { CoverSongTitle } from '../../ui';
@@ -49,9 +53,11 @@ const PopoverSongCover = ({ songId }) => {
   const { data, isLoading, isSuccess, isError } = useGetPlaylistsQuery();  
   const [ addSongToPlaylist ] = useAddSongToPlaylistMutation() 
   const [ addPlaylist, {isLoading: newPlaylist} ] = useAddPlaylistMutation()
+  const [ deleteSong ]= useDeleteSongMutation()
   
   const handleAddSong = (playlistId) => {        
     addSongToPlaylist({playlistId, songId})
+    toast.success(`Song added to playlist!`, { position: toast.POSITION.TOP_CENTER } )
     console.log('Song added to playlist!')    
     console.log({playlistId, songId})
   }
@@ -63,10 +69,21 @@ const PopoverSongCover = ({ songId }) => {
       isPrivate: false,
       userId: userId,
       songs: songId })
-    console.log(`${randomPlaylistTitle()} created`)
-    console.log('previous')
-    navigate("/playlist")
-    console.log('jksjdjsdljsljdlkjs')
+    toast.success(`New playlist created!`, { 
+      position: "top-center",
+      autoClose: 1000
+    } )
+    console.log(`${randomPlaylistTitle()} created`)    
+    navigate("/playlist")    
+  }
+
+  const hadndleDeleteSong = () => {
+    deleteSong({songId})
+    toast.success(`Song deleted!`, { 
+      position: "top-center",
+      autoClose: 1000 
+    } )
+    console.log(`Song ${songId} deleted!`)    
   }
 
   let content;
@@ -132,7 +149,7 @@ const PopoverSongCover = ({ songId }) => {
         }}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose}>Delete song</MenuItem>
+        <MenuItem onClick={hadndleDeleteSong}>Delete song</MenuItem>
         <MenuItem onClick={handleClose}>Edit song</MenuItem>
         <MenuItem onClick={openPlaylists}>
           <Button onClick={handleOpenModal}>Add song to playlist</Button>

@@ -53,6 +53,13 @@ export const apiSlice = createApi({
           ? [...result.map(({ id }) => ({ type: 'Songs', id })), 'Songs']
           : ['Songs'],
     }),
+    deleteSong: builder.mutation({
+      query: ({songId}) => ({
+        url: `/songs/${songId}`,
+        method: 'DELETE'  
+      }),
+      invalidatesTags: ['Songs']
+    }),
     addUser: builder.mutation({
       query: (user) => ({
         url: '/users',
@@ -148,6 +155,7 @@ export const {
   useSignUpUserMutation,
   useLogInAndUpdateTokenMutation,
   useGetSongsQuery,
+  useDeleteSongMutation,
   useGetGenresQuery,
   useGetPlaylistsQuery,
   useLazyGetSinglePlaylistQuery,
