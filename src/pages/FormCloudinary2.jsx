@@ -2,20 +2,6 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 const FormCloudinary2 = () => {
-  const [song, setSong] = useState(null);
-  const [thumbnail, setThumbnail] = useState(null);
-  const [title, setTitle] = useState('');
-
-  const handleSong = (e) => {
-    const uploadedFile = e.target.files[0];
-    setSong(uploadedFile);
-  };
-
-  const hanldeThumbnail = (e) => {
-    const uploadThummail = e.target.files[0];
-    setThumbnail(uploadThummail);
-  };
-
   // const handleFile = (e) => {
   //   const { name, value } = e.target;
   //   setFile((prevState) => ({

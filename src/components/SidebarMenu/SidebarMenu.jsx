@@ -33,8 +33,9 @@ const customStyles = {
     transform: 'translate(-50%, -50%)',
   },
   overlay: {
-    backgroundColor: 'rgba(0, 0, 0, 0.7)'
-  }
+    zIndex: '1',
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+  },
 };
 
 const SidebarMenu = () => {
