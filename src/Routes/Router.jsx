@@ -15,6 +15,7 @@ import OutletFrame from '../components/OutletFrame/OutletFrame';
 // import FormCloudinary from '../pages/FormCloudinary';
 import FormCloudinary2 from '../pages/FormCloudinary2';
 import ErrorPage from '../pages/ErrorPage/index';
+import ProtectedRoutes from '../utils/ProtectedRoutes';
 
 const Router = () => {
   return (
@@ -23,16 +24,18 @@ const Router = () => {
       <Route path="login" element={<Login />} />
       <Route path="reset" element={<ForgotPassword />} />
       <Route path="registration" element={<Registration />} />
-      <Route path="profile" element={<PersonalProfile />} />
-      <Route path="/" element={<OutletFrame />}>
-        <Route path="dashboard" element={<Dashboard />} />
-        <Route path="terms" element={<Terms />} />
-        <Route path="favorites" element={<FavoriteTracks />} />
-        <Route path="playlist" element={<Playlist />} />
-        <Route path="categories" element={<Categories />} />
-        <Route path="cloudinary" element={<FormCloudinary2 />} />
-        <Route path="upload" element={<FormCloudinary2 />} />
-        <Route path="*" element={<ErrorPage />} />
+      <Route path="*" element={<ErrorPage />} />
+      <Route element={<ProtectedRoutes />}>
+        <Route path="profile" element={<PersonalProfile />} />
+        <Route path="/" element={<OutletFrame />}>
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="terms" element={<Terms />} />
+          <Route path="favorites" element={<FavoriteTracks />} />
+          <Route path="playlist" element={<Playlist />} />
+          <Route path="categories" element={<Categories />} />
+          <Route path="cloudinary" element={<FormCloudinary2 />} />
+          <Route path="upload" element={<FormCloudinary2 />} />
+        </Route>
       </Route>
     </Routes>
   );
