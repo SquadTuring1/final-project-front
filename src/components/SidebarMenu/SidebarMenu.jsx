@@ -76,9 +76,9 @@ const SidebarMenu = () => {
           style={customStyles}
           isOpen={modalOpen}
           onRequestClose={closeModal}
+          ariaHideApp={false}
         >
           <UploadModal />
-          <Button onClick={closeModal}>Upload song</Button>
         </ReactModal>
       </SideMenuItems>
     </SideMenu>
