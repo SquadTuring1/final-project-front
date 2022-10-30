@@ -189,7 +189,7 @@ const PopoverSongCover = ({ songId, title, artist, album }) => {
               </div>
               <div>
                 <label>Artist</label>
-                <input defaultValue={album[0].artist} {...register("artist")} />
+                <input defaultValue={album && album[0]?.artist} {...register("artist")} />
               </div>
               {/* Not using album */}
               {/* <div>
