@@ -25,7 +25,9 @@ const persistedReducer = persistReducer(persistConfig, reducer);
 export const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(apiSlice.middleware),
+    getDefaultMiddleware({ serializableCheck: false }).concat(
+      apiSlice.middleware,
+    ),
 });
 
 // enable refetchOnFocus / refetchOnReConnect
