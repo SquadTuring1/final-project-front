@@ -29,7 +29,7 @@ const Playlist = () => {
     useEffect(() => {
     if (isClickedSuccess) {
       const selectedPlaylist = clickedPlaylist.playlist.songs;
-      dispatch(setSongsList({ songList: selectedPlaylist, currentSongIndex: 0, currentSongId: selectedPlaylist[0]._id, currentSongUrl: selectedPlaylist[0].fileUrl, playing: false}));
+      dispatch(setSongsList({ songList: selectedPlaylist, currentSongIndex: 0, currentSongId: selectedPlaylist[0]?._id, currentSongUrl: selectedPlaylist[0]?.fileUrl, playing: false}));
     }
   }, [clickedPlaylist])
 
@@ -92,28 +92,34 @@ const Playlist = () => {
     songsContent = <div>No playlist selected</div>
   } else if (isClickedSuccess) {        
     if (songList) {
-      songsContent =  
-      songList?.map(({ imageUrl, genre, title, artist, likedBy, _id}, index) =>    
-      <Draggable key={_id} draggableId={_id} index={index}>
-        {(provided, snapshot) => {
-          return (
-            <PlaylistSong 
-              {...provided.draggableProps} 
-              ref={provided.innerRef}
-              {...provided.dragHandleProps} 
-              style={{...draggableStyles, backgroundColor: snapshot.isDragging && '#456C86', ...provided.draggableProps.style}}
-              onClick={() => handleSongClick(_id, index)}
-              >
-              <CoverSongTitle className="index__song--playlist">{index+1}</CoverSongTitle>
-              <CoverSong className="cover__song--playlist" src={imageUrl} />
-              <CoverSongTitle className="title__song--playlist playlist__info--row">{title}</CoverSongTitle>
-              <CoverSongTitle className="artist__song--playlist playlist__info--row">{artist}</CoverSongTitle>
-              <CoverSongTitle className="genre__song--playlist playlist__info--row">{genre?.title}</CoverSongTitle>
-            </PlaylistSong>
-          )
-        }}
-      </Draggable>
-      )
+      if (!songList[0]) {
+        songsContent = <div>No songs in this playlist
+        </div>
+      } else {
+        songsContent =  
+        songList?.map(({ imageUrl, genre, title, artist, likedBy, _id}, index) =>    
+        <Draggable key={_id} draggableId={_id} index={index}>
+          {(provided, snapshot) => {
+            return (
+              <PlaylistSong 
+                {...provided.draggableProps} 
+                ref={provided.innerRef}
+                {...provided.dragHandleProps} 
+                style={{...draggableStyles, backgroundColor: snapshot.isDragging && '#456C86', ...provided.draggableProps.style}}
+                onClick={() => handleSongClick(_id, index)}
+                >
+                <CoverSongTitle className="index__song--playlist">{index+1}</CoverSongTitle>
+                <CoverSong className="cover__song--playlist" src={imageUrl} />
+                <CoverSongTitle className="title__song--playlist playlist__info--row">{title}</CoverSongTitle>
+                <CoverSongTitle className="artist__song--playlist playlist__info--row">{artist}</CoverSongTitle>
+                <CoverSongTitle className="genre__song--playlist playlist__info--row">{genre?.title}</CoverSongTitle>
+              </PlaylistSong>
+            )
+          }}
+        </Draggable>
+        )
+      }
+      
     }     
       
   }
