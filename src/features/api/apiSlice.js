@@ -151,7 +151,9 @@ export const apiSlice = createApi({
           ? [...result.map(({ id }) => ({ type: 'Genres', id })), 'Genres']
           : ['Genres'],
     }),
-
+    getGenreById: builder.query({
+      query: (genreId) => `/genres/${genreId}`
+    }),
     addPlaylist: builder.mutation({
       query: ({ title, description, isPrivate, userId, songs }) => ({
         url: '/playlists',
@@ -182,6 +184,7 @@ export const {
   useAddSongMutation,
   useDeleteSongMutation,
   useGetGenresQuery,
+  useLazyGetGenreByIdQuery,
   useGetPlaylistsQuery,
   useGetPlaylistsByUserQuery,
   useLazyGetSinglePlaylistQuery,

@@ -5,6 +5,7 @@ import { PlaylistDash } from '../../../ui';
 import PlaylistItem from '../PlaylistItem';
 import "swiper/css";
 import "swiper/css/bundle";
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd/'
 
 
 const PlaylistList = () => {
