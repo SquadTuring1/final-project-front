@@ -125,6 +125,10 @@ export const apiSlice = createApi({
       query: () => '/playlists',
       providesTags: ['Playlists'],
     }),
+    getPlaylistsByUser: builder.query({
+      query: (userId) => `/playlists/user/${userId}`,
+      providesTags: ['Playlists'],
+    }),
     addSongToPlaylist: builder.mutation({
       query: ({ playlistId, songId }) => ({
         url: `/playlists/${playlistId}/addsong`,
@@ -179,6 +183,7 @@ export const {
   useDeleteSongMutation,
   useGetGenresQuery,
   useGetPlaylistsQuery,
+  useGetPlaylistsByUserQuery,
   useLazyGetSinglePlaylistQuery,
   useAddSongToPlaylistMutation,
   useAddPlaylistMutation,
