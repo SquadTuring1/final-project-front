@@ -2,8 +2,10 @@ import { useState } from 'react';
 import { getUserId } from '../../features/auth/authSlice'
 import { useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
-
+import { toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 import { RiMore2Line } from 'react-icons/ri';
+import { useForm } from "react-hook-form";
 
 // import { MenuItem, Menu } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
@@ -17,7 +19,9 @@ import {
   useGetPlaylistsQuery,
   useAddSongToPlaylistMutation,
   // useGetSinglePlaylistQuery,
-  useAddPlaylistMutation
+  useAddPlaylistMutation,
+  useDeleteSongMutation,
+  useUpdateSongMutation
 } from '../../features/api/apiSlice';
 import { autocompleteClasses } from '@mui/material';
 import { CoverSongTitle } from '../../ui';
@@ -29,7 +33,7 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 500,
+  width: 400,
   height: 'auto',
   bgcolor: 'background.paper',
   border: '2px solid #000',
@@ -42,16 +46,24 @@ const randomPlaylistTitle = () => {
   return `playlist_${randomNumber}`
 }
 
-const PopoverSongCover = ({ songId }) => {  
+const PopoverSongCover = ({ songId, title, artist, album }) => {  
+  // console.log(album[0].title)
+  // console.log(artist)
   const userId = useSelector(getUserId);
   const navigate = useNavigate()
+  const { register, handleSubmit, watch, formState: { errors } } = useForm();
   // console.log(userId)
+
   const { data, isLoading, isSuccess, isError } = useGetPlaylistsQuery();  
   const [ addSongToPlaylist ] = useAddSongToPlaylistMutation() 
   const [ addPlaylist, {isLoading: newPlaylist} ] = useAddPlaylistMutation()
+  const [ deleteSong ]= useDeleteSongMutation()
+  const [ updateSong ] = useUpdateSongMutation()
+  
   
   const handleAddSong = (playlistId) => {        
     addSongToPlaylist({playlistId, songId})
+    toast.success(`Song added to playlist!`, { position: toast.POSITION.TOP_CENTER } )
     console.log('Song added to playlist!')    
     console.log({playlistId, songId})
   }
@@ -63,10 +75,37 @@ const PopoverSongCover = ({ songId }) => {
       isPrivate: false,
       userId: userId,
       songs: songId })
-    console.log(`${randomPlaylistTitle()} created`)
-    console.log('previous')
-    navigate("/playlist")
-    console.log('jksjdjsdljsljdlkjs')
+    toast.success(`New playlist created!`, { 
+      position: "top-center",
+      autoClose: 1000
+    } )
+    console.log(`${randomPlaylistTitle()} created`)    
+    navigate("/playlist")    
+  }
+
+  const hadndleDeleteSong = () => {
+    deleteSong({songId})
+    toast.success(`Song deleted!`, { 
+      position: "top-center",
+      autoClose: 1000 
+    } )
+    console.log(`Song ${songId} deleted!`)    
+  }
+  
+  const handleEditSong = (data) => {
+    console.log(songId)
+    console.log(data)
+    updateSong({
+      songId: songId,
+      title: data.title,   
+      album: data.album,
+      artist: data.artist  
+    })
+    // toast.success(`Song updated!`, { 
+    //   position: "top-center",
+    //   autoClose: 1000 
+    // })
+    console.log("Song edited!")
   }
 
   let content;
@@ -98,16 +137,17 @@ const PopoverSongCover = ({ songId }) => {
   };
   const handleClose = () => {
     setAnchorEl(null);
-  };
-  const openPlaylists = () => {
-    console.log('Playlist openened!');    
-  };
+  };  
   // end MUI pop over
 
   // MUI Modal
-  const [openModal, setOpenModal] = useState(false);
-  const handleOpenModal = () => setOpenModal(true);
-  const handleCloseModal = () => setOpenModal(false);
+  const [openModalAddSong, setOpenModalAddSong] = useState(false);
+  const handleOpenModalAddSong = () => setOpenModalAddSong(true);
+  const handleCloseModalAddSong = () => setOpenModalAddSong(false);
+
+  const [openModalEditSong, setOpenModalEditSong] = useState(false);
+  const handleOpenModalEditSong = () => setOpenModalEditSong(true);
+  const handleCloseModalEditSong = () => setOpenModalEditSong(false);
   // ends MUI modal
 
   return (
@@ -131,13 +171,42 @@ const PopoverSongCover = ({ songId }) => {
         }}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose}>Delete song</MenuItem>
-        <MenuItem onClick={handleClose}>Edit song</MenuItem>
-        <MenuItem onClick={openPlaylists}>
-          <Button onClick={handleOpenModal}>Add song to playlist</Button>
+        <MenuItem onClick={hadndleDeleteSong}>Delete song</MenuItem>
+        <MenuItem onClick={handleEditSong}>
+        
+        <Button onClick={handleOpenModalEditSong}>Edit song</Button>
+        <Modal
+          open={openModalEditSong}
+          onClose={handleCloseModalEditSong}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <form onSubmit={handleSubmit(handleEditSong)}>
+              <div>
+                <label>Title</label>
+                <input defaultValue={title} {...register("title")} />
+              </div>
+              <div>
+                <label>Artist</label>
+                <input defaultValue={album[0].artist} {...register("artist")} />
+              </div>
+              {/* Not using album */}
+              {/* <div>
+                <label>Album</label>
+                <input defaultValue={(album[0].title)} {...register("album")} />
+              </div>             */}
+            <input type="submit" />
+            </form>
+          </Box>
+        </Modal>      
+        </MenuItem>              
+
+        <MenuItem>
+          <Button onClick={handleOpenModalAddSong}>Add song to playlist</Button>
           <Modal
-            open={openModal}
-            onClose={handleCloseModal}
+            open={openModalAddSong}
+            onClose={handleCloseModalAddSong}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
           >
@@ -147,8 +216,7 @@ const PopoverSongCover = ({ songId }) => {
                 {content}                
               </Typography>              
             </Box>
-          </Modal>
-          
+          </Modal>          
         </MenuItem>
       </Menu>
     </div>

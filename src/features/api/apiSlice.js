@@ -1,6 +1,4 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-
-
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const apiSlice = createApi({
   reducerPath: 'api',
@@ -9,30 +7,32 @@ export const apiSlice = createApi({
     // refetchOnMountOrChange: true,
     // refetchOnFocus: true,
     prepareHeaders: (headers, { getState }) => {
-      const token = getState().auth.token
+      const token = getState().auth.token;
       // If we have a token set in state, let's assume that we should be passing it.
       if (token) {
-        headers.set('Authorization', `Bearer ${token}`)
+        headers.set('Authorization', `Bearer ${token}`);
       }
-      return headers
-    }, }),
+      return headers;
+    },
+  }),
   tagTypes: ['User', 'Songs', 'Playlists', 'Genres'],
   endpoints: (builder) => ({
     getUsers: builder.query({
       query: () => '/users',
-      providesTags: ['User']
+      providesTags: ['User'],
     }),
     getSingleUser: builder.query({
       query: (uid) => `users/${uid}`,
       method: 'GET',
     }),
-    signUpUser: builder.mutation({        // TODO: can this be merged with addUser in front and back?
+    signUpUser: builder.mutation({
+      // TODO: can this be merged with addUser in front and back?
       query: (user) => ({
         url: '/signup',
         method: 'POST',
-        body: user
+        body: user,
       }),
-      invalidatesTags: ['User']
+      invalidatesTags: ['User'],
     }),
     logInAndUpdateToken: builder.mutation({
       query: ({ uid, token }) => ({
@@ -41,17 +41,45 @@ export const apiSlice = createApi({
         body: {
           uid: uid,
           token: token,
-        }
-      })
+        },
+      }),
     }),
     getSongs: builder.query({
       query: () => '/songs',
-      transformResponse: res => res.songs,
+      transformResponse: (res) => res.songs,
       providesTags: ['Songs'],
       providesTags: (result, error, arg) =>
         result
           ? [...result.map(({ id }) => ({ type: 'Songs', id })), 'Songs']
           : ['Songs'],
+    }),
+    addSong: builder.mutation({
+      query: (song) => ({
+        url: '/addsong',
+        method: 'POST',
+        body: song,
+      }),
+      invalidatesTags: ['Songs'],
+      transformResponse: (res) => console.log(res),
+    }),
+    deleteSong: builder.mutation({
+      query: ({ songId }) => ({
+        url: `/songs/${songId}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Songs'],
+    }),
+    updateSong: builder.mutation({
+      query: ({ songId, title, album, artist }) => ({
+        url: `/songs/${songId}`,
+        method: 'PUT',
+        body: {
+          title,
+          album,
+          artist,
+        },
+      }),
+      invalidatesTags: ['Songs'],
     }),
     addUser: builder.mutation({
       query: (user) => ({
@@ -59,7 +87,7 @@ export const apiSlice = createApi({
         method: 'POST',
         body: user,
       }),
-      invalidatesTags: ['Users']
+      invalidatesTags: ['Users'],
     }),
     updateUser: builder.mutation({
       query: (userObj) => ({
@@ -68,49 +96,49 @@ export const apiSlice = createApi({
         body: {
           firstName: userObj.firstName,
           lastName: userObj.lastName,
-        }
+        },
       }),
-      invalidatesTags: ['Users']
+      invalidatesTags: ['Users'],
     }),
     likeASong: builder.mutation({
-      query: ({songId, userId}) => ({
+      query: ({ songId, userId }) => ({
         url: `/songs/${songId}/like`,
         method: 'POST',
         body: {
           userId: userId,
-        }
+        },
       }),
       // invalidatesTags: ['Songs']
       invalidatesTags: (result, error, arg) => [{ type: 'Songs', id: arg.id }],
     }),
     deleteLikeASong: builder.mutation({
-      query: ({songId, userId}) => ({
+      query: ({ songId, userId }) => ({
         url: `/songs/${songId}/like`,
         method: 'DELETE',
         body: {
           userId: userId,
-        }
+        },
       }),
-      invalidatesTags: ['Songs']
+      invalidatesTags: ['Songs'],
     }),
     getPlaylists: builder.query({
       query: () => '/playlists',
-      providesTags: ['Playlists']
+      providesTags: ['Playlists'],
     }),
     addSongToPlaylist: builder.mutation({
-      query: ({playlistId, songId}) => ({
+      query: ({ playlistId, songId }) => ({
         url: `/playlists/${playlistId}/addsong`,
         method: 'PATCH',
-        body:{
-          songId: songId
-        }
+        body: {
+          songId: songId,
+        },
       }),
-      invalidatesTags: ['Playlists'] 
-    }),    
+      invalidatesTags: ['Playlists'],
+    }),
     getSinglePlaylist: builder.query({
       query: (playlistId) => `/playlists/${playlistId}`,
       method: 'GET',
-      providesTags: ['Playlists']
+      providesTags: ['Playlists'],
     }),
     getGenres: builder.query({
       query: () => '/genres',
@@ -121,22 +149,21 @@ export const apiSlice = createApi({
     }),
 
     addPlaylist: builder.mutation({
-      query: ({title, description, isPrivate, userId, songs}) => ({
+      query: ({ title, description, isPrivate, userId, songs }) => ({
         url: '/playlists',
         method: 'POST',
-        body:{
+        body: {
           title,
           description,
           isPrivate,
           userId,
-          songs
-        }
+          songs,
+        },
       }),
-      invalidatesTags: ['Playlists']
-    })    
-  })
-})
-
+      invalidatesTags: ['Playlists'],
+    }),
+  }),
+});
 
 export const {
   useGetUsersQuery,
@@ -148,10 +175,12 @@ export const {
   useSignUpUserMutation,
   useLogInAndUpdateTokenMutation,
   useGetSongsQuery,
+  useAddSongMutation,
+  useDeleteSongMutation,
   useGetGenresQuery,
   useGetPlaylistsQuery,
   useLazyGetSinglePlaylistQuery,
   useAddSongToPlaylistMutation,
-  
-  useAddPlaylistMutation
+  useAddPlaylistMutation,
+  useUpdateSongMutation,
 } = apiSlice;
