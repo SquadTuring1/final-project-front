@@ -1,4 +1,5 @@
 import { RiRestartLine, RiStarFill, RiStarLine } from 'react-icons/ri'
+import { TiStarOutline, TiStarFullOutline } from 'react-icons/ti'
 import { useEffect, useState } from 'react';
 import { getAuthUser, getUserId } from '../../features/auth/authSlice'
 import { useSelector } from 'react-redux';
@@ -7,6 +8,8 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css'
 import { nanoid } from '@reduxjs/toolkit';
 import auth from '../../utils/firebase/firebaseConfig.js';
+import { IconFavorites } from '../../ui';
+
 
 export default function LikedSong({ songId, likedBY }) {  
   const userId = useSelector(getUserId)
@@ -52,7 +55,7 @@ export default function LikedSong({ songId, likedBY }) {
   
   return (
     <>    
-    <div onClick={handleClick}>{isLiked ? <RiStarFill/> : <RiStarLine/>}</div>
+    <IconFavorites className='star__song--item' onClick={handleClick}>{isLiked ? <TiStarFullOutline/> : <TiStarOutline/>}</IconFavorites>
     </>
   )
 }

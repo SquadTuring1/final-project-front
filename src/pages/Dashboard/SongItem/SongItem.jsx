@@ -45,7 +45,7 @@ const SongItem = ({ artist, title, cover, songId, likedBY, album }) => {
         <CoverSongTitle>{title}</CoverSongTitle>
       </article>
       <article>
-        <CoverSongArtist>{artist}</CoverSongArtist>
+        <CoverSongArtist>Artist</CoverSongArtist>
       </article>
       <LikedSong songId={songId} likedBY={likedBY} />      
     </CoverSongMain>

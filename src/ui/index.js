@@ -15,7 +15,7 @@ import { ProgressBar } from './ProgressBar.styled';
 import { SidebarMain, UploadBtn, CurrentSong, CurrentPlaying } from './SidebarMain';
 import { CategoryDash, GenDashMain, PlaylistDash, RecommendedDash, SongsDash } from './GeneralDashboardGrid.styled';
 import { CoverMenuIcon, CoverSong } from './DashboardImg.styled';
-import { CoverSongTitle, CoverSongArtist, SongsH2, SongTimer } from './DashboardText.styled';
+import { CoverSongTitle, CoverSongArtist, SongsH2, SongTimer, PopoverArticle, PopoverButton, StarButton } from './DashboardText.styled';
 import { CoverCategoryMain, CoverPlaylistMain, CoverSongMain, PlaylistTitle, PlaylistInfo, CoverCategoryImg, CategorySwiper, CategorySwiperItem } from './DashboardItems.styled';
 import { SideMenu, SideMenuItems } from './MenuItems.styled';
 import { NavOutlet, SideOutlet, PlayerOutlet, MainOutlet } from './GridOutlet.styled';
@@ -81,7 +81,10 @@ export {
   SongsH2,
   CoverMenuIcon,
   PopCoverItems,
-  PopItems
+  PopItems,
+  PopoverArticle,
+  PopoverButton,
+  
 }
 
 //General Dashboard

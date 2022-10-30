@@ -14,6 +14,8 @@ import {
 } from '../../ui/index';
 import ReactModal from 'react-modal';
 import UploadModal from '../UploadModal';
+import { RiStarFill } from 'react-icons/ri';
+
 
 const customStyles = {
   content: {
@@ -60,7 +62,7 @@ const SidebarMenu = () => {
         <p className="playlist__link">Playlist</p>
       </SideMenuItems>
       <SideMenuItems as={Link} to="/favorites">
-        <IconFavorites />
+        <IconFavorites as={RiStarFill} />
         <p className="favorites__link">Favorites</p>
       </SideMenuItems>
       <SideMenuItems as={Link} to="/categories">

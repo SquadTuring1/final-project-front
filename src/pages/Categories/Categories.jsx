@@ -20,7 +20,7 @@ const Categories = () => {
         <CategoryItem />
       </div>
       <PlaylistColumnSongs>
-
+    <h1>hola</h1>
       </PlaylistColumnSongs>
     </PlaylistContainer>
   );

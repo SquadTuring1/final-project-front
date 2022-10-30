@@ -101,9 +101,11 @@ const Playlist = () => {
                 >
                 <CoverSongTitle className="index__song--playlist">{index+1}</CoverSongTitle>
                 <CoverSong className="cover__song--playlist" src={imageUrl} />
-                <CoverSongTitle className="title__song--playlist playlist__info--row">{title}</CoverSongTitle>
-                <CoverSongTitle className="artist__song--playlist playlist__info--row">{artist}</CoverSongTitle>
-                <CoverSongTitle className="genre__song--playlist playlist__info--row">{genre.title}</CoverSongTitle>
+                <PlaylistItemRow>
+                  <CoverSongTitle className="title__song--playlist playlist__info--row">{title}</CoverSongTitle>
+                  <CoverSongTitle className="artist__song--playlist playlist__info--row">{artist}</CoverSongTitle>
+                  <CoverSongTitle className="genre__song--playlist playlist__info--row">{genre.title}</CoverSongTitle>
+                </PlaylistItemRow>
               </PlaylistSong>
             )
           }}

@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import Button from '@mui/material/Button';
+import { TiStarFullOutline } from 'react-icons/ti'
 
 export const CoverSongTitle = styled.p`
   width: 6.5rem;
@@ -11,14 +13,15 @@ export const CoverSongTitle = styled.p`
   font-family: 'Source Sans Pro', sans-serif;
 
   &.sidebar__desktop--title {
-    font-size:1.4rem;
+    width:14rem;
+    font-size: 1.4rem;
     font-weight: 600;
-    margin: 0 0 .3rem 0;
+    margin: 0 0 0.3rem 0;
   }
 
-  &.index__song--playlist{
+  &.index__song--playlist {
     width: 2rem;
-    font-size:1rem;
+    font-size: 1rem;
     font-weight: 200;
     text-align: right;
   }
@@ -33,7 +36,7 @@ export const CoverSongTitle = styled.p`
     font-size: 1.1rem;
     font-weight: 300;
   }
-  &.genre__song--playlist{
+  &.genre__song--playlist {
     width: 15rem;
     font-size: 1.1rem;
     font-weight: 300;
@@ -44,23 +47,25 @@ export const CoverSongTitle = styled.p`
     padding: 1.5rem 0 1.5rem 0;
 
     &:hover {
-      background-color: #00365C;
+      background-color: #00365c;
     }
   }
 `;
 
+
 export const CoverSongArtist = styled(CoverSongTitle)`
-  font-size: 0.65rem;
-  font-weight: 200;
+  font-size: 0.8rem;
+  font-weight: 300;
 
   &.sidebar__desktop--artist {
-    font-size:1.1rem;
+    font-size: 1.1rem;
+    width:14rem;
   }
 `;
 
 export const SongsH2 = styled.h2`
-display: flex;
-flex-direction: column;
+  display: flex;
+  flex-direction: column;
   margin: 0 0 1rem;
   font-size: 1.5rem;
   font-weight: 600;
@@ -69,11 +74,20 @@ flex-direction: column;
   &.sidebar__desktop--nowplaying {
     font-size: 1.4rem;
     font-weight: 600;
-    margin: 0 0 .5rem;
+    margin: 0 0 0.5rem;
   }
 `;
 
+export const PopoverArticle = styled.article`
+  position: absolute;
+  top: 8.2rem;
+  left:6.8rem;
+  min-width: 29px;
+  background-color: transparent;
+`;
+
+
 export const SongTimer = styled.p`
-  font-size:.85rem;
+  font-size: 0.85rem;
   color: #fff;
 `;
