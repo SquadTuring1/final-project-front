@@ -97,7 +97,7 @@ const Playlist = () => {
         </div>
       } else {
         songsContent =  
-        songList?.map(({ imageUrl, genre, title, artist, likedBy, _id}, index) =>    
+        songList?.map(({ imageUrl, genre, title, artist, likedBy, _id, album}, index) =>    
         <Draggable key={_id} draggableId={_id} index={index}>
           {(provided, snapshot) => {
             return (
@@ -113,6 +113,7 @@ const Playlist = () => {
                 <CoverSongTitle className="title__song--playlist playlist__info--row">{title}</CoverSongTitle>
                 <CoverSongTitle className="artist__song--playlist playlist__info--row">{artist}</CoverSongTitle>
                 <CoverSongTitle className="genre__song--playlist playlist__info--row">{genre?.title}</CoverSongTitle>
+                <PopoverSongCover songId={_id} title={title} artist={artist} album={album} />
               </PlaylistSong>
             )
           }}
