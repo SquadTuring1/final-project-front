@@ -1,6 +1,8 @@
 import styled from 'styled-components';
+import PopoverSongCover from '../components/PopoverSongCover';
 import { PlaylistTitle, PlaylistInfo,  } from './DashboardItems.styled';
 import { CoverPlaylistMain } from './DashboardItems.styled';
+
 
 // export const PlaylistContainer = styled.div`
 //   display: flex;
@@ -88,3 +90,18 @@ export const PlaylistSong = styled.div`
   padding:0 0 1.5rem 0;
   margin: 2rem 0;
 `
+
+export const PlaylistArticle = styled.article`
+position: relative;
+  display: flex;
+  border-bottom: 1px solid #fff;
+  padding: 1.5rem 0 1.5rem 0;
+
+  &:hover {
+    background-color: #0d1423;
+  }
+`;
+
+export const PopoverPlaylist = styled(PopoverSongCover)`
+  
+`;

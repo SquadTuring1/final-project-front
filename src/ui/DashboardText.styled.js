@@ -43,12 +43,12 @@ export const CoverSongTitle = styled.p`
   }
 
   &.playlist__info--row {
-    border-bottom: 1px solid #fff;
-    padding: 1.5rem 0 1.5rem 0;
+    /* border-bottom: 1px solid #fff;
+    padding: 1.5rem 0 1.5rem 0; */
 
-    &:hover {
+    /* &:hover {
       background-color: #00365c;
-    }
+    } */
   }
 `;
 

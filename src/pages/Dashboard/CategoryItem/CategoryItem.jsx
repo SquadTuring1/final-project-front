@@ -15,18 +15,20 @@ import { Grid, Pagination, Navigation, Virtual, Scrollbar, A11y } from "swiper";
 
 
 
-const CategoryItem = () => {
+const CategoryItem = ({ handleGenreClick }) => {
   const { data: genres, isLoading, isSuccess, isError, error } = useGetGenresQuery();
+
+
+
 
   let content;
   if (isLoading) {
     content = <p>Loading genres...</p>
   } else if (isSuccess) {
-    genres.map(gen =>console.log(gen))
     content =     
       genres.map(genre =>  
         <CategorySwiperItem key={genre._id} virtualIndex={genre._id}>
-            <CoverCategoryImg  src={genre.imgUrl} />
+            <CoverCategoryImg  src={genre.imgUrl} onClick={() => handleGenreClick(genre._id)} />
        </CategorySwiperItem>
       )
   }
