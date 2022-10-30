@@ -20,15 +20,14 @@ const content = song_item_test.map(({ id, tracks, title }) => {
   return (
     <main>
       <Swiper
-        modules={[ Navigation, Pagination, Scrollbar, A11y, Virtual]}
-        navigation
-        spaceBetween={30}
-        slidesPerView={3}
-        virtual
-        height={"100%"}
-        style={{
-          "--swiper-navigation-color": "#fff",
-          "--swiper-navigation-size": "1.5rem"
+      modules={[ Navigation, Pagination, Virtual]}
+      navigation
+      spaceBetween={-300}
+      slidesPerView={5}
+      virtual
+      style={{
+        "--swiper-navigation-color": "#fff",
+        "--swiper-navigation-size": "1.5rem"
         }}
       >
         <PlaylistDash>

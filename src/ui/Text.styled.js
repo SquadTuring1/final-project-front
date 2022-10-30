@@ -63,6 +63,32 @@ export const TitleH2 = styled.h2`
   color: #eee;
   font-size: 2.3rem;
   font-weight: 600;
+
+  &.genre__dashboard--h2{
+    width: 10rem;
+    padding: 0 0 .5rem 0;
+    margin: 1rem 0 0 1rem;
+    border-bottom: 1px solid #e5e5e5;
+    font-size: 1.5rem;
+    text-shadow: 2px 2px 11px #eee;
+  }
+
+  &.songs__dashboard--h2{
+    width: 10rem;
+    padding: 0 0 .5rem 0;
+    margin: 1rem 0 1rem 1rem;
+    border-bottom: 1px solid #e5e5e5;
+    font-size: 1.5rem;
+    text-shadow: 2px 2px 11px #eee;
+  }
+  &.playlist__dashboard--h2{
+    width: 10rem;
+    padding: 0 0 .5rem 0;
+    margin: 1rem 0 0 1rem;
+    border-bottom: 1px solid #e5e5e5;
+    font-size: 1.5rem;
+    text-shadow: 2px 2px 11px #eee;
+  }
 `;
 
 export const TitleP = styled.p`

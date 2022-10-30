@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const MainNav = styled.main`
-  background-color: #000;
+  background-color: #040810;
 `;
 
 export const NavContent = styled.section`

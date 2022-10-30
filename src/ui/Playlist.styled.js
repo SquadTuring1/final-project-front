@@ -17,27 +17,16 @@ export const PlaylistColumn = styled.section `
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  width: 100%;
   grid-area: playlist;
   margin: 0 0 0 1rem;
 
-  
-  /* height: 60vh;
-  width: 50%;
-  align-items: center;
-  justify-content: flex-start; 
-  gap: 1rem;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  margin-left: -1rem;
-  padding-right: 1rem;
-
-  &.playlist__songs {
-    gap: 0.1rem;
-    margin: 0;
-    padding: 0;
-  } */
+  &.Category__row {
+    width: 100%;
+  }
 `
 export const PlaylistColumnSongs = styled.section`
+width: 100%;
 grid-area: songs;
   margin: 0 1rem 0 0;
 
@@ -53,10 +42,12 @@ height: 100%;
   ;
   gap: 1rem;
 
-  /* display: flex;
-  justify-content: space-between;
-  height: 70vh;
-  width: 100%; */
+  &.category__container {
+    grid:
+    'playlist' 30%
+    'songs' auto/
+    100%
+  }
 `
 
 

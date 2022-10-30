@@ -4,11 +4,11 @@ import {
   CategoryRow,
   SongsRow,
   PlaylistRow,
-  SpecialRow,
+  TitleH2,
 } from '../../ui/index';
 import SongItem from './SongItem/index';
 import SongList from './SongList/SongList';
-import Categories from './CategoryItem/CategoryItem';
+import CategoryItem from './CategoryItem/index';
 import { Scrollbars } from 'react-custom-scrollbars-2';
 import PlaylistItem from './PlaylistItem';
 import PlaylistList from './PlaylistList/PlaylistList';
@@ -18,27 +18,21 @@ const Dashboard = () => {
     <Scrollbars universal>
       <MainFlex>
         <CategoryRow>
-          <h2>Genres</h2>
-          <Categories />
+          <TitleH2 className='genre__dashboard--h2'>Genres</TitleH2>
+          <CategoryItem />
         </CategoryRow>
         <SongsRow>
-        <h2>My Songs</h2>
+        <TitleH2 className='songs__dashboard--h2'>My Songs</TitleH2>
           <SongList />
         </SongsRow>
         <PlaylistRow>
-        My Playlist
+        <TitleH2 className='playlist__dashboard--h2'>My Playlist</TitleH2>
           <PlaylistList />
         </PlaylistRow>
-        <SpecialRow>
-        Recommended Songs
+        <SongsRow>
+        <TitleH2 className='songs__dashboard--h2'>All Songs</TitleH2>
           <SongList />
-        </SpecialRow>
-        <SpecialRow>
-          <SongList />
-        </SpecialRow>
-        <SpecialRow>
-          <SongList />
-        </SpecialRow>
+        </SongsRow>
       </MainFlex>
     </Scrollbars>
   );

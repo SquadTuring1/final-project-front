@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 export const CoverSongMain = styled.main`
 
@@ -56,12 +57,24 @@ export const PlaylistInfo = styled(PlaylistTitle)`
 
 export const CoverCategoryImg = styled.img`
 height: 8rem;
-margin: 0 1rem;
+margin: .8rem 1rem;
+`;
+
+export const CategorySwiperItem = styled(SwiperSlide)`
+  /* width: 16rem; */
 `;
 
 export const CoverCategoryMain = styled.main`
   display: flex;
+  flex-wrap: wrap;
+`;
 
+export const CategorySwiper = styled.main`
+display: flex;
 
-`
-;
+&.mySwiper {
+  display: flex;
+  flex-wrap: wrap;
+}
+  
+`;

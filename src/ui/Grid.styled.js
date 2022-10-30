@@ -8,22 +8,18 @@ export const MainFlex = styled.main`
 `;
 
 export const CategoryRow = styled.section`
+margin: 0 0 0 0;
   /* border: 1px dashed #fff; */
 `;
 
 export const SongsRow = styled.section`
-  /* border: 1px dashed #fff; */
+margin: 0 0 1rem 0;  
 `;
 
 export const PlaylistRow = styled.section`
   /* border: 1px dashed #fff; */
 `;
 
-
-
-export const SpecialRow = styled.section`
-  /* border: 1px dashed #fff; */
-`;
 
 
 // export const GridSideItem = styled.aside`
