@@ -6,17 +6,28 @@ import PlaylistItem from '../PlaylistItem';
 import "swiper/css";
 import "swiper/css/bundle";
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd/'
+import { useGetPlaylistsQuery } from '../../../features/api/apiSlice';
 
 
 const PlaylistList = () => {
+  const { data: playlists, isLoading, isSuccess, isError: error } = useGetPlaylistsQuery();
+
+
+  let content;
+  if (isLoading) {
+    content = <div>Loading genres...</div>
+  } else if (isSuccess) {
+    console.log(playlists)
+    content = playlists.map(({ id, tracks, title }) => {
+      return (
+        <SwiperSlide key={id} virtualIndex={id}>
+          <PlaylistItem tracks={tracks} title={title} />
+        </SwiperSlide>
+      )
+    })
+  }
   
-const content = song_item_test.map(({ id, tracks, title }) => {
-  return (
-    <SwiperSlide key={id} virtualIndex={id}>
-      <PlaylistItem tracks={tracks} title={title} />
-    </SwiperSlide>
-  )
-})
+// const content = 
 
   return (
     <main>

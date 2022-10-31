@@ -34,9 +34,10 @@ const SongList = () => {
     // console.log(songList)
     content = songList?.map(({ _id, imageUrl, artist, title, fileUrl, likedBY, album }, songIndex) =>
       <SwiperSlide key={_id} virtualIndex={_id}>
-        <SongItem artist={artist?.artistName} title={title} cover={imageUrl} songId={_id} songIndex={songIndex} fileUrl={fileUrl} likedBY={likedBY} album={album} />  
+        <SongItem artist={artist} title={title} cover={imageUrl} songId={_id} songIndex={songIndex} fileUrl={fileUrl} likedBY={likedBY} album={album} />  
       </SwiperSlide> 
     )
+    console.log(songList)
   } else if (isError) {
     content = <p>{error}</p>
   } 

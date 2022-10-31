@@ -30,22 +30,7 @@ const FavoriteTracks = ({ artist, title, cover, songId, likedBY, album }) => {
 //flex-wrap: wrap
   
   return (
-    <div key={songId} >
-    <CoverSongMain>
-      {/* <SongsH2>Your Songs</SongsH2> */}
-        <PopoverSongCover songId={songId} title={title} artist={artist} album={album}/>
-      <CoverSong cover={cover} src={emptyCover} 
-      onClick={handleClick} 
-      /> 
-      <article>
-        <CoverSongTitle>{title}</CoverSongTitle>
-      </article>
-      <article>
-        <CoverSongArtist>{artist}</CoverSongArtist>
-      </article>
-      <LikedSong songId={songId} likedBY={likedBY} />      
-    </CoverSongMain>
-    </div>
+    <div>FavoriteTracks</div>
   )
 }
 

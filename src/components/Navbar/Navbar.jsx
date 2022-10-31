@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import logoSM from '../../assets/images/Logo-sign.png';
 import {
   Logo,
@@ -11,11 +11,12 @@ import PopoverNavbar from '../PopoverNavbar/PopoverNavbar';
 
 const Navbar = () => {
 
+  const navigate = useNavigate()
 
   return (
     <MainNav>
       <NavContent>
-        <Logo className="logo_profile" src={logoSM} alt="logotipe" />
+        <Logo onClick={() => navigate('/dashboard')} className="logo_profile" src={logoSM} alt="logotipe" />
           <PopoverNavbar />
       </NavContent>
     </MainNav>     

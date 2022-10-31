@@ -41,9 +41,6 @@ const CategoryItem = ({ handleGenreClick }) => {
       spaceBetween={-300}
       slidesPerView={5}
       virtual
-      // height={"100%"}
-      // loop={true}
-      // pagination={{clickable: true}}
       style={{
         "--swiper-navigation-color": "#fff",
         "--swiper-navigation-size": "1.5rem"

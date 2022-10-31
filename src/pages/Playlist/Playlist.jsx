@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { PlaylistColumn, PlaylistContainer, PlaylistTitle, PlaylistInfo, PlaylistCoverSm, PlaylistSong, PlaylistColumnSongs, CoverSong, CoverSongTitle } from "../../ui/index"
+import { PlaylistBigHeader, PlaylistColumn, PlaylistContainer, PlaylistTitle, PlaylistInfo, PlaylistCoverSm, PlaylistSong, PlaylistColumnSongs, CoverSong, CoverSongTitle, PlaylistArticle, PopoverPlaylistStyled, PlaylistHeader } from "../../ui/index"
 import { useEffect, useState } from 'react'
 import { getAuthUser } from "../../features/auth/authSlice";
 import { useGetPlaylistsQuery, useLazyGetSinglePlaylistQuery } from "../../features/api/apiSlice";
@@ -9,6 +9,11 @@ import SongItem from '../Dashboard/SongItem/index'
 import PopoverSongCover from "../../components/PopoverSongCover";
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd/'
 import { nanoid } from '@reduxjs/toolkit'
+import LikedSong from "../../components/LikedSong/index";
+import { StarButton } from "../../ui/Icons.styled";
+import PopoverPlaylist from "../../components/PopoverPlaylist/PopoverPlaylist";
+
+import { RiMore2Line } from 'react-icons/ri';
 
 
 const Playlist = () => {
@@ -66,20 +71,27 @@ const Playlist = () => {
       
     }
   }
-  
+ 
+  // console.log("playlistdata", playlistsData)
+
   let playlistsContent;
   if (isPlaylistsLoading) {
     playlistsContent = 
         <div>Playlists are being loaded...</div>
   } else if (isPlaylistsSuccess) {
-    console.log(playlistsData)
+    // console.log(playlistsData)
     playlistsContent = 
       <>
-      {playlistsData?.playlists?.map(playlist =>
-        <PlaylistCoverSm key={playlist._id} onClick={() => handlePlaylistClick(playlist._id)}>
-          <PlaylistTitle >{playlist.title}</PlaylistTitle>
-          <PlaylistInfo>{playlist.songs.length}</PlaylistInfo>         
-        </PlaylistCoverSm>
+      {playlistsData?.playlists?.map(playlist =>       
+
+        <article key={playlist._id}>
+          <PopoverPlaylist playlistId={playlist._id} playlistTitle={playlist.title}></PopoverPlaylist>
+          <PlaylistCoverSm  onClick={() => handlePlaylistClick(playlist._id)}>
+            <PlaylistTitle >{playlist.title}</PlaylistTitle>
+            <PlaylistInfo>{playlist.songs.length}</PlaylistInfo>         
+          </PlaylistCoverSm>
+        </article>
+        
       )}
       </>
   } else if (isPlaylistsError) {
@@ -109,11 +121,16 @@ const Playlist = () => {
                 onClick={() => handleSongClick(_id, index)}
                 >
                 <CoverSongTitle className="index__song--playlist">{index+1}</CoverSongTitle>
+                {console.log(index)}
                 <CoverSong className="cover__song--playlist" src={imageUrl} />
-                <CoverSongTitle className="title__song--playlist playlist__info--row">{title}</CoverSongTitle>
-                <CoverSongTitle className="artist__song--playlist playlist__info--row">{artist}</CoverSongTitle>
-                <CoverSongTitle className="genre__song--playlist playlist__info--row">{genre?.title}</CoverSongTitle>
-                <PopoverSongCover songId={_id} title={title} artist={artist} album={album} />
+
+                <PlaylistArticle>
+                  <CoverSongTitle className="title__song--playlist playlist__info--row">{title}</CoverSongTitle>
+                  <CoverSongTitle className="artist__song--playlist playlist__info--row">{artist}</CoverSongTitle>
+                  <CoverSongTitle className="genre__song--playlist playlist__info--row">{genre?.title}</CoverSongTitle>
+                  <PopoverSongCover className='popoverPlaylist' songId={_id} title={title} artist={artist} album={album} />
+                  <StarButton  />
+                </PlaylistArticle>
               </PlaylistSong>
             )
           }}
@@ -128,20 +145,27 @@ const Playlist = () => {
   return (
     <>  
       <PlaylistContainer>
+      <PlaylistBigHeader>Playlist</PlaylistBigHeader>
+   
         <Scrollbars universal>
           <PlaylistColumn className="playlist__covers">
             {playlistsContent}
           </PlaylistColumn>
         </Scrollbars>
-        <Scrollbars>
           {/* separation columns */}
+        <Scrollbars>
+            <PlaylistHeader>
+                    <CoverSongTitle className="playlist__header">Title</CoverSongTitle>
+                    <CoverSongTitle className="playlist__header">Artist</CoverSongTitle>
+                    <CoverSongTitle className="playlist__header">Genre</CoverSongTitle>
+                  </PlaylistHeader>
           <DragDropContext onDragEnd={handleOnDragEnd}>
             <Droppable droppableId='tracks' key={nanoid()}>
               {(provided, snapshot) => (
                   <PlaylistColumnSongs className="playlist__songs"
                   {...provided.droppableProps}
                   ref={provided.innerRef}
-                  >
+                  >   
                     {songsContent }
                     {provided.placeholder}  
                   </PlaylistColumnSongs>

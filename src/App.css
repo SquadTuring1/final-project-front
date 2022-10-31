@@ -4,3 +4,8 @@
   box-sizing: border-box;
   font-family: 'Source Sans Pro', sans-serif;
 }
+
+#resources-button {
+  min-width: 25px;
+  color: #fff;
+}

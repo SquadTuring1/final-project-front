@@ -26,7 +26,7 @@ const Dashboard = () => {
           <SongList />
         </SongsRow>
         <PlaylistRow>
-        <TitleH2 className='playlist__dashboard--h2'>My Playlist</TitleH2>
+        <TitleH2 className='playlist__dashboard--h2'>Playlists</TitleH2>
           <PlaylistList />
         </PlaylistRow>
         <SongsRow>

@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { RiMore2Line } from 'react-icons/ri';
 import { useForm } from "react-hook-form";
 
+
 // import { MenuItem, Menu } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
@@ -14,6 +15,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
+
 
 import {
   useGetPlaylistsQuery,
@@ -23,8 +25,8 @@ import {
   useDeleteSongMutation,
   useUpdateSongMutation
 } from '../../features/api/apiSlice';
-import { autocompleteClasses } from '@mui/material';
-import { CoverSongTitle } from '../../ui';
+import { autocompleteClasses, IconButton } from '@mui/material';
+import { CoverSongTitle, PopoverArticle } from '../../ui/index';
 import { async } from '@firebase/util';
 
 
@@ -93,7 +95,7 @@ const PopoverSongCover = ({ songId, title, artist, album }) => {
   }
   
   const handleEditSong = (data) => {
-    console.log(songId)
+    console.log('songId',songId)
     console.log(data)
     updateSong({
       songId: songId,
@@ -101,18 +103,18 @@ const PopoverSongCover = ({ songId, title, artist, album }) => {
       album: data.album,
       artist: data.artist  
     })
-    // toast.success(`Song updated!`, { 
-    //   position: "top-center",
-    //   autoClose: 1000 
-    // })
-    console.log("Song edited!")
+    toast.success(`Song updated!`, {
+      position: "top-center",
+      autoClose: 1000 
+    })
+    // console.log("Song edited!")
   }
 
   let content;
   if (isLoading) {
     content = <p>Loading...</p>;
   } else if (isSuccess) {    
-    content = data.playlists.map((playlist) => {
+    content = data.map((playlist) => {
       const { _id, title, description, thumbnail } = playlist;
       return (
         <article key={_id}>
@@ -152,7 +154,7 @@ const PopoverSongCover = ({ songId, title, artist, album }) => {
 
   return (
     <div>
-      <article>
+      <PopoverArticle>
         <Button
           id="resources-button"
           onClick={handleClick}
@@ -161,7 +163,7 @@ const PopoverSongCover = ({ songId, title, artist, album }) => {
         >
           <RiMore2Line />
         </Button>
-      </article>
+      </PopoverArticle>
       <Menu
         id="resources-menu"
         anchorEl={anchorEl}
