@@ -7,13 +7,23 @@ import {
   TitleH2,
 } from '../../ui/index';
 import SongItem from './SongItem/index';
-import SongList from './SongList/SongList';
+// import SongList from './MySongs/MySongs';
+import MySongs from './MySongs/MySongs';
+import AllSongs from './AllSongs/AllSongs';
 import CategoryItem from './CategoryItem/index';
 import { Scrollbars } from 'react-custom-scrollbars-2';
 import PlaylistItem from './PlaylistItem';
 import PlaylistList from './PlaylistList/PlaylistList';
 
 const Dashboard = () => {
+
+
+
+
+
+
+
+
   return (
     <Scrollbars universal>
       <MainFlex>
@@ -23,7 +33,7 @@ const Dashboard = () => {
         </CategoryRow>
         <SongsRow>
         <TitleH2 className='songs__dashboard--h2'>My Songs</TitleH2>
-          <SongList />
+          <MySongs />
         </SongsRow>
         <PlaylistRow>
         <TitleH2 className='playlist__dashboard--h2'>Playlists</TitleH2>
@@ -31,7 +41,7 @@ const Dashboard = () => {
         </PlaylistRow>
         <SongsRow>
         <TitleH2 className='songs__dashboard--h2'>All Songs</TitleH2>
-          <SongList />
+          <AllSongs />
         </SongsRow>
       </MainFlex>
     </Scrollbars>

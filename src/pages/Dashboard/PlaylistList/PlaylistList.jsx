@@ -17,10 +17,9 @@ const PlaylistList = () => {
   if (isLoading) {
     content = <div>Loading genres...</div>
   } else if (isSuccess) {
-    console.log(playlists)
-    content = playlists.map(({ id, tracks, title }) => {
+    content = playlists.map(({ _id, tracks, title }) => {
       return (
-        <SwiperSlide key={id} virtualIndex={id}>
+        <SwiperSlide key={_id} virtualIndex={_id}>
           <PlaylistItem tracks={tracks} title={title} />
         </SwiperSlide>
       )

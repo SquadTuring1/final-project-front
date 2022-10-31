@@ -8,7 +8,6 @@ export const apiSlice = createApi({
     // refetchOnFocus: true,
     prepareHeaders: (headers, { getState }) => {
       const token = getState().auth.token;
-      console.log(token)
       // If we have a token set in state, let's assume that we should be passing it.
       if (token) {
         headers.set('Authorization', `Bearer ${token}`);
@@ -48,11 +47,15 @@ export const apiSlice = createApi({
     getSongs: builder.query({
       query: () => '/songs',
       transformResponse: (res) => res.songs,
-      providesTags: ['Songs'],
+      
       providesTags: (result, error, arg) =>
         result
           ? [...result.map(({ id }) => ({ type: 'Songs', id })), 'Songs']
           : ['Songs'],
+    }),
+    getSongsByUser: builder.query({
+      query: (userId) => `/songs/${userId}/user`,
+      providesTags: ['Songs'],
     }),
     addSong: builder.mutation({
       query: (song) => ({
@@ -201,6 +204,8 @@ export const {
   useSignUpUserMutation,
   useLogInAndUpdateTokenMutation,
   useGetSongsQuery,
+  useGetSongsByUserQuery,
+  useLazyGetSongsByUserQuery,
   useAddSongMutation,
   useDeleteSongMutation,
   useGetGenresQuery,

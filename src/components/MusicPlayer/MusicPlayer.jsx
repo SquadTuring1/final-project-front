@@ -17,7 +17,7 @@ const MusicPlayer = () => {
 
   const [ currentSongTime, setCurrentSongTime ] = useState(0);
   const [ songDuration, setSongDuration ] = useState(0);
-  const [ volume, setVolume ] = useState(0.15);
+  const [ volume, setVolume ] = useState(0.1);
 
   const audioTag = useRef();
   
@@ -32,6 +32,7 @@ const MusicPlayer = () => {
   }
 
   const handleVolume = (volumeValue) => {
+    console.log(volumeValue)
     setVolume(volumeValue)
     audioTag.current.volume = volumeValue;
   }

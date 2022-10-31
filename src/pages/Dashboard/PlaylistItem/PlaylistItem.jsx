@@ -6,8 +6,13 @@ import {
 } from '../../../ui/index';
 
 const PlaylistItem = ({ tracks, title }) => {
+
+
+
+
+
   return (
-    <CoverPlaylistMain>
+    <CoverPlaylistMain onClick={() => handlePlaylistClick(playlist._id)}>
       <PlaylistTitle>{title}</PlaylistTitle>
       <PlaylistInfo>{tracks}</PlaylistInfo>
       {/* {console.log(title)} */}

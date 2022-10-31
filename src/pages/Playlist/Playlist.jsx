@@ -42,7 +42,6 @@ const Playlist = () => {
     await getSinglePlaylist(playlistId);
     console.log('playlist loaded')
     console.log(clickedPlaylist)
-    
   }
 
   const handleSongClick = (songId, index) => {  
@@ -68,11 +67,10 @@ const Playlist = () => {
       const [ reorderedItem ] = songsArray.splice(result.source.index, 1);
       songsArray.splice(result.destination.index, 0, reorderedItem)
       dispatch(setSongsList({ songList: songsArray, }));
-      
     }
   }
  
-  // console.log("playlistdata", playlistsData)
+  
 
   let playlistsContent;
   if (isPlaylistsLoading) {
