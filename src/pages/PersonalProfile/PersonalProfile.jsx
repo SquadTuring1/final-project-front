@@ -1,5 +1,5 @@
 import { ErrorMessage } from '@hookform/error-message';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useSelector, useDispatch } from 'react-redux';
 import { Popover } from 'react-tiny-popover';
@@ -35,7 +35,7 @@ const PersonalProfile = () => {
   const authUser = useSelector(getAuthUser);
   const [updateUser, { isLoading, isError, error }] = useUpdateUserMutation();
   const { data } = useGetSingleUserQuery(authUser.uid);
-
+  const formRef = useRef();
   // form settings
   const {
     getValues,
@@ -80,6 +80,7 @@ const PersonalProfile = () => {
           username: data.username,
         };
         await updateUser({ ...userObj }).unwrap();
+        formRef.current.reset();
         dispatch(userSignedIn({ ...authUser, ...userObj }));
         toast.success('User updated successfully!', { toastId: nanoid() });
       } catch (error) {
@@ -108,13 +109,16 @@ const PersonalProfile = () => {
 
   return (
     <MainDash>
-      <form id="personalProfileForm" onSubmit={handleSubmit(onSubmit)}>
+      <form
+        id="personalProfileForm"
+        onSubmit={handleSubmit(onSubmit)}
+        ref={formRef}
+      >
         <CenterProfile loginLab>
           <TitleH2 className="profile__title">Profile</TitleH2>
           {/* <Button><input accept="image/png,image/jpeg" id="avatar__input" type="file"  />Avatar</Button> */}
           {/* <FileUploader buttonName="Avatar"></FileUploader> */}
           <Input
-            disabled={modifyInfo === true ? true : false}
             className="username__input"
             name="username"
             type="text"
@@ -187,8 +191,8 @@ const PersonalProfile = () => {
           </Button>
         )}
         {/* <Button type="submit">Save</Button> */}
+        <AvatarUpload />
       </CenterArticle>
-      <AvatarUpload />
     </MainDash>
   );
 };
