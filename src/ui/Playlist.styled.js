@@ -122,6 +122,6 @@ position: relative;
   }
 `;
 
-export const PopoverPlaylist = styled(PopoverSongCover)`
+export const PopoverPlaylistStyled = styled(PopoverSongCover)`
   
 `;

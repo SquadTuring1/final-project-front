@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { PlaylistBigHeader, PlaylistColumn, PlaylistContainer, PlaylistTitle, PlaylistInfo, PlaylistCoverSm, PlaylistSong, PlaylistColumnSongs, CoverSong, CoverSongTitle, PlaylistArticle, PopoverPlaylist } from "../../ui/index"
+import { PlaylistBigHeader, PlaylistColumn, PlaylistContainer, PlaylistTitle, PlaylistInfo, PlaylistCoverSm, PlaylistSong, PlaylistColumnSongs, CoverSong, CoverSongTitle, PlaylistArticle, PopoverPlaylistStyled } from "../../ui/index"
 import { useEffect, useState } from 'react'
 import { getAuthUser } from "../../features/auth/authSlice";
 import { useGetPlaylistsQuery, useLazyGetSinglePlaylistQuery } from "../../features/api/apiSlice";
