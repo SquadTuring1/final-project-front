@@ -6,6 +6,12 @@ import Controls from './Controls/index';
 import { getCurrentSongUrl, getShuffle, getRepeat, getCurrentSongIndex, getSongList, playNextSong, playRandomSong } from '../../features/songs/songsSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
+import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
+import Slider from '@mui/material/Slider';
+import VolumeDown from '@mui/icons-material/VolumeDown';
+import VolumeUp from '@mui/icons-material/VolumeUp';
+
 
 const MusicPlayer = () => {
   const dispatch = useDispatch();
@@ -53,6 +59,7 @@ const MusicPlayer = () => {
     await audioTag.current.play();
   }
 
+
   return (
     <>
     <PlayerMain>  
@@ -73,12 +80,17 @@ const MusicPlayer = () => {
           <SongTimer>{currentSongTime ? formatSongTime(currentSongTime) : formatSongTime(0)}</SongTimer>
           <SongTimer>{formatSongTime(songDuration)}</SongTimer>
         </ProgressTime>
-        <ProgressBar type="range" 
-        id="progressBar"
-        value={songDuration ? (currentSongTime * 1000) / songDuration : 0}
-        max="1000"  
-        onChange={(e) => handleProgressBar(e)}
-        />
+        <Box sx={{ width: '70%',
+          margin:'0 auto' }}>
+          <ProgressBar as={Slider}
+          aria-label="Temperature"
+          defaultValue={30}
+          color='error'
+            value={songDuration ? (currentSongTime * 1000) / songDuration : 0}
+            max="1000"
+            onChange={(e) => handleProgressBar(e)}
+          />
+        </Box>
           {/* </MusicBar> */}
             
          
