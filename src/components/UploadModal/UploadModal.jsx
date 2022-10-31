@@ -29,9 +29,6 @@ const UploadModal = () => {
   const [formFields, setFormFields] = useState(initialFieldsState);
   const userId = useSelector(getUserId);
   const formRef = useRef();
-  useEffect(() => {
-    console.log(formFields);
-  }, [formFields]);
 
   const handleOnChange = (e) => {
     let { name, value, files } = e.target;
