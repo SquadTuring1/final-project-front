@@ -51,16 +51,16 @@ const SongList = () => {
   }, []);
 
   const mediaScreen = () => {
-    console.log('matches: ', matches)
+    // console.log('matches: ', matches)
     if (window.matchMedia("(max-width: 500px)").matches) {
-      console.log('2')
+      // console.log('2')
       return 2;
     }else if (window.matchMedia("(min-width: 500px)").matches) {
-      console.log('3')
+      // console.log('3')
       return 3
     }
     if (window.matchMedia("(min-width: 768px)").matches) {
-      console.log('6')
+      // console.log('6')
       return 6 
     }
   }

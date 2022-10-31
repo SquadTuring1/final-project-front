@@ -20,13 +20,7 @@ const SongItem = ({ artist, title, cover, songId, likedBY, album }) => {
   const userId = useSelector(getUserId)
   const songList = useSelector(getSongList)
 
-  const emptyCover = () => {
-    if (cover !== undefined) {
-      return cover;
-    }else{
-      return logoMammoth;
-    }
-  }
+  const emptyCover = cover !== undefined ? cover : logoMammoth
 
   const handleClick = () => {
     const index = songList.findIndex(song => song._id === songId);
@@ -38,7 +32,7 @@ const SongItem = ({ artist, title, cover, songId, likedBY, album }) => {
     <CoverSongMain>
       {/* <SongsH2>Your Songs</SongsH2> */}
         <PopoverSongCover songId={songId} title={title} artist={artist} album={album}/>
-      <CoverSong cover={cover} src={emptyCover()} 
+      <CoverSong cover={cover} src={emptyCover} 
       onClick={handleClick} 
       /> 
       <article>
