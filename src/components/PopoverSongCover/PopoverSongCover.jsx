@@ -95,7 +95,7 @@ const PopoverSongCover = ({ songId, title, artist, album }) => {
   }
   
   const handleEditSong = (data) => {
-    console.log(songId)
+    console.log('songId',songId)
     console.log(data)
     updateSong({
       songId: songId,
@@ -103,18 +103,18 @@ const PopoverSongCover = ({ songId, title, artist, album }) => {
       album: data.album,
       artist: data.artist  
     })
-    // toast.success(`Song updated!`, { 
-    //   position: "top-center",
-    //   autoClose: 1000 
-    // })
-    console.log("Song edited!")
+    toast.success(`Song updated!`, {
+      position: "top-center",
+      autoClose: 1000 
+    })
+    // console.log("Song edited!")
   }
 
   let content;
   if (isLoading) {
     content = <p>Loading...</p>;
   } else if (isSuccess) {    
-    content = data.playlists.map((playlist) => {
+    content = data.map((playlist) => {
       const { _id, title, description, thumbnail } = playlist;
       return (
         <article key={_id}>

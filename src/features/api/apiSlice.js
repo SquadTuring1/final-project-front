@@ -8,6 +8,7 @@ export const apiSlice = createApi({
     // refetchOnFocus: true,
     prepareHeaders: (headers, { getState }) => {
       const token = getState().auth.token;
+      console.log(token);
       // If we have a token set in state, let's assume that we should be passing it.
       if (token) {
         headers.set('Authorization', `Bearer ${token}`);
@@ -135,6 +136,7 @@ export const apiSlice = createApi({
     getPlaylists: builder.query({
       query: () => '/playlists',
       providesTags: ['Playlists'],
+      transformResponse: (res) => res.playlists,
     }),
     getPlaylistsByUser: builder.query({
       query: (userId) => `/playlists/user/${userId}`,
@@ -179,12 +181,30 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: ['Playlists'],
     }),
+    deletePlaylist: builder.mutation({
+      query: ({ playlistId }) => ({
+        url: `/playlists/${playlistId}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Playlists'],
+    }),
+    renamePlaylist: builder.mutation({
+      query: ({ playlistId, playlistTitle }) => ({
+        url: `/playlists/${playlistId}`,
+        method: 'PATCH',
+        body: {
+          title: playlistTitle,
+        },
+      }),
+      invalidatesTags: ['Playlists'],
+    }),
   }),
 });
 
 export const {
   useGetUsersQuery,
   useGetSingleUserQuery,
+  useLazyGetSingleUserQuery,
   useAddUserMutation,
   useUpdateUserMutation,
   useLikeASongMutation,
@@ -203,4 +223,6 @@ export const {
   useAddPlaylistMutation,
   useUpdateSongMutation,
   useUpdateAvatarMutation,
+  useDeletePlaylistMutation,
+  useRenamePlaylistMutation,
 } = apiSlice;
