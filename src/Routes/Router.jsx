@@ -12,8 +12,7 @@ import FavoriteTracks from '../pages/FavoriteTracks/index';
 import Playlist from '../pages/Playlist/index';
 import Categories from '../pages/Categories/index';
 import OutletFrame from '../components/OutletFrame/OutletFrame';
-// import FormCloudinary from '../pages/FormCloudinary';
-import FormCloudinary2 from '../pages/FormCloudinary2';
+
 import ErrorPage from '../pages/ErrorPage/index';
 import ProtectedRoutes from '../utils/ProtectedRoutes';
 
@@ -33,8 +32,6 @@ const Router = () => {
           <Route path="favorites" element={<FavoriteTracks />} />
           <Route path="playlist" element={<Playlist />} />
           <Route path="categories" element={<Categories />} />
-          <Route path="cloudinary" element={<FormCloudinary2 />} />
-          <Route path="upload" element={<FormCloudinary2 />} />
         </Route>
       </Route>
     </Routes>
