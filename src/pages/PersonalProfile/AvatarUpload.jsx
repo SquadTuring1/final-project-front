@@ -2,7 +2,8 @@ import { useState, useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useUpdateAvatarMutation } from '../../features/api/apiSlice';
 import { getAuthUser } from '../../features/auth/authSlice';
-import { Button } from '../../ui';
+import { Button, CenterProfile } from '../../ui';
+
 
 const AvatarUpload = () => {
   const [avatarFile, setAvatarFile] = useState('');
@@ -47,17 +48,19 @@ const AvatarUpload = () => {
 
   return (
     <form onSubmit={handleSubmit} encType="multipart/form-data" ref={formRef}>
-      <label htmlFor="avatar">avatar</label>
-      <div className="avatar-input">
-        <input type="file" required onChange={handleChange} accept="image/*" />
-        <img
-          src={avatarPreviewImg}
-          style={{ width: '50px', height: '50px' }}
-          alt="avatar-preview"
-        />
-      </div>
-      <Button type="submit">Update Avatar</Button>
-    </form>
+    <CenterProfile className='avatar__upload--form'>
+        {/* <label style={{color:'#fff'}} htmlFor="avatar">avatar</label> */}
+        <div className="avatar-input">
+          <input type="file" required onChange={handleChange} accept="image/*" />
+          <img
+            src={avatarPreviewImg}
+            style={{ width: '50px', height: '50px' }}
+            alt="avatar-preview"
+          />
+        </div>
+        <Button className='profile__upload--btn' type="submit">Update Avatar</Button>
+    </CenterProfile>
+      </form>
   );
 };
 

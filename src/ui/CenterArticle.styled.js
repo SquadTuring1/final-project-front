@@ -15,10 +15,14 @@ export const CenterArticle = styled.article`
 
 export const CenterProfile = styled(CenterArticle)`
   margin-top: -3rem;
-  height: 50vh;
+  height: auto;
   align-items: center;
 
   &.button {
     height: 100%;
+  }
+
+  &.avatar__upload--form {
+    margin: 3rem 0 0;
   }
 `;
