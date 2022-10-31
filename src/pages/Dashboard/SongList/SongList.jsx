@@ -6,11 +6,10 @@ import { setCurrentSong, setSongsList } from '../../../features/songs/songsSlice
 import { useDispatch } from 'react-redux';
 import { useState } from 'react'
 
-import Swiper, { Navigation, Pagination } from 'swiper';
 import "swiper/css";
 import "swiper/css/bundle";
-// import { Swiper, SwiperSlide } from 'swiper/react';
-// import { A11y, Navigation, Pagination, Scrollbar, Virtual } from "swiper";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { A11y, Navigation, Pagination, Scrollbar, Virtual } from "swiper";
 
 
 
@@ -28,75 +27,62 @@ const SongList = () => {
     }
   }, [songList ])
 
-
-
-  // let content;
-  // if (isLoading) {
-  //   content = <p>Loading...</p>
-  // } else if (isSuccess) {
-  //   // console.log(songList)
-  //   content = songList?.map(({ _id, imageUrl, artist, title, fileUrl, likedBY, album }, songIndex) =>
-  //     <SwiperSlide key={_id} virtualIndex={_id}>
-  //       <SongItem artist={artist?.artistName} title={title} cover={imageUrl} songId={_id} songIndex={songIndex} fileUrl={fileUrl} likedBY={likedBY} album={album} />  
-  //     </SwiperSlide> 
-  //   )
-  // } else if (isError) {
-  //   content = <p>{error}</p>
-  // } 
-  
-
-  const swiper = new Swiper('.swiper', {
-    modules: [Navigation, Pagination],
-    slidesPerView: 4,
-    spaceBetween: 10,
-    navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev",
-    },
-    scrollbar: {
-      el: '.swiper-scrollbar',
-      draggable: true,
-    },
-  });
-  
   let content;
   if (isLoading) {
     content = <p>Loading...</p>
   } else if (isSuccess) {
     // console.log(songList)
     content = songList?.map(({ _id, imageUrl, artist, title, fileUrl, likedBY, album }, songIndex) =>
-      <div className='swiper-container' key={_id} virtualIndex={_id}>
+      <SwiperSlide key={_id} virtualIndex={_id}>
         <SongItem artist={artist?.artistName} title={title} cover={imageUrl} songId={_id} songIndex={songIndex} fileUrl={fileUrl} likedBY={likedBY} album={album} />  
-      </div> 
+      </SwiperSlide> 
     )
   } else if (isError) {
     content = <p>{error}</p>
   } 
 
-  return (
-    // <Swiper
-    //   modules={[ Navigation, Pagination, Virtual]}
-    //   navigation
-    //   spaceBetween={10}
-    //   slidesPerView={9}
-    //   virtual
-    //   style={{
-    //     "--swiper-navigation-color": "#fff",
-    //     "--swiper-navigation-size": "1.5rem"
-    //   }}
-    // >
-    //   <SongsDash>
-    //     {content}
-    //   </SongsDash>
-    // </Swiper>
+  //Test Media Queries in React
+  const [matches, setMatches] = useState('')
 
-    <div className="swiper">
-      <div className="swiper-wrapper">
+  useEffect(() => {
+    window
+    .matchMedia("(max-width: 500px)")
+    .addEventListener('change', e => setMatches( e.matches ));
+  }, []);
+
+  const mediaScreen = () => {
+    console.log('matches: ', matches)
+    if (window.matchMedia("(max-width: 500px)").matches) {
+      console.log('2')
+      return 2;
+    }else if (window.matchMedia("(min-width: 500px)").matches) {
+      console.log('3')
+      return 3
+    }
+    if (window.matchMedia("(min-width: 768px)").matches) {
+      console.log('6')
+      return 6 
+    }
+  }
+
+  
+
+  return (
+    <Swiper
+      modules={[ Navigation, Pagination, Virtual]}
+      navigation
+      spaceBetween={10}
+      slidesPerView={mediaScreen()}
+      virtual
+      style={{
+        "--swiper-navigation-color": "#fff",
+        "--swiper-navigation-size": "1.5rem"
+      }}
+    >
+      <SongsDash>
         {content}
-		  </div>
-      <div class="swiper-button-next" style={{backgroundColor: 'white', width: '20px'}}></div>
-      <div class="swiper-button-prev" style={{backgroundColor: 'white', width: '20px'}}></div>
-	</div>
+      </SongsDash>
+    </Swiper>
   );
 };
 
