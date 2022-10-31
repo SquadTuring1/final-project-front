@@ -151,7 +151,6 @@ export const apiSlice = createApi({
           ? [...result.map(({ id }) => ({ type: 'Genres', id })), 'Genres']
           : ['Genres'],
     }),
-
     addPlaylist: builder.mutation({
       query: ({ title, description, isPrivate, userId, songs }) => ({
         url: '/playlists',
@@ -166,6 +165,23 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: ['Playlists'],
     }),
+    deletePlaylist: builder.mutation({
+      query: ({ playlistId }) => ({
+        url: `/playlists/${playlistId}`,
+        method: 'DELETE'
+      }),
+      invalidatesTags: ['Playlists'],
+    }),
+    renamePlaylist: builder.mutation({
+      query: ({ playlistId, playlistTitle })=> ({
+        url: `/playlists/${playlistId}`,
+        method: 'PATCH',
+        body: {
+          title: playlistTitle          
+        }
+      }),
+      invalidatesTags: ['Playlists'],
+    })
   }),
 });
 
@@ -188,4 +204,6 @@ export const {
   useAddSongToPlaylistMutation,
   useAddPlaylistMutation,
   useUpdateSongMutation,
+  useDeletePlaylistMutation,
+  useRenamePlaylistMutation
 } = apiSlice;

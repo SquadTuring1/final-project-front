@@ -11,7 +11,7 @@ function App() {
     <MainApp>
       <GlobalStyle />
       <Router />
-      <ToastContainer theme="dark" position="top-center" autoClose={3000} transition={Slide} hideProgressBar={true} />
+      <ToastContainer theme="dark" position="top-center" autoClose={3000} transition={Slide} hideProgressBar={true} limit={1} />
     </MainApp>
   )
 }
