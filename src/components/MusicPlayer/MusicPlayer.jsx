@@ -92,7 +92,7 @@ const MusicPlayer = () => {
           defaultValue={30}
           color='error'
             value={songDuration ? (currentSongTime * 1000) / songDuration : 0}
-            max='1000'
+            max={1000}
             onChange={(e) => handleProgressBar(e)}
           />
         </Box>
