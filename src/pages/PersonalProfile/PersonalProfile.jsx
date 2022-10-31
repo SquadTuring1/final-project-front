@@ -118,13 +118,7 @@ const PersonalProfile = () => {
           <TitleH2 className="profile__title">Profile</TitleH2>
           {/* <Button><input accept="image/png,image/jpeg" id="avatar__input" type="file"  />Avatar</Button> */}
           {/* <FileUploader buttonName="Avatar"></FileUploader> */}
-          <Input
-            className="username__input"
-            name="username"
-            type="text"
-            placeholder="Username"
-            {...register('username')}
-          />
+
           {/* <Label className="name__profile">Name</Label> */}
           <Input
             disabled={modifyInfo === true ? true : false}
