@@ -1,13 +1,12 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { CoverCategoryMain, PlaylistColumn, PlaylistColumnSongs, PlaylistContainer, PlaylistSong, CoverSongTitle, CoverSong } from '../../ui/index';
+import { CoverCategoryMain, PlaylistColumn, PlaylistColumnSongs, PlaylistContainer, PlaylistSong, CoverSongTitle, CoverSong, PlaylistBigHeader, PlaylistHeader, PlaylistArticle } from '../../ui/index';
 import Scrollbars from 'react-custom-scrollbars-2';
 import CategoryItem from '../Dashboard/CategoryItem/index';
 import { getSongList, setSongsList, setCurrentSong } from '../../features/songs/songsSlice';
 import { useLazyGetGenreByIdQuery } from '../../features/api/apiSlice';
 import { useEffect } from 'react';
 import PopoverSongCover from '../../components/PopoverSongCover/PopoverSongCover';
-
 
 
 const Categories = () => {
@@ -39,12 +38,14 @@ const Categories = () => {
   } else if (isSuccess) {    
     playlistContent = 
       songList?.map(({ imageUrl, genre, title, artist, likedBy, _id, album}, index) =>      
-        <PlaylistSong key={_id} onClick={() => handleSongClick(_id, index)}>
+        <PlaylistSong className='playlist__category' key={_id} onClick={() => handleSongClick(_id, index)}>
           <CoverSongTitle className="index__song--playlist">{index+1}</CoverSongTitle>
           <CoverSong className="cover__song--playlist" src={imageUrl} />
-          <CoverSongTitle className="title__song--playlist playlist__info--row">{title}</CoverSongTitle>
-          <CoverSongTitle className="artist__song--playlist playlist__info--row">{artist}</CoverSongTitle>
-          <CoverSongTitle className="genre__song--playlist playlist__info--row">{genre?.title}</CoverSongTitle>
+          <PlaylistArticle>
+            <CoverSongTitle className="title__song--playlist playlist__info--row">{title}</CoverSongTitle>
+            <CoverSongTitle className="artist__song--playlist playlist__info--row">{artist}</CoverSongTitle>
+            <CoverSongTitle className="genre__song--playlist playlist__info--row">{genre?.title}</CoverSongTitle>
+          </PlaylistArticle>
           <PopoverSongCover songId={_id} title={title} artist={artist} album={album} />
         </PlaylistSong>
       )
@@ -53,14 +54,20 @@ const Categories = () => {
 
   return (
     <PlaylistContainer className="category__container">
+    <PlaylistBigHeader>Categories</PlaylistBigHeader>
       <div>
         <CategoryItem handleGenreClick={handleGenreClick}/>
       </div>
-      {/* <Scrollbars universal> */}
+      <Scrollbars universal>
         <PlaylistColumnSongs className="playlist__songs">
+          <PlaylistHeader className='playlist__category--header'>
+                    <CoverSongTitle className="category__header">Title</CoverSongTitle>
+                    <CoverSongTitle className="category__header">Artist</CoverSongTitle>
+                    <CoverSongTitle className="category__header">Genre</CoverSongTitle>
+            </PlaylistHeader>
           {playlistContent }
         </PlaylistColumnSongs>
-      {/* </Scrollbars> */}
+      </Scrollbars>
     </PlaylistContainer>
   );
 };

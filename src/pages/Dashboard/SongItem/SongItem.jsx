@@ -16,6 +16,7 @@ import { getUserId } from '../../../features/auth/authSlice';
 import { getSongList, setCurrentSong } from '../../../features/songs/songsSlice';
 
 const SongItem = ({ artist, title, cover, songId, likedBY, album }) => {
+  console.log(artist)
   const dispatch = useDispatch();
   const userId = useSelector(getUserId)
   const songList = useSelector(getSongList)
@@ -36,7 +37,6 @@ const SongItem = ({ artist, title, cover, songId, likedBY, album }) => {
   return (
     <div key={songId} >
     <CoverSongMain>
-      {/* <SongsH2>Your Songs</SongsH2> */}
         <PopoverSongCover songId={songId} title={title} artist={artist} album={album}/>
       <CoverSong cover={cover} src={emptyCover()} 
       onClick={handleClick} 
@@ -45,7 +45,7 @@ const SongItem = ({ artist, title, cover, songId, likedBY, album }) => {
         <CoverSongTitle>{title}</CoverSongTitle>
       </article>
       <article>
-        <CoverSongArtist>Artist</CoverSongArtist>
+        <CoverSongArtist>{artist}</CoverSongArtist>
       </article>
       <LikedSong songId={songId} likedBY={likedBY} />      
     </CoverSongMain>
