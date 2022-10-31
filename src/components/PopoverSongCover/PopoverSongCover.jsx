@@ -114,7 +114,7 @@ const PopoverSongCover = ({ songId, title, artist, album }) => {
   if (isLoading) {
     content = <p>Loading...</p>;
   } else if (isSuccess) {    
-    content = data.playlists.map((playlist) => {
+    content = data.map((playlist) => {
       const { _id, title, description, thumbnail } = playlist;
       return (
         <article key={_id}>

@@ -26,7 +26,7 @@ import auth from '../../utils/firebase/firebaseConfig';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { getAuthUser, userSignedIn } from '../../features/auth/authSlice';
-import { useGetSingleUserQuery, useLogInAndUpdateTokenMutation } from '../../features/api/apiSlice';
+import { useLazyGetSingleUserQuery, useLogInAndUpdateTokenMutation } from '../../features/api/apiSlice';
 import { skipToken } from '@reduxjs/toolkit/dist/query';
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.min.css'
@@ -37,20 +37,27 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const authUser = useSelector(getAuthUser && getAuthUser);
-  const { data: dbUser, isLoading, isSuccess, error } = useGetSingleUserQuery(authUser.uid);
-  const [ loginAndUpdateToken, { isLoadingLogin }] = useLogInAndUpdateTokenMutation();
+  const [ getSingleUser, { data: dbUser, isLoading, isUninitialized, isSuccess, error } ] = useLazyGetSingleUserQuery();
+
   
 
-  useEffect(() => {
+  useEffect(() => {     
     if (isLoading) {
-      console.log('Loading...');
-      return;
-    }
-    if (isSuccess) {
-      dispatch(userSignedIn({ ...authUser, ...dbUser.currentUser }));
-      dbUser?.currentUser && navigate('/dashboard');
+      console.log('Loading user...')
+      
+    } else if (isSuccess) {
+      console.log(dbUser.currentUser[0])
+      dispatch(userSignedIn({ ...authUser, ...dbUser.currentUser[0] } ));
+      authUser && toast.success(`You are now logged in as ${dbUser.currentUser[0].email}`, {
+        toastId: 'login-success',
+      })
+      navigate('/dashboard')
     }
   }, [dbUser]);
+
+
+
+
 
   // set variables for react-hook-form
   const {
@@ -81,14 +88,11 @@ const Login = () => {
           uid: uid,
         };
         dispatch(userSignedIn(userObject));
-        loginAndUpdateToken(userObject);
-        authUser && toast.success(`You are now logged in as ${email}`, {
-          toastId: nanoid(),
-        })
+        getSingleUser(uid);
       });
     } catch (error) {
       console.log(error);
-      toast.error(`You were unable to log in`, { toastId: nanoid() })
+      toast.error(`You were unable to log in`, { toastId: 'login-error' })
     }
   };
 
