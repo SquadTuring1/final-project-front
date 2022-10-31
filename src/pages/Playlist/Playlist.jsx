@@ -146,7 +146,6 @@ const Playlist = () => {
     <>  
       <PlaylistContainer>
       <PlaylistBigHeader>Playlist</PlaylistBigHeader>
-   
         <Scrollbars universal>
           <PlaylistColumn className="playlist__covers">
             {playlistsContent}

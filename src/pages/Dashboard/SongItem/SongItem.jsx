@@ -16,7 +16,7 @@ import { getUserId } from '../../../features/auth/authSlice';
 import { getSongList, setCurrentSong } from '../../../features/songs/songsSlice';
 
 const SongItem = ({ artist, title, cover, songId, likedBY, album }) => {
-  console.log(artist)
+  // console.log(artist)
   const dispatch = useDispatch();
   const userId = useSelector(getUserId)
   const songList = useSelector(getSongList)

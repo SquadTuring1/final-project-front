@@ -1,37 +1,44 @@
-import React, { useState } from 'react';
-import {
-  CoverSong,
-  CoverSongTitle,
-  CoverSongArtist,
-  CoverSongMain,
-  CoverMenuIcon,
-  SongsH2,
-} from '../../ui';
-import Modal from 'react-modal';
-import PopoverSongCover from '../../components/PopoverSongCover/index';
-import logoMammoth from '../../assets/images/empty-cover-logo.svg'
-import LikedSong from '../../components/LikedSong'
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import {ContainerFavSong, PlaylistBigHeader, PlaylistContainer} from '../../ui/index'
+import SongItem from '../Dashboard/SongItem';
+import { useSelector } from 'react-redux'
 import { getUserId } from '../../features/auth/authSlice';
-import { getSongList, setCurrentSong } from '../../features/songs/songsSlice';
+import Scrollbars from 'react-custom-scrollbars-2';
 
-const FavoriteTracks = ({ artist, title, cover, songId, likedBY, album }) => {
-  const dispatch = useDispatch()
-  const userId = useSelector(getUserId)
-  const songList = useSelector(getSongList)
+const FavoriteTracks = () => {
+  const [likedSongs, setlikedSongs] = useState([]);
 
-  const emptyCover = cover !== undefined ? cover : logoMammoth
+  const baseUrl = import.meta.env.VITE_BASE_URL;
+  const userId = useSelector(getUserId);
 
-  const handleClick = () => {
-    const index = songList.findIndex(song => song._id === songId);
-    dispatch(setCurrentSong({ currentSongIndex: index, _id: songId, fileUrl: songList[index].fileUrl }))
-  }
-//display: flex
-//flex-wrap: wrap
-  
-  return (
-    <div>FavoriteTracks</div>
+  useEffect(() => {
+    fetch(baseUrl + `me/${userId}/songs`)
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data.myLikedSongs)
+        setlikedSongs(data.myLikedSongs);
+      });
+  }, []);
+
+  const songs = likedSongs.map(({ _id, imageUrl, artist, title, fileUrl, likedBY, album }, songIndex) =>
+      <div key={_id} virtualIndex={_id}>
+        <SongItem artist={artist} title={title} cover={imageUrl} songId={_id}  likedBY={likedBY} songIndex={songIndex} fileUrl={fileUrl} album={album} />  
+      </div> 
   )
+
+  return (
+      <Scrollbars universal>
+        <PlaylistContainer className="favorites__container">
+          <PlaylistBigHeader>My favorites</PlaylistBigHeader>
+          <ContainerFavSong>
+            {songs}
+          </ContainerFavSong>
+        </PlaylistContainer>
+      </Scrollbars>
+    
+  );
 }
 
 export default FavoriteTracks

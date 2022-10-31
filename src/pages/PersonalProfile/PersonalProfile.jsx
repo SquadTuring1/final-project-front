@@ -14,8 +14,6 @@ import 'react-toastify/dist/ReactToastify.min.css'
 import { nanoid } from '@reduxjs/toolkit';
 
 
-
-
 const PersonalProfile = () => {
   const dispatch = useDispatch();
   const [modifyInfo, setModifyInfo] = useState(true);  // enable editing in fields

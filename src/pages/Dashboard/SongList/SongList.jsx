@@ -37,7 +37,7 @@ const SongList = () => {
         <SongItem artist={artist} title={title} cover={imageUrl} songId={_id} songIndex={songIndex} fileUrl={fileUrl} likedBY={likedBY} album={album} />  
       </SwiperSlide> 
     )
-    console.log(songList)
+    // console.log(songList)
   } else if (isError) {
     content = <p>{error}</p>
   } 
@@ -58,11 +58,7 @@ const SongList = () => {
       return 2;
     }else if (window.matchMedia("(min-width: 500px)").matches) {
       // console.log('3')
-      return 3
-    }
-    if (window.matchMedia("(min-width: 768px)").matches) {
-      // console.log('6')
-      return 6 
+      return 8
     }
   }
 
