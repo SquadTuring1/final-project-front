@@ -172,6 +172,9 @@ const PopoverSongCover = ({ songId, title, artist, album }) => {
           'aria-labelledby': 'resources-button',
         }}
         onClose={handleClose}
+        sx={{
+          backgroundColor:'#000'
+        }}
       >
         <MenuItem onClick={hadndleDeleteSong}>Delete song</MenuItem>
         <MenuItem onClick={handleEditSong}>

@@ -6,6 +6,12 @@ import Controls from './Controls/index';
 import { getCurrentSongUrl, getShuffle, getRepeat, getCurrentSongIndex, getSongList, playNextSong, playRandomSong } from '../../features/songs/songsSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
+import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
+import Slider from '@mui/material/Slider';
+import VolumeDown from '@mui/icons-material/VolumeDown';
+import VolumeUp from '@mui/icons-material/VolumeUp';
+
 
 const MusicPlayer = () => {
   const dispatch = useDispatch();
@@ -54,6 +60,11 @@ const MusicPlayer = () => {
     await audioTag.current.play();
   }
 
+  const handleChange = (event, newValue) => {
+    setVolume(newValue);
+  };
+
+
   return (
     <>
     <PlayerMain>  
@@ -74,17 +85,22 @@ const MusicPlayer = () => {
           <SongTimer>{currentSongTime ? formatSongTime(currentSongTime) : formatSongTime(0)}</SongTimer>
           <SongTimer>{formatSongTime(songDuration)}</SongTimer>
         </ProgressTime>
-        <ProgressBar type="range" 
-        id="progressBar"
-        value={songDuration ? (currentSongTime * 1000) / songDuration : 0}
-        max="1000"  
-        onChange={(e) => handleProgressBar(e)}
-        />
+        <Box sx={{ width: '70%',
+          margin:'0 auto' }}>
+          <ProgressBar as={Slider}
+          aria-label="Temperature"
+          defaultValue={30}
+          color='error'
+            value={songDuration ? (currentSongTime * 1000) / songDuration : 0}
+            max="1000"
+            onChange={(e) => handleProgressBar(e)}
+          />
+        </Box>
           {/* </MusicBar> */}
             
          
       </MusicBar>
-      <MusicVolume className='volume__bar'>
+      {/* <MusicVolume className='volume__bar'>
         <RiVolumeUpFill />
         <input 
           type="range" 
@@ -93,7 +109,14 @@ const MusicPlayer = () => {
           id="volumeBar" 
           onChange={(e) => handleVolume(e.target.value / 100)}
           />
-      </MusicVolume>
+      </MusicVolume> */}
+      <Box sx={{ width: 200 }}>
+      <Stack spacing={2} direction="row" sx={{ mb: 1, margin:'3rem 1rem 0 0'}} alignItems="center">
+        <VolumeDown sx={{ color:'#fff'}} />
+        <Slider aria-label="Volume"   value={Math.round(volume * 100)} onChange={(e) => handleVolume(e.target.value / 100)} color='error'/>
+        <VolumeUp  sx={{ color:'#fff'}} />
+      </Stack>
+    </Box>
     </PlayerMain>
     </>    
   );
