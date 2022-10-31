@@ -15,14 +15,25 @@ import { getAuthUser, getUserId } from '../../../features/auth/authSlice';
 
 
 
-const MySongs = () => {
+const SongList = ({ mySongsQuery, allSongsQuery }) => {
   const dispatch = useDispatch();
-  const userId = useSelector(getUserId)
-  const { data: mySongs, isLoading, isSuccess, isError, error} = useGetSongsByUserQuery(userId)
+  const userId = useSelector(getUserId);
+
+  const { data: songs, isLoading, isSuccess, isError, error } = mySongsQuery ? mySongsQuery : allSongsQuery;
+
+  useEffect(() => {
+    if (allSongsQuery) {
+      if (isSuccess) {
+        dispatch(setSongsList({songList: songs, currentSongIndex: 0, currentSongId: songs[0]?._id, currentSongUrl: songs[0]?.fileUrl, playing: false}));
+        } 
+    } else {
+      return;
+    }   
+  }, [])
 
 
   const handleClick = (_id, index) => {
-    dispatch(setSongsList({ songList: mySongs, currentSongIndex: index, currentSongId: mySongs[index]?._id, currentSongUrl: mySongs[index]?.fileUrl, playing: false}));
+    dispatch(setSongsList({ songList: songs, currentSongIndex: index, currentSongId: songs[index]?._id, currentSongUrl: songs[index]?.fileUrl, playing: false}));
   }
 
 
@@ -30,8 +41,7 @@ const MySongs = () => {
   if (isLoading) {
     content = <p>Loading...</p>
   } else if (isSuccess) {
-    console.log(mySongs)
-    content = mySongs?.map(({ _id, imageUrl, artist, title, fileUrl, likedBY, album }, index) =>
+    content = songs?.map(({ _id, imageUrl, artist, title, fileUrl, likedBY, album }, index) =>
       <SwiperSlide key={_id} virtualIndex={_id} onClick={() => handleClick(_id, index)}>
         <SongItem artist={artist} title={title} cover={imageUrl} songId={_id} songIndex={index} fileUrl={fileUrl} likedBY={likedBY} album={album}   />  
       </SwiperSlide> 
@@ -40,7 +50,9 @@ const MySongs = () => {
     content = <p>{error}</p>
   } 
 
+
   return (
+    
     <Swiper
       modules={[ Navigation, Pagination, Virtual]}
       navigation
@@ -59,4 +71,4 @@ const MySongs = () => {
   );
 };
 
-export default MySongs;
+export default SongList;

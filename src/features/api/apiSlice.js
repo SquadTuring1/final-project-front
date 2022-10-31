@@ -26,7 +26,6 @@ export const apiSlice = createApi({
       method: 'GET',
     }),
     signUpUser: builder.mutation({
-      // TODO: can this be merged with addUser in front and back?
       query: (user) => ({
         url: '/signup',
         method: 'POST',
@@ -34,20 +33,9 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: ['User'],
     }),
-    logInAndUpdateToken: builder.mutation({
-      query: ({ uid, token }) => ({
-        url: '/login',
-        method: 'PATCH',
-        body: {
-          uid: uid,
-          token: token,
-        },
-      }),
-    }),
     getSongs: builder.query({
       query: () => '/songs',
       transformResponse: (res) => res.songs,
-      
       providesTags: (result, error, arg) =>
         result
           ? [...result.map(({ id }) => ({ type: 'Songs', id })), 'Songs']
@@ -55,7 +43,10 @@ export const apiSlice = createApi({
     }),
     getSongsByUser: builder.query({
       query: (userId) => `/songs/${userId}/user`,
-      providesTags: ['Songs'],
+      providesTags: (result, error, arg) =>
+        result
+          ? [...result.map(({ id }) => ({ type: 'Songs', id })), 'Songs']
+          : ['Songs'],
     }),
     addSong: builder.mutation({
       query: (song) => ({
