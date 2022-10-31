@@ -7,13 +7,27 @@ import {
   TitleH2,
 } from '../../ui/index';
 import SongItem from './SongItem/index';
-import SongList from './SongList/SongList';
+// import SongList from './MySongs/MySongs';
 import CategoryItem from './CategoryItem/index';
 import { Scrollbars } from 'react-custom-scrollbars-2';
 import PlaylistItem from './PlaylistItem';
 import PlaylistList from './PlaylistList/PlaylistList';
+import SongList from './SongList/SongList';
+import { useGetSongsByUserQuery, useGetSongsQuery } from '../../features/api/apiSlice';
+import { useSelector } from 'react-redux';
+import { getUserId } from '../../features/auth/authSlice';
+
+
 
 const Dashboard = () => {
+  const userId = useSelector(getUserId)
+  
+  const mySongsQuery = useGetSongsByUserQuery(userId);
+  const allSongsQuery = useGetSongsQuery();
+
+
+
+
   return (
     <Scrollbars universal>
       <MainFlex>
@@ -23,7 +37,7 @@ const Dashboard = () => {
         </CategoryRow>
         <SongsRow>
         <TitleH2 className='songs__dashboard--h2'>My Songs</TitleH2>
-          <SongList />
+          <SongList mySongsQuery={mySongsQuery} />
         </SongsRow>
         <PlaylistRow>
         <TitleH2 className='playlist__dashboard--h2'>Playlists</TitleH2>
@@ -31,7 +45,7 @@ const Dashboard = () => {
         </PlaylistRow>
         <SongsRow>
         <TitleH2 className='songs__dashboard--h2'>All Songs</TitleH2>
-          <SongList />
+          <SongList allSongsQuery={allSongsQuery} />
         </SongsRow>
       </MainFlex>
     </Scrollbars>

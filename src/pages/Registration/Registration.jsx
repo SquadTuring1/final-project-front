@@ -8,7 +8,7 @@ import { getAuthUser, userSignedIn } from '../../features/auth/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 import '../../ui/Registration.styled.css';
-import logoSM from '../../assets/images/Logo-sign.png';
+import logoSM from '../../assets/images/logo-mammoth-vertical.png';
 import { MainSign, Button, ButtonGoogle, TextAccount, TextColor, TextTerms, TermColor, TextRemember, TitleSign, Logo, Input, Label, CenterArticle, ResponseMessage } from '../../ui/index';
 
 import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, } from 'firebase/auth';

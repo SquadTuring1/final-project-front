@@ -15,25 +15,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getUserId } from '../../../features/auth/authSlice';
 import { getSongList, setCurrentSong } from '../../../features/songs/songsSlice';
 
-const SongItem = ({ artist, title, cover, songId, likedBY, album }) => {
-  // console.log(artist)
-  const dispatch = useDispatch();
-  const userId = useSelector(getUserId)
-  const songList = useSelector(getSongList)
-
+const SongItem = ({ artist, title, cover, songId, likedBY, album }) => {  
   const emptyCover = cover !== undefined ? cover : logoMammoth
-
-  const handleClick = () => {
-    const index = songList.findIndex(song => song._id === songId);
-    dispatch(setCurrentSong({ currentSongIndex: index, _id: songId, fileUrl: songList[index].fileUrl }))
-  }
-
+  
   return (
     <div key={songId} >
     <CoverSongMain>
         <PopoverSongCover songId={songId} title={title} artist={artist} album={album}/>
       <CoverSong cover={cover} src={emptyCover} 
-      onClick={handleClick} 
       /> 
       <article>
         <CoverSongTitle>{title}</CoverSongTitle>

@@ -1,3 +1,4 @@
-import PersonalProfile from "./PersonalProfile";
+import AvatarUpload from './AvatarUpload';
+import PersonalProfile from './PersonalProfile';
 
-export default PersonalProfile
+export default PersonalProfile;

@@ -8,7 +8,6 @@ export const apiSlice = createApi({
     // refetchOnFocus: true,
     prepareHeaders: (headers, { getState }) => {
       const token = getState().auth.token;
-      console.log(token)
       // If we have a token set in state, let's assume that we should be passing it.
       if (token) {
         headers.set('Authorization', `Bearer ${token}`);
@@ -27,7 +26,6 @@ export const apiSlice = createApi({
       method: 'GET',
     }),
     signUpUser: builder.mutation({
-      // TODO: can this be merged with addUser in front and back?
       query: (user) => ({
         url: '/signup',
         method: 'POST',
@@ -35,20 +33,16 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: ['User'],
     }),
-    logInAndUpdateToken: builder.mutation({
-      query: ({ uid, token }) => ({
-        url: '/login',
-        method: 'PATCH',
-        body: {
-          uid: uid,
-          token: token,
-        },
-      }),
-    }),
     getSongs: builder.query({
       query: () => '/songs',
       transformResponse: (res) => res.songs,
-      providesTags: ['Songs'],
+      providesTags: (result, error, arg) =>
+        result
+          ? [...result.map(({ id }) => ({ type: 'Songs', id })), 'Songs']
+          : ['Songs'],
+    }),
+    getSongsByUser: builder.query({
+      query: (userId) => `/songs/${userId}/user`,
       providesTags: (result, error, arg) =>
         result
           ? [...result.map(({ id }) => ({ type: 'Songs', id })), 'Songs']
@@ -61,7 +55,6 @@ export const apiSlice = createApi({
         body: song,
       }),
       invalidatesTags: ['Songs'],
-      transformResponse: (res) => console.log(res),
     }),
     deleteSong: builder.mutation({
       query: ({ songId }) => ({
@@ -79,6 +72,7 @@ export const apiSlice = createApi({
           album,
           artist,
         },
+        transformResponse: (res) => console.log(res),
       }),
       invalidatesTags: ['Songs'],
     }),
@@ -97,9 +91,20 @@ export const apiSlice = createApi({
         body: {
           firstName: userObj.firstName,
           lastName: userObj.lastName,
+          username: userObj.username,
+          avatar: userObj.avatar,
         },
       }),
       invalidatesTags: ['Users'],
+    }),
+    updateAvatar: builder.mutation({
+      query: (data) => ({
+        url: '/update',
+        method: 'PATCH',
+        body: data,
+        invalidatesTags: ['Users'],
+        transformResponse: (res) => console.log(res),
+      }),
     }),
     likeASong: builder.mutation({
       query: ({ songId, userId }) => ({
@@ -154,7 +159,7 @@ export const apiSlice = createApi({
           : ['Genres'],
     }),
     getGenreById: builder.query({
-      query: (genreId) => `/genres/${genreId}`
+      query: (genreId) => `/genres/${genreId}`,
     }),
     addPlaylist: builder.mutation({
       query: ({ title, description, isPrivate, userId, songs }) => ({
@@ -173,20 +178,20 @@ export const apiSlice = createApi({
     deletePlaylist: builder.mutation({
       query: ({ playlistId }) => ({
         url: `/playlists/${playlistId}`,
-        method: 'DELETE'
+        method: 'DELETE',
       }),
       invalidatesTags: ['Playlists'],
     }),
     renamePlaylist: builder.mutation({
-      query: ({ playlistId, playlistTitle })=> ({
+      query: ({ playlistId, playlistTitle }) => ({
         url: `/playlists/${playlistId}`,
         method: 'PATCH',
         body: {
-          title: playlistTitle          
-        }
+          title: playlistTitle,
+        },
       }),
       invalidatesTags: ['Playlists'],
-    })
+    }),
   }),
 });
 
@@ -201,6 +206,8 @@ export const {
   useSignUpUserMutation,
   useLogInAndUpdateTokenMutation,
   useGetSongsQuery,
+  useGetSongsByUserQuery,
+  useLazyGetSongsByUserQuery,
   useAddSongMutation,
   useDeleteSongMutation,
   useGetGenresQuery,
@@ -211,6 +218,7 @@ export const {
   useAddSongToPlaylistMutation,
   useAddPlaylistMutation,
   useUpdateSongMutation,
+  useUpdateAvatarMutation,
   useDeletePlaylistMutation,
-  useRenamePlaylistMutation
+  useRenamePlaylistMutation,
 } = apiSlice;

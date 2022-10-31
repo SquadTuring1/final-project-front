@@ -1,4 +1,4 @@
-import React from 'react'
+import { useState } from 'react'
 // import "swiper/css";
 // import 'swiper/css/a11y';
 // import "swiper/css/bundle";
@@ -12,13 +12,19 @@ import { useGetGenresQuery } from '../../../features/api/apiSlice'
 import { CoverCategoryMain, CoverPlaylistMain, CoverCategoryImg, CategorySwiper, CategorySwiperItem } from '../../../ui/index'
 // import { A11y, Navigation, Pagination, Scrollbar, Virtual, Grid } from "swiper";
 import { Grid, Pagination, Navigation, Virtual, Scrollbar, A11y } from "swiper";
+import { useNavigate } from 'react-router-dom';
 
 
 
-const CategoryItem = ({ handleGenreClick }) => {
+const CategoryItem = () => {
+  const navigate = useNavigate();
+  const [ selectedGenre, setSelectedGenre ] = useState();
+
   const { data: genres, isLoading, isSuccess, isError, error } = useGetGenresQuery();
 
-
+  const handleGenreClick = (genreId) => {
+    navigate('/categories', { state: { genreId: genreId } } )
+  }
 
 
   let content;

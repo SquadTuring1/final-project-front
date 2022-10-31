@@ -7,7 +7,7 @@ import {
   CenterArticle,
   TextColor,
 } from '../../ui/index';
-import turingLogo from '../../assets/images/Logo-home.png';
+import turingLogo from '../../assets/images/logo-mammoth-vertical.png';
 import {Link} from 'react-router-dom';
 
 const Home = () => {

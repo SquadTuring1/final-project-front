@@ -189,5 +189,5 @@ export {
   PlaylistArticle,
   PlaylistBigHeader,
   PlaylistHeader,
-  PopoverPlaylistStyled,  
+  PopoverPlaylistStyled,
 }
