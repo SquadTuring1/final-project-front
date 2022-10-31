@@ -9,6 +9,9 @@ import SongItem from '../Dashboard/SongItem/index'
 import PopoverSongCover from "../../components/PopoverSongCover";
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd/'
 import { nanoid } from '@reduxjs/toolkit'
+import PopoverPlaylist from "../../components/PopoverPlaylist/PopoverPlaylist";
+
+import { RiMore2Line } from 'react-icons/ri';
 
 
 const Playlist = () => {
@@ -66,20 +69,27 @@ const Playlist = () => {
       
     }
   }
-  
+ 
+  // console.log("playlistdata", playlistsData)
+
   let playlistsContent;
   if (isPlaylistsLoading) {
     playlistsContent = 
         <div>Playlists are being loaded...</div>
   } else if (isPlaylistsSuccess) {
-    console.log(playlistsData)
+    // console.log(playlistsData)
     playlistsContent = 
       <>
-      {playlistsData?.playlists?.map(playlist =>
-        <PlaylistCoverSm key={playlist._id} onClick={() => handlePlaylistClick(playlist._id)}>
-          <PlaylistTitle >{playlist.title}</PlaylistTitle>
-          <PlaylistInfo>{playlist.songs.length}</PlaylistInfo>         
-        </PlaylistCoverSm>
+      {playlistsData?.playlists?.map(playlist =>       
+
+        <article key={playlist._id}>
+          <PopoverPlaylist playlistId={playlist._id} playlistTitle={playlist.title}></PopoverPlaylist>
+          <PlaylistCoverSm  onClick={() => handlePlaylistClick(playlist._id)}>
+            <PlaylistTitle >{playlist.title}</PlaylistTitle>
+            <PlaylistInfo>{playlist.songs.length}</PlaylistInfo>         
+          </PlaylistCoverSm>
+        </article>
+        
       )}
       </>
   } else if (isPlaylistsError) {
