@@ -51,6 +51,31 @@ export const CoverSongTitle = styled.p`
       background-color: #00365c;
     } */
   }
+
+  &.playlist__header,
+  &.category__header {
+    font-size: 1rem;
+    margin: 0 0 0 .2rem;
+
+    &:nth-child(2) {
+      margin: 0 0 0 12.5rem;
+    }
+    &:nth-child(3) {
+      margin: 0 0 0 12rem;
+    }
+  }
+
+  /* &.category__header {
+    font-size: 1rem;
+    margin: 0 0 0 .2rem;
+
+    &:nth-child(2) {
+      margin: 0 0 0 12.5rem;
+    }
+    &:nth-child(3) {
+      margin: 0 0 0 12rem;
+    } */
+  }
 `;
 
 
