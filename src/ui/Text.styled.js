@@ -30,11 +30,11 @@ export const TextColor = styled(Link)`
 
 export const TextTerms = styled(TextAccount)`
   width: 85%;
-  margin-bottom: 0.9rem;
+  margin: 2rem 0 0;
   font-size: 0.9rem;
   font-weight: 200;
   line-height: 1.4rem;
-  text-align: left;
+  text-align: center;
 `;
 
 export const TermColor = styled(TextColor)`
@@ -43,14 +43,22 @@ export const TermColor = styled(TextColor)`
 `;
 
 export const TextRemember = styled(TermColor)`
+display: flex;
+align-items: center;
+justify-content: flex-end;
+width: 20rem;
   margin: 0.5rem 0 0.8rem;
   font-size: 1rem;
   font-weight: 400;
   text-align: right;
+
+  & input {
+    margin: .17rem .5rem 0 0;
+  }
 `;
 
 export const TitleSign = styled.h2`
-  margin-top: ${({ signUp }) => (signUp ? '2rem' : '')};
+  margin-top: ${({ signUp }) => (signUp ? '1rem' : '')};
   padding-bottom: 1rem;
   color: #eee;
   font-size: ${({uploadModal}) => (uploadModal ? '2.7rem' : '2.5rem')};

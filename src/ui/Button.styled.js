@@ -28,6 +28,10 @@ export const Button = styled.button`
     background-color: #999;
     color:#000;
   }
+
+  &.login__btn{
+    margin: 3rem 0 0;
+  }
 `;
 
 export const ButtonGoogle = styled(Button)`

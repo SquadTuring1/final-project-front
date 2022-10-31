@@ -12,7 +12,7 @@ import {
   Label,
   ResponseMessage
 } from '../../ui/index';
-import logoSM from '../../assets/images/Logo-sign.png';
+import logoSM from '../../assets/images/logo-mammoth-vertical.png';
 
 import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
@@ -140,7 +140,7 @@ const Login = () => {
         </TextColor>
       </form>
       <article>
-        <Button type="submit" form="loginForm">
+        <Button className='login__btn' type="submit" form="loginForm">
           Sign in
         </Button>
         <TextAccount register>

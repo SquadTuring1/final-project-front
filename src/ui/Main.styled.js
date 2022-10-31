@@ -18,7 +18,7 @@ export const MainHome = styled.main`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  height: 100vh;
+  height:100vh;
   background-image: url(${LoginBG});
   background-size: cover;
   background-position: center;
@@ -29,6 +29,10 @@ export const MainSign = styled(MainHome)`
   justify-content: space-between;
   height: 'auto';
   background-image: url(${SignBG});
+
+  @media (min-width: 960px) {
+    justify-content: center;
+  }
 `;
 
 export const MainDash = styled.main`
