@@ -153,6 +153,6 @@ export const PlaylistHeader = styled.section`
   }
 `;
 
-export const PopoverPlaylist = styled(PopoverSongCover)`
+export const PopoverPlaylistStyled = styled(PopoverSongCover)`
   
 `;
