@@ -30,6 +30,7 @@ export const CoverSongTitle = styled.p`
     width: 20rem;
     font-size: 1.1rem;
     font-weight: 600;
+    margin: 0 0 0 .5rem
   }
   &.artist__song--playlist {
     width: 20rem;
@@ -43,8 +44,8 @@ export const CoverSongTitle = styled.p`
   }
 
   &.playlist__info--row {
-    /* border-bottom: 1px solid #fff;
-    padding: 1.5rem 0 1.5rem 0; */
+    /* border-bottom: 1px solid #fff;*/
+    padding: 1.9rem 0 1.25rem 0;
 
     /* &:hover {
       background-color: #00365c;
