@@ -59,6 +59,10 @@ const MusicPlayer = () => {
     await audioTag.current.play();
   }
 
+  const handleChange = (event, newValue) => {
+    setVolume(newValue);
+  };
+
 
   return (
     <>
@@ -95,7 +99,7 @@ const MusicPlayer = () => {
             
          
       </MusicBar>
-      <MusicVolume className='volume__bar'>
+      {/* <MusicVolume className='volume__bar'>
         <RiVolumeUpFill />
         <input 
           type="range" 
@@ -104,7 +108,14 @@ const MusicPlayer = () => {
           id="volumeBar" 
           onChange={(e) => handleVolume(e.target.value / 100)}
           />
-      </MusicVolume>
+      </MusicVolume> */}
+      <Box sx={{ width: 200 }}>
+      <Stack spacing={2} direction="row" sx={{ mb: 1, margin:'3rem 1rem 0 0'}} alignItems="center">
+        <VolumeDown sx={{ color:'#fff'}} />
+        <Slider aria-label="Volume"   value={Math.round(volume * 100)} onChange={(e) => handleVolume(e.target.value / 100)} color='error'/>
+        <VolumeUp  sx={{ color:'#fff'}} />
+      </Stack>
+    </Box>
     </PlayerMain>
     </>    
   );
