@@ -8,8 +8,6 @@ import {
 } from '../../ui/index';
 import SongItem from './SongItem/index';
 // import SongList from './MySongs/MySongs';
-import MySongs from './MySongs/MySongs';
-import AllSongs from './AllSongs/AllSongs';
 import CategoryItem from './CategoryItem/index';
 import { Scrollbars } from 'react-custom-scrollbars-2';
 import PlaylistItem from './PlaylistItem';
