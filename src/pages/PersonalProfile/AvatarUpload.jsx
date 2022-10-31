@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useUpdateAvatarMutation } from '../../features/api/apiSlice';
 import { getAuthUser } from '../../features/auth/authSlice';
@@ -15,6 +15,27 @@ const AvatarUpload = () => {
     setAvatarFile(e.target.files[0]);
   };
 
+  useEffect(() => {
+    let fileReader,
+      isCancel = false;
+    if (avatarFile) {
+      fileReader = new FileReader();
+      fileReader.onload = (e) => {
+        const { result } = e.target;
+        if (result && !isCancel) {
+          setAvatarPreviewIng(result);
+        }
+      };
+      fileReader.readAsDataURL(avatarFile);
+    }
+    return () => {
+      isCancel = true;
+      if (fileReader && fileReader.readyState === 1) {
+        fileReader.abort();
+      }
+    };
+  }, [avatarFile]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = new FormData();
@@ -28,7 +49,7 @@ const AvatarUpload = () => {
     <form onSubmit={handleSubmit} encType="multipart/form-data" ref={formRef}>
       <label htmlFor="avatar">avatar</label>
       <div className="avatar-input">
-        <input type="file" required onChange={handleChange} />
+        <input type="file" required onChange={handleChange} accept="image/*" />
         <img
           src={avatarPreviewImg}
           style={{ width: '50px', height: '50px' }}
