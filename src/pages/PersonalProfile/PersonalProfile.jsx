@@ -13,6 +13,7 @@ import {
   TitleP,
   Button,
   ResponseMessage,
+  PlaylistBigHeader,
 } from '../../ui/index';
 import auth from '../../utils/firebase/firebaseConfig';
 import { updatePassword } from 'firebase/auth';
@@ -25,6 +26,8 @@ import AvatarUpload from './AvatarUpload';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 import { nanoid } from '@reduxjs/toolkit';
+import Navbar from '../../components/Navbar/index'
+
 
 const PersonalProfile = () => {
   const dispatch = useDispatch();
@@ -108,6 +111,8 @@ const PersonalProfile = () => {
   };
 
   return (
+    <>
+    <Navbar />
     <MainDash>
       <form
         id="personalProfileForm"
@@ -115,7 +120,7 @@ const PersonalProfile = () => {
         ref={formRef}
       >
         <CenterProfile loginLab>
-          <TitleH2 className="profile__title">Profile</TitleH2>
+          <PlaylistBigHeader className="profile__title">Profile</PlaylistBigHeader>
           {/* <Button><input accept="image/png,image/jpeg" id="avatar__input" type="file"  />Avatar</Button> */}
           {/* <FileUploader buttonName="Avatar"></FileUploader> */}
 
@@ -138,6 +143,30 @@ const PersonalProfile = () => {
             placeholder="Last name"
             {...register('lastName')}
           />
+                            {modifyInfo ? (
+          // enables editing of name
+          <Button
+            className="modify__btn"
+            type="button"
+            onClick={(e) => {
+              handleDisabled(e);
+            }}
+          >
+            Modify
+          </Button>
+          
+        ) : (
+          <Button
+            style={{color:'#fff', border:'1px solid #fff'}}
+            className="modify__btn"
+            form="personalProfileForm"
+            type="submit"
+          >
+            Save
+          </Button>
+        )}
+        
+          <AvatarUpload />
           <TitleP className="change__pass">Change Password</TitleP>
           {/* <Label className="pass__profile">Password</Label> */}
           <Input
@@ -153,6 +182,7 @@ const PersonalProfile = () => {
             placeholder="New password"
             {...register('newPassword')}
           />
+
         </CenterProfile>
       </form>
       <Button
@@ -164,7 +194,7 @@ const PersonalProfile = () => {
       </Button>
 
       <CenterArticle className="button__profile--container">
-        {modifyInfo ? (
+        {/* {modifyInfo ? (
           // enables editing of name
           <Button
             className="modify__btn"
@@ -183,11 +213,11 @@ const PersonalProfile = () => {
           >
             Save
           </Button>
-        )}
+        )} */}
         {/* <Button type="submit">Save</Button> */}
-        <AvatarUpload />
       </CenterArticle>
     </MainDash>
+    </>
   );
 };
 

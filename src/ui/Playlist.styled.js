@@ -22,6 +22,11 @@ export const PlaylistBigHeader = styled.h2`
   font-size: 6rem;
   font-weight: 700;
   text-shadow: 0px 0px 10px #ffffff60;
+
+  &.profile__title {
+    text-align: center;
+    margin: 0 0 2rem;
+  }
 `;
 
 export const PlaylistColumn = styled.section `

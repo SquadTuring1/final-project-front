@@ -30,6 +30,7 @@ export const CoverPlaylistMain = styled.main`
   background-color: #8D0E0E;
   margin: 1rem 1rem 2rem 1rem;
   padding: .4rem 0 .4rem .7rem;
+  user-select: none;
 
 
   @media(min-width: 960px) {

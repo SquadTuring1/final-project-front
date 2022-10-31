@@ -8,10 +8,21 @@ export const Logo = styled.img`
     height: 1.9rem;
     margin: 0 0 0 1rem;
     padding: .5rem 0 0 0;
-
+    
     @media(min-width: 960px) {
       height: 2.6rem;
       margin: 0 0 0 4.4rem;
+    }
+  }
+  
+  &.logo__navbar {
+    height: 3.2rem;
+    margin: 0 0 0 .2rem;
+    padding: .5rem 0 0 1rem;
+
+        @media(min-width: 960px) {
+      height: 3.2rem;
+      margin: 0 0 0 2.3rem;
     }
   }
 `;

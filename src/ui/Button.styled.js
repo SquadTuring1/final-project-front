@@ -25,12 +25,41 @@ export const Button = styled.button`
   }
 
   &.modify__btn{
-    background-color: #999;
-    color:#000;
+    width: 10rem;
+    height: 2rem;
+    border: 1px solid #ffc700;
+    border-radius: .5rem;
+    background-color: transparent;
+    color:#ffc700;
+    font-size:.9rem;
+    font-weight: 500;
   }
 
   &.login__btn{
     margin: 3rem 0 0;
+  }
+
+  &.pass__btn {
+    width: 10rem;
+    height: 2rem;
+    margin: 0 0 2rem;
+    border: 1px solid #ffc700;
+    border-radius: .5rem;
+    background-color: transparent;
+    color:#ffc700;
+    font-size:.9rem;
+    font-weight: 500;
+  }
+
+  &.profile__upload--btn {
+    width: 10rem;
+    height: 2rem;
+    border: 1px solid #ffc700;
+    border-radius: .5rem;
+    background-color: transparent;
+    color:#ffc700;
+    font-size:.9rem;
+    font-weight: 500;
   }
 `;
 

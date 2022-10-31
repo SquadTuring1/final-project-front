@@ -40,7 +40,8 @@ export const MainDash = styled.main`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 90vh;
+  height: 88vh;
+  margin: 3rem 0 0;
   background: linear-gradient(
     180deg,
     rgba(0, 0, 0, 1) 0%,
