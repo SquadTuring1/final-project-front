@@ -22,7 +22,7 @@ const MySongs = () => {
 
 
   const handleClick = (_id, index) => {
-    dispatch(setSongsList({ songList: mySongs, currentSongIndex: index, currentSongId: mySongs[index]?._id, currentSongUrl: mySongs[0]?.fileUrl, playing: false}));
+    dispatch(setSongsList({ songList: mySongs, currentSongIndex: index, currentSongId: mySongs[index]?._id, currentSongUrl: mySongs[index]?.fileUrl, playing: false}));
   }
 
 

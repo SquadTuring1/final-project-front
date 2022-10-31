@@ -17,25 +17,23 @@ const AllSongs = () => {
   const { data: allSongs, isLoading, isSuccess, isError, error} = useGetSongsQuery()
 
   // sets songs in songs state, if the query for data from getSongs returns a list
-  // useEffect(() => {
-  //   if (isSuccess) {
-  //     // console.log(songs)
-  //   dispatch(setSongsList({songList: songs, currentSongIndex: 0, currentSongId: songs[0]?._id, currentSongUrl: songs[0]?.fileUrl, playing: false}));
-  //   } else {
-  //     return;
-  //   }
-  // }, [songs ])
+  useEffect(() => {
+    if (isSuccess) {
+    dispatch(setSongsList({songList: allSongs, currentSongIndex: 0, currentSongId: allSongs[0]?._id, currentSongUrl: allSongs[0]?.fileUrl, playing: false}));
+    } 
+  }, [])
 
-
+  const handleClick = (_id, index) => {
+      dispatch(setSongsList({ songList: allSongs, currentSongIndex: index, currentSongId: allSongs[index]?._id, currentSongUrl: allSongs[index]?.fileUrl, playing: false}));
+  }
 
   let content;
   if (isLoading) {
     content = <p>Loading...</p>
   } else if (isSuccess) {
-    // console.log(songs)
-    content = allSongs?.map(({ _id, imageUrl, artist, title, fileUrl, likedBY, album }, songIndex) =>
-      <SwiperSlide key={_id} virtualIndex={_id}>
-        <SongItem artist={artist} title={title} cover={imageUrl} songId={_id} songIndex={songIndex} fileUrl={fileUrl} likedBY={likedBY} album={album} />  
+    content = allSongs?.map(({ _id, imageUrl, artist, title, fileUrl, likedBY, album }, index) =>
+      <SwiperSlide key={_id} virtualIndex={_id} onClick={() => handleClick(_id, index)}>
+        <SongItem artist={artist} title={title} cover={imageUrl} songId={_id} songIndex={index} fileUrl={fileUrl} likedBY={likedBY} album={album} />  
       </SwiperSlide> 
     )
   } else if (isError) {

@@ -18,8 +18,7 @@ import { RiMore2Line } from 'react-icons/ri';
 
 const Playlist = () => {
   const dispatch = useDispatch();
-  const songList = useSelector(getSongList)
-  
+  const songList = useSelector(getSongList)  
 
   const { data: playlistsData, isLoading: isPlaylistsLoading, isSuccess: isPlaylistsSuccess, isError: isPlaylistsError, error: playlistsError } = useGetPlaylistsQuery();
   const [ getSinglePlaylist, {

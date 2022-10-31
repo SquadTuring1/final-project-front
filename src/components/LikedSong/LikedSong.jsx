@@ -14,7 +14,6 @@ import { IconFavorites } from '../../ui';
 export default function LikedSong({ songId, likedBY }) {  
   const userId = useSelector(getUserId)
   const [ isLiked, setIsLiked] = useState(likedBY?.some(user => user === userId))
-  console.log(isLiked)
 
   const [ likeASong, { isLoading } ] = useLikeASongMutation();
   const [ deleteASong, { isLoading: deleteLoading } ] = useDeleteLikeASongMutation()
