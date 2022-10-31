@@ -80,7 +80,7 @@ const Playlist = () => {
     // console.log(playlistsData)
     playlistsContent = 
       <>
-      {playlistsData?.playlists?.map(playlist =>       
+      {playlistsData?.map(playlist =>       
 
         <article key={playlist._id}>
           <PopoverPlaylist playlistId={playlist._id} playlistTitle={playlist.title}></PopoverPlaylist>
