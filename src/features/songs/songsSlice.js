@@ -28,7 +28,7 @@ const songsSlice = createSlice({
                 currentSongId: action.payload._id, 
                 currentSongUrl: action.payload.fileUrl,
                 currentSongIndex: action.payload.currentSongIndex,
-                playing: true
+                // playing: true
             }
         }
     },

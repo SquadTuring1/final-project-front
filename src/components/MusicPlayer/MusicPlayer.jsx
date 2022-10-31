@@ -23,7 +23,7 @@ const MusicPlayer = () => {
 
   const [ currentSongTime, setCurrentSongTime ] = useState(0);
   const [ songDuration, setSongDuration ] = useState(0);
-  const [ volume, setVolume ] = useState(0.15);
+  const [ volume, setVolume ] = useState(0.1);
 
   const audioTag = useRef();
   
@@ -38,6 +38,7 @@ const MusicPlayer = () => {
   }
 
   const handleVolume = (volumeValue) => {
+    console.log(volumeValue)
     setVolume(volumeValue)
     audioTag.current.volume = volumeValue;
   }
@@ -91,7 +92,7 @@ const MusicPlayer = () => {
           defaultValue={30}
           color='error'
             value={songDuration ? (currentSongTime * 1000) / songDuration : 0}
-            max="1000"
+            max='1000'
             onChange={(e) => handleProgressBar(e)}
           />
         </Box>
