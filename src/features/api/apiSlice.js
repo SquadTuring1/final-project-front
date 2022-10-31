@@ -60,7 +60,6 @@ export const apiSlice = createApi({
         body: song,
       }),
       invalidatesTags: ['Songs'],
-      transformResponse: (res) => console.log(res),
     }),
     deleteSong: builder.mutation({
       query: ({ songId }) => ({
@@ -78,6 +77,7 @@ export const apiSlice = createApi({
           album,
           artist,
         },
+        transformResponse: (res) => console.log(res),
       }),
       invalidatesTags: ['Songs'],
     }),
@@ -96,9 +96,20 @@ export const apiSlice = createApi({
         body: {
           firstName: userObj.firstName,
           lastName: userObj.lastName,
+          username: userObj.username,
+          avatar: userObj.avatar,
         },
       }),
       invalidatesTags: ['Users'],
+    }),
+    updateAvatar: builder.mutation({
+      query: (data) => ({
+        url: '/update',
+        method: 'PATCH',
+        body: data,
+        invalidatesTags: ['Users'],
+        transformResponse: (res) => console.log(res),
+      }),
     }),
     likeASong: builder.mutation({
       query: ({ songId, userId }) => ({
@@ -152,7 +163,7 @@ export const apiSlice = createApi({
           : ['Genres'],
     }),
     getGenreById: builder.query({
-      query: (genreId) => `/genres/${genreId}`
+      query: (genreId) => `/genres/${genreId}`,
     }),
     addPlaylist: builder.mutation({
       query: ({ title, description, isPrivate, userId, songs }) => ({
@@ -191,4 +202,5 @@ export const {
   useAddSongToPlaylistMutation,
   useAddPlaylistMutation,
   useUpdateSongMutation,
+  useUpdateAvatarMutation,
 } = apiSlice;
