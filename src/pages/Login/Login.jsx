@@ -10,7 +10,7 @@ import {
   Logo,
   Input,
   Label,
-  ResponseMessage
+  ResponseMessage,
 } from '../../ui/index';
 import logoSM from '../../assets/images/Logo-sign.png';
 
@@ -26,38 +26,37 @@ import auth from '../../utils/firebase/firebaseConfig';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { getAuthUser, userSignedIn } from '../../features/auth/authSlice';
-import { useLazyGetSingleUserQuery, useLogInAndUpdateTokenMutation } from '../../features/api/apiSlice';
+import {
+  useLazyGetSingleUserQuery,
+  useLogInAndUpdateTokenMutation,
+} from '../../features/api/apiSlice';
 import { skipToken } from '@reduxjs/toolkit/dist/query';
-import { toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.min.css'
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
 import { nanoid } from '@reduxjs/toolkit';
-
 
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const authUser = useSelector(getAuthUser && getAuthUser);
-  const [ getSingleUser, { data: dbUser, isLoading, isUninitialized, isSuccess, error } ] = useLazyGetSingleUserQuery();
+  const [
+    getSingleUser,
+    { data: dbUser, isLoading, isUninitialized, isSuccess, error },
+  ] = useLazyGetSingleUserQuery();
 
-  
-
-  useEffect(() => {     
+  useEffect(() => {
     if (isLoading) {
-      console.log('Loading user...')
-      
+      console.log('Loading user...');
     } else if (isSuccess) {
-      console.log(dbUser.currentUser[0])
-      dispatch(userSignedIn({ ...authUser, ...dbUser.currentUser[0] } ));
-      authUser && toast.success(`You are now logged in as ${dbUser.currentUser[0].email}`, {
-        toastId: 'login-success',
-      })
-      navigate('/dashboard')
+      console.log(dbUser.currentUser[0]);
+      dispatch(userSignedIn({ ...authUser, ...dbUser.currentUser[0] }));
+      authUser &&
+        toast.success(`You are now logged in as ${auth.currentUser.email}`, {
+          toastId: 'login-success',
+        });
+      navigate('/dashboard');
     }
   }, [dbUser]);
-
-
-
-
 
   // set variables for react-hook-form
   const {
@@ -92,7 +91,7 @@ const Login = () => {
       });
     } catch (error) {
       console.log(error);
-      toast.error(`You were unable to log in`, { toastId: 'login-error' })
+      toast.error(`You were unable to log in`, { toastId: 'login-error' });
     }
   };
 
@@ -109,7 +108,7 @@ const Login = () => {
           {/* <Label htmlFor="email">
             Email:</Label> */}
           <Input
-          noFocus
+            noFocus
             className="signup__input"
             name="email"
             type="email"
@@ -118,7 +117,12 @@ const Login = () => {
               required: 'Email is required',
             })}
           />
-          <ErrorMessage as={ResponseMessage} className="login error" errors={errors} name="email" />
+          <ErrorMessage
+            as={ResponseMessage}
+            className="login error"
+            errors={errors}
+            name="email"
+          />
           {/* </CenterArticle>
         <CenterArticle loginLab> */}
           {/* <Label passPos htmlFor="password">
@@ -133,7 +137,12 @@ const Login = () => {
               required: 'Password is required',
             })}
           />
-          <ErrorMessage as={ResponseMessage} className="login error" errors={errors} name="password" />
+          <ErrorMessage
+            as={ResponseMessage}
+            className="login error"
+            errors={errors}
+            name="password"
+          />
         </CenterArticle>
         <TextColor as={Link} to="/reset" className="forgotPass">
           Forgot your password?
