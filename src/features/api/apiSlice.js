@@ -26,10 +26,10 @@ export const apiSlice = createApi({
       method: 'GET',
     }),
     signUpUser: builder.mutation({
-      query: (user) => ({
+      query: (userObj) => ({
         url: '/signup',
         method: 'POST',
-        body: user,
+        body: userObj,
       }),
       invalidatesTags: ['User'],
     }),

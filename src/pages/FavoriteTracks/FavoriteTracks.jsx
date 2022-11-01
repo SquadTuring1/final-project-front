@@ -12,18 +12,17 @@ const FavoriteTracks = () => {
   const userId = useSelector(getUserId);
 
   useEffect(() => {
-    fetch(baseUrl + `me/${userId}/songs`)
+    fetch(baseUrl + `/me/${userId}/songs`)
       .then((res) => {
         return res.json();
       })
       .then((data) => {
-        console.log(data.myLikedSongs)
         setlikedSongs(data.myLikedSongs);
       });
   }, []);
 
   const songs = likedSongs.map(({ _id, imageUrl, artist, title, fileUrl, likedBY, album }, songIndex) =>
-      <div key={_id} virtualIndex={_id}>
+      <div key={_id} >
         <SongItem artist={artist} title={title} cover={imageUrl} songId={_id}  likedBY={likedBY} songIndex={songIndex} fileUrl={fileUrl} album={album} />  
       </div> 
   )
