@@ -110,9 +110,9 @@ npm install
 
 - [Sefi Cohen](https://github.com/seficohen1)
 -  [Jose Cuevas](https://github.com/jose-cuevas)
-- [Jesus Herrera](https://github.com/Jesusjha)
+- [Jesús Herrera](https://github.com/Jesusjha)
 - [Blake Johnson](https://github.com/blakejohns5)
-- [Sofia Romera](https://github.com/Sofianct)
+- [Sofía Romera](https://github.com/Sofianct)
 
 <br>
 
