@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Input, MainSign, Logo, TitleSign } from '../../ui';
-import logoSM from '../../assets/images/Logo-sign.png';
+import logoSM from '../../assets/images/logo-mammoth-vertical.png';
 import { Button } from '../../ui';
 import { sendPasswordResetEmail } from 'firebase/auth';
 import auth from '../../utils/firebase/firebaseConfig';
@@ -26,8 +26,8 @@ const ForgotPassword = () => {
   };
   return (
     <MainReset>
-      <Logo sign src={logoSM} />
       <form onSubmit={handleSubmit}>
+      <Logo sign src={logoSM} />
         <TitleSign>Reset your password</TitleSign>
         <Input onChange={handleChange} />
         <Button type="submit">Reset passowrd</Button>
