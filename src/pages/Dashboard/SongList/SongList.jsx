@@ -18,7 +18,7 @@ import { getAuthUser, getUserId } from '../../../features/auth/authSlice';
 const SongList = ({ mySongsQuery, allSongsQuery }) => {
   const dispatch = useDispatch();
   const userId = useSelector(getUserId);
-
+  
   const { data: songs, isLoading, isSuccess, isError, error } = mySongsQuery ? mySongsQuery : allSongsQuery;
 
   useEffect(() => {

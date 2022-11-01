@@ -3,7 +3,7 @@ import { ErrorMessage } from '@hookform/error-message';
 import { useNavigate, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
-import { useSignUpUserMutation, useGetSingleUserQuery, } from '../../features/api/apiSlice';
+import { useSignUpUserMutation, useGetSingleUserQuery, useLazyGetSingleUserQuery } from '../../features/api/apiSlice';
 import { getAuthUser, userSignedIn } from '../../features/auth/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -27,13 +27,9 @@ const Registration = () => {
   const [signUpError, setSignUpError] = useState(null);
 
   const authUser = useSelector(getAuthUser);   
-  const { data: dbUser, isFetching, isLoading: isLoadingUser, isSuccess } = useGetSingleUserQuery(authUser && authUser.uid);
+  const [ getUserFromDb, { data: dbUser, isFetching, isLoading: isLoadingUser, isSuccess: isSuccessUser } ] = useLazyGetSingleUserQuery();
   // get the function addUser from apiSlice hook, only need the function since adding
-  const [signUpUser, { isLoading: isLoadingSignup }] = useSignUpUserMutation();
-
-  // const showToast = (type, string) => {
-  //   type === 'success' ? toast.success(string) : toast.error(string);
-  // }
+  const [signUpUser, { data: newUser, isLoading: isLoadingSignup, isSuccess: isSuccessSignup }] = useSignUpUserMutation();
 
   // set variables from react-hook-form
   const { getValues, register, handleSubmit, formState: { errors },} = useForm({
@@ -47,39 +43,26 @@ const Registration = () => {
   
   useEffect(() => {
     if (isLoadingUser) {
-      console.log('Loading User Complete...');
-      return;
+      console.log('Loading User...');
     }
-    if (isSuccess) {
-      dispatch(userSignedIn({ ...authUser, ...dbUser.currentUser }));
-      // dbUser.currentUser && navigate('/dashboard');
+    if (isSuccessUser) {
+      // dispatch(userSignedIn({ ...authUser, ...dbUser.currentUser[0] }));
+      console.log('User created successfully') 
+      toast.success('User created successfully', { toastId: nanoid() })
+      dbUser && navigate('/login');
     }
   }, [dbUser]);
 
-  const addUserToDb = async (user, data) => {
-    const { accessToken, uid, email } = user;
-    const userObj = {
-      token: accessToken, 
-      uid: uid, 
-      email: email, 
-      password: data.password, 
-      username: data.username,
-    };
-    // console.log(authUser)     // all undefined
-    const canSave = [userObj.token, userObj.uid, userObj.email, userObj.username].every(Boolean) && !isLoadingSignup;
-
+  const addUserToDb = async (userObj) => {
+    const canSave = [userObj.token, userObj.uid, userObj.email, userObj.username].every(Boolean) && !isLoadingSignup;    
     // add user to db
     if (canSave) {
       try {
-        console.log('adding to db')
-        await signUpUser(userObj);    // add to db
-        console.log('User created successfully') 
-        toast.success('User created successfully', { toastId: nanoid() })
-        authUser && dispatch(userSignedIn({ ...authUser, ...userObj }))
+        await signUpUser(userObj).unwrap();
+        await getUserFromDb(userObj.uid).unwrap();
       } catch (error) {
         console.log('Signup failed')
-        toast.error('Signup failed', { toastId: nanoid() })
-      }      
+      }
     } else {
       console.log('Cannot save user')
       toast.error('User could not be created', { toastId: nanoid() })
@@ -99,17 +82,14 @@ const Registration = () => {
           console.log('User not logged in')
           return;
         } else {
-          addUserToDb(user, data); // calls func declared 
-          if (isLoadingUser) {
-            console.log('Loading User')
-          } else if (isSuccess) {
-            console.log(dbUser)
-            dispatch(userSignedIn({ ...authUser, ...dbUser.currentUser }))
-            toast.success(`${data.email} is now signed in`, { toastId: nanoid() })
-          }
+          const userObj = {
+            token: user.accessToken, 
+            uid: user.uid, 
+            email: data.email, 
+            username: data.username,
+          };  
+          addUserToDb(userObj); // calls func declared above to add user to db
         }
-        console.log('User Created');
-        // navigate('/dashboard');
       });
     } catch (error) {
       setSignUpError(error.message);
