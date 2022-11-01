@@ -19,12 +19,12 @@ export const ShuffleBtn = styled.button`
   display: none;
   font-weight: ${props => props.selected && 'bold'};
   transform:  ${props => props.selected && 'scale(1.5)'};
-  color:  ${props => props.selected && 'rgb(255,215,3)'};
+  color:  ${props => props.selected && '#EF5656'};
 
   &:hover {
     font-weight: bold;
     transform: scale(1.5);
-    color: rgb(255,215,3);
+    color: #EF5656;
   }
 
   @media (min-width: 960px) {
@@ -37,12 +37,12 @@ export const RepeatBtn = styled.button`
   display: none;
   font-weight: ${props => props.selected && 'bold'};
   transform:  ${props => props.selected && 'scale(1.5)'};
-  color:  ${props => props.selected && 'rgb(255,215,3)'};
+  color:  ${props => props.selected && '#EF5656'};
 
   &:hover {
     font-weight: bold;
     transform: scale(1.5);
-    color: rgb(255,215,3);
+    color: #EF5656;
   }
 
   @media (min-width: 960px) {
@@ -56,12 +56,12 @@ export const PlayBtn = styled.button`
   margin: 0 1.5rem;
   font-weight: ${props => props.selected && 'bold'};
   transform:  ${props => props.selected && 'scale(3)'};
-  color:  ${props => props.selected && 'rgb(255,215,3)'};
+  color:  ${props => props.selected && '#EF5656'};
 
   &:hover {
     font-weight: bold;
     transform: scale(3);
-    color: rgb(255,215,3);
+    color: #EF5656;
   }
 
   @media (min-width: 960px) {
@@ -75,7 +75,7 @@ export const ChangeSongBtn = styled.button`
   &:hover {
     font-weight: bold;
     transform: scale(1.5);
-    color: rgb(255,215,3);
+    color: #EF5656;
   }
 
   @media (min-width: 960px) {
