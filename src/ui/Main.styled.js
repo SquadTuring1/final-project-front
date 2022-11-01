@@ -2,7 +2,7 @@ import ReactModal from 'react-modal';
 import styled from 'styled-components';
 import LoginBG from '../assets/images/login-bg-desktop-dark.jpg';
 import LoginMobileBG from '../assets/images/login-bg-mobile-dark.jpg';
-import SignBG from '../assets/images/Sign-bg.jpg';
+import SignBG from '../assets/images/login-bg-desktop.jpg';
 
 
 export const MainApp = styled.main`
@@ -26,7 +26,7 @@ export const MainHome = styled.main`
   font-family: 'Source Sans Pro', sans-serif;
 
   @media(min-width: 960px) {
-    background-image: url(${LoginBG});
+    background-image: url(${SignBG});
     justify-content: center;
     align-items: flex-start;
   padding: 0 0 0 8rem;
