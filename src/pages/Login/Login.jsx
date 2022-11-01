@@ -12,7 +12,7 @@ import {
   Label,
   ResponseMessage,
 } from '../../ui/index';
-import logoSM from '../../assets/images/logo-mammoth-vertical.png';
+import logoSM from '../../assets/images/logo-mammoth2-vertical.png';
 
 import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';

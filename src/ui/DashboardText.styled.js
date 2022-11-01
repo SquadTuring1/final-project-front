@@ -83,6 +83,7 @@ export const CoverSongTitle = styled.p`
 export const CoverSongArtist = styled(CoverSongTitle)`
   font-size: 0.8rem;
   font-weight: 300;
+  width: 6rem;
 
   &.sidebar__desktop--artist {
     font-size: 1.1rem;

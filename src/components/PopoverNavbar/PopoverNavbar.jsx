@@ -5,7 +5,7 @@ import {
   ButtonAvatar,
   GreenDot,
   PopMenu,
-  AvatarContent,
+  AvatarContent
 } from '../../ui/index';
 import avatar from '../../assets/images/user-avatar.jpg';
 import { Popover } from 'react-tiny-popover';
@@ -37,10 +37,11 @@ const PopoverNavbar = () => {
       <Popover
         isOpen={isPopoverOpen}
         positions={['bottom']} // preferred positions by priority
+        onClickOutside={() => setIsPopoverOpen(false)}
         content={
           <PopMenu>
-            <button onClick={() => navigate('profile')}>Profile</button>
-            <button onClick={signOut}>Sign out</button>
+            <article onClick={() => navigate('profile')}>Profile</article>
+            <article onClick={signOut}>Sign out</article>
           </PopMenu>
         }
       >

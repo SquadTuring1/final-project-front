@@ -1,5 +1,5 @@
 import { Outlet, useNavigate } from 'react-router-dom';
-import logoSM from '../../assets/images/logo-mammoth-sign.png';
+import logoSM from '../../assets/images/logo-mammoth2.png';
 import {
   Logo,
   MainNav,

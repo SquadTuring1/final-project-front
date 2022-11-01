@@ -29,12 +29,18 @@ export const ButtonAvatar = styled.button`
   height: 3.2rem;
   width: 3.2rem;
   background: 0;
+  border: 0;
+
+  &:hover {
+    transform: scale(1.09);
+    transition: transform .5s
+  }
 `;
 
 export const GreenDot = styled.div`
   position: absolute;
-  top: 1.4rem;
-  right: 1.6rem;
+  top: 1.5rem;
+  right: 1.7rem;
   height: 0.9rem;
   width: 0.9rem;
   border: 3px solid #000;

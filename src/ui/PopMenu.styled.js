@@ -5,11 +5,28 @@ export const PopMenu = styled.section`
   flex-direction: column;
   align-items: center;
   padding: 0 .8rem ;
+  border-radius: .3rem;
   background: #151821;
   font-family: 'Source Sans Pro', sans-serif;
+  color: #fff;
+
+  & article {
+    margin: .5rem 0;
+    font-size: .9rem;
+    font-weight: 300;
+    user-select: none;
+
+
+    &:hover {
+      color: #FFD600;
+      text-shadow: 0 0 5px #FFD600;
+    }
+  }
 `;
 
-export const PopButton = styled.button``;
+export const PopButton = styled.button`
+  color: #fff;
+`;
 
 export const PopCoverItems = styled.article`
   display: flex;
