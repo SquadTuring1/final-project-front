@@ -51,7 +51,7 @@ const Login = () => {
       console.log(dbUser.currentUser[0]);
       dispatch(userSignedIn({ ...authUser, ...dbUser.currentUser[0] }));
       authUser &&
-        toast.success(`You are now logged in as ${auth.currentUser.email}`, {
+        toast.success(`You are now logged in as ${auth?.currentUser?.email}`, {
           toastId: 'login-success',
         });
       navigate('/dashboard');
@@ -149,7 +149,7 @@ const Login = () => {
         </TextColor>
       </form>
       <article>
-        <Button className='login__btn' type="submit" form="loginForm">
+        <Button className="login__btn" type="submit" form="loginForm">
           Sign in
         </Button>
         <TextAccount register>

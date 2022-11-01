@@ -26,8 +26,7 @@ import AvatarUpload from './AvatarUpload';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 import { nanoid } from '@reduxjs/toolkit';
-import Navbar from '../../components/Navbar/index'
-
+import Navbar from '../../components/Navbar/index';
 
 const PersonalProfile = () => {
   const dispatch = useDispatch();
@@ -112,89 +111,88 @@ const PersonalProfile = () => {
 
   return (
     <>
-    <Navbar />
-    <MainDash>
-      <form
-        id="personalProfileForm"
-        onSubmit={handleSubmit(onSubmit)}
-        ref={formRef}
-      >
-        <CenterProfile loginLab>
-          <PlaylistBigHeader className="profile__title">Profile</PlaylistBigHeader>
-          {/* <Button><input accept="image/png,image/jpeg" id="avatar__input" type="file"  />Avatar</Button> */}
-          {/* <FileUploader buttonName="Avatar"></FileUploader> */}
+      <Navbar />
+      <MainDash>
+        <form
+          id="personalProfileForm"
+          onSubmit={handleSubmit(onSubmit)}
+          ref={formRef}
+        >
+          <CenterProfile loginLab>
+            <PlaylistBigHeader className="profile__title">
+              Profile
+            </PlaylistBigHeader>
+            {/* <Button><input accept="image/png,image/jpeg" id="avatar__input" type="file"  />Avatar</Button> */}
+            {/* <FileUploader buttonName="Avatar"></FileUploader> */}
 
-          {/* <Label className="name__profile">Name</Label> */}
-          <Input
-            disabled={modifyInfo === true ? true : false}
-            className="info__user--input"
-            name="firstName"
-            type="text"
-            placeholder="First name"
-            {...register('firstName')}
-          />
+            {/* <Label className="name__profile">Name</Label> */}
+            <Input
+              disabled={modifyInfo === true ? true : false}
+              className="info__user--input"
+              name="firstName"
+              type="text"
+              placeholder="First name"
+              {...register('firstName')}
+            />
 
-          {/* <Label className="lastname__profile">Lastname</Label> */}
-          <Input
-            disabled={modifyInfo === true ? true : false}
-            className="info__user--input"
-            name="lastName"
-            type="text"
-            placeholder="Last name"
-            {...register('lastName')}
-          />
-                            {modifyInfo ? (
-          // enables editing of name
-          <Button
-            className="modify__btn"
-            type="button"
-            onClick={(e) => {
-              handleDisabled(e);
-            }}
-          >
-            Modify
-          </Button>
-          
-        ) : (
-          <Button
-            style={{color:'#fff', border:'1px solid #fff'}}
-            className="modify__btn"
-            form="personalProfileForm"
-            type="submit"
-          >
-            Save
-          </Button>
-        )}
-        
-          <AvatarUpload />
-          <TitleP className="change__pass">Change Password</TitleP>
-          {/* <Label className="pass__profile">Password</Label> */}
-          <Input
-            name="currentPassword"
-            type="password"
-            placeholder="Current password"
-            {...register('currentPassword')}
-          />
-          {/* <Label className="conf__pass-profile">Confirm Password</Label> */}
-          <Input
-            name="newPassword"
-            type="password"
-            placeholder="New password"
-            {...register('newPassword')}
-          />
+            {/* <Label className="lastname__profile">Lastname</Label> */}
+            <Input
+              disabled={modifyInfo === true ? true : false}
+              className="info__user--input"
+              name="lastName"
+              type="text"
+              placeholder="Last name"
+              {...register('lastName')}
+            />
+            {modifyInfo ? (
+              // enables editing of name
+              <Button
+                className="modify__btn"
+                type="button"
+                onClick={(e) => {
+                  handleDisabled(e);
+                }}
+              >
+                Modify
+              </Button>
+            ) : (
+              <Button
+                style={{ color: '#fff', border: '1px solid #fff' }}
+                className="modify__btn"
+                form="personalProfileForm"
+                type="submit"
+              >
+                Save
+              </Button>
+            )}
 
-        </CenterProfile>
-      </form>
-      <Button
-        className="pass__btn"
-        type="button"
-        onClick={(e) => changePassword(e)}
-      >
-        Change Password
-      </Button>
-
-      <CenterArticle className="button__profile--container">
-        {/* {modifyInfo ? (
+            <TitleP className="change__pass">Change Password</TitleP>
+            {/* <Label className="pass__profile">Password</Label> */}
+            <Input
+              name="currentPassword"
+              type="password"
+              placeholder="Current password"
+              {...register('currentPassword')}
+            />
+            {/* <Label className="conf__pass-profile">Confirm Password</Label> */}
+            <Input
+              name="newPassword"
+              type="password"
+              placeholder="New password"
+              {...register('newPassword')}
+            />
+          </CenterProfile>
+        </form>
+        <Button
+          className="pass__btn"
+          type="button"
+          onClick={(e) => changePassword(e)}
+        >
+          Change Password
+        </Button>
+        <AvatarUpload />
+        <CenterArticle className="button__profile--container">
+          {/* {modifyInfo ? (
           // enables editing of name
           <Button
             className="modify__btn"
@@ -214,9 +212,9 @@ const PersonalProfile = () => {
             Save
           </Button>
         )} */}
-        {/* <Button type="submit">Save</Button> */}
-      </CenterArticle>
-    </MainDash>
+          {/* <Button type="submit">Save</Button> */}
+        </CenterArticle>
+      </MainDash>
     </>
   );
 };
