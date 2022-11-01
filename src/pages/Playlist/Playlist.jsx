@@ -125,8 +125,20 @@ const Playlist = () => {
                   <CoverSongTitle className="title__song--playlist playlist__info--row">{title}</CoverSongTitle>
                   <CoverSongTitle className="artist__song--playlist playlist__info--row">{artist}</CoverSongTitle>
                   <CoverSongTitle className="genre__song--playlist playlist__info--row">{genre?.title}</CoverSongTitle>
-                  <PopoverSongCover className='popoverPlaylist' songId={_id} title={title} artist={artist} album={album} />
-                  <StarButton  />
+                  {/* <article style={{
+                    position:'absolute',
+                    bottom:'11rem',
+                    right:'10rem'
+                  }}>
+                    <PopoverSongCover className='popoverPlaylist' songId={_id} title={title} artist={artist} album={album} />
+                  </article> */}
+                  {/* <article style={{
+                    position:'absolute',
+                    bottom:'12.2rem',
+                    right:'10rem'
+                  }}>
+                    <StarButton  />
+                  </article> */}
                 </PlaylistArticle>
               </PlaylistSong>
             )

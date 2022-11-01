@@ -97,7 +97,7 @@ const Login = () => {
 
   return (
     <MainSign>
-      <Logo sign src={logoSM} />
+      <Logo className='logo__login' sign src={logoSM} />
       <form
         className="registration__form"
         id="loginForm"

@@ -1,6 +1,7 @@
 import ReactModal from 'react-modal';
 import styled from 'styled-components';
-import LoginBG from '../assets/images/Login-bg.jpg';
+import LoginBG from '../assets/images/login-bg-desktop-dark.jpg';
+import LoginMobileBG from '../assets/images/login-bg-mobile-dark.jpg';
 import SignBG from '../assets/images/Sign-bg.jpg';
 
 
@@ -19,19 +20,29 @@ export const MainHome = styled.main`
   justify-content: space-between;
   align-items: center;
   height:100vh;
-  background-image: url(${LoginBG});
+  background-image: url(${LoginMobileBG});
   background-size: cover;
   background-position: center;
   font-family: 'Source Sans Pro', sans-serif;
+
+  @media(min-width: 960px) {
+    background-image: url(${LoginBG});
+    justify-content: center;
+    align-items: flex-start;
+  padding: 0 0 0 8rem;
+  }
 `;
 
 export const MainSign = styled(MainHome)`
   justify-content: space-between;
   height: 'auto';
-  background-image: url(${SignBG});
+  background-image: url(${LoginMobileBG});
+
 
   @media (min-width: 960px) {
     justify-content: center;
+    align-items: center;
+    background-image: url(${LoginBG});
   }
 `;
 

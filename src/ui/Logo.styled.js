@@ -9,9 +9,12 @@ export const Logo = styled.img`
     margin: 0 0 0 1rem;
     padding: .5rem 0 0 0;
     
+    
     @media(min-width: 960px) {
       height: 2.6rem;
       margin: 0 0 0 4.4rem;
+
+
     }
   }
   
@@ -24,5 +27,22 @@ export const Logo = styled.img`
       height: 3.2rem;
       margin: 0 0 0 2.3rem;
     }
+  }
+
+  &.logo__home {
+    height: 9rem;
+     @media(min-width: 960px){
+      height: 13rem;
+      margin: 0 0 0 5.8rem;
+     }
+  }
+
+  &.logo__login {
+    
+    height: 9rem;
+    @media(min-width: 960px){
+      height: 13rem;
+      margin: 0 0 3rem 2rem;
+     }
   }
 `;

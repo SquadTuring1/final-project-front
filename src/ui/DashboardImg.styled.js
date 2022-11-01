@@ -30,3 +30,7 @@ export const CoverMenuIcon = styled.article`
   top: 9.2rem;
   left: 5.5rem;
 `;
+
+export const ErrorImg = styled.img`
+  
+`;

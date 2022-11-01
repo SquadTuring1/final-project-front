@@ -13,7 +13,7 @@ import {Link} from 'react-router-dom';
 const Home = () => {
   return (
     <MainHome>
-      <Logo src={turingLogo} />
+      <Logo className='logo__home' src={turingLogo} />
       <CenterArticle>
           <Button as={Link} to="login">Login</Button>
         <TextAccount>

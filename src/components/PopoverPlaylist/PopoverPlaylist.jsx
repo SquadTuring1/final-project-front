@@ -96,7 +96,11 @@ const handleCloseModalRenamePlaylist = () => setOpenModalRenamePlaylist(false);
 
   return (
     <div>        
-        <article>
+        <article style={{
+          position: 'absolute',
+
+          left:'15.5rem'
+        }}>
         <Button
           id="resources-button"
           onClick={handleClick}
