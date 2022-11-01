@@ -75,7 +75,7 @@ export const CoverSongTitle = styled.p`
     &:nth-child(3) {
       margin: 0 0 0 12rem;
     } */
-  }
+  
 `;
 
 
