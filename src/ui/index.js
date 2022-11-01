@@ -16,7 +16,7 @@ import { SidebarMain, UploadBtn, CurrentSong, CurrentPlaying } from './SidebarMa
 import { CategoryDash, GenDashMain, PlaylistDash, RecommendedDash, SongsDash } from './GeneralDashboardGrid.styled';
 import { CoverMenuIcon, CoverSong } from './DashboardImg.styled';
 import { CoverSongTitle, CoverSongArtist, SongsH2, SongTimer, PopoverArticle } from './DashboardText.styled';
-import { CoverCategoryMain, CoverPlaylistMain, CoverSongMain, PlaylistTitle, PlaylistInfo, CoverCategoryImg, CategorySwiper, CategorySwiperItem } from './DashboardItems.styled';
+import { CoverCategoryMain, CoverPlaylistMain, CoverSongMain, PlaylistTitle, PlaylistInfo, CoverCategoryImg, CategorySwiper, CategorySwiperItem, ContainerFavSong } from './DashboardItems.styled';
 import { SideMenu, SideMenuItems } from './MenuItems.styled';
 import { NavOutlet, SideOutlet, PlayerOutlet, MainOutlet } from './GridOutlet.styled';
 import { IconHome, IconFavorites, IconPlaylist, IconCategories, IconUpload } from './Icons.styled';
@@ -94,6 +94,7 @@ export {
   PlaylistDash,
   RecommendedDash,
   SongsDash,
+  ContainerFavSong
 }
 
 //sidebar

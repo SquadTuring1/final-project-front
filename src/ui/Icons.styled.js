@@ -34,6 +34,7 @@ export const IconPlaylist = styled(RiPlayListFill)`
 export const IconFavorites = styled.div`
   margin: 0 1.2rem;
   font-size: 2rem;
+  color: white;
 
   @media (min-width: 960px) {
     margin: 0 0.5rem;

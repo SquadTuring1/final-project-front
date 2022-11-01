@@ -1,4 +1,4 @@
-import { RiRestartLine, RiStarFill, RiStarLine } from 'react-icons/ri'
+import { RiContrastDropLine, RiRestartLine, RiStarFill, RiStarLine } from 'react-icons/ri'
 import { TiStarOutline, TiStarFullOutline } from 'react-icons/ti'
 import { useEffect, useState } from 'react';
 import { getAuthUser, getUserId } from '../../features/auth/authSlice'
@@ -13,8 +13,8 @@ import { IconFavorites } from '../../ui';
 
 export default function LikedSong({ songId, likedBY }) {  
   const userId = useSelector(getUserId)
-  const [ isLiked, setIsLiked] = useState(likedBY?.some(user => user._id === userId))
-
+  const [ isLiked, setIsLiked] = useState(likedBY?.some(user => user === userId))
+  
   const [ likeASong, { isLoading } ] = useLikeASongMutation();
   const [ deleteASong, { isLoading: deleteLoading } ] = useDeleteLikeASongMutation()
 

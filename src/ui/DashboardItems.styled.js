@@ -6,7 +6,7 @@ export const CoverSongMain = styled.main`
 position: relative;
   display: flex;
   flex-direction: column;
-  margin: 0 1rem;
+  margin:  1rem;
   border-radius: .3rem;
   background-color: #0A101A;
   padding: .5rem .7rem;
@@ -18,6 +18,10 @@ position: relative;
   }
 `;
 
+export const ContainerFavSong = styled.main`
+  display: flex;
+  flex-wrap: wrap;
+`
 /// Playlist component ///
 
 export const CoverPlaylistMain = styled.main`

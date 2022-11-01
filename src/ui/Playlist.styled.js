@@ -71,6 +71,13 @@ height: 100%;
     'songs' auto/
     100%
   }
+
+  &.favorites__container{
+    grid:
+    'bigheader' 35%
+    'songs' auto/
+    100%
+  }
 `
 
 

@@ -18,8 +18,7 @@ import { RiMore2Line } from 'react-icons/ri';
 
 const Playlist = () => {
   const dispatch = useDispatch();
-  const songList = useSelector(getSongList)
-  
+  const songList = useSelector(getSongList)  
 
   const { data: playlistsData, isLoading: isPlaylistsLoading, isSuccess: isPlaylistsSuccess, isError: isPlaylistsError, error: playlistsError } = useGetPlaylistsQuery();
   const [ getSinglePlaylist, {
@@ -42,7 +41,6 @@ const Playlist = () => {
     await getSinglePlaylist(playlistId);
     console.log('playlist loaded')
     console.log(clickedPlaylist)
-    
   }
 
   const handleSongClick = (songId, index) => {  
@@ -68,11 +66,10 @@ const Playlist = () => {
       const [ reorderedItem ] = songsArray.splice(result.source.index, 1);
       songsArray.splice(result.destination.index, 0, reorderedItem)
       dispatch(setSongsList({ songList: songsArray, }));
-      
     }
   }
  
-  // console.log("playlistdata", playlistsData)
+  
 
   let playlistsContent;
   if (isPlaylistsLoading) {
@@ -82,7 +79,7 @@ const Playlist = () => {
     // console.log(playlistsData)
     playlistsContent = 
       <>
-      {playlistsData?.playlists?.map(playlist =>       
+      {playlistsData?.map(playlist =>       
 
         <article key={playlist._id}>
           <PopoverPlaylist playlistId={playlist._id} playlistTitle={playlist.title}></PopoverPlaylist>
@@ -146,7 +143,6 @@ const Playlist = () => {
     <>  
       <PlaylistContainer>
       <PlaylistBigHeader>Playlist</PlaylistBigHeader>
-   
         <Scrollbars universal>
           <PlaylistColumn className="playlist__covers">
             {playlistsContent}

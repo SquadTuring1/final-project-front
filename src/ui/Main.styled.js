@@ -54,7 +54,8 @@ export const MainReset = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  height: 100vh;
   font-family: 'Source Sans Pro', sans-serif;
 `;
 

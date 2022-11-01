@@ -7,28 +7,39 @@ import { getSongList, setSongsList, setCurrentSong } from '../../features/songs/
 import { useLazyGetGenreByIdQuery } from '../../features/api/apiSlice';
 import { useEffect } from 'react';
 import PopoverSongCover from '../../components/PopoverSongCover/PopoverSongCover';
+import { useLocation } from 'react-router-dom';
 
 
 const Categories = () => {
   const songList = useSelector(getSongList);
   const dispatch = useDispatch();
-
+  const location = useLocation();
+  
   const [ getGenryById, {data: songsByGenre, isLoading, isSuccess, isUninitialized, isError: error } ] = useLazyGetGenreByIdQuery();
 
+  useEffect(() => {
+      getGenryById(location?.state?.genreId)
+  }, [location?.state?.genreId])
 
   useEffect(() => {
     if (isSuccess) {
-      dispatch(setSongsList({ songList: songsByGenre?.songs, currentSongIndex: 0, currentSongId: songsByGenre?.songs[0]?._id, currentSongUrl: songsByGenre?.songs[0]?.fileUrl, playing: false}));
+      dispatch(setSongsList({ songList: songsByGenre?.songs, currentSongIndex: 0, currentSongId: songsByGenre?.songs[0]?._id, currentSongUrl: songsByGenre?.songs[0]?.fileUrl, playing: false})); 
     }
   }, [songsByGenre])
 
   const handleGenreClick = async (genreId) => {
     await getGenryById(genreId);
+    if (isSuccess) {
+      dispatch(setSongsList({ songList: songsByGenre?.songs, currentSongIndex: 0, currentSongId: songsByGenre?.songs[0]?._id, currentSongUrl: songsByGenre?.songs[0]?.fileUrl, playing: false})); 
+    }
   }
 
   const handleSongClick = (songId, index) => {  
     dispatch(setCurrentSong({ currentSongIndex: index, _id: songId, fileUrl: songList[index].fileUrl })) 
   }
+
+  
+
 
 
   let playlistContent;
@@ -53,6 +64,7 @@ const Categories = () => {
 
 
   return (
+    <>
     <PlaylistContainer className="category__container">
     <PlaylistBigHeader>Categories</PlaylistBigHeader>
       <div>
@@ -61,14 +73,15 @@ const Categories = () => {
       <Scrollbars universal>
         <PlaylistColumnSongs className="playlist__songs">
           <PlaylistHeader className='playlist__category--header'>
-                    <CoverSongTitle className="category__header">Title</CoverSongTitle>
-                    <CoverSongTitle className="category__header">Artist</CoverSongTitle>
-                    <CoverSongTitle className="category__header">Genre</CoverSongTitle>
-            </PlaylistHeader>
+            <CoverSongTitle className="category__header">Title</CoverSongTitle>
+            <CoverSongTitle className="category__header">Artist</CoverSongTitle>
+            <CoverSongTitle className="category__header">Genre</CoverSongTitle>
+          </PlaylistHeader>
           {playlistContent }
         </PlaylistColumnSongs>
       </Scrollbars>
     </PlaylistContainer>
+    </>
   );
 };
 

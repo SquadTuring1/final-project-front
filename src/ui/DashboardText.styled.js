@@ -11,6 +11,7 @@ export const CoverSongTitle = styled.p`
   text-overflow: ellipsis;
   overflow: hidden;
   font-family: 'Source Sans Pro', sans-serif;
+  color: white;
 
   &.sidebar__desktop--title {
     width:14rem;
@@ -75,13 +76,14 @@ export const CoverSongTitle = styled.p`
     &:nth-child(3) {
       margin: 0 0 0 12rem;
     } */
-  }
+  
 `;
 
 
 export const CoverSongArtist = styled(CoverSongTitle)`
   font-size: 0.8rem;
   font-weight: 300;
+  width: 6rem;
 
   &.sidebar__desktop--artist {
     font-size: 1.1rem;
